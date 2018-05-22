@@ -5,3 +5,10 @@ DNA-gyrase is a type II topoisomerase that introduces negative superhelicity int
 Topo-Seq is a ChIP-Seq-like approach that exploits the formation the complexes to map the gyrase cleavage sites with a single-base precision.
 
 This repositorium contains a set of bash, python and R scripts that were used for Topo-Seq data analysis and visualization.
+
+######################
+
+## GCSs_filtering_and_overlapping.py
+
+The script takes raw GCSs data, returns only trusted GCSs, computes GCSs shared between different conditions, draws Venn diagrams of the sets overlappings, writes GCSs sets.
+
