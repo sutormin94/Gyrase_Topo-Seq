@@ -5,7 +5,7 @@
 ##Topo-Seq analysis##
 
 #Shell script that makes QC of the reads before and after the trimming procedure. 
-#Than script maps trimmed and only paired reads to the reference genome, and prepares
+#Than script maps trimmed and paired reads to the reference genome, prepares
 #sorted and indexed BAM-files suitable for visualization with IGV
 
 #Requirements: factqc, trimmomatic, bwa mem, samtools 
