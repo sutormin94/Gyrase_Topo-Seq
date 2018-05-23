@@ -18,3 +18,9 @@ The script takes raw GCSs data, returns only trusted GCSs, computes GCSs shared 
 
 Shell script that makes QC of the reads before and after the trimming procedure. Than script maps trimmed and paired reads to the reference genome, prepares sorted and indexed BAM-files suitable for visualization with IGV
 Requirements: factqc, trimmomatic, bwa mem, samtools 
+
+######################
+
+## SAM_to_coverage_and_N5E_N3E.py
+
+Script takes SAM files as input, performs QC filtering of reads relying on the alignment quality and a presence of the partner: only reads pairs that have a score<256 are stored. Than the script computes coverage depth for DNA chains separately and for both. Additionally it calculates N5E (number of DNA fragments starts) and N3E (number of DNA fragments ends) values for every genome position. Coverage depth, N3E and N5E info returns as WIG files.
