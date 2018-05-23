@@ -12,3 +12,9 @@ This repositorium contains a set of bash, python and R scripts that were used fo
 
 The script takes raw GCSs data, returns only trusted GCSs, computes GCSs shared between different conditions, draws Venn diagrams of the sets overlappings, writes GCSs sets.
 
+######################
+
+## Raw_reads_processing.sh
+
+Shell script that makes QC of the reads before and after the trimming procedure. Than script maps trimmed and paired reads to the reference genome, prepares sorted and indexed BAM-files suitable for visualization with IGV
+Requirements: factqc, trimmomatic, bwa mem, samtools 
