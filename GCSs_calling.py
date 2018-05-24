@@ -24,6 +24,8 @@ from Bio.SeqUtils import GC as GC_count
 #Variables to be defined
 #######
 
+print('Variables to be defined:')
+
 #Path to the file with regions to be omitted (e.g. deletions).
 Deletions=''
 #Paths to the WIG files contain N3E or N5E that forms a tetrade: A+IP+, A+IP-, A-IP+, A-IP-.
@@ -396,3 +398,5 @@ def GCSs_caller(tetrade_dictionary, deletions, genome_path, path_out):
     return
 
 GCSs_caller(Tetrade, Deletions, Genome, Path_for_output)
+
+print('Script ends seccesfully!')
