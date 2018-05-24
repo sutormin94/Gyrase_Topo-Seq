@@ -22,6 +22,8 @@ import numpy as np
 #Variables to be defined
 #######
 
+print('Variables to be defined:')
+
 #Path to the input SAM-files
 sam_path=""
 #Path to the output/input SAM-files contain proper aligned reads (score<256)
@@ -354,3 +356,5 @@ def create_wig_files_wrapper(tab_path, wig_path, chromosome_id):
 edit_sam_files_wrapper(sam_path, edited_sam_path, 0)
 create_tab_files_wrapper(edited_sam_path, tab_path)
 create_wig_files_wrapper(tab_path, wig_path, chromosome_identificator)
+
+print('Script ends succesfully!')
