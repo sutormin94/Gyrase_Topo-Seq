@@ -26,8 +26,9 @@ Script takes SAM files as input, performs QC filtering of reads relying on the a
 The script takes WIG files tetrade that contain N3E or N5E values: A+IP+, A+IP-, A-IP+, A-IP-. It smooths A+IP- and A-IP- tracks and divides A+IP+ and A-IP+ by them. Once A+IP+_div and A-IP+_div are obtained the script performs Audic-Clavery statistic test (Audic & Claverie, 1997) and returns regions of A+IP+_div where i and i+5 positions are significantly higher than corresponding in A-IP+. These regions from now are called GCSs. GCSs are stored in the output TXT file. Also two plots are generated: 1) signal coverage over the genome for treated and untreated samples; 2) Motif expected to be under the GCSs.
 Requirements: TAB file with deletions coordinates.
 
+######################
+
 ## GCSs_filtering_and_overlapping.py
 
 The script takes raw GCSs data, returns only trusted GCSs, computes GCSs shared between different conditions, draws Venn diagrams of the sets overlappings, writes GCSs sets.
 
-######################
