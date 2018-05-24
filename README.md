@@ -10,7 +10,8 @@ This repositorium contains a set of bash, python and R scripts that were used fo
 
 ## Raw_reads_processing.sh
 
-Shell script that makes QC of the reads before and after the trimming procedure. Than script maps trimmed and paired reads to the reference genome, prepares sorted and indexed BAM-files suitable for visualization with IGV
+Shell script that makes QC of the reads before and after the trimming procedure. Than script maps trimmed and paired reads to the reference genome, prepares sorted and indexed BAM-files suitable for visualization with IGV.
+
 Requirements: factqc, trimmomatic, bwa mem, samtools 
 
 ######################
