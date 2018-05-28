@@ -9,14 +9,14 @@
 ###############################################
 
 #######
-#Packages to be imported
+#Packages to be imported.
 #######
 
 import matplotlib.pyplot as plt
 import numpy as np
 
 #######
-#Variables to be defined
+#Variables to be defined.
 #######
 
 print('Variables to be defined:')
@@ -141,7 +141,7 @@ Oxo=replicas_comb_trust_wrapper(path_to_oxo_replicas, Replicas_path_out, Oxo_nam
 Antibs_GCSs_sets=[Cfx, RifCfx, Micro, Oxo]
 
 #######
-#GCSs shared between pairs of antibiotics - Cfx, Micro and Oxo and between Cfx and RifCfx
+#GCSs shared between pairs of antibiotics - Cfx, Micro and Oxo and between Cfx and RifCfx.
 #######
 
 def pairs_construction(ar1, ar2):
