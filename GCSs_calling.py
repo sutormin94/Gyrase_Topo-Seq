@@ -10,10 +10,12 @@
 #GCSs are stored in the output TXT file. 
 #Also two plots are generated: 1) signal coverage over the genome for treated and untreated samples;
 #2) Motif expected to be under the GCSs.
+
+#Requirements: TAB file with deletions.
 ###############################################
 
 #######
-#Packages to be imported
+#Packages to be imported.
 #######
 
 import matplotlib.pyplot as plt
@@ -21,10 +23,8 @@ import numpy as np
 from Bio.SeqUtils import GC as GC_count
 
 #######
-#Variables to be defined
+#Variables to be defined.
 #######
-
-print('Variables to be defined:')
 
 #Path to the file with regions to be omitted (e.g. deletions).
 Deletions=''
@@ -128,7 +128,7 @@ def Smoothing(ends, deletions):
     return smoothed
 
 #######
-#Returns A+IP+/smoothed(A+IP-) and A-IP+/smoothed(A-IP-) tracks ready for GCSs calling
+#Returns A+IP+/smoothed(A+IP-) and A-IP+/smoothed(A-IP-) tracks ready for GCSs calling.
 #######
 
 def norm_smooth_devide(ex_file_path, cont_file_path, un_ex_file_path, un_cont_file_path, deletions):
@@ -399,4 +399,4 @@ def GCSs_caller(tetrade_dictionary, deletions, genome_path, path_out):
 
 GCSs_caller(Tetrade, Deletions, Genome, Path_for_output)
 
-print('Script ends seccesfully!')
+print('Script ended its work succesfully!')
