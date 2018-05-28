@@ -12,17 +12,15 @@
 ###############################################
 
 #######
-#Packages to be imported
+#Packages to be imported.
 #######
 
 from os import listdir
 import numpy as np
 
 #######
-#Variables to be defined
+#Variables to be defined.
 #######
-
-print('Variables to be defined:')
 
 #Path to the input SAM-files
 sam_path=""
@@ -37,7 +35,7 @@ chromosome_identificator=""
 
 
 #######
-#Reads SAM file and returns proper aligned reads (FLAG score < 256)
+#Reads SAM file and returns proper aligned reads (FLAG score < 256).
 #######
 def sam_edt(in_sam_file_path, out_sam_file_path):
 	sam_input=open(in_sam_file_path, 'r')
@@ -65,7 +63,7 @@ def sam_edt(in_sam_file_path, out_sam_file_path):
 	return
 
 #######
-#Reads and checks SAM file by counting reads that form pairs
+#Reads and checks SAM file by counting reads that form pairs.
 #######
 def check_sam(sam_file_path):
 	sam_file=open(sam_file_path, 'r')
@@ -91,7 +89,7 @@ def check_sam(sam_file_path):
 
 #######
 #Reads SAM file and create TAB file contains left-most coordinate of 
-#the read alignment and observed template length (length of the DNA fragment aligned)
+#the read alignment and observed template length (length of the DNA fragment aligned).
 #######
 def create_tab_files(input_sam_file, output_tab_file):
 	sam_file=open(input_sam_file, 'r')
@@ -107,7 +105,7 @@ def create_tab_files(input_sam_file, output_tab_file):
 	return
 
 #######
-#Reads TAB files
+#Reads TAB files.
 #######
 
 def Tab_pars(filein):
@@ -139,7 +137,7 @@ def QC_reads(ar):
 #######
 #Looks through the array, contains read pairs and classifies them according 
 #to the orientation of the pair (forward or reverse). 
-#Returns dictionary contains two lists - one for FOR pairs and one for REV pairs
+#Returns dictionary contains two lists - one for FOR pairs and one for REV pairs.
 #######
 def Read_strand_classif(ar):
 	forw=[]
@@ -156,7 +154,7 @@ def Read_strand_classif(ar):
 #######
 #Looks through the array, contains read pairs classified according to 
 #the orientation (aligned to the for. or to the rev. strands). 
-#Returns list contains left-most and right-most coordinates of the DNA fragment aligned
+#Returns list contains left-most and right-most coordinates of the DNA fragment aligned.
 #######
 def Coords(ar, strand):
 	ar_out=[]
@@ -179,7 +177,7 @@ def Coords(ar, strand):
 #######
 #Calculates coverage depth for every genome position using the coordinates of 
 #the DNA fragments alignment (left-most and right-most). Returns list 
-#contains cov depth for every genome position
+#contains cov depth for every genome position.
 #######
 def depth_counter(coords_ar):
 	genome=[]
@@ -242,7 +240,7 @@ def start_end_count(forw, rev):
 #######
 #Wraps functions that read, edit and write .sam files (sam_edt) and check the resulting edt.sam (check_sam). 
 #Editing results in filtering of the proper aligned reads with score<256.
-#Checking procedure: counting reads that form pairs
+#Checking procedure: counting reads that form pairs.
 #######
 def edit_sam_files_wrapper(sam_path, edited_sam_path, check_option):
 	#Prepares the list of .sam files to work with
@@ -295,18 +293,18 @@ def create_tab_files_wrapper(edited_sam_path, tab_path):
 #marks left- and right-most positions of the DNA fragments aligned (Coords),
 #calculates coverage depth for + and - strands and sum them (depth_counter, Integrator), 
 #calculates number of DNA fragments starts and ends for every genome position (start_end_count) and
-#writes output .wig files
+#writes output WIG files
 #######
 def create_wig_files_wrapper(tab_path, wig_path, chromosome_id):
-	#Makes the list of .tab files to work with
+	#Makes the list of TAB files to work with
 	files=listdir(tab_path)
 	tabfiles=[]
 	for file in files:
 		if file.endswith(".tab"):
 			tabfiles.append(file)
-	#.tab files parsing, pairs construction, strand classification, start-end calculation,
+	#TAB files parsing, pairs construction, strand classification, start-end calculation,
 	#coverage depth calculation, coverage depth integration, number of start-end calculation,
-	#.wig files wrighting
+	#WIG files writing.
 	for tab in tabfiles:
 		#Parsing of the .tab file
 		print(tab)
@@ -357,4 +355,4 @@ edit_sam_files_wrapper(sam_path, edited_sam_path, 0)
 create_tab_files_wrapper(edited_sam_path, tab_path)
 create_wig_files_wrapper(tab_path, wig_path, chromosome_identificator)
 
-print('Script ends succesfully!')
+print('Script ended its work succesfully!')
