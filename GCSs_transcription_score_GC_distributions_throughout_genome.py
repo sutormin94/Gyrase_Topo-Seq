@@ -41,7 +41,7 @@ Transcription_data_path=''
 Plot_path_out=''
 
 #######
-#GCSs data parsing.
+#Trusted GCSs data parsing.
 #######
 
 def trusted_GCSs_parsing(input_dict):
