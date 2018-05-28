@@ -33,3 +33,8 @@ Requirements: TAB file with deletions coordinates.
 
 The script takes raw GCSs data, returns only trusted GCSs, computes GCSs shared between different conditions, draws Venn diagrams of the sets overlappings, writes GCSs sets.
 
+######################
+
+## GCSs_transcription_score_GC_distributions_throughout_genome.py
+
+The script takes sets of trusted GCSs and analysis the distribution of GCSs troughout the genome. Also it plots the distribution of other values such as score, GC% and transcription.
