@@ -5,7 +5,7 @@
 ##Topo-Seq analysis##
 
 #Shell script that makes QC of the reads before and after the trimming procedure. 
-#Than script maps trimmed and paired reads to the reference genome, prepares
+#Than script maps trimmed only paired reads to the reference genome, prepares
 #sorted and indexed BAM-files suitable for visualization with IGV
 
 #Requirements: factqc, trimmomatic, bwa mem, samtools 
@@ -40,21 +40,21 @@ fastqc -t 20 -o $Sample_path/Fastqc_analysis/Trimmed_gentely/ $Sample_path/Data/
 
 #Reads mapping to the reference genome: make SAM-files
 mkdir SAM/
-for i in `ls -a $Sample_path/Data/Trimmed_gentely/ | sed -r "s/(.+_paired)_R[1,2]_00.*/\1/g" | uniq | sort -d`; do 
-bwa mem -t 20 Ref_genome $Sample_path/Data/Trimmed_gentely/${i}_R1_001.fastq.gz $Sample_path/Data/Trimmed_gentely/${i}_R2_001.fastq.gz > $Sample_path/SAM/$i.sam; done
+for i in `ls -a $Sample_path/Data/Trimmed_gentely/ | sed -r "s/(.+)_paired_R[1,2]_00.*/\1/g" | uniq | sort -d`; do 
+bwa mem -t 20 Ref_genome $Sample_path/Data/Trimmed_gentely/${i}_paired_R1_001.fastq.gz $Sample_path/Data/Trimmed_gentely/${i}_paired_R2_001.fastq.gz > $Sample_path/SAM/$i.sam; done
 
 
 #Prepares tracks for IGV: makes BAM-files, sorts them, makes index-files
 mkdir SAM_sorted/
 mkdir BAM/
 #Makes BAM-files
-for i in `ls -a $Sample_path/SAM/ | sed -r "s/(.+_paired).*/\1/g"`; do 
+for i in `ls -a $Sample_path/SAM/ | sed -r "s/(.+).sam/\1/g"`; do 
 samtools view -S -b $Sample_path/SAM/${i}.sam > $Sample_path/BAM/${i}.bam ; done
 #Sorts BAM-files
-for i in `ls -a $Sample_path/BAM/ | sed -r "s/(.+_paired).*/\1/g"`; do 
+for i in `ls -a $Sample_path/BAM/ | sed -r "s/(.+).bam/\1/g"`; do 
 samtools sort $Sample_path/BAM/${i}.bam $Sample_path/BAM_sorted/${i}_sorted.bam ; done
 #Makes index files
-for i in `ls -a $Sample_path/BAM_sorted/ | sed -r "s/(.+_paired_sorted).*/\1/g"`; do 
-samtools index $Sample_path/BAM_sorted/${i}.bam ; done
+for i in `ls -a $Sample_path/BAM_sorted/`; do 
+samtools index $Sample_path/BAM_sorted/${i} ; done
 
-
+print 'Script ended its work succesfully!'
