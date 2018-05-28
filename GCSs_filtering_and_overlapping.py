@@ -22,11 +22,25 @@ import numpy as np
 print('Variables to be defined:')
 
 #Input data
-path_to_cfx_raw_data=''
-path_to_rifcfx_raw_data=''
-path_to_microcin_raw_data=''
-path_to_oxo_raw_data=''
-#Output_data
+path_to_cfx_replicas={'Cfx_1': '',
+                      'Cfx_2': '',
+                      'Cfx_3': ''}
+path_to_rifcfx_replicas={'RifCfx_1': '',
+                      'RifCfx_2': '',
+                      'RifCfx_3': ''}
+path_to_microcin_replicas={'Micro_1': '',
+                      'Micro_2': '',
+                      'Micro_3': ''}
+path_to_oxo_replicas={'Oxo_1': '',
+                      'Oxo_2': '',
+                      'Oxo_3': ''}
+#Configuration of the output for the GCSs data in replicas.
+Replicas_path_out=''
+Cfx_name='Cfx'
+RifCfx_name='RifCfx'
+Micro_name='Micro'
+Oxo_name='Oxo'
+#Configuration of the output for GCSs trusted.
 Cfx_path=''
 RifCfx_path=''
 Micro_path=''
@@ -37,10 +51,60 @@ Micro_Oxo_path=''
 Cfx_Micro_Oxo_path=''
 Cfx_RifCfx_shared_GCSs_path=''
 
+#######
+#Parsing raw GCSs coordinates, returns dictionary - GCSs_coordinate:N3E.
+#######
+
+def read_GCSs_file(GCSs_file_path):
+    GCSs_dict={}
+    GCSs_in=open(GCSs_file_path, 'r')
+    for line in GCSs_in:
+        line=line.rstrip().split('\t')
+        if line[0] not in ['GCSs_coordinate']:
+            GCSs_dict[int(line[0])]=float(line[1])
+    GCSs_in.close()
+    return GCSs_dict
 
 #######
-#Parsing raw GCSs coordinates, returns only trusted GCSs - observed at least 2 times within 3 biological replicates.
-#Raw data is organized as a tabbed table, consist of 4 columns: 1. coordinate of GCSs, 2.-4. N3E values for biological replicates 1-3
+#Combines replicates into one GCSs table.
+#######
+
+def combine_replicates(replicas_dict, path_out, name):
+    #Merges a range of replicates
+    GCSs_replicas_dict={}
+    names_ar=[]
+    for key, value in replicas_dict.items():
+        names_ar.append(k)
+        for k, v in read_GCSs_file(value).items():
+            if k in GCSs_replicas_dict:
+                GCSs_replicas_dict[k].append(v)
+            else:
+                add_el=[]
+                for j in range(i):
+                    add_el.append(0)
+                add_el.append(v)
+                GCSs_replicas_dict[k]=add_el
+        for k, v in GCSs_replicas_dict.items():
+            if len(v)<i+1:
+                GCSs_replicas_dict[k].append(0)
+    #Writes merged GCSs data
+    fileout=open(path_out + name + '_GCSs_replicates.txt', 'w')
+    fileout.write('GCSs_coordinate\t')
+    for i in names_ar:
+        fileout.write(str(i) + '_N3E\t')
+    fileout.write('\n')
+    for k, v in GCSs_replicas_dict.items():
+        fileout.write(str(k) + '\t')
+        for i in v:
+            fileout.write(str(v) + '\t')
+        fileout.write('\n')
+    fileout.close()
+    return GCSs_replicas_dict
+        
+
+#######
+#Returns only trusted GCSs - observed at least 2 times within 3 biological replicates.
+#Data organization: 1. coordinate of GCSs, 2.-4. N3E values for biological replicates 1-3
 #######
 
 def trusted(ar):
@@ -55,27 +119,24 @@ def trusted(ar):
     else:
         return "No signal"
 
-def trusted_GCSs_calling(path):
+def trusted_GCSs_calling(GCSs_dictionary):
     ar=[]
-    filein=open(path, 'r')
-    for line in filein:
-        line=line.rstrip().split('\t')
-        if line[0] not in ["peak"]:
-            line=[int(line[0]), float(line[1]), float(line[2]), float(line[3])]
-        if trusted(line[1:])!="No signal":
-            ar.append([line[0], trusted(line[1:])])
-    filein.close()
+    for k, v in GCSs_dictionary.items():
+        if trusted(v)!="No signal":
+            ar.append([k, trusted(v)])
     return ar
 
-Cfx=trusted_GCSs_calling(path_to_cfx_raw_data)
-RifCfx=trusted_GCSs_calling(path_to_rifcfx_raw_data)
-Micro=trusted_GCSs_calling(path_to_microcin_raw_data)
-Oxo=trusted_GCSs_calling(path_to_oxo_raw_data)
+def replicas_comb_trust_wrapper(replicas_dict, path_out, name):
+    print('Now working with: ' + str(name))
+    cur_GCSs_dict=combine_replicates(replicas_dict, path_out, name)
+    cur_GCSs_trusted=trusted_GCSs_calling(cur_GCSs_dict)
+    print('Number of trusted GCSs for ' + str(name) + ' : ' + str(len(cur_GCSs_trusted)))
+    return cur_GCSs_trusted
 
-print('Number of trusted Cfx GCSs: ' + str(len(Cfx)))
-print('Number of trusted RifCfx GCSs: ' + str(len(RifCfx)))
-print('Number of trusted Micro GCSs: ' + str(len(Micro)))
-print('Number of trusted Oxo GCSs: ' + str(len(Oxo)) + '\n')
+Cfx=replicas_comb_trust_wrapper(path_to_cfx_replicas, Replicas_path_out, Cfx_name)
+RifCfx=replicas_comb_trust_wrapper(path_to_rifcfx_replicas, Replicas_path_out, RifCfx_name)
+Micro=replicas_comb_trust_wrapper(path_to_microcin_replicas, Replicas_path_out, Micro_name)
+Oxo=replicas_comb_trust_wrapper(path_to_oxo_replicas, Replicas_path_out, Oxo_name)
 
 Antibs_GCSs_sets=[Cfx, RifCfx, Micro, Oxo]
 
@@ -149,7 +210,7 @@ venn3(subsets = (venn_data_3[0], venn_data_3[1], venn_data_3[2], venn_data_3[3],
 plt.show()
 
 #######
-#GCSs sets average N3E estimation
+#GCSs sets average N3E estimation.
 #######
 
 def average_height(ar):
@@ -169,7 +230,7 @@ print('Cfx, Micro and Oxo average GCSs N3E: ' + str(average_height(Cfx_Micro_Oxo
 
 
 #######
-#Write down files with GCSs lists - trusted or shared
+#Write down files with GCSs lists - trusted or shared.
 #######
 
 All_GCSs_sets={Cfx_path: Antibs_GCSs_sets[0],
@@ -203,5 +264,5 @@ def write_Cfx_RifCfx_shared_GCSs(ar, path):
     
 write_Cfx_RifCfx_shared_GCSs(Cfx_RifCfx_shared_GCSs, Cfx_RifCfx_shared_GCSs_path)
  
-print('Script ended succesfully!') 
+print('Script ended its work succesfully!') 
  
