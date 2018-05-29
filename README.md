@@ -38,3 +38,10 @@ The script takes raw GCSs data, returns only trusted GCSs, computes GCSs shared 
 ## GCSs_transcription_score_GC_distributions_throughout_genome.py
 
 The script takes sets of trusted GCSs and analysis the distribution of GCSs troughout the genome. Also it plots the distribution of other values such as score, GC% and transcription.
+
+######################
+
+## Motifs_visualization_sequences_extraction.py
+
+The script takes sets of trusted GCSs as input and plots motifs using the sequences under the GCSs.
+Also it writes sequences and motif to files.
