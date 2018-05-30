@@ -45,3 +45,11 @@ The script takes sets of trusted GCSs and analysis the distribution of GCSs trou
 
 The script takes sets of trusted GCSs as input and plots motifs using the sequences under the GCSs.
 Also it writes sequences and motif to files.
+
+######################
+
+## Combined_motif_construction_scanning_plotting_writing.py
+
+The script takes sets of trusted GCSs as input, filters GCSs with highest N3E, makes a combined set consists of these GCSs, returns sequences under them and constructs
+PSSM matrix by the way getting rid of antibiotic-specific bias at positions forming the cleavage site. Than the script scans a sequence of interest with the PSSM, 
+returns the results of scanning, plots combined motif and writes it in a GC% degenerate and in a non-degenerate forms.
