@@ -53,3 +53,11 @@ Also it writes sequences and motif to files.
 The script takes sets of trusted GCSs as input, filters GCSs with highest N3E, makes a combined set consists of these GCSs, returns sequences under them and constructs
 PSSM matrix by the way getting rid of antibiotic-specific bias at positions forming the cleavage site. Than the script scans a sequence of interest with the PSSM, 
 returns the results of scanning, plots combined motif and writes it in a GC% degenerate and in a non-degenerate forms.
+
+######################
+
+## Prepare_score_track_GCSs_score_height_score_correlation.py
+
+The script takes results of scanning procedure for forward and reverse strands.
+Returns score for every genome position (writes into WIG file), for GCSs (writes TAB files contain coordinate\tN3E\tScore info), 
+computes Pearson correlation between N3E and score, plots (Score, N3E) scatter plots.
