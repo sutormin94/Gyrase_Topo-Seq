@@ -351,20 +351,19 @@ def TU_interval_stat_analysis(GCSs_sets_dict, intervals_GCSs_dict, intervals, sc
 
 #######
 #Number of GCSs statistical analysis for those associated with TUs, additional normalization step is added. 
-#parameters_example=[Number of GCSs for particular condition, Total number of TUs, Number of TUs in the partial set]
 #######
 
-def GCSs_num_normalization(all_TUs, part_TU, parameters):
+def GCSs_num_normalization(all_TUs, part_TUs, GCSs_sets_dict, all_TUs_set, part_TUs_set):
     GCSs_set_exp_interval_dict={} 
     for a, s in all_TUs.items():
         GCSs_all=all_TUs[a][0]+all_TUs[a][3]+all_TUs[a][6]+all_TUs[a][9] #Total number of GCSs observed to be associated with the full set of TUs.
         GCSs_all_exp_compartment=float(GCSs_all)/4 #Expected number of GCSs fall into particular compartment (USUS, USGB, GBDS, DSDS) for full set of TUs.
-        GCSs_set_exp_interval=GCSs_all_exp_compartment*parameters[2]/parameters[1] #Expected number of GCSs fall into particular compartment (USUS, USGB, GBDS, DSDS) for partial set of TUs.
+        GCSs_set_exp_interval=GCSs_all_exp_compartment*len(part_TUs_set)/len(all_TUs_set) #Expected number of GCSs fall into particular compartment (USUS, USGB, GBDS, DSDS) for partial set of TUs.
         GCSs_set_exp_interval_dict[a]=[GCSs_set_exp_interval] 
         for j in range(((len(s))-1)/3):
-            GCSs_set_exp_interval_dict[a].append(part_TU[a][j*3]) #Number of GCSs fall into particular compartment (USUS, USGB, GBDS, DSDS) for partial set of TUs.
-            GCSs_set_exp_interval_dict[a].append(binom.cdf(part_TU[a][j*3], GCSs_set_exp_interval*4, 0.25)) #p-value of binomial test for the number of GCSs fall into particular compartment (USUS, USGB, GBDS, DSDS) for partial set of TUs.
-            GCSs_set_exp_interval_dict[a].append(float(part_TU[a][j*3])*100000/(parameters[0]*parameters[2])) #Normalized number of GCSs fall into particular compartment (USUS, USGB, GBDS, DSDS) for partial set of TUs.
+            GCSs_set_exp_interval_dict[a].append(part_TUs[a][j*3]) #Number of GCSs fall into particular compartment (USUS, USGB, GBDS, DSDS) for partial set of TUs.
+            GCSs_set_exp_interval_dict[a].append(binom.cdf(part_TUs[a][j*3], GCSs_set_exp_interval*4, 0.25)) #p-value of binomial test for the number of GCSs fall into particular compartment (USUS, USGB, GBDS, DSDS) for partial set of TUs.
+            GCSs_set_exp_interval_dict[a].append(float(part_TUs[a][j*3])*100000/(len(GCSs_sets_dict[a])*len(part_TUs_set))) #Normalized number of GCSs fall into particular compartment (USUS, USGB, GBDS, DSDS) for partial set of TUs.
     return GCSs_set_exp_interval_dict #[GCSs expected] + [GCSs obs, p-value, GCSs norm]*[USUS, USGB, GBDS, DSDS]
 
 #######
@@ -415,10 +414,13 @@ def broadpeak_pars(intervals_sets_path):
 #######   
 
 def GCSs_in_intervals(GCSs_sets_dict,  intervals, path_out):
-    fileout=open(path_out+'GCSs_associated_with_intervals_statistics.txt', 'w')
+    fileout=open(path_out+'GCSs_associated_with_intervals_statistics.txt', 'w') #For all intervals sets.
     fileout.write('Interval type\tCondition\tNumber of GCSs expected\tNumber of GCSs observed\tp-value\t' +
                   'GCSs N3E (intervals)\tGCSs N3E (overall)\tp-value\tt-statistic\t' + 
                   'GCSs score (intervals)\tGCSs score (overall)\tp-value\tt-statistic\n')
+    
+    fileout1=open(path_out+'GCSs_association_with_BIME.txt', 'w') #Specially for BIMEs1, BIMEs2 sets.
+    fileout1.write('Interval type\tStart\tEnd\tCfx (number of GCSs)\tRifCfx (number of GCSs)\tMicro (number of GCSs)\tOxo (number of GCSs)\n')    
     #Correcting genome length.
     deletions=[[274500, 372148], [793800, 807500], [1199000, 1214000]] #Deletions in E. coli w3110 strain that corresponds to DY330 strain.
     del_len=0
@@ -443,15 +445,23 @@ def GCSs_in_intervals(GCSs_sets_dict,  intervals, path_out):
         GCSs_associated_info[k]={}
         intervals_len=0
         for i in v: #Iterate intevals.
-            intervals_len+=i[1]-i[0]      
+            intervals_len+=i[1]-i[0]  
+            interval_associated_GCSs={}
             for a, s in GCSs_sets_dict.items(): #Iterate GCSs sets.
                 if a not in GCSs_associated_info[k]:
                     GCSs_associated_info[k][a]=[0, [], []] #Dictionary contains elements corresponds to GCSs sets. [Number of GCSs, N3E values, Score values]
+                interval_associated_GCSs[a]=0 #GCSs fall into particular interval counter.
                 for gcs, info in s.items(): #Iterate GCSs.
                     if i[1]>gcs>i[0]:
                         GCSs_associated_info[k][a][0]+=1
                         GCSs_associated_info[k][a][1].append(info[0])
                         GCSs_associated_info[k][a][2].append(info[1])
+                        interval_associated_GCSs[a]+=1
+            if k in ['BIMEs1', 'BIMEs2']:
+                fileout1.write(k + '\t' + str(i[0]) + '\t' + str(i[1]) + '\t' + str(interval_associated_GCSs['Cfx']) + '\t' + 
+                               str(interval_associated_GCSs['RifCfx']) + '\t' + str(interval_associated_GCSs['Micro']) + '\t' +
+                               str(interval_associated_GCSs['Oxo']) + '\n')
+                
         
         for a, s in GCSs_associated_info[k].items():
             relative_intervals_len=float(intervals_len)/genome_len
@@ -465,7 +475,61 @@ def GCSs_in_intervals(GCSs_sets_dict,  intervals, path_out):
                           str(np.mean(s[2])) + '\t' + str(np.mean(GCSs_values_dict[a][1])) + '\t' + str(GCSs_score_stat[1]) + '\t' + str(GCSs_score_stat[0]) + '\n')
     
     fileout.close()
+    fileout1.close()
     return GCSs_associated_info
 
+#######
+#Wrapper for TUs analysis functions.
+####### 
+
+def TU_analysis_wrapper(input_dict, inpath, TUs_sets_path, path_out):
+    #Reading input.
+    GCSs_sets_dict=trusted_GCSs_parsing(input_dict) #Parsing GCSs
+    score_data=score_data_parser(inpath, 'score') #Parsing score file
+    TU_sets_dict=TUs_parser(TUs_sets_path) #Parsing TUs
+    
+    #16S operons analysis.
+    window_width_16S_operons=5000
+    set_type_16S='16S operons'
+    GCSs_16S_assoc_info=TU_association(GCSs_sets_dict, TU_sets_dict['16S_operons'], set_type_16S, window_width_16S_operons, path_out, set_type_16S)
+    TU_interval_stat_analysis(GCSs_sets_dict, GCSs_16S_assoc_info, TU_sets_dict['16S_operons'], score_data, window_width_16S_operons, set_type_16S, path_out, set_type_16S)
+    
+    #All genes analysis.
+    window_width=650
+    GCSs_all_genes_assoc_info=TU_association(GCSs_sets_dict, TU_sets_dict['All_genes'], 'genes', window_width, path_out, 'All_genes')
+    TU_interval_stat_analysis(GCSs_sets_dict, GCSs_all_genes_assoc_info, TU_sets_dict['All_genes'], score_data, window_width, 'genes', path_out, 'All_genes')
+    GCSs_set_exp_interval_dict_ag=GCSs_num_normalization(GCSs_all_genes_assoc_info, GCSs_all_genes_assoc_info, GCSs_sets_dict, TU_sets_dict['All_genes'], TU_sets_dict['All_genes'])
+    write_GCSs_norm(GCSs_set_exp_interval_dict_ag, path_out, 'All_genes')    
+    
+    #Other genes sets analysis.
+    for k, v in TU_sets_dict.items():
+        if k not in ['All_genes'] and k.find('genes')>0: #k contains 'genes' as a substring but not equial to 'All_genes'.
+            GCSs_genes_assoc_info=TU_association(GCSs_sets_dict, v, 'genes', window_width, path_out, k)
+            TU_interval_stat_analysis(GCSs_sets_dict, GCSs_genes_assoc_info, v, score_data, window_width, 'genes', path_out, k)
+            GCSs_set_exp_interval_dict_g=GCSs_num_normalization(GCSs_all_genes_assoc_info, GCSs_genes_assoc_info, GCSs_sets_dict, TU_sets_dict['All_genes'], TU_sets_dict[k])
+            write_GCSs_norm(GCSs_set_exp_interval_dict_g, path_out, k)
+            
+    #All operons analysis.
+    window_width=650
+    GCSs_all_operons_assoc_info=TU_association(GCSs_sets_dict, TU_sets_dict['All_operons'], 'operons', window_width, path_out, 'All_operons')
+    TU_interval_stat_analysis(GCSs_sets_dict, GCSs_all_operons_assoc_info, TU_sets_dict['All_operons'], score_data, window_width, 'operons', path_out, 'All_operons')
+    GCSs_set_exp_interval_dict_ao=GCSs_num_normalization(GCSs_all_operons_assoc_info, GCSs_all_operons_assoc_info, GCSs_sets_dict, TU_sets_dict['All_operons'], TU_sets_dict['All_operons'])
+    write_GCSs_norm(GCSs_set_exp_interval_dict_ao, path_out, 'All_operons')    
+    
+    #Other operons sets analysis (except 16S operons).
+    for k, v in TU_sets_dict.items():
+        if k not in ['All_operons', '16S_operons'] and k.find('operons')>0: #k contains 'operons' as a substring but not equial to 'All_operons' or '16S_operons'.
+            GCSs_operons_assoc_info=TU_association(GCSs_sets_dict, v, 'operons', window_width, path_out, k)
+            TU_interval_stat_analysis(GCSs_sets_dict, GCSs_operons_assoc_info, v, score_data, window_width, 'operons', path_out, k)
+            GCSs_set_exp_interval_dict_o=GCSs_num_normalization(GCSs_all_operons_assoc_info, GCSs_operons_assoc_info, GCSs_sets_dict, TU_sets_dict['All_operons'], TU_sets_dict[k])
+            write_GCSs_norm(GCSs_set_exp_interval_dict_o, path_out, k)
+    return
+
+
+TU_analysis_wrapper(path_to_GCSs_files, Score_path, path_to_TUs_sets, TU_analysis_outpath)
+
+#######
+#Wrapper for intervals analysis functions.
+####### 
 
 print('Script ended its work succesfully!') 
