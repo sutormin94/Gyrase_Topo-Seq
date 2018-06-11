@@ -413,7 +413,7 @@ def broadpeak_pars(intervals_sets_path):
 #GCSs in intervals.
 #######   
 
-def GCSs_in_intervals(GCSs_sets_dict,  intervals, path_out):
+def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
     fileout=open(path_out+'GCSs_associated_with_intervals_statistics.txt', 'w') #For all intervals sets.
     fileout.write('Interval type\tCondition\tNumber of GCSs expected\tNumber of GCSs observed\tp-value\t' +
                   'GCSs N3E (intervals)\tGCSs N3E (overall)\tp-value\tt-statistic\t' + 
@@ -460,9 +460,7 @@ def GCSs_in_intervals(GCSs_sets_dict,  intervals, path_out):
             if k in ['BIMEs1', 'BIMEs2']:
                 fileout1.write(k + '\t' + str(i[0]) + '\t' + str(i[1]) + '\t' + str(interval_associated_GCSs['Cfx']) + '\t' + 
                                str(interval_associated_GCSs['RifCfx']) + '\t' + str(interval_associated_GCSs['Micro']) + '\t' +
-                               str(interval_associated_GCSs['Oxo']) + '\n')
-                
-        
+                               str(interval_associated_GCSs['Oxo']) + '\n')          
         for a, s in GCSs_associated_info[k].items():
             relative_intervals_len=float(intervals_len)/genome_len
             total_number_of_GCSs=len(GCSs_sets_dict[a])
@@ -473,9 +471,21 @@ def GCSs_in_intervals(GCSs_sets_dict,  intervals, path_out):
             fileout.write(k + '\t' + a + '\t' + str(expected_number_of_GCSs_in_interval) + '\t' + str(s[0]) + '\t' + str(GCSs_num_stat) + '\t' + 
                           str(np.mean(s[1])) + '\t' + str(np.mean(GCSs_values_dict[a][0])) + '\t' + str(GCSs_N3E_stat[1]) + '\t' + str(GCSs_N3E_stat[0]) + '\t' + 
                           str(np.mean(s[2])) + '\t' + str(np.mean(GCSs_values_dict[a][1])) + '\t' + str(GCSs_score_stat[1]) + '\t' + str(GCSs_score_stat[0]) + '\n')
-    
     fileout.close()
     fileout1.close()
+    
+    #Intervals score statistics.
+    fileout2=open(path+'Intervals_score_statistics.txt', 'w')
+    fileout.write('Test\tInterval\tValue (intervals)\tValue (overall)\tp-value\tt-statistic\n')
+    for k, v in intervals.items():
+        intervals_values=[]
+        for i in v:
+            intervals_values+=score_data[i[0]:i[1]]
+        intervals_score_stat=stats.ttest_ind(intervals_values, score_data) #Score
+        fileout.write('t-test\t' + k + '\t' + str(np.mean(intervals_values)) + '\t' + 
+                  str(np.mean(score_data)) + '\t' + str(intervals_score_stat[1]) + 't-statistic: ' + 
+                  str(intervals_score_stat[0]) + '\n')  
+    fileout2.close()
     return GCSs_associated_info
 
 #######
@@ -531,5 +541,17 @@ TU_analysis_wrapper(path_to_GCSs_files, Score_path, path_to_TUs_sets, TU_analysi
 #######
 #Wrapper for intervals analysis functions.
 ####### 
+
+def Interval_analysis_wrapper(input_dict, inpath, intervals_sets_path, path_out):
+    #Reading input.
+    GCSs_sets_dict=trusted_GCSs_parsing(input_dict) #Parsing GCSs
+    score_data=score_data_parser(inpath, 'score') #Parsing score file   
+    Intervals_sets_dict=broadpeak_pars(intervals_sets_path) #Parsing intervals
+    
+    #Statistics calculation.
+    GCSs_in_intervals(GCSs_sets_dict, Intervals_sets_dict, score_data, path_out)
+    return
+
+Interval_analysis_wrapper(path_to_GCSs_files, Score_path, path_to_intervals_sets, Intervals_analysis_outpath)
 
 print('Script ended its work succesfully!') 
