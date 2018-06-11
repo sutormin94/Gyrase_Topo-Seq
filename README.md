@@ -15,7 +15,9 @@ Than script maps trimmed and paired reads to the reference genome, prepares sort
 indexed BAM-files suitable for visualization with IGV.
 
 **Requirements:** factqc, trimmomatic, bwa mem, samtools, shell
+
 **Input:** Raw reads files (FASTQ), Genome file (FASTA)
+
 **Output:** FastQC reports, SAM files, sorted indexed BAM files
 
 ######################
