@@ -13,16 +13,22 @@
 ##############
 
 
-#Set path to different files
-#Path to the working directory, contains /Data folder with raw data
+#######
+#Variables to be defined.
+#######
+
+#Path to the working directory, contains /Data folder with raw reads files.
 Sample_path=''
 print $Sample_path
 cd $Sample_path
 #Path to the file containing sequencing adapters sequences for trimmomatic uses. Typically in the Trimmomatic-0.36/adapters/All_TruSeq.fa
 Adapters=''
-#Path to the reference genome
+#Path to the reference genome.
 Ref_genome=''
 
+#######
+#Quality control and sequencing data preparation.
+#######
 
 #Initial quality control
 mkdir Fastqc_analysis/
@@ -38,11 +44,14 @@ java -jar trimmomatic PE -threads 10 -phred33 $Sample_path/Data/${i}_R1_001.fast
 mkdir Fastqc_analysis/Trimmed_gentely/
 fastqc -t 20 -o $Sample_path/Fastqc_analysis/Trimmed_gentely/ $Sample_path/Data/Trimmed_gentely/*
 
+#######
+#Reads mapping, alignment conversion to IGV-compatible format (sorted indexed BAM).
+#######
+
 #Reads mapping to the reference genome: make SAM-files
 mkdir SAM/
 for i in `ls -a $Sample_path/Data/Trimmed_gentely/ | sed -r "s/(.+)_paired_R[1,2]_00.*/\1/g" | uniq | sort -d`; do 
 bwa mem -t 20 Ref_genome $Sample_path/Data/Trimmed_gentely/${i}_paired_R1_001.fastq.gz $Sample_path/Data/Trimmed_gentely/${i}_paired_R2_001.fastq.gz > $Sample_path/SAM/$i.sam; done
-
 
 #Prepares tracks for IGV: makes BAM-files, sorts them, makes index-files
 mkdir SAM_sorted/

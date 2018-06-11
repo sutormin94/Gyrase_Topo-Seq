@@ -13,6 +13,7 @@
 #######
 
 import matplotlib.pyplot as plt
+from matplotlib_venn import venn2, venn3, venn3_circles
 import numpy as np
 
 #######
@@ -50,6 +51,8 @@ Cfx_Oxo_path=''
 Micro_Oxo_path=''
 Cfx_Micro_Oxo_path=''
 Cfx_RifCfx_shared_GCSs_path=''
+#Outpath for Venn diagrams.
+plot_outpath=''
 
 #######
 #Parsing raw GCSs coordinates, returns dictionary - GCSs_coordinate:N3E.
@@ -73,19 +76,19 @@ def combine_replicates(replicas_dict, path_out, name):
     #Merges a range of replicates
     GCSs_replicas_dict={}
     names_ar=[]
-    for key, value in replicas_dict.items():
-        names_ar.append(k)
-        for k, v in read_GCSs_file(value).items():
+    for key, value in replicas_dict.items(): #Iterates replicas
+        names_ar.append(key)
+        for k, v in read_GCSs_file(value).items(): #Iterates raw GCSs
             if k in GCSs_replicas_dict:
                 GCSs_replicas_dict[k].append(v)
             else:
                 add_el=[]
-                for j in range(i):
+                for j in range(len(names_ar)-1):
                     add_el.append(0)
                 add_el.append(v)
                 GCSs_replicas_dict[k]=add_el
         for k, v in GCSs_replicas_dict.items():
-            if len(v)<i+1:
+            if len(v)<len(names_ar):
                 GCSs_replicas_dict[k].append(0)
     #Writes merged GCSs data
     fileout=open(path_out + name + '_GCSs_replicates.txt', 'w')
@@ -149,11 +152,7 @@ def pairs_construction(ar1, ar2):
     for i in range(len(ar1)):
         for j in range(len(ar2)):
             if ar1[i][0]==ar2[j][0]:
-                cp_info=[]
-                cp_info.append(ar1[i][0])
-                cp_info.append(ar1[i][1])
-                cp_info.append(ar2[j][1])
-                double.append(cp_info)      
+                double.append([ar1[i][0], ar1[i][1], ar2[j][1]]) #GCSs coordinate, N3E_1, N3E_2 
     return double
 
 Cfx_RifCfx_shared_GCSs=pairs_construction(Cfx, RifCfx)
@@ -178,16 +177,35 @@ def triple_construction(ar12, ar3):
     for i in range(len(ar12)):
         for j in range(len(ar3)):
             if ar12[i][0]==ar3[j][0]:
-                ct_info=[]
-                ct_info.append(ar12[i][0])
-                ct_info.append(ar12[i][1])
-                ct_info.append(ar12[i][2])
-                ct_info.append(ar3[j][1])
-                triple.append(ct_info)      
+                triple.append([ar12[i][0], ar12[i][1], ar12[i][2], ar3[j][1]]) #GCSs coordinate, N3E_1, N3E_2, N3E_3
     return triple
 
 Cfx_Micro_Oxo_shared_GCSs=triple_construction(Cfx_Micro_shared_GCSs, Oxo)
 print('Number of GCSs shared between Cfx, Micro and Oxo: ' + str(len(Cfx_Micro_Oxo_shared_GCSs)) +'\n')
+
+#######
+#Parses replicas, overlaps lists of GCSs, output data for Venn diagram construction.
+#######
+
+def replicates_parsing_to_list_and_overlapping(replicas_dict, name):
+    #Parsing
+    GCSs_dict={}
+    for k, v in replicas_dict.items(): #Iterate replicas.
+        GCSs_dict[k]=[]
+        for c, h in read_GCSs_file(v): #Iterate GCSs.
+            GCSs_dict[k].append([c, h])
+    #Overlapping
+    one_two=pairs_construction(GCSs_dict[name+str(1)], GCSs_dict[name+str(2)])
+    one_three=pairs_construction(GCSs_dict[name+str(1)], GCSs_dict[name+str(3)])
+    two_three=pairs_construction(GCSs_dict[name+str(2)], GCSs_dict[name+str(3)])
+    one_two_three=triple_construction(one_two, GCSs_dict[name+str(3)])
+    #Venn input description (for 3 sets): one, two, three, one_two, one_three, two_three, one_two_three
+    venn_input=[len(GCSs_dict[name+str(1)])-len(one_two)-len(one_three)+len(one_two_three), 
+                len(GCSs_dict[name+str(2)])-len(one_two)-len(two_three)+len(one_two_three), 
+                len(GCSs_dict[name+str(3)])-len(one_three)-len(two_three)+len(one_two_three),
+                len(one_two)-len(one_two_three), len(one_three)-len(one_two_three), len(two_three)-len(one_two_three),
+                len(one_two_three)]
+    return venn_input
 
 #######
 #Venn diagram represents GCSs sets overlapping.
@@ -204,10 +222,23 @@ venn_data_3=[len(Cfx)-len(Cfx_Micro_shared_GCSs)-len(Cfx_Oxo_shared_GCSs)+len(Cf
              len(Micro_Oxo_shared_GCSs)-len(Cfx_Micro_Oxo_shared_GCSs), 
              len(Cfx_Micro_Oxo_shared_GCSs)]
 
-venn2(subsets = (venn_data_2[0], venn_data_2[1], venn_data_2[2]), set_labels = ("Ciprofloxacin", "Rifampicin Ciprofloxacin"))
-plt.show()
-venn3(subsets = (venn_data_3[0], venn_data_3[1], venn_data_3[2], venn_data_3[3], venn_data_3[4], venn_data_3[5], venn_data_3[6]), set_labels = ('Ciprofloxacin', 'Microcin B17', 'Oxolinic acid'))
-plt.show()
+venn2(subsets = (venn_data_2), set_labels = ("Ciprofloxacin", "Rifampicin Ciprofloxacin"))
+plt.savefig(plot_outpath+'Cfx_RifCfx_venn.png', dpi=320)
+
+venn3(subsets = (venn_data_3), set_labels = ('Ciprofloxacin', 'Microcin B17', 'Oxolinic acid'))
+plt.savefig(plot_outpath+'Cfx_Micro_Oxo_venn.png', dpi=320)
+
+venn3(subsets = (replicates_parsing_to_list_and_overlapping(path_to_cfx_replicas, 'Cfx_')), set_labels = ('Cfx_1', 'Cfx_2', 'Cfx_3'))
+plt.savefig(plot_outpath+'Cfx_replicas_venn.png', dpi=320)
+
+venn3(subsets = (replicates_parsing_to_list_and_overlapping(path_to_rifcfx_replicas, 'RifCfx_')), set_labels = ('RifCfx_1', 'RifCfx_2', 'RifCfx_3'))
+plt.savefig(plot_outpath+'RifCfx_replicas_venn.png', dpi=320)
+
+venn3(subsets = (replicates_parsing_to_list_and_overlapping(path_to_microcin_replicas, 'Micro_')), set_labels = ('Micro_1', 'Micro_2', 'Micro_3'))
+plt.savefig(plot_outpath+'Micro_replicas_venn.png', dpi=320)
+
+venn3(subsets = (replicates_parsing_to_list_and_overlapping(path_to_oxo_replicas, 'Oxo_')), set_labels = ('Oxo_1', 'Oxo_2', 'Oxo_3'))
+plt.savefig(plot_outpath+'Oxo_replicas_venn.png', dpi=320)
 
 #######
 #GCSs sets average N3E estimation.

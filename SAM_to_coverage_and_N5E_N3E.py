@@ -30,7 +30,7 @@ edited_sam_path=""
 tab_path=""
 #Path to the output/input WIG files
 wig_path=""
-#Chromosome (genome) identificator
+#Chromosome (genome) identificator (look for the corresponding FASTA ID)
 chromosome_identificator=""
 
 
@@ -95,7 +95,7 @@ def create_tab_files(input_sam_file, output_tab_file):
 	sam_file=open(input_sam_file, 'r')
 	outfile=open(output_tab_file, 'w+')
 	for line in sam_file:
-		if line[0]=="@": #Header cheking	
+		if line[0]=="@": #Header checking	
 			continue		
 		line=line.rstrip().split('\t')	
 		if -1500<int(line[8])<1500: #Distance between reads within the pair has to be less than 1500 bp
@@ -195,7 +195,7 @@ def depth_counter(coords_ar):
 	return genome
 
 #######
-#Looks through two equial-lenght lists contains num values.
+#Looks through two equal-length lists contains num values.
 #Creates new list with pairwise summs.
 #######
 def Integrator(ar1, ar2):
@@ -238,7 +238,7 @@ def start_end_count(forw, rev):
 	return {'DNA_fragments_starts':genome_start, 'DNA_fragments_ends':genome_end, 'DNA_fragments_starts_and_ends':genome_start_and_end}
 
 #######
-#Wraps functions that read, edit and write .sam files (sam_edt) and check the resulting edt.sam (check_sam). 
+#Wraps functions that read, edit and write SAM files (sam_edt) and check the resulting edited SAM (check_sam). 
 #Editing results in filtering of the proper aligned reads with score<256.
 #Checking procedure: counting reads that form pairs.
 #######
@@ -268,7 +268,7 @@ def edit_sam_files_wrapper(sam_path, edited_sam_path, check_option):
 	return
 	
 #######
-#Wraps functions that read .sam files and makes .tab files (create_tab_files).
+#Wraps functions that read SAM files and makes TAB files (create_tab_files).
 #While running, it filters reads pairs consist of reads that form a DNA fragment
 #less than 1500 bp.
 #######	
@@ -288,11 +288,11 @@ def create_tab_files_wrapper(edited_sam_path, tab_path):
 	return
 	
 #######
-#Wraps functions that read .tab files (Peaks_pars from pars_com),
+#Wraps functions that read TAB files (Peaks_pars from pars_com),
 #makes reads pairs (QC_reads), strand classify reads pairs (Read_strand_classif),
 #marks left- and right-most positions of the DNA fragments aligned (Coords),
 #calculates coverage depth for + and - strands and sum them (depth_counter, Integrator), 
-#calculates number of DNA fragments starts and ends for every genome position (start_end_count) and
+#calculates number of DNA fragments starts (N5E) and ends (N3E) for every genome position (start_end_count) and
 #writes output WIG files
 #######
 def create_wig_files_wrapper(tab_path, wig_path, chromosome_id):
@@ -336,18 +336,18 @@ def create_wig_files_wrapper(tab_path, wig_path, chromosome_id):
 		outfile_path=wig_path + tab[:-4] + "_for_rev_depth.wig"
 		write_file(genome_depth, str(tab[:-4]) + "depth", chromosome_id, outfile_path)
 		
-		#Calculates number of DNA fragments starts and ends for every genome position
+		#Calculates number of DNA fragments starts (N5E) and ends (N3E) for every genome position
 		Starts=start_end_count(for_coords, rev_coords)['DNA_fragments_starts']
 		Ends=start_end_count(for_coords, rev_coords)['DNA_fragments_ends']
 		Starts_and_ends=start_end_count(for_coords, rev_coords)['DNA_fragments_starts_and_ends']
 		
-		#Writes WIG files (starts and ends)
+		#Writes WIG files (N3E and N5E)
 		outfile_starts_path=wig_path + tab[:-4] + "_starts.wig"
-		write_file(Starts, str(tab[:-4]) + "_starts", chromosome_id, outfile_starts_path)
+		write_file(Starts, str(tab[:-4]) + "_starts", chromosome_id, outfile_starts_path) #N5E
 		outfile_ends_path=wig_path + tab[:-4] + "_ends.wig"	
-		write_file(Ends, str(tab[:-4]) + "_ends", chromosome_id, outfile_ends_path)
+		write_file(Ends, str(tab[:-4]) + "_ends", chromosome_id, outfile_ends_path) #N3E
 		outfile_starts_ends_path=wig_path + tab[:-4] + "_stends.wig"	
-		write_file(Starts_and_ends, str(tab[:-4]) + "_starts_and_ends", chromosome_id, outfile_starts_ends_path)
+		write_file(Starts_and_ends, str(tab[:-4]) + "_starts_and_ends", chromosome_id, outfile_starts_ends_path) #N5E+N3E
 	return
 
 

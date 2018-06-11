@@ -72,7 +72,7 @@ def genome_seq(genome_path):
 
 def return_seqs(GCS_coords, win_range, genomefa, filepath): 
         fileout=open(filepath, 'w')
-        seqs = []
+        seqs=[]
         for i in range(len(GCS_coords)):
                 seq=genomefa[int(GCS_coords[i]- win_range[0] + 1):int(GCS_coords[i]+ win_range[1] + 1)]
                 seqs.append(seq)
@@ -205,7 +205,7 @@ def wrap_function(GCSs_input, genome_input_path, output_path):
                 PFMs=make_PFM(sequences_list)
                 write_motif(PFMs[PFM_type], output_path+str(k)+'_GC_pfm.txt', win_width)
                 dict_of_PFMs[k]=PFMs[PFM_type]
-        Plotting(dict_of_PFMs, plot_title, PFM_type, output_path+'Gyrase_motif_'+str(PFM_type)+'.png', win_width)
+        Plotting(dict_of_PFMs, plot_title, PFM_type, output_path+'Gyrase_motif_trusted_GCSs_'+str(PFM_type)+'.png', win_width)
         return
 
 wrap_function(path_to_GCSs_files, Genome_path, Output_path)

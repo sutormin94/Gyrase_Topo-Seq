@@ -2,9 +2,9 @@
 ##Dmitry Sutormin, 2018##
 ##Topo-Seq analysis##
 
-#The script analysis sets of genome intervals (transcription units, REPs, BIMEs-2, Fis sites, H-NS sites, MatP sites, etc.)
-#for the enrichment of GCSs, compares their N3E and score with mean GCSs N3E and score, 
-#compares intarvals mean score with genome mean score.
+#The script analysis sets of genome intervals (transcription units - TUs, BIMEs-1, BIMEs-2, IHF sites, Fis sites, H-NS sites, MatP sites, etc.)
+#for the enrichment of GCSs (binomial test), compares their N3E and score with mean GCSs N3E and score (t-test), 
+#compares intervals mean score with genome mean score (t-test).
 ###############################################
 
 #######
@@ -12,13 +12,9 @@
 #######
 
 import matplotlib.pyplot as plt
-from matplotlib import gridspec
 import numpy as np
 import scipy
 from scipy.stats import binom
-from scipy.stats.stats import pearsonr
-from Bio import SeqIO
-from Bio.SeqUtils import GC
 
 #######
 #Variables to be defined.

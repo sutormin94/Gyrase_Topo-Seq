@@ -34,10 +34,10 @@ path_to_GCSs_files={'Cfx': '',
                     'Micro': '',
                     'Oxo': ''}
 
-#Path to the E. coli genome (source of sequences for PFM/PWM construction).
+#Path to the E. coli genome (source of sequences for PFM/PWM construction), FASTA.
 Genome_seq_path=''
 
-#Path to the sequence to be scanned.
+#Path to the sequence to be scanned, FASTA.
 Target_seq_path=''
 
 #Prefix of the output path.
