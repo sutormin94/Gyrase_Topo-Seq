@@ -29,8 +29,10 @@ only reads pairs that have a score<256 are stored. Than the script computes cove
 Additionally it calculates N5E (number of DNA fragments starts) and N3E (number of DNA fragments ends) values for every genome position. 
 Coverage depth, N3E and N5E info returns as WIG files.
 
-**Requirements:** python 3 
+**Requirements:** python 3
+
 **Input:** SAM files, chromosome identificator (for output WIG)
+
 **Output:** SAM files contain proper aligned reads only, TAB files with start coordinates of DNA fragments alignments and alignment lengths, a range of WIG files:
 coverage depth for forward strand, reverse strand, and for both strands, N3E, N5E, and N3E+N5E data 
 
@@ -45,7 +47,9 @@ These regions from now are called GCSs. GCSs are stored in the output TXT file. 
 signal coverage over the genome for treated and untreated samples; 2) Motif expected to be under the GCSs.
 
 **Requirements:** python 3
+
 **Input:** TAB file with deletions coordinates, N3E or N5E values containing WIG files forms a tetrade (A+IP+, A+IP-, A-IP+, A-IP-), FASTA genome file
+
 **Output:** Plot shows coverage depth normalization before GCSs calling, TAB file with raw GCSs coordinates and N3E values, Plot with raw motif
 
 ######################
@@ -56,7 +60,9 @@ The script takes raw GCSs data, returns only trusted GCSs, computes GCSs shared 
 draws Venn diagrams of the sets overlappings, writes GCSs sets.
 
 **Requirements:** python 3
+
 **Input:** TAB files with raw GCSs (triplicates)
+
 **Output:** TAB files with trusted GCSs, TAB files with shared GCSs (Cfx_Micro, Cfx_Oxo, Micro_Oxo, Cfx_MIcro_Oxo, Cfx_Rif_Cfx), 
 Venn diagrams (Cfx vs Micro vs Oxo, Cfx vs RifCfx, 3 replicas for of the each experimental conditions)
 
@@ -68,7 +74,9 @@ The script takes sets of trusted GCSs and analysis the distribution of GCSs thro
 Also it plots the distribution of other values such as score, GC% and transcription.
 
 **Requirements:** python 3
+
 **Input:** TAB files with trusted GCSs, WIG genome score file, WIG genome GC file, TAB file with transcription data
+
 **Output:** Plot with all the values examined distributed throughout the genome: GCSs number, score, GC, transcription level
 
 ######################
@@ -79,7 +87,9 @@ The script takes sets of trusted GCSs as input and plots motifs using the sequen
 Also it writes sequences and motif to files.
 
 **Requirements:** python 3
+
 **Input:** TAB files with trusted GCSs, FASTA genome file
+
 **Output:** FASTA file with sequences under GCSs, TAB file with motif PFM (GC degenerate for further Fourier analysis), Gyrase motif plots constructed for trusted GCSs
 
 ######################
@@ -91,7 +101,9 @@ PSSM matrix by the way getting rid of antibiotic-specific bias at positions form
 returns the results of scanning, plots combined motif and writes it in a GC% degenerate and in a non-degenerate forms.
 
 **Requirements:** python 3
+
 **Input:** TAB files with trusted GCSs, FASTA genome file, FASTA file with a sequence to scan using the motif constructed
+
 **Output:** A pair of PreWIG files with the scanning procedure results (for forward and reverse strands), FASTA file with sequences under GCSs were selected for combined motif construction,
 Plot of the combined gyrase motif, TAB file with motif PFM (GC degenerate for further Fourier analysis) vertically oriented, 
 TAB file with motif non-degenerate and corrected PFM horizontally oriented.
@@ -105,8 +117,10 @@ Returns score for every genome position (writes into WIG file), for GCSs (writes
 computes Pearson correlation between N3E and score, plots (Score, N3E) scatter plots.
 
 **Requirements:** python 3
+
 **Input:** TAB files with trusted GCSs, a pair of PreWIG files with the scanning procedure results (for forward and reverse strands), 
 dataset name and chromosome identificator (both for output WIG)
+
 **Output:** TAB files with trusted GCSs (score info added), WIG file with score defined for every genome position, 
 (score, N3E) scatter plot with 1d trend line, correlation (score, N3E)
 
@@ -119,7 +133,9 @@ for the enrichment of GCSs (binomial test), compares their N3E and score with me
 compares intervals mean score with genome mean score (t-test).
 
 **Requirements:** python 3
+
 **Input:** TAB files with trusted GCSs and score info, WIG genome score file, TAB transcription units data files, TAB intervals data files
+
 **Output:** TAB file with numbers of GCSs are associated with TUs compartments (USUS, USGB, GBDS, DSDS), 
 TAB file with GCSs-TUs association analysis (GCSs number, GCSs N3E, GCSs score, TUs compartments score), TAB file with normalized numbers of GCSs are associated with TUs,
 TAB file with the number of GCSs are associated with particular intervals set and statistics (GCSs number, GCSs N3E, GCSs score),
