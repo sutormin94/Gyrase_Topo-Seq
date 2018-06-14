@@ -140,3 +140,18 @@ compares intervals mean score with genome mean score (t-test).
 TAB file with GCSs-TUs association analysis (GCSs number, GCSs N3E, GCSs score, TUs compartments score), TAB file with normalized numbers of GCSs are associated with TUs,
 TAB file with the number of GCSs are associated with particular intervals set and statistics (GCSs number, GCSs N3E, GCSs score),
 TAB file with the number of GCSs are associated with particular intervals (BIMEs-1, BIMEs-2), TAB file with intervals score statistics
+
+######################
+
+## Cfx_RifCfx_data_comparison.py
+
+Script compares data from Cfx and RifCfx (conditions with transcription inhibited with rifampicin) experiments. It identifies GCSs
+shared between datasets, computes whether the signal (N3E) goes up or down as a response for transcription inhibition. Also it 
+analysis shared GCSs that fall into BIMEs or DS regions of rRNA operons to be associated with signal increase or decrease.
+
+**Requirements:** python 3
+
+**Input:** TAB files with trusted GCSs and score info (Cfx and RifCfx), TAB transcription units data files (rRNA operons), TAB intervals data files (BIMEs-1, BIMEs-2)
+
+**Output:** Plot representing N3E ratio (RifCfx/Cfx), STOUTPUT with statistical information about preferential increase or decrease of 
+N3E as a response for transcription inhibition for GCSs subsets
