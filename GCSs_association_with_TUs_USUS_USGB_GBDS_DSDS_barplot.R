@@ -2,7 +2,7 @@
 ##Dmitry Sutormin, 2018##
 ##Topo-Seq analysis##
 
-#Script vizualises GCSs association with different sets of transcription units (TUs):
+#Script visualizes GCSs association with different sets of transcription units (TUs):
 #AG - all genes,
 #GLE - genes with low transcription level,
 #GHE - genes with high level of transcription,

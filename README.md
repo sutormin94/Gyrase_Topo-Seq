@@ -170,3 +170,19 @@ Script makes barplot and computes t-test statistic.
 
 **Output:** Plot represents qPCR data and t statistics
 
+######################
+
+## GCSs_association_with_TUs_USUS_USGB_GBDS_DSDS_barplot.R
+
+Script visualizes GCSs association with different sets of transcription units (TUs):
+AG - all genes, GLE - genes with low transcription level, GHE - genes with high level of transcription,
+AO - all operons, OLE - operons characterized by low level of transcription, OHE - operons with high transcription level.
+Simultaneously the script is revealing association of GCSs with a range of TUs regions:
+Upstream, TU start, TU end, Downstream that are correspond to USUS, USGB, GBDS, DSDS.
+The same analysis is performing with score of GCSs and average score of regions working with.
+
+**Requirements:** R (tested on 3.4.3 "Kite-Eating Tree")
+
+**Input:** Excel file with GCSs data and score data
+
+**Output:** Plots represent GCSs association data and score data
