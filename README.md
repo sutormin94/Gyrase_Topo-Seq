@@ -155,3 +155,18 @@ analysis shared GCSs that fall into BIMEs or DS regions of rRNA operons to be as
 
 **Output:** Plot representing N3E ratio (RifCfx/Cfx), STOUTPUT with statistical information about preferential increase or decrease of 
 N3E as a response for transcription inhibition for GCSs subsets
+
+######################
+
+qPCR_statistics.R
+
+Script that visualizes qPCR data: Cfx vs RifCfx compared for 4 locus - ccmH, MuSGS, rRNA A DS, rRNA A US.
+Fold enrichment data is stored in the script body, raw data could be found in Summary_table.xlsx supplementary table, sheet DS1.
+Script makes barplot and computes t-test statistic.
+
+**Requirements:** R (tested on 3.4.3 "Kite-Eating Tree")
+
+**Input:** Data is already stored in the script
+
+**Output:** Plot represents qPCR data and t statistics
+
