@@ -158,7 +158,7 @@ N3E as a response for transcription inhibition for GCSs subsets
 
 ######################
 
-qPCR_statistics.R
+## qPCR_statistics.R
 
 Script that visualizes qPCR data: Cfx vs RifCfx compared for 4 locus - ccmH, MuSGS, rRNA A DS, rRNA A US.
 Fold enrichment data is stored in the script body, raw data could be found in Summary_table.xlsx supplementary table, sheet DS1.
