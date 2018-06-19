@@ -35,15 +35,19 @@ library(forcats)
 
 #Path to input excell file and sheet
 excell_path="C:/Sutor/science/DNA-gyrase/Results/Final_data_2/GCSS_association_with_US_GB_DS/DOOR_TUs/Deletions_corrected/Peaks_assoc_with_us_ds_gb.xlsx"
-excell_sheet="For_R_DOOR_del_cor_all_data"
+excell_sheet_TU_sets="For_R_DOOR_del_cor_all_data"
+excell_sheet_rRNA="rRNA_data"
+excell_sheet_score="Score_R"
 
-Outpath="C:/Sutor/science/DNA-gyrase/reports and burocraty/Papers/PICTURES/GCSs_association_with_US_DS_GB/test.png"
+Outpath_TU_sets_GCSs_num="C:/Sutor/science/DNA-gyrase/reports and burocraty/Papers/PICTURES/GCSs_association_with_US_DS_GB/GCSs_association_with_TUs_USUS_USGB_GBDS_DSDS_test.png"
+Outpath_rRNA_GCSs_num="C:/Sutor/science/DNA-gyrase/reports and burocraty/Papers/PICTURES/GCSs_association_with_US_DS_GB/GCSs_association_with_rRNA_US_GB_DS_test.png"
+Outpath_TU_sets_GCSs_score="C:/Sutor/science/DNA-gyrase/reports and burocraty/Papers/PICTURES/GCSs_association_with_US_DS_GB/GCSs_score_association_with_TUs_USUS_USGB_GBDS_DSDS_test.png"
 
 #######
-#Imports data.
+#Imports data for GCSs association with TUs sets.
 #######
-GCSs_assoc_num=read_excel(excell_path, sheet=excell_sheet)
 
+GCSs_assoc_num=read_excel(excell_path, sheet=excell_sheet_TU_sets)
 GCSs_assoc_num <-data.frame(GCSs_assoc_num)
 
 #######
@@ -51,7 +55,7 @@ GCSs_assoc_num <-data.frame(GCSs_assoc_num)
 #######
 
 p <- ggplot(data = GCSs_assoc_num, aes(x=fct_inorder(GCSs_assoc_num$Set), y=GCSs_assoc_num$Cfx, fill=fct_inorder(GCSs_assoc_num$Position))) +
-  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9))+
+  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9)) +
   labs(x = NULL, y = "Number of GCSs\n(normalized)") +
   scale_fill_brewer(name="Region", palette="GnBu") +
   theme(axis.line=element_line(size=0.6), axis.ticks=element_line(size=0.4), axis.text.x=element_text(size=18, color="black"),
@@ -60,7 +64,7 @@ p <- ggplot(data = GCSs_assoc_num, aes(x=fct_inorder(GCSs_assoc_num$Set), y=GCSs
         legend.text=element_text(size=15), legend.title=element_text(size=17,face = "bold"))
 
 p1 <- ggplot(data = GCSs_assoc_num, aes(x=fct_inorder(GCSs_assoc_num$Set), y=GCSs_assoc_num$RifCfx, fill=fct_inorder(GCSs_assoc_num$Position))) +
-  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9))+
+  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9)) +
   labs(x = NULL, y = "Number of GCSs\n(normalized)") +
   scale_fill_brewer(name="Region", palette="YlGn") +
   theme(axis.line=element_line(size=0.6), axis.ticks=element_line(size=0.4), axis.text.x=element_text(size=18, color="black"),
@@ -69,7 +73,7 @@ p1 <- ggplot(data = GCSs_assoc_num, aes(x=fct_inorder(GCSs_assoc_num$Set), y=GCS
         legend.text=element_text(size=15), legend.title=element_text(size=17,face = "bold"))
 
 p2 <- ggplot(data = GCSs_assoc_num, aes(x=fct_inorder(GCSs_assoc_num$Set), y=GCSs_assoc_num$Microcin, fill=fct_inorder(GCSs_assoc_num$Position))) +
-  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9))+
+  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9)) +
   labs(x = NULL, y = "Number of GCSs\n(normalized)") +
   scale_fill_brewer(name="Region", palette="Reds") +
   theme(axis.line=element_line(size=0.6), axis.ticks=element_line(size=0.4), axis.text.x=element_text(size=18, color="black"),
@@ -78,7 +82,7 @@ p2 <- ggplot(data = GCSs_assoc_num, aes(x=fct_inorder(GCSs_assoc_num$Set), y=GCS
         legend.text=element_text(size=15), legend.title=element_text(size=17,face = "bold"))
 
 p3 <- ggplot(data = GCSs_assoc_num, aes(x=fct_inorder(GCSs_assoc_num$Set), y=GCSs_assoc_num$Oxo, fill=fct_inorder(GCSs_assoc_num$Position))) +
-  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9))+
+  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9)) +
   labs(x = NULL, y = "Number of GCSs\n(normalized)") +
   scale_fill_brewer(name="Region", palette="Blues") +
   theme(axis.line=element_line(size=0.6), axis.ticks=element_line(size=0.4), axis.text.x=element_text(size=18, color="black"),
@@ -87,60 +91,69 @@ p3 <- ggplot(data = GCSs_assoc_num, aes(x=fct_inorder(GCSs_assoc_num$Set), y=GCS
         legend.text=element_text(size=15), legend.title=element_text(size=17,face = "bold"))
 
 p_sum <- grid.arrange(p, p1, p2, p3, nrow = 4)  
+ggsave(Outpath_TU_sets_GCSs_num, units="in", p_sum, width=10, height=8, dpi=600)
 
-ggsave(Outpath, units="in", p_sum, width=10, height=8, dpi=600)
+#######
+#Imports data for GCSs association with rRNA operons.
+#######
 
-Num_peaks_rRNA=read_excel("C:/Sutor/science/DNA-gyrase/Results/Final_data_2/GCS_assocoation_with_highly_transcribed_operons/GCSs_association_with rRNA_operons_for_R.xlsx", sheet = "For_R")
-
+Num_peaks_rRNA=read_excel(excell_path, sheet=excell_sheet_rRNA)
 Num_peaks_rRNA <-data.frame(Num_peaks_rRNA)
-Num_peaks_rRNA$Set
-Num_peaks_rRNA$Enrichment
-Num_peaks_rRNA$Region
 
-#rownames(Num_peaks) <- c("rRNA A", "rRNA B", "rRNA C", "rRNA D", "rRNA E", "rRNA G", "rRNA H", "Name", "Antibiotic")
-#indata
+#######
+#Plots.
+#######
 
-p <- ggplot(data = Num_peaks_rRNA, aes(x = Num_peaks_rRNA$Set , y=Num_peaks_rRNA$Enrichment, fill= Num_peaks_rRNA$Region)) +
-  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9))+
+p <- ggplot(data=Num_peaks_rRNA, aes(x=fct_inorder(Num_peaks_rRNA$Set) , y=Num_peaks_rRNA$Enrichment, fill=fct_inorder(Num_peaks_rRNA$Region))) +
+  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9)) +
   labs(x = NULL, y = "Number of GCSs") +
   scale_fill_brewer(name="Region", palette="Set2") +
   theme(axis.line=element_line(size=0.6), axis.ticks=element_line(size=0.4), axis.text.x=element_text(size=18),
-        axis.text.y=element_text(size=11), axis.title.y=element_text(size=15), 
-        panel.background=element_rect(fill="white"), axis.ticks.length=unit(0.15, "cm"))
+        axis.text.y=element_text(size=14), axis.title.y=element_text(size=15), 
+        panel.background=element_rect(fill="white"), axis.ticks.length=unit(0.15, "cm"),
+        legend.text=element_text(size=15), legend.title=element_text(size=17,face = "bold"))
 
-p_sum <- grid.arrange(p, nrow = 1)  
+p_sum_rRNA <- grid.arrange(p, nrow=1)
+ggsave(Outpath_rRNA_GCSs_num, units="in", p_sum_rRNA, width=10, height=4, dpi=600)
 
+#######
+#Imports data for GCSs score association with TUs sets and compartments.
+#######
 
-Score=read_excel("C:/Sutor/science/DNA-gyrase/Results/Final_data_1/Association_with_US_IG_DS/Peaks_assoc_with_us_ds_gb.xlsx", sheet = "Score_R")
-
+Score=read_excel(excell_path, sheet=excell_sheet_score)
 Score <-data.frame(Score)
-Score$Set
 
-#rownames(Num_peaks) <- c("rRNA A", "rRNA B", "rRNA C", "rRNA D", "rRNA E", "rRNA G", "rRNA H", "Name", "Antibiotic")
-#indata
+#######
+#Plots.
+#######
 
-p <- ggplot(data = Score, aes(x = Score$Set , y=Score$Microcin, fill= Score$Position)) +
-  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9))+
+p <- ggplot(data = Score, aes(x=fct_inorder(Score$Set), y=Score$Microcin, fill=fct_inorder(Score$Position))) +
+  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9)) +
   labs(x = NULL, y = "Average GCSs score") +
   scale_fill_brewer(name="Region", palette="Reds") +
-  theme(axis.line=element_line(size=0.6), axis.ticks=element_line(size=0.4), axis.text.x=element_text(size=13),
-        axis.text.y=element_text(size=11), axis.title.y=element_text(size=15), 
-        panel.background=element_rect(fill="white"), axis.ticks.length=unit(0.15, "cm"))
+  theme(axis.line=element_line(size=0.6), axis.ticks=element_line(size=0.4), axis.text.x=element_text(size=18),
+        axis.text.y=element_text(size=14), axis.title.y=element_text(size=15), 
+        panel.background=element_rect(fill="white"), axis.ticks.length=unit(0.15, "cm"),
+        legend.text=element_text(size=15), legend.title=element_text(size=17,face = "bold"))
 
-p1 <- ggplot(data = Score, aes(x = Score$Set , y=Score$Cfx, fill= Score$Position)) +
-  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9))+
+p1 <- ggplot(data = Score, aes(x=fct_inorder(Score$Set), y=Score$Cfx, fill=fct_inorder(Score$Position))) +
+  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9)) +
   labs(x = NULL, y = "Average GCSs score") +
   scale_fill_brewer(name="Region", palette="Greens") +
-  theme(axis.line=element_line(size=0.6), axis.ticks=element_line(size=0.4), axis.text.x=element_text(size=13),
-        axis.text.y=element_text(size=11), axis.title.y=element_text(size=15), 
-        panel.background=element_rect(fill="white"), axis.ticks.length=unit(0.15, "cm"))
-p2 <- ggplot(data = Score, aes(x = Score$Set , y=Score$Oxo, fill= Score$Position)) +
-  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9))+
+  theme(axis.line=element_line(size=0.6), axis.ticks=element_line(size=0.4), axis.text.x=element_text(size=18),
+        axis.text.y=element_text(size=14), axis.title.y=element_text(size=15), 
+        panel.background=element_rect(fill="white"), axis.ticks.length=unit(0.15, "cm"),
+        legend.text=element_text(size=15), legend.title=element_text(size=17,face = "bold"))
+
+p2 <- ggplot(data = Score, aes(x=fct_inorder(Score$Set), y=Score$Oxo, fill=fct_inorder(Score$Position))) +
+  geom_bar(stat = "identity", color="black", width=0.9, size=0.5, position = position_dodge(width = 0.9)) +
   labs(x = NULL, y = "Average GCSs score") +
   scale_fill_brewer(name="Region", palette="Blues") +
-  theme(axis.line=element_line(size=0.6), axis.ticks=element_line(size=0.4), axis.text.x=element_text(size=13),
-        axis.text.y=element_text(size=11), axis.title.y=element_text(size=15), 
-        panel.background=element_rect(fill="white"), axis.ticks.length=unit(0.15, "cm"))
+  theme(axis.line=element_line(size=0.6), axis.ticks=element_line(size=0.4), axis.text.x=element_text(size=18),
+        axis.text.y=element_text(size=14), axis.title.y=element_text(size=15), 
+        panel.background=element_rect(fill="white"), axis.ticks.length=unit(0.15, "cm"),
+        legend.text=element_text(size=15), legend.title=element_text(size=17,face = "bold"))
 
-p_sum <- grid.arrange(p, p1, p2, nrow = 3) 
+p_sum_score <- grid.arrange(p, p1, p2, nrow = 3) 
+ggsave(Outpath_TU_sets_GCSs_score, units="in", p_sum_score, width=10, height=6.5, dpi=600)
 
