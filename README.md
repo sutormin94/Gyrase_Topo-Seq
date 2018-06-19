@@ -179,10 +179,11 @@ AG - all genes, GLE - genes with low transcription level, GHE - genes with high 
 AO - all operons, OLE - operons characterized by low level of transcription, OHE - operons with high transcription level.
 Simultaneously the script is revealing association of GCSs with a range of TUs regions:
 Upstream, TU start, TU end, Downstream that are correspond to USUS, USGB, GBDS, DSDS.
-The same analysis is performing with score of GCSs and average score of regions working with.
+The same analysis is performing with score of GCSs and average score of regions working with. Additionally 
+GCSs association with rRNA operons is visualizing.
 
 **Requirements:** R (tested on 3.4.3 "Kite-Eating Tree")
 
-**Input:** Excel file with GCSs data and score data
+**Input:** Excel file with GCSs data and score data 
 
 **Output:** Plots represent GCSs association data and score data
