@@ -190,7 +190,7 @@ GCSs association with rRNA operons is visualizing.
 
 ######################
 
-TAD_Mut_assoc_GCSs_analysis.py
+## TAD_Mut_assoc_GCSs_analysis.py
 
 Script analysis colocalization of mutations (from Foster, 2015) and TADs borders (from Lioy, 2018) with GCSs.
 
