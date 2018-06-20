@@ -187,3 +187,15 @@ GCSs association with rRNA operons is visualizing.
 **Input:** Excel file with GCSs data and score data 
 
 **Output:** Plots represent GCSs association data and score data
+
+######################
+
+TAD_Mut_assoc_GCSs_analysis.py
+
+Script analysis colocalization of mutations (from Foster, 2015) and TADs borders (from Lioy, 2018) with GCSs.
+
+**Requirements:** python 3
+
+**Input:** TAB files with trusted GCSs, BED file with TAD intervals, VCF file with mutations
+
+**Output:** Statistics of GCSs associations
