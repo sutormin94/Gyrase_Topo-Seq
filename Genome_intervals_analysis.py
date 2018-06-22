@@ -14,6 +14,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy
+from scipy import stats
 from scipy.stats import binom
 
 #######

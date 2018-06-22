@@ -12,6 +12,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy
+from scipy import stats
 from scipy.stats import binom
 
 #######
@@ -25,6 +26,8 @@ path_to_GCSs_files={'Cfx': 'C:\Sutor\science\DNA-gyrase\Results\Final_data_2\GCS
                     'RifCfx': 'C:\Sutor\science\DNA-gyrase\Results\Final_data_2\GCSs_sets\Rif_Cfx_trusted_one_position.txt',
                     'Micro': 'C:\Sutor\science\DNA-gyrase\Results\Final_data_2\GCSs_sets\Micro_trusted_one_position.txt',
                     'Oxo': 'C:\Sutor\science\DNA-gyrase\Results\Final_data_2\GCSs_sets\Oxo_trusted_one_position.txt'}
+#Input data - transcription, TAB.
+Transcription_data_path='C:\Sutor\science\DNA-gyrase\Results\Final_data_2\Expression_data\Deletion_corrected\DOOR_Mu_del_cor_genes_expression.txt'
 #TAD coordinates.
 TAD_150_inputpath='C:\Sutor\science\DNA-gyrase\Results\Hi-C\TAD_calling\CIDs_150kb_31_W3110_Mu_compatible.bed'
 TAD_80_inputpath='C:\Sutor\science\DNA-gyrase\Results\Hi-C\TAD_calling\CIDs_80kb_57_W3110_Mu_compatible.bed'
@@ -84,19 +87,32 @@ def Mutations_parser(Mut_inpath):
     return Mut_dict
 
 #######
+#Parsing transcription - TAB file (optional step).
+#######
+
+def transcription_data_parser(transcription_path):
+    transcription_file=open(transcription_path, 'r')
+    transcription=[]
+    for i in range(4647454):
+        transcription.append(0)
+    for line in transcription_file:
+        line=line.rstrip().split('\t')
+        if line[0] not in ['GeneID', 'OperonID']:
+            for j in range(int(line[3])-int(line[2])):
+                transcription[int(line[2])+j]=float(line[5].replace(',','.'))
+    print('Whole genome average transcription: ' + str(sum(transcription)/len(transcription)))
+    return transcription
+
+#######
 #Colocalization.
 #######
 
-def colocal_search(GCSs_sets_dict, data_type, data_to_coloc, Bad_TAD_reg, TAD_inpath, Mut_inpath, outpath):
+def colocal_search(GCSs_sets_dict, transcription, data_type, data_to_coloc, Bad_TAD_reg, TAD_inpath, Mut_inpath, outpath):
     fileout=open(outpath, 'a')
     genome_len=4647454 #Overall genome len
-    deletions=[[274500, 372148], [793800, 807500], [1199000, 1214000]]
-    for i in deletions:
-        genome_len+=i[0]-i[1] #Genome len corrected on deletions
         
     if data_type=='TAD':
-       
-        #Genome len correction on bad TAD regions.
+        #Genome len correction on bad TAD regions (deletions are included into bad data).
         TAD_genome_len=genome_len
         for i in Bad_TAD_reg:
             TAD_genome_len+=i[0]-i[1] #Genome len corrected on bad TADs
@@ -142,8 +158,37 @@ def colocal_search(GCSs_sets_dict, data_type, data_to_coloc, Bad_TAD_reg, TAD_in
                           '\nBinom test p-value for the number of GCSs in InterTADs\t' + 
                           str(binom.cdf(TAD_assoc_dict[a]['GCSs in interTAD'], TAD_assoc_dict[a]['GCSs in TAD']+TAD_assoc_dict[a]['GCSs in interTAD'], sum_interTAD_len/(sum_interTAD_len+sum_TAD_len))) + 
                           '\n\n')
+        TAD_score=[]
+        InterTAD_score=[]
+        for i in range(len(data_to_coloc)): #Iterates TADs
+            TAD_score+=transcription[data_to_coloc[i][0]:data_to_coloc[i][1]]
+            status=0
+            for bad_TAD in Bad_TAD_reg: #Iterates bad TADs
+                if bad_TAD[1]>=data_to_coloc[i][1]+10>=bad_TAD[0]: #bad TAD interval
+                    print(data_to_coloc[i][1]+10)
+                    status=1
+                    break
+            if status==0 and i<len(data_to_coloc)-1:
+                InterTAD_score+=transcription[data_to_coloc[i][1]:data_to_coloc[i+1][0]]
+            elif status==0 and i==len(data_to_coloc)-1:
+                InterTAD_score+=transcription[data_to_coloc[i][1]:4647454]
+        fileout.write('Comparison of TAD and InterTAD mean transcription level\n')
+        print('Len of TAD regions: ' + str(len(TAD_score)))
+        print('Len of interTAD regions: ' + str(len(InterTAD_score)))
+        print('Mean TAD transcription level: ' + str(np.mean(TAD_score)))
+        print('Mean interTAD transcription level: ' + str(np.mean(InterTAD_score)))
+        transcription_t_test=stats.ttest_ind(TAD_score, InterTAD_score)
+        print(transcription_t_test)
+        print('\n')
+        fileout.write('Mean TAD transcription level\t' + str(np.mean(TAD_score)) + '\nMean interTAD transcription level\t' + str(np.mean(InterTAD_score)) +
+                      '\nt-test statistic\t' + str(transcription_t_test[0]) + '\nt-test p-value\t' + str(transcription_t_test[1]) + '\n\n')
     
-    elif data_type=='Mut':
+    #Correction for deletions
+    deletions=[[274500, 372148], [793800, 807500], [1199000, 1214000]]
+    for i in deletions:
+        genome_len+=i[0]-i[1] #Genome len correction on deletions
+
+    if data_type=='Mut':
         Mut_assoc_dict={}
         for a, gcss_set in GCSs_sets_dict.items(): #Itarates GCSs sets (conditions)
             Mut_assoc_dict[a]={'Precise match':{}, '4bp GCSs':{}, '5bp vicinity':{}}
@@ -185,19 +230,20 @@ def colocal_search(GCSs_sets_dict, data_type, data_to_coloc, Bad_TAD_reg, TAD_in
 #Funcrions wrapper.
 #######
 
-def wrapper(input_dict, TAD_inpath, Mut_inpath, Bad_TAD_reg, outpath):
+def wrapper(input_dict, transcription_path, TAD_inpath, Mut_inpath, Bad_TAD_reg, outpath):
     #Data parsing
     GCSs_sets_dict=trusted_GCSs_parsing(input_dict)
+    transcription=transcription_data_parser(transcription_path)
     TAD_coord=TAD_parser(TAD_inpath)
     Mut_dict=Mutations_parser(Mut_inpath)
     #Data classification
-    colocal_search(GCSs_sets_dict, 'TAD', TAD_coord, Bad_TAD_reg, TAD_inpath, Mut_inpath, outpath)
-    colocal_search(GCSs_sets_dict, 'Mut', Mut_dict, Bad_TAD_reg, TAD_inpath, Mut_inpath, outpath)
+    colocal_search(GCSs_sets_dict, transcription, 'TAD', TAD_coord, Bad_TAD_reg, TAD_inpath, Mut_inpath, outpath)
+    colocal_search(GCSs_sets_dict, transcription, 'Mut', Mut_dict, Bad_TAD_reg, TAD_inpath, Mut_inpath, outpath)
     return
 
-Bad_TAD_reg_150kb=[[1147701, 1307836], [3420979, 3432802], [4196538, 4315800]]
-Bad_TAD_reg_80kb=[[1177701, 1307836], [3420979, 3432802], [4196538, 4279712]] 
-wrapper(path_to_GCSs_files, TAD_150_inputpath, Mut_wt_inputpath, Bad_TAD_reg_150kb, Outputpath)
-wrapper(path_to_GCSs_files, TAD_80_inputpath, Mut_mut_inputpath, Bad_TAD_reg_80kb, Outputpath)
+Bad_TAD_reg_150kb=[[220002, 394224], [776546, 966544], [1147701, 1307836], [3420979, 3432802], [4196538, 4315800]] #Contains deletions
+Bad_TAD_reg_80kb=[[220002, 379224], [776546, 876544], [1177701, 1307836], [3420979, 3432802], [4196538, 4279712]] #Contains deletions
+wrapper(path_to_GCSs_files, Transcription_data_path, TAD_150_inputpath, Mut_wt_inputpath, Bad_TAD_reg_150kb, Outputpath)
+wrapper(path_to_GCSs_files, Transcription_data_path, TAD_80_inputpath, Mut_mut_inputpath, Bad_TAD_reg_80kb, Outputpath)
 
 print('Script ended its work succesfully!') 

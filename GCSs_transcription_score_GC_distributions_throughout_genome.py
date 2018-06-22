@@ -34,7 +34,7 @@ Score_data_path=''
 #Input data - GC, WIG.
 GC_data_path=''
 
-#Input data - expression, TAB.
+#Input data - transcription, TAB.
 Transcription_data_path=''
 
 #Output data: plot.
@@ -85,8 +85,9 @@ def transcription_data_parser(transcription_path):
         transcription.append(0)
     for line in transcription_file:
         line=line.rstrip().split('\t')
-        for j in range(int(line[3])-int(line[2])):
-            transcription[int(line[2])+j]=float(line[5])
+        if line[0] not in ['GeneID', 'OperonID']:
+            for j in range(int(line[3])-int(line[2])):
+                transcription[int(line[2])+j]=float(line[5].replace(',','.'))
     print('Whole genome average transcription: ' + str(sum(transcription)/len(transcription)))
     return transcription
 
