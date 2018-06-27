@@ -15,6 +15,7 @@
 #Packages to be imported.
 #######
 
+import os
 from os import listdir
 import numpy as np
 
@@ -22,16 +23,24 @@ import numpy as np
 #Variables to be defined.
 #######
 
-#Path to the input SAM-files
-sam_path=""
-#Path to the output/input SAM-files contain proper aligned reads (score<256)
-edited_sam_path=""
+#Path to the working directory
+pwd="/data/Gyrase/Data_preparation/Cfx_900nM"
+#Path to the input raw SAM-files
+sam_path=pwd + "/SAM/"
+#Path to the output/input folder with SAM-files contain proper aligned reads (score<256)
+edited_sam_path=pwd + "/SAM_edited/"
+if not os.path.exists(edited_sam_path):
+	os.makedirs(edited_sam_path)
 #Path to the output/input TAB files
-tab_path=""
+tab_path=pwd + "/TAB/"
+if not os.path.exists(tab_path):
+	os.makedirs(tab_path)
 #Path to the output/input WIG files
-wig_path=""
+wig_path=pwd + "/WIG/"
+if not os.path.exists(wig_path):
+	os.makedirs(wig_path)
 #Chromosome (genome) identificator (look for the corresponding FASTA ID)
-chromosome_identificator=""
+chromosome_identificator="NC_007779.1_w3110_Mu"
 
 
 #######
@@ -59,7 +68,7 @@ def sam_edt(in_sam_file_path, out_sam_file_path):
 	sam_input.close()
 	sam_output.close()
 	print("Total number of reads: " + str(count_tot))				
-	print("Number of innormal read alignments: " + str(count_in))
+	print("Number of abnormal reads alignments: " + str(count_in))
 	return
 
 #######
@@ -116,7 +125,6 @@ def Tab_pars(filein):
 		peak.append(int(line[0]))
 		peak.append(int(line[1]))
 		peaks.append(peak)            
-	print(len(peaks))
 	return peaks
 
 #######
@@ -159,14 +167,14 @@ def Read_strand_classif(ar):
 def Coords(ar, strand):
 	ar_out=[]
 	if strand=="+":
-		print("Reads pairs aligned to the forward strand")
+		print("Alignment to the forward strand")
 		for k in range(len(ar)):
 			pair_c=[]
 			pair_c.append(int(ar[k][0]))
 			pair_c.append(int(ar[k][0])+int(ar[k][1])-1)
 			ar_out.append(pair_c) #Left-most and right-most coordinates of the DNA fragment aligned
 	elif strand=="-":
-		print("Reads pairs aligned to the reverse strand")
+		print("Alignment to the reverse strand")
 		for k in range(len(ar)):
 			pair_c=[]
 			pair_c.append(int(ar[k][0])-1)
@@ -183,7 +191,6 @@ def depth_counter(coords_ar):
 	genome=[]
 	for i in range(4647999):
 		genome.append(0)
-	print(len(genome))
 	i=0
 	counter=np.arange(0, 8000000, 100000)
 	for i in range(len(coords_ar)-1):
@@ -273,13 +280,13 @@ def edit_sam_files_wrapper(sam_path, edited_sam_path, check_option):
 #less than 1500 bp.
 #######	
 def create_tab_files_wrapper(edited_sam_path, tab_path):
-	#Reads .sam files edited
+	#Reads SAM files were edited
 	files=listdir(edited_sam_path)
 	samfiles=[]
 	for file in files:
 		if file.endswith(".sam"):
 			samfiles.append(file)		
-	#Creates .tab files
+	#Creates TAB files
 	for sam in samfiles:
 		print(sam)
 		input_sam_file_path=edited_sam_path + sam
@@ -342,12 +349,12 @@ def create_wig_files_wrapper(tab_path, wig_path, chromosome_id):
 		Starts_and_ends=start_end_count(for_coords, rev_coords)['DNA_fragments_starts_and_ends']
 		
 		#Writes WIG files (N3E and N5E)
-		outfile_starts_path=wig_path + tab[:-4] + "_starts.wig"
-		write_file(Starts, str(tab[:-4]) + "_starts", chromosome_id, outfile_starts_path) #N5E
-		outfile_ends_path=wig_path + tab[:-4] + "_ends.wig"	
-		write_file(Ends, str(tab[:-4]) + "_ends", chromosome_id, outfile_ends_path) #N3E
-		outfile_starts_ends_path=wig_path + tab[:-4] + "_stends.wig"	
-		write_file(Starts_and_ends, str(tab[:-4]) + "_starts_and_ends", chromosome_id, outfile_starts_ends_path) #N5E+N3E
+		outfile_starts_path=wig_path + tab[:-4] + "_N5E.wig" #N5E
+		write_file(Starts, str(tab[:-4]) + "_N5E", chromosome_id, outfile_starts_path) 
+		outfile_ends_path=wig_path + tab[:-4] + "_N3E.wig" #N3E
+		write_file(Ends, str(tab[:-4]) + "_N3E", chromosome_id, outfile_ends_path) 
+		outfile_starts_ends_path=wig_path + tab[:-4] + "_N53E.wig" #N5E+N3E
+		write_file(Starts_and_ends, str(tab[:-4]) + "_N5E_and_N3E", chromosome_id, outfile_starts_ends_path) 
 	return
 
 
