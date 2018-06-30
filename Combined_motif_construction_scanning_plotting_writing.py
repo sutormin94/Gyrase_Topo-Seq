@@ -14,6 +14,7 @@
 #Packages to be imported.
 #######
 
+import os
 import scipy
 from random import shuffle
 import numpy as np
@@ -30,18 +31,21 @@ import matplotlib.pyplot as plt
 print('Variables to be defined:')
 
 #Input data - GCSs, TAB.
-path_to_GCSs_files={'Cfx': '',
-                    'Micro': '',
-                    'Oxo': ''}
+path_to_GCSs_files={'Cfx': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets\Cfx_10mkM_trusted_GCSs.txt",
+                    'Micro': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets\Micro_trusted_GCSs.txt",
+                    'Oxo': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets\Oxo_trusted_GCSs.txt"
+                    }
 
 #Path to the E. coli genome (source of sequences for PFM/PWM construction), FASTA.
-Genome_seq_path=''
+Genome_seq_path="C:\Sutor\science\DNA-gyrase\Genomes\E_coli_w3110_G_Mu.fasta"
 
 #Path to the sequence to be scanned, FASTA.
-Target_seq_path=''
+Target_seq_path="C:\Sutor\science\DNA-gyrase\Genomes\E_coli_w3110_G_Mu.fasta"
 
 #Prefix of the output path.
-Output_data_prefix=''
+Output_data_prefix="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\Combined_motif\\"
+if not os.path.exists(Output_data_prefix):
+    os.makedirs(Output_data_prefix)
 
 ###############################################
 #Motif construction and scanning sequences of interest with it.
@@ -83,15 +87,21 @@ def trusted_GCSs_parsing(input_dict):
 #######
 
 def sorting_combining(GCSs_dict):
-    threshold=522
+    #Estimate the threshold for the number of GCSs to take from each GCSs set to construct combined motif. 
+    GCSs_sets_len=[]
+    for k, v in GCSs_dict.items():
+        GCSs_sets_len.append(len(v))
+    threshold=min(GCSs_sets_len)
+    #Return GCSs for combined motif construction.
     GCSs_set_for_motif={}
     for k, v in GCSs_dict.items():
         list_of_keys_sbv=sorted(v, key=v.get)
         list_of_keys_sbv_slice=list_of_keys_sbv[-threshold:]
+        print(list_of_keys_sbv_slice)
         for i in list_of_keys_sbv_slice:
             if i not in GCSs_set_for_motif:
                 GCSs_set_for_motif[i]=v[i]
-    print("Number of Cfx Micro Oxo GCSs are using for combined motif construction: " + str(len(GCSs_set_for_motif)))  
+    print("Number of Cfx Micro Oxo GCSs for combined motif construction: " + str(len(GCSs_set_for_motif)))  
     return GCSs_set_for_motif 
 
 #######
@@ -107,9 +117,9 @@ def motif_construction_and_analysis(GCSs_dict, genomefam, genomefas, outpath):
     #Returns sequences under the GCSs.
     seqs=[]
     for k, v in GCSs_dict.items():
-        seq=genomefam[(int(k) - win_width_l + 1):(int(k) + win_width_r + 1)]
+        seq=genomefam[(int(k) - win_width_l - 1):(int(k) + win_width_r - 1)]
         seqs.append(seq) 
-    print('Number of sequences are using for motif construction: ' + str(len(seqs)))
+    print('Number of sequences for motif construction: ' + str(len(seqs)))
     #Substitutes nucleotides at antibiotic-biased central positions with letters 
     #to be expected by chance taking into account the background nucleotides frequencies.
     hard_copy=['A']*(int(background['A']*len(seqs))+3) + ['C']*(int(background['C']*len(seqs))) +  ['G']*(int(background['G']*len(seqs))) + ['T']*(int(background['T']*len(seqs)))
@@ -134,16 +144,16 @@ def motif_construction_and_analysis(GCSs_dict, genomefam, genomefas, outpath):
     #Scans forward sequence
     test_seq=Seq(str(genomefas), IUPAC.unambiguous_dna)
     whole_genome_scores=pssm.calculate(test_seq) 
-    outfile=open(outpath + '_scan_forward_with_combined_motif.txt', 'w')
+    outfile=open(outpath + 'Scan_forward_with_combined_motif.txt', 'w')
     for i in range(len(whole_genome_scores)):
-        outfile.write(str(i+62) + '\t' + str(whole_genome_scores[i]) + '\t'+ str(test_seq[i+62-1]) + '\n')
+        outfile.write(str(i+63+1) + '\t' + str(whole_genome_scores[i]) + '\t'+ str(test_seq[i+63]) + '\n')
     outfile.close()
     #Scans reverse complement sequence
     test_seq_rc=Seq(str(genomefas), IUPAC.unambiguous_dna).reverse_complement()
     whole_genome_scores_rc=pssm.calculate(test_seq_rc)   
-    outfile_rc=open(outpath + '_scan_rc_with_combined_motif.txt', 'w')
+    outfile_rc=open(outpath + 'Scan_rc_with_combined_motif.txt', 'w')
     for i in range(len(whole_genome_scores_rc)):
-        outfile_rc.write(str(i+63) + '\t' + str(whole_genome_scores_rc[-i]) + '\t'+ str(test_seq_rc[-(i+63)]) + '\n')
+        outfile_rc.write(str(i+63-2) + '\t' + str(whole_genome_scores_rc[-i]) + '\t'+ str(test_seq_rc[-(i+63-2)]) + '\n')
     outfile_rc.close()     
     return
 
@@ -157,9 +167,9 @@ def Wrapper_motif_construct_scan(Source_genome_path, Target_genome_path, GCSs_fi
     GCSs_sets=trusted_GCSs_parsing(GCSs_files_paths)
     GCSs_for_motif=sorting_combining(GCSs_sets)
     motif_construction_and_analysis(GCSs_for_motif, Source_sequence, Target_sequence, outpath)
-    return
+    return GCSs_for_motif
 
-Wrapper_motif_construct_scan(Genome_seq_path, Target_seq_path, path_to_GCSs_files, Output_data_prefix)
+Motif_defined_GSCs_dict=Wrapper_motif_construct_scan(Genome_seq_path, Target_seq_path, path_to_GCSs_files, Output_data_prefix)
 
 ###############################################
 #The motif plotting and writing.
@@ -171,14 +181,14 @@ Wrapper_motif_construct_scan(Genome_seq_path, Target_seq_path, path_to_GCSs_file
 #######
 
 def return_seqs(GCS_coords_dict, win_range, genomefa, outpath): 
-    fileout=open(outpath + '_combined_motif_sequences.fasta', 'w')
+    fileout=open(outpath + 'Combined_motif_originated_sequences.fasta', 'w')
     seqs=[]
-    for k, v in GCS_coords_dict:
-        seq=genomefa[int(int(k) - win_range[0] + 1):int(int(k) + win_range[1] + 1)]
+    for k, v in GCS_coords_dict.items():
+        seq=genomefa[int(int(k) - win_range[0] - 1):int(int(k) + win_range[1] - 1)]
         seqs.append(seq)
         fileout.write('>'+str(k)+'\n'+str(seq)+'\n')
     fileout.close()
-    print('Number of sequences (GCSs) to analyse: ' + str(len(seqs)))
+    print('Number of sequences (GCSs) to be analysed: ' + str(len(seqs)))
     return seqs
 
 #######
@@ -234,12 +244,13 @@ def make_PFM(seqs_list):
 #Edits PPM in the cleavage site - substitutes real frequencies with background values.
 #######
 
-def gc_matrix_edit(matrix, background_freq):
+def gc_matrix_edit(matrix, background_freq, win_width):
     background_gc=float(background_freq['C']) + float(background_freq['G'])
-    matrix[84]=background_gc
-    matrix[85]=background_gc
-    matrix[86]=background_gc
-    matrix[87]=background_gc
+    Seq_centre=int((win_width/2))
+    matrix[Seq_centre-1]=background_gc
+    matrix[Seq_centre]=background_gc
+    matrix[Seq_centre+1]=background_gc
+    matrix[Seq_centre+2]=background_gc
     return matrix
 
 #######
@@ -251,8 +262,10 @@ def Plotting(matrix, matrix_type, win_width, outpath):
     for i in range(len(matrix)):
         x_axis.append(-(win_width/2)+1+i)
     ax_range=[-win_width/2, win_width/2, 0.3, 0.95]
-    plt.figure(figsize=(16, 6), dpi=900)
+    plt.figure(figsize=(16, 6), dpi=100)
     plot1=plt.subplot()
+    plot1.set_xticks([0], minor=True)
+    plot1.xaxis.grid(True, which='minor', linewidth=0.5, linestyle='--', alpha=1)     
     plot1.plot(x_axis, matrix, color='#7FCE79', linewidth=4, alpha=0.6)
     plot1.plot(x_axis, matrix, color='#454F24', linewidth=1, alpha=0.6)
     plot1.plot(x_axis, matrix, 'o', fillstyle='none', color='#7FCE79', markeredgecolor='#454F24', markersize=2, alpha=0.6)               
@@ -261,9 +274,10 @@ def Plotting(matrix, matrix_type, win_width, outpath):
     plot1.set_xlim(-win_width/2, win_width/2)
     plot1.set_xticks(np.concatenate((np.arange(-(win_width/2)+5, (win_width/2)+2, 10), [0, 3, -63, -17, 20, 66])))
     plot1.set_xlabel('Position, nt', size=17)
-    plot1.set_ylabel(str(matrix_type), size=17)
-    plt.show()
-    plt.savefig(outpath + '_combined_motif_plot.png', dpi=600, figsize=(16, 6)) 
+    plot1.set_ylabel(str(matrix_type + '%'), size=17)
+    #plt.show()
+    plt.savefig(outpath + 'Combined_motif_plot.png', dpi=400, figsize=(16, 6))
+    plt.close()
     return
 
 #######
@@ -271,10 +285,10 @@ def Plotting(matrix, matrix_type, win_width, outpath):
 #######
 
 def write_motif_deg(gc_matrix, win_width, outpath):
-    fileout=open(outpath + '_deg_combined_motif_fourier.txt', 'w')
+    fileout=open(outpath + 'Degenerate_combined_motif_for_Fourier_analysis.txt', 'w')
     fileout.write("#X\tY\n")
     for i in range(len(gc_matrix)):
-        fileout.write(str((-win_width/2)+1+i) + '\t' + str(gc_matrix[i])+'\n')
+        fileout.write(str(int((-win_width/2)+1+i)) + '\t' + str(gc_matrix[i])+'\n')
     fileout.close()
     return
 
@@ -288,24 +302,25 @@ def write_line(ar, fileout):
     fileout.write('\n')
     return
 
-def write_motif(A, T, G, C, background, outpath):
-    fileout=open(outpath + '_combined_motif_matrix.txt', 'w')
-    A[84]=background['A']
-    A[85]=background['A']
-    A[86]=background['A']
-    A[87]=background['A']  
-    T[84]=background['T']
-    T[85]=background['T']
-    T[86]=background['T']
-    T[87]=background['T']
-    G[84]=background['G']
-    G[85]=background['G']
-    G[86]=background['G']
-    G[87]=background['G']
-    C[84]=background['C']
-    C[85]=background['C']
-    C[86]=background['C']
-    C[87]=background['C']  
+def write_motif(A, T, G, C, background, win_width, outpath):
+    fileout=open(outpath + 'Combined_motif_PFM.txt', 'w')
+    Seq_centre=int((win_width/2))
+    A[Seq_centre-1]=background['A']
+    A[Seq_centre]=background['A']
+    A[Seq_centre+1]=background['A']
+    A[Seq_centre+2]=background['A']  
+    T[Seq_centre-1]=background['T']
+    T[Seq_centre]=background['T']
+    T[Seq_centre+1]=background['T']
+    T[Seq_centre+2]=background['T']
+    G[Seq_centre-1]=background['G']
+    G[Seq_centre]=background['G']
+    G[Seq_centre+1]=background['G']
+    G[Seq_centre+2]=background['G']
+    C[Seq_centre-1]=background['C']
+    C[Seq_centre]=background['C']
+    C[Seq_centre+1]=background['C']
+    C[Seq_centre+2]=background['C']  
     write_line(A, fileout)
     write_line(T, fileout)
     write_line(G, fileout)
@@ -317,19 +332,19 @@ def write_motif(A, T, G, C, background, outpath):
 #Wraps functions for motif editing, plotting and writing.
 #######
 
-def Wrapper_motif_plotting_write(GCSs_dict, Source_genome_path, outpath):
+def Wrapper_motif_plotting_write(GCSs_form_motif_dict, Source_genome_path, outpath):
     background={'A': 0.245774783354, 'C': 0.2537191331, 'G': 0.254184334046, 'T': 0.246130246797}
     window_width=170
     win_range=[(window_width/2)-2, (window_width/2)+2]
     Source_sequence=obtain_seq(Source_genome_path)
-    GCSs_seqs=return_seqs(GCSs_dict, win_range, Source_sequence, outpath)
+    GCSs_seqs=return_seqs(GCSs_form_motif_dict, win_range, Source_sequence, outpath)
     pfms=make_PFM(GCSs_seqs)
-    matrix_deg_red=gc_matrix_edit(pfms['GC'], background)
+    matrix_deg_red=gc_matrix_edit(pfms['GC'], background, window_width)
     Plotting(matrix_deg_red, 'GC', window_width, outpath)
     write_motif_deg(matrix_deg_red, window_width, outpath)
-    write_motif(pfms['A'], pfms['T'], pfms['G'], pfms['C'], background, outpath)
+    write_motif(pfms['A'], pfms['T'], pfms['G'], pfms['C'], background, window_width, outpath)
     return
 
-Wrapper_motif_plotting_write(path_to_GCSs_files, Genome_seq_path, Output_data_prefix)
+Wrapper_motif_plotting_write(Motif_defined_GSCs_dict, Genome_seq_path, Output_data_prefix)
 
 print('Script ended its work succesfully!') 
