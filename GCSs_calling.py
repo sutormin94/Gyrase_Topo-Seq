@@ -19,6 +19,7 @@
 #######
 
 import os
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy
@@ -37,11 +38,18 @@ pwd="/data/Gyrase/Data_preparation"
 Deletions="/data/Gyrase/Genomes_tracks/Deletions.bed"
 #Paths to the WIG files contain N3E or N5E that forms a tetrade: A+IP+, A+IP-, A-IP+, A-IP-.
 #Name of the set (e.g. Cfx, RifCfx, Micro, Oxo and so on).
-Tetrade={'A+IP+': pwd + "/RifCfx/WIG/RifCfx_IP_Mu_122mkM_10mkM_3_edt_N3E.wig", 
-         'A+IP-': pwd + "/RifCfx/WIG/RifCfx_IN_Mu_122mkM_10mkM_3_edt_N3E.wig",
-         'A-IP+': pwd + "/RifCfx/WIG/Rif_IP_Mu_122mkM_1_edt_N3E.wig", 
+'''
+'A+IP-': pwd + "/RifCfx/WIG/RifCfx_IN_Mu_122mkM_10mkM_1_edt_N3E.wig",
+         'A-IP+': pwd + "/Un/WIG/Un_IP_Mu_2_edt_N3E.wig", 
          'A-IP-': pwd + "/RifCfx/WIG/Rif_IN_Mu_122mkM_1_edt_N3E.wig",
-         'Tetrade name': 'RifCfx_3'
+         'Tetrade name': 'RifCfx_1'
+         }
+'''
+Tetrade={'A+IP+': pwd + "/Un/WIG/Un_IP_Mu_2_edt_N3E.wig", 
+         'A+IP-': pwd + "/Un/WIG/Un_IN_Mu_2_edt_N3E.wig",
+         'A-IP+': pwd + "/Un/WIG/Un_IP_Mu_1_edt_N3E.wig", 
+         'A-IP-': pwd + "/Un/WIG/Un_IN_Mu_1_edt_N3E.wig",
+         'Tetrade name': 'Un_2_1'
          }
 '''
 Tetrade={'A+IP+': "/data/Gyrase/Stuff/Pipe/Fragments_ends/Data_second_mapping/Cfx_IP_10_mkM_2_ends.wig", 
@@ -54,7 +62,7 @@ Tetrade={'A+IP+': "/data/Gyrase/Stuff/Pipe/Fragments_ends/Data_second_mapping/Cf
 #Path to the reference genome
 Genome="/data/Gyrase/Genomes_tracks/E_coli_w3110_G_Mu.fasta"
 #Output folder
-Path_for_output=pwd + "/RifCfx/GCSs_calling_0_05/" + Tetrade['Tetrade name'] + "/"
+Path_for_output=pwd + "/RifCfx/GCSs_calling_0_05_Un/" + Tetrade['Tetrade name'] + "/"
 if not os.path.exists(Path_for_output):
     os.makedirs(Path_for_output)
 
@@ -156,33 +164,29 @@ def norm_smooth_devide(ex_file_path, cont_file_path, un_ex_file_path, un_cont_fi
     untreated_experiment=wig_parsing(un_ex_file_path) #-A+IP
     untreated_control=wig_parsing(un_cont_file_path) #-A-IP
     #Normalization on the reads number
+    #Adds pseudocounts to avoid zero values
     Min_total_NE=min(treated_experiment[1], treated_control[1], untreated_experiment[1], untreated_control[1])
     print('Min_total_NE: ' + str(Min_total_NE))
-    treated_experiment_norm=[1.0 * x * Min_total_NE/treated_experiment[1] for x in treated_experiment[0]] #+A+IP norm
-    treated_control_norm=[1.0 * x * Min_total_NE/treated_control[1] for x in treated_control[0]] #+A-IP norm
-    untreated_experiment_norm=[1.0 * x * Min_total_NE/untreated_experiment[1] for x in untreated_experiment[0]] #-A+IP norm
-    untreated_control_norm=[1.0 * x * Min_total_NE/untreated_control[1] for x in untreated_control[0]] #-A-IP norm
+    treated_experiment_norm=[1.0 * (x + 1) * Min_total_NE/treated_experiment[1] for x in treated_experiment[0]] #+A+IP norm
+    treated_control_norm=[1.0 * (x + 1) * Min_total_NE/treated_control[1] for x in treated_control[0]] #+A-IP norm
+    untreated_experiment_norm=[1.0 * (x + 1) * Min_total_NE/untreated_experiment[1] for x in untreated_experiment[0]] #-A+IP norm
+    untreated_control_norm=[1.0 * (x + 1) * Min_total_NE/untreated_control[1] for x in untreated_control[0]] #-A-IP norm
     #Control samples smoothing: A+IP- and A-IP-
-    un_experiment_norm_sm=Smoothing(untreated_experiment_norm, deletions) #-A+IP norm sm
+    un_experiment_norm_sm=Smoothing(untreated_experiment_norm, deletions) #-A+IP norm sm 
     un_control_norm_sm=Smoothing(untreated_control_norm, deletions) #-A-IP norm sm
-    #Adds pseudocounts to avoid zero values
-    exper_ends=[(1.0 * x) + 1.0  for x in treated_experiment_norm] #+A+IP norm pc
-    control_ends=[(1.0 * x) + 1.0  for x in treated_control_norm] #+A-IP norm pc
-    un_exper_ends=[(1.0 * x) + 1.0  for x in un_experiment_norm_sm] #-A+IP norm sm pc
-    un_control_ends=[(1.0 * x) + 1.0 for x in un_control_norm_sm] #-A-IP norm sm pc
     #Pairwise division: +A+IP/-A+IP and +A-IP/-A-IP
     ends_divide_IP=[] #+A+IP/-A+IP
     ends_divide_mock=[] #+A-IP/-A-IP
-    for i in range (len(exper_ends)):
-        if exper_ends[i]!=0 and un_exper_ends[i]!=0:
-            ends_divide_IP.append(exper_ends[i]/un_exper_ends[i])
+    for i in range (len(treated_experiment_norm)):
+        if treated_experiment_norm[i]!=0 and un_experiment_norm_sm[i]!=0:
+            ends_divide_IP.append(treated_experiment_norm[i]/un_experiment_norm_sm[i])
         else:
             ends_divide_IP.append(0)
-        if control_ends[i]!=0 and un_control_ends[i]!=0:
-            ends_divide_mock.append(control_ends[i]/un_control_ends[i])
+        if treated_control_norm[i]!=0 and un_control_norm_sm[i]!=0:
+            ends_divide_mock.append(treated_control_norm[i]/un_control_norm_sm[i])
         else:
             ends_divide_mock.append(0) 
-    return ends_divide_IP, ends_divide_mock
+    return ends_divide_IP, ends_divide_mock, un_experiment_norm_sm, un_control_norm_sm
 
 #######
 #Audic & Claverie statistics: borders of the confidential intervals (p-value=0.05, two-tailed test).
@@ -307,7 +311,7 @@ def plot_the_motif(fname, seqs, genome_fasta, path_out):
     #Plotting
     x_axis=[]
     for i in range(len(GC_percent)):
-        x_axis.append(-109 + i)
+        x_axis.append(-111 + i)
     ax_range=[-110, +110, 0.2, 1]
     plt.figure(figsize=(16, 8), dpi=100)
     #GC% pwm plotting
@@ -318,6 +322,8 @@ def plot_the_motif(fname, seqs, genome_fasta, path_out):
     plot1.set_xticks(np.arange(-120, 112, 10))
     plot1.axis(ax_range)
     plot1.set_xlim(-110, 110)
+    plot1.set_xticks([0], minor=True)
+    plot1.xaxis.grid(True, which='minor', linewidth=0.5, linestyle='--', alpha=1)    
     plot1.annotate('GC%', xytext=(80, 0.65), xy=(40, 0.85), color='green', weight="bold", size=15)
     txt=plot1.annotate('p-value', xytext=(80, 0.60), xy=(-105, 0.64), color='cyan', weight="bold", size=15)
     txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='black')])   
@@ -344,7 +350,16 @@ def plot_the_motif(fname, seqs, genome_fasta, path_out):
 #Plots the enrichment signal over the genome: +A+IP/smoothed(-A+IP) and +A-IP/smoothed(-A-IP)
 #######
 
-def plot_enrichment_signal(fname, IP_nd_ends, mock_nd_ends, deletions, path_out):	
+def plot_enrichment_signal(fname, IP_nd_ends, mock_nd_ends, un_IP_sm, un_mock_sm, deletions, path_out):
+    #Some hack to avoid some bug in matplotlib (OverflowError: In draw_path: Exceeded cell block limit)
+    #See: https://stackoverflow.com/questions/37470734/matplotlib-giving-error-overflowerror-in-draw-path-exceeded-cell-block-limit
+    mpl.rcParams['agg.path.chunksize']=10000
+    #Scaling smoothed tracks to male them visible on the plot.
+    max_element=max(IP_nd_ends+mock_nd_ends) #Max N3E value of experimental tracks
+    max_element_IP_sm=max(un_IP_sm)
+    max_element_mock_sm=max(un_mock_sm)
+    un_IP_sm=[(max_element/2)*x/max_element_IP_sm for x in un_IP_sm]
+    un_mock_sm=[(max_element/2)*x/max_element_mock_sm for x in un_mock_sm]
     #Regions to be masked (e.g. deletions).  
     mask_array=[]
     for k in range(len(IP_nd_ends)):
@@ -357,13 +372,17 @@ def plot_enrichment_signal(fname, IP_nd_ends, mock_nd_ends, deletions, path_out)
             mask_array.append(False)
     IPed=np.ma.masked_array(IP_nd_ends, mask=mask_array)
     mock=np.ma.masked_array(mock_nd_ends, mask=mask_array)
+    un_IPed=np.ma.masked_array(un_IP_sm, mask=mask_array)
+    un_mock=np.ma.masked_array(un_mock_sm, mask=mask_array)
     #Plotting the distribution of the signal around the genome for IPed and mock samples.
     xcoord=np.arange(0,4647999)
     plt.figure(figsize=(16, 8), dpi=100)
     plt.suptitle(fname, fontsize=20)
-    plot1=plt.subplot()
+    plot1=plt.subplot() 
     plot1.plot(xcoord, IPed, '-', label='+A+IP/smoothed(-A+IP)', color='blue', linewidth=1)
     plot1.plot(xcoord, mock, '-', label='+A-IP/smoothed(-A-IP)', color='orange', linewidth=1)
+    plot1.plot(xcoord, un_IPed, '-', label='smoothed(-A+IP)', color='#5bbdff', linewidth=3)
+    plot1.plot(xcoord, un_mock, '-', label='smoothed(-A-IP)', color='#ed781f', linewidth=3)    
     plot1.set_xlabel('Genome position, nt', size=17)
     plot1.set_ylabel('Signal enrichment', size=17)
     plot1.legend(loc='upper right')
@@ -393,6 +412,8 @@ def GCSs_caller(tetrade_dictionary, deletions_inpath, genome_path, path_out):
     ends_fitting=norm_smooth_devide(treated_experiment, treated_control, untreated_experiment, untreated_control, deletions)
     IP_norm_div=ends_fitting[0]
     mock_norm_div=ends_fitting[1]
+    un_IP_sm=ends_fitting[2]
+    un_mock_sm=ends_fitting[3]    
     
     #GCSs calling procedure.
     #GCSs calling using Audic, Claverie test (Audic & Claverie, 1998).
@@ -423,7 +444,7 @@ def GCSs_caller(tetrade_dictionary, deletions_inpath, genome_path, path_out):
     plot_the_motif(Tet_ID, seqs, genome_fasta, path_out)
     
     #Plotting the distribution of the signal around the genome for treated and untreated.
-    plot_enrichment_signal(Tet_ID, IP_norm_div, mock_norm_div, deletions, path_out)    
+    plot_enrichment_signal(Tet_ID, IP_norm_div, mock_norm_div, un_IP_sm, un_mock_sm, deletions, path_out)    
 
     #Writes GCSs data.
     #Converts coordinates to 1-start system.

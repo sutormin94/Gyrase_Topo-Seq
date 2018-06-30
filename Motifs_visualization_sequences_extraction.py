@@ -10,9 +10,11 @@
 #Packages to be imported.
 #######
 
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 from Bio import SeqIO
+from Bio import SeqUtils
 
 #######
 #Variables to be defined.
@@ -21,16 +23,18 @@ from Bio import SeqIO
 print('Variables to be defined:')
 
 #Input data - GCSs, TAB.
-path_to_GCSs_files={'Cfx': '',
-                    'RifCfx': '',
-                    'Micro': '',
-                    'Oxo': ''}
+path_to_GCSs_files={'Cfx': "/data/Gyrase/GCSs_sets/Cfx_10mkM_trusted_GCSs.txt",
+                    'RifCfx': "/data/Gyrase/GCSs_sets/RifCfx_trusted_GCSs.txt",
+                    'Micro': "/data/Gyrase/GCSs_sets/Micro_trusted_GCSs.txt",
+                    'Oxo': "/data/Gyrase/GCSs_sets/Oxo_trusted_GCSs.txt"}
 
 #Path to the genome FASTA.
-Genome_path=''
+Genome_path="/data/Gyrase/Genomes_tracks/E_coli_w3110_G_Mu.fasta"
 
 #Path for the output.
-Output_path=''
+Output_path="/data/Gyrase/Motif/"
+if not os.path.exists(Output_path):
+        os.makedirs(Output_path)
 
 #######
 #Trusted GCSs data parsing.
@@ -61,7 +65,7 @@ def genome_seq(genome_path):
         for record in SeqIO.parse(genome, "fasta"):
                 genome_sequence=str(record.seq)
         genome.close()
-        print('Whole genome average GC: ' + str(GC(genome_sequence)))
+        print('Whole genome average GC: ' + str(SeqUtils.GC(genome_sequence)))
         print('Whole genome length: ' + str(len(genome_sequence)))        
         return genome_sequence
 
@@ -70,14 +74,18 @@ def genome_seq(genome_path):
 #Writes sequences under the GCSs to file.
 #######
 
-def return_seqs(GCS_coords, win_range, genomefa, filepath): 
-        fileout=open(filepath, 'w')
+def return_seqs(GCS_coords, win_range, genomefa, filepath_full_len, filepath_6bp_LOGO): 
+        fileout=open(filepath_full_len, 'w')
+        fileout_6bp_LOGO=open(filepath_6bp_LOGO, 'w')
         seqs=[]
         for i in range(len(GCS_coords)):
-                seq=genomefa[int(GCS_coords[i]- win_range[0] + 1):int(GCS_coords[i]+ win_range[1] + 1)]
+                seq=genomefa[int(GCS_coords[i]- win_range[0] - 1):int(GCS_coords[i]+ win_range[1] - 1)]
+                seq_6bp_LOGO=genomefa[int(GCS_coords[i]-1):int(GCS_coords[i]-1+6)]
                 seqs.append(seq)
                 fileout.write('>'+str(GCS_coords[i])+'\n'+str(seq)+'\n')
+                fileout_6bp_LOGO.write('>'+str(GCS_coords[i])+'\n'+str(seq_6bp_LOGO)+'\n')
         fileout.close()
+        fileout_6bp_LOGO.close()
         print('Number of sequences (GCSs) analysing: ' + str(len(seqs)))
         return seqs
 
@@ -138,7 +146,7 @@ def write_motif(ar, filepath, coord_shift):
         fileout=open(filepath, 'w')
         fileout.write("#X\tY\n")
         for i in range(len(ar)):
-                fileout.write(str((-coord_shift/2)+i+1) + '\t' + str(ar[i])+'\n')
+                fileout.write(str((-coord_shift/2)+1+i) + '\t' + str(ar[i])+'\n')
         fileout.close()
         return
 
@@ -150,12 +158,14 @@ def write_motif(ar, filepath, coord_shift):
 def Plotting(PFMs_set, title, matrix_type, write_out, win_width):
         x_axis=[]
         for i in range(len(PFMs_set['Cfx'])):
-                x_axis.append(-(win_width/2)+1 + i)      
+                x_axis.append(-(win_width/2)+1+i)      
         print('len(x_axis)=' + str(len(x_axis)))
         ax_range = [-win_width/2, win_width/2, 0.35, 0.9]
-        plt.figure(figsize=(16, 6), dpi=900)
+        plt.figure(dpi=100, figsize=(16, 6))
         plt.suptitle(str(title), fontsize=20)
         plot1 = plt.subplot()
+        plot1.set_xticks([0], minor=True)
+        plot1.xaxis.grid(True, which='minor', linewidth=0.5, linestyle='--', alpha=1)            
         #Cfx
         plot1.plot(x_axis, PFMs_set['Cfx'], color='#7FCE79', linewidth=4, alpha=0.6)
         plot1.plot(x_axis, PFMs_set['Cfx'], color='#454F24', linewidth=1, alpha=0.6)
@@ -173,10 +183,10 @@ def Plotting(PFMs_set, title, matrix_type, write_out, win_width):
         plot1.plot(x_axis, PFMs_set['Oxo'], color='#470A59', linewidth=1)
         plot1.plot(x_axis, PFMs_set['Oxo'], 'o', fillstyle='none', color='#8991ff', markeredgecolor='#470A59', markersize=2, alpha=0.8)   
         #Tracks annotation
-        plot1.annotate('Ciprofloxacin', xytext=(-100, 0.75), xy=(40, 0.85), color='#7FCE79', weight="bold", size=15)
-        plot1.annotate('Rifampicin Ciprofloxacin', xytext=(-100, 0.7), xy=(-105, 0.64), color='#BAE85C', weight="bold", size=15)
-        plot1.annotate('Microcin B17', xytext=(-100, 0.65), xy=(40, 0.85), color='#ff878b', weight="bold", size=15)
-        plot1.annotate('Oxolinic acid', xytext=(-100, 0.60), xy=(-105, 0.64), color='#8991ff', weight="bold", size=15)        
+        plot1.annotate('Ciprofloxacin', xytext=(-75, 0.85), xy=(40, 0.85), color='#7FCE79', weight="bold", size=15)
+        plot1.annotate('Rifampicin Ciprofloxacin', xytext=(-75, 0.8), xy=(40, 0.85), color='#BAE85C', weight="bold", size=15)
+        plot1.annotate('Microcin B17', xytext=(-75, 0.75), xy=(40, 0.85), color='#ff878b', weight="bold", size=15)
+        plot1.annotate('Oxolinic acid', xytext=(-75, 0.70), xy=(40, 0.85), color='#8991ff', weight="bold", size=15)        
         #Set axis parameters
         plot1.tick_params(axis='both', direction='in', bottom='on', top='on', left='on', right='on')
         plot1.axis(ax_range)
@@ -186,6 +196,7 @@ def Plotting(PFMs_set, title, matrix_type, write_out, win_width):
         plot1.set_ylabel(str(matrix_type), size=17)
         plt.show()
         plt.savefig(write_out, dpi=400, figsize=(16, 6)) 
+        plt.close()
         return
 
 #######
@@ -201,7 +212,7 @@ def wrap_function(GCSs_input, genome_input_path, output_path):
         genome_sequence=genome_seq(genome_input_path)
         dict_of_PFMs={}
         for k, v in GCSs_dict.items():
-                sequences_list=return_seqs(v, win_range, genome_sequence, output_path+str(k)+'_sequences_under_GCSs.fasta')
+                sequences_list=return_seqs(v, win_range, genome_sequence, output_path+str(k)+'_sequences_under_GCSs_full.fasta', output_path+str(k)+'_sequences_under_GCSs_6bp_LOGO.fasta')
                 PFMs=make_PFM(sequences_list)
                 write_motif(PFMs[PFM_type], output_path+str(k)+'_GC_pfm.txt', win_width)
                 dict_of_PFMs[k]=PFMs[PFM_type]

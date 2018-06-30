@@ -12,7 +12,9 @@
 #Packages to be imported.
 #######
 
+import os
 import matplotlib.pyplot as plt
+import collections
 from matplotlib_venn import venn2, venn3, venn3_circles
 import numpy as np
 
@@ -22,37 +24,57 @@ import numpy as np
 
 print('Variables to be defined:')
 
+#Path to the working directory
+pwd="/data/Gyrase/Data_preparation/"
+
 #Input data
-path_to_cfx_replicas={'Cfx_1': '',
-                      'Cfx_2': '',
-                      'Cfx_3': ''}
-path_to_rifcfx_replicas={'RifCfx_1': '',
-                      'RifCfx_2': '',
-                      'RifCfx_3': ''}
-path_to_microcin_replicas={'Micro_1': '',
-                      'Micro_2': '',
-                      'Micro_3': ''}
-path_to_oxo_replicas={'Oxo_1': '',
-                      'Oxo_2': '',
-                      'Oxo_3': ''}
+path_to_cfx_replicas={'Cfx_1': pwd + "Cfx_10mkM/GCSs_calling_0_05/Cfx_1/Cfx_1_raw_GCSs_called.txt",
+                      'Cfx_2': pwd + "Cfx_10mkM/GCSs_calling_0_05/Cfx_2/Cfx_2_raw_GCSs_called.txt",
+                      'Cfx_3': pwd + "Cfx_10mkM/GCSs_calling_0_05/Cfx_3/Cfx_3_raw_GCSs_called.txt"}
+path_to_rifcfx_replicas={'RifCfx_1': pwd + "RifCfx/GCSs_calling_0_05_Un/RifCfx_1/RifCfx_1_raw_GCSs_called.txt",
+                         'RifCfx_2':  pwd + "RifCfx/GCSs_calling_0_05_Un/RifCfx_2/RifCfx_2_raw_GCSs_called.txt",
+                      'RifCfx_3':  pwd + "RifCfx/GCSs_calling_0_05_Un/RifCfx_3/RifCfx_3_raw_GCSs_called.txt"}
+path_to_microcin_replicas={'Micro_1':  pwd + "Micro/GCSs_calling_0_05/Micro_1/Micro_1_raw_GCSs_called.txt",
+                           'Micro_2': pwd + "Micro/GCSs_calling_0_05/Micro_2/Micro_2_raw_GCSs_called.txt",
+                      'Micro_3': pwd + "Micro/GCSs_calling_0_05/Micro_3/Micro_3_raw_GCSs_called.txt"}
+path_to_oxo_replicas={'Oxo_1': pwd + "Oxo/GCSs_calling_0_05/Oxo_1/Oxo_1_raw_GCSs_called.txt",
+                      'Oxo_2': pwd + "Oxo/GCSs_calling_0_05/Oxo_2/Oxo_2_raw_GCSs_called.txt",
+                      'Oxo_3': pwd + "Oxo/GCSs_calling_0_05/Oxo_3/Oxo_3_raw_GCSs_called.txt"}
+#Input data in one dict (for one output table contains all replices and raw GCSs)
+path_to_replicas={'Cfx_1': pwd + "Cfx_10mkM/GCSs_calling_0_05/Cfx_1/Cfx_1_raw_GCSs_called.txt",
+                  'Cfx_2': pwd + "Cfx_10mkM/GCSs_calling_0_05/Cfx_2/Cfx_2_raw_GCSs_called.txt",
+                      'Cfx_3': pwd + "Cfx_10mkM/GCSs_calling_0_05/Cfx_3/Cfx_3_raw_GCSs_called.txt",
+                      'RifCfx_1': pwd + "RifCfx/GCSs_calling_0_05_Un/RifCfx_1/RifCfx_1_raw_GCSs_called.txt",
+                      'RifCfx_2':  pwd + "RifCfx/GCSs_calling_0_05_Un/RifCfx_2/RifCfx_2_raw_GCSs_called.txt",
+                      'RifCfx_3':  pwd + "RifCfx/GCSs_calling_0_05_Un/RifCfx_3/RifCfx_3_raw_GCSs_called.txt",
+                      'Micro_1':  pwd + "Micro/GCSs_calling_0_05/Micro_1/Micro_1_raw_GCSs_called.txt",
+                      'Micro_2': pwd + "Micro/GCSs_calling_0_05/Micro_2/Micro_2_raw_GCSs_called.txt",
+                      'Micro_3': pwd + "Micro/GCSs_calling_0_05/Micro_3/Micro_3_raw_GCSs_called.txt",
+                      'Oxo_1': pwd + "Oxo/GCSs_calling_0_05/Oxo_1/Oxo_1_raw_GCSs_called.txt",
+                      'Oxo_2': pwd + "Oxo/GCSs_calling_0_05/Oxo_2/Oxo_2_raw_GCSs_called.txt",
+                      'Oxo_3': pwd + "Oxo/GCSs_calling_0_05/Oxo_3/Oxo_3_raw_GCSs_called.txt"}
+
 #Configuration of the output for the GCSs data in replicas.
-Replicas_path_out=''
-Cfx_name='Cfx'
-RifCfx_name='RifCfx'
-Micro_name='Micro'
-Oxo_name='Oxo'
+Replicas_path_out="/data/Gyrase/GCSs_sets/"
+if not os.path.exists(Replicas_path_out):
+    os.makedirs(Replicas_path_out)
+Cfx_name="Cfx_10mkM"
+RifCfx_name="RifCfx"
+Micro_name="Micro"
+Oxo_name="Oxo"
+All_conditions_name="All_conditions_GCSs"
 #Configuration of the output for GCSs trusted.
-Cfx_path=''
-RifCfx_path=''
-Micro_path=''
-Oxo_path=''
-Cfx_Micro_path=''
-Cfx_Oxo_path=''
-Micro_Oxo_path=''
-Cfx_Micro_Oxo_path=''
-Cfx_RifCfx_shared_GCSs_path=''
+Cfx_path=Replicas_path_out + "Cfx_10mkM_trusted_GCSs.txt"
+RifCfx_path=Replicas_path_out + "RifCfx_trusted_GCSs.txt"
+Micro_path=Replicas_path_out + "Micro_trusted_GCSs.txt"
+Oxo_path=Replicas_path_out + "Oxo_trusted_GCSs.txt"
+Cfx_Micro_path=Replicas_path_out + "Cfx_10mkM_Micro_shared_trusted_GCSs.txt"
+Cfx_Oxo_path=Replicas_path_out + "Cfx_10mkM_Oxo_shared_trusted_GCSs.txt"
+Micro_Oxo_path=Replicas_path_out + "Micro_Oxo_shared_trusted_GCSs.txt"
+Cfx_Micro_Oxo_path=Replicas_path_out + "Cfx_10mkM_Micro_Oxo_shared_trusted_GCSs.txt"
+Cfx_RifCfx_shared_GCSs_path=Replicas_path_out + "Cfx_10mkM_RifCfx_shared_trusted_GCSs.txt"
 #Outpath for Venn diagrams.
-plot_outpath=''
+plot_outpath=Replicas_path_out
 
 #######
 #Parsing raw GCSs coordinates, returns dictionary - GCSs_coordinate:N3E.
@@ -78,32 +100,48 @@ def combine_replicates(replicas_dict, path_out, name):
     names_ar=[]
     for key, value in replicas_dict.items(): #Iterates replicas
         names_ar.append(key)
-        for k, v in read_GCSs_file(value).items(): #Iterates raw GCSs
-            if k in GCSs_replicas_dict:
-                GCSs_replicas_dict[k].append(v)
+        #Read file with raw GCSs
+        Raw_GCSs_dict=read_GCSs_file(value)
+        for k, v in Raw_GCSs_dict.items(): #Iterates raw GCSs
+            #Table filling process initiation
+            if len(names_ar)==1:
+                GCSs_replicas_dict[k]=[v]
+            #Table filling process continuing (the table already contains at least one GCSs set)
             else:
-                add_el=[]
-                for j in range(len(names_ar)-1):
-                    add_el.append(0)
-                add_el.append(v)
-                GCSs_replicas_dict[k]=add_el
+                #If GCSs is already in the table
+                if k in GCSs_replicas_dict:
+                    GCSs_replicas_dict[k].append(v)
+                #If this is the first occurrence of the element in a NON empty table.
+                else:
+                    add_el=[]
+                    for j in range(len(names_ar)-1):
+                        add_el.append(0)
+                    add_el.append(v)
+                    GCSs_replicas_dict[k]=add_el
+        #If table body line contains less elements than header does, hence add zero.
         for k, v in GCSs_replicas_dict.items():
             if len(v)<len(names_ar):
                 GCSs_replicas_dict[k].append(0)
+    #Sorting the list of dictionary keys.
+    GCSs_replicas_dict_sorted=collections.OrderedDict(sorted(GCSs_replicas_dict.items()))
     #Writes merged GCSs data
     fileout=open(path_out + name + '_GCSs_replicates.txt', 'w')
+    #Header
     fileout.write('GCSs_coordinate\t')
     for i in names_ar:
         fileout.write(str(i) + '_N3E\t')
     fileout.write('\n')
-    for k, v in GCSs_replicas_dict.items():
+    #Body of the table
+    for k, v in GCSs_replicas_dict_sorted.items():
         fileout.write(str(k) + '\t')
-        for i in v:
-            fileout.write(str(v) + '\t')
+        for i in GCSs_replicas_dict_sorted[k]:
+            fileout.write(str(i) + '\t')
         fileout.write('\n')
     fileout.close()
     return GCSs_replicas_dict
-        
+ 
+#Prepares GCSs table for all conditions
+combine_replicates(path_to_replicas, Replicas_path_out, All_conditions_name)      
 
 #######
 #Returns only trusted GCSs - observed at least 2 times within 3 biological replicates.
@@ -192,7 +230,7 @@ def replicates_parsing_to_list_and_overlapping(replicas_dict, name):
     GCSs_dict={}
     for k, v in replicas_dict.items(): #Iterate replicas.
         GCSs_dict[k]=[]
-        for c, h in read_GCSs_file(v): #Iterate GCSs.
+        for c, h in read_GCSs_file(v).items(): #Iterate GCSs.
             GCSs_dict[k].append([c, h])
     #Overlapping
     one_two=pairs_construction(GCSs_dict[name+str(1)], GCSs_dict[name+str(2)])
@@ -224,21 +262,28 @@ venn_data_3=[len(Cfx)-len(Cfx_Micro_shared_GCSs)-len(Cfx_Oxo_shared_GCSs)+len(Cf
 
 venn2(subsets = (venn_data_2), set_labels = ("Ciprofloxacin", "Rifampicin Ciprofloxacin"))
 plt.savefig(plot_outpath+'Cfx_RifCfx_venn.png', dpi=320)
+plt.close()
 
+print("Cfx Micro Oxo subsets volumes: " + str(venn_data_3))
 venn3(subsets = (venn_data_3), set_labels = ('Ciprofloxacin', 'Microcin B17', 'Oxolinic acid'))
 plt.savefig(plot_outpath+'Cfx_Micro_Oxo_venn.png', dpi=320)
+plt.close()
 
 venn3(subsets = (replicates_parsing_to_list_and_overlapping(path_to_cfx_replicas, 'Cfx_')), set_labels = ('Cfx_1', 'Cfx_2', 'Cfx_3'))
 plt.savefig(plot_outpath+'Cfx_replicas_venn.png', dpi=320)
+plt.close()
 
 venn3(subsets = (replicates_parsing_to_list_and_overlapping(path_to_rifcfx_replicas, 'RifCfx_')), set_labels = ('RifCfx_1', 'RifCfx_2', 'RifCfx_3'))
 plt.savefig(plot_outpath+'RifCfx_replicas_venn.png', dpi=320)
+plt.close()
 
 venn3(subsets = (replicates_parsing_to_list_and_overlapping(path_to_microcin_replicas, 'Micro_')), set_labels = ('Micro_1', 'Micro_2', 'Micro_3'))
 plt.savefig(plot_outpath+'Micro_replicas_venn.png', dpi=320)
+plt.close()
 
 venn3(subsets = (replicates_parsing_to_list_and_overlapping(path_to_oxo_replicas, 'Oxo_')), set_labels = ('Oxo_1', 'Oxo_2', 'Oxo_3'))
 plt.savefig(plot_outpath+'Oxo_replicas_venn.png', dpi=320)
+plt.close()
 
 #######
 #GCSs sets average N3E estimation.
@@ -270,11 +315,12 @@ All_GCSs_sets={Cfx_path: Antibs_GCSs_sets[0],
                Oxo_path: Antibs_GCSs_sets[3],
                Cfx_Micro_path: Antibs_GCSs_sets_pair_shared[0],
                Cfx_Oxo_path: Antibs_GCSs_sets_pair_shared[1],
-               Micro_Oxo_path: Antibs_GCSs_sets_pair_shared[3],
+               Micro_Oxo_path: Antibs_GCSs_sets_pair_shared[2],
                Cfx_Micro_Oxo_path: Cfx_Micro_Oxo_shared_GCSs}
 
 def write_GCSs_file(dictionary):
-    for k, v in dictionary.items():
+    for k, v in dictionary.items(): #Iterates lists to be written
+        v.sort(key=lambda tup: tup[0])  #Sorting lists by the zero elements of the sublists they consist of 
         fileout=open(k, 'w')
         fileout.write('GCSs_coordinate\tN3E\n')
         for i in range(len(v)):
@@ -288,6 +334,7 @@ write_GCSs_file(All_GCSs_sets)
 def write_Cfx_RifCfx_shared_GCSs(ar, path):
     fileout=open(path, 'w')
     fileout.write('GCSs_coordinate\tCfx_N3E\tRifCfx_N3E\n')
+    ar.sort(key=lambda tup: tup[0])
     for i in range(len(ar)):
         fileout.write(str(ar[i][0]) + '\t' + str(ar[i][1]) + '\t' + str(ar[i][2]) + '\n')
     fileout.close()
