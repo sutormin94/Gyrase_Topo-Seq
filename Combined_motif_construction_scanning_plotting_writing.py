@@ -41,6 +41,8 @@ Genome_seq_path="C:\Sutor\science\DNA-gyrase\Genomes\E_coli_w3110_G_Mu.fasta"
 
 #Path to the sequence to be scanned, FASTA.
 Target_seq_path="C:\Sutor\science\DNA-gyrase\Genomes\E_coli_w3110_G_Mu.fasta"
+#Name of the target sequence ready to be scanned.
+Target_seq_name="E_coli_w3110_G_Mu_"
 
 #Prefix of the output path.
 Output_data_prefix="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\Combined_motif\\"
@@ -97,7 +99,6 @@ def sorting_combining(GCSs_dict):
     for k, v in GCSs_dict.items():
         list_of_keys_sbv=sorted(v, key=v.get)
         list_of_keys_sbv_slice=list_of_keys_sbv[-threshold:]
-        print(list_of_keys_sbv_slice)
         for i in list_of_keys_sbv_slice:
             if i not in GCSs_set_for_motif:
                 GCSs_set_for_motif[i]=v[i]
@@ -109,7 +110,7 @@ def sorting_combining(GCSs_dict):
 #Returns file with scores.
 #######
 
-def motif_construction_and_analysis(GCSs_dict, genomefam, genomefas, outpath):
+def motif_construction_and_analysis(GCSs_dict, genomefam, genomefas, target_name, outpath):
     #Frozen variables.
     background={'A': 0.245774783354, 'C': 0.2537191331, 'G': 0.254184334046, 'T': 0.246130246797}
     win_width_l=63
@@ -117,9 +118,10 @@ def motif_construction_and_analysis(GCSs_dict, genomefam, genomefas, outpath):
     #Returns sequences under the GCSs.
     seqs=[]
     for k, v in GCSs_dict.items():
-        seq=genomefam[(int(k) - win_width_l - 1):(int(k) + win_width_r - 1)]
+        seq=genomefam[(int(k)-1-win_width_l):(int(k)-1+win_width_r)]
         seqs.append(seq) 
     print('Number of sequences for motif construction: ' + str(len(seqs)))
+    print('Len of sequences for motif construction: ' + str(len(seqs[0])))
     #Substitutes nucleotides at antibiotic-biased central positions with letters 
     #to be expected by chance taking into account the background nucleotides frequencies.
     hard_copy=['A']*(int(background['A']*len(seqs))+3) + ['C']*(int(background['C']*len(seqs))) +  ['G']*(int(background['G']*len(seqs))) + ['T']*(int(background['T']*len(seqs)))
@@ -128,11 +130,9 @@ def motif_construction_and_analysis(GCSs_dict, genomefam, genomefas, outpath):
         soft_copy=[]
         soft_copy.extend(hard_copy)
         shuffle(soft_copy)
-        l=0
-        for j in range(0, len(seqs)):
+        for j in range(len(seqs)):
             ls=list(seqs[j])
-            ls[k]=soft_copy[l]
-            l=l+1
+            ls[k]=soft_copy[j]
             seqs[j]="".join(ls)    
     #Create PWM and PSSM.
     instances=[]
@@ -144,16 +144,26 @@ def motif_construction_and_analysis(GCSs_dict, genomefam, genomefas, outpath):
     #Scans forward sequence
     test_seq=Seq(str(genomefas), IUPAC.unambiguous_dna)
     whole_genome_scores=pssm.calculate(test_seq) 
-    outfile=open(outpath + 'Scan_forward_with_combined_motif.txt', 'w')
+    outfile=open(outpath + target_name + 'scan_forward_with_combined_motif.txt', 'w')
+    #If test_seq len is equal to pssm, pssm.calculate() returns float32 but not the list.
+    if len(test_seq)==win_width_l+win_width_r:
+        one_pos_score=[]
+        one_pos_score.append(whole_genome_scores)
+        whole_genome_scores=one_pos_score
     for i in range(len(whole_genome_scores)):
-        outfile.write(str(i+63+1) + '\t' + str(whole_genome_scores[i]) + '\t'+ str(test_seq[i+63]) + '\n')
+        outfile.write(str(i+63+2) + '\t' + str(whole_genome_scores[i]) + '\t'+ str(test_seq[i+63+1]) + '\n')
     outfile.close()
     #Scans reverse complement sequence
     test_seq_rc=Seq(str(genomefas), IUPAC.unambiguous_dna).reverse_complement()
     whole_genome_scores_rc=pssm.calculate(test_seq_rc)   
-    outfile_rc=open(outpath + 'Scan_rc_with_combined_motif.txt', 'w')
+    outfile_rc=open(outpath + target_name + 'scan_rc_with_combined_motif.txt', 'w')
+    #If test_seq len is equal to pssm, pssm.calculate() returns float32 but not the list.
+    if len(test_seq_rc)==win_width_l+win_width_r:
+        one_pos_score_rc=[]
+        one_pos_score_rc.append(whole_genome_scores_rc)
+        whole_genome_scores_rc=one_pos_score_rc 
     for i in range(len(whole_genome_scores_rc)):
-        outfile_rc.write(str(i+63-2) + '\t' + str(whole_genome_scores_rc[-i]) + '\t'+ str(test_seq_rc[-(i+63-2)]) + '\n')
+        outfile_rc.write(str(i+67-1) + '\t' + str(whole_genome_scores_rc[-i-1]) + '\t'+ str(test_seq_rc[-(i+67-1)]) + '\n')
     outfile_rc.close()     
     return
 
@@ -161,15 +171,15 @@ def motif_construction_and_analysis(GCSs_dict, genomefam, genomefas, outpath):
 #Wraps functions for motif construction and for scanning sequences of interest with it.
 #######
 
-def Wrapper_motif_construct_scan(Source_genome_path, Target_genome_path, GCSs_files_paths, outpath):
+def Wrapper_motif_construct_scan(Source_genome_path, Target_genome_path, target_name, GCSs_files_paths, outpath):
     Source_sequence=obtain_seq(Source_genome_path)
     Target_sequence=obtain_seq(Target_genome_path)
     GCSs_sets=trusted_GCSs_parsing(GCSs_files_paths)
     GCSs_for_motif=sorting_combining(GCSs_sets)
-    motif_construction_and_analysis(GCSs_for_motif, Source_sequence, Target_sequence, outpath)
+    motif_construction_and_analysis(GCSs_for_motif, Source_sequence, Target_sequence, target_name, outpath)
     return GCSs_for_motif
 
-Motif_defined_GSCs_dict=Wrapper_motif_construct_scan(Genome_seq_path, Target_seq_path, path_to_GCSs_files, Output_data_prefix)
+Motif_defined_GSCs_dict=Wrapper_motif_construct_scan(Genome_seq_path, Target_seq_path, Target_seq_name, path_to_GCSs_files, Output_data_prefix)
 
 ###############################################
 #The motif plotting and writing.
@@ -303,6 +313,7 @@ def write_line(ar, fileout):
     return
 
 def write_motif(A, T, G, C, background, win_width, outpath):
+    #Writes PFM matrix.
     fileout=open(outpath + 'Combined_motif_PFM.txt', 'w')
     Seq_centre=int((win_width/2))
     A[Seq_centre-1]=background['A']
@@ -326,6 +337,15 @@ def write_motif(A, T, G, C, background, win_width, outpath):
     write_line(G, fileout)
     write_line(C, fileout)
     fileout.close()
+    #Writes consensus sequence.
+    fileout_cs=open(outpath + 'Combined_motif_consensus_sequence.fasta', 'w')
+    fileout_cs.write('>Combined_motif_consensus_sequence\n')
+    alphabet=['A', 'T', 'G', 'C']
+    for i in range(len(A)):
+        posit_examined=[A[i], T[i], G[i], C[i]]
+        index_consensus=max(range(len(posit_examined)), key=posit_examined.__getitem__)
+        fileout_cs.write(alphabet[index_consensus])
+    fileout_cs.close()   
     return
 
 #######
