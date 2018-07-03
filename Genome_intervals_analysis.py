@@ -380,7 +380,7 @@ def write_GCSs_norm(GCSs_set_exp_interval_dict, path_out, set_name):
     Compartment_names=['USUS', 'USGB', 'GBDS', 'DSDS']
     for a, s in GCSs_set_exp_interval_dict.items():
         for i in range(len(Compartment_names)):
-            fileout.write(a + '\t' + Compartment_names[i] + '\t' + str(s[0]) + '\t' + str(s[(i*3)+1]) + '\t' + str(s[(i*3)+2]) + '\t' + str(s[(i*3)+3]) +'\n')
+            fileout.write(a + '\t' + Compartment_names[i] + '\t' + str(round(s[0],3)) + '\t' + str(s[(i*3)+1]) + '\t' + str(s[(i*3)+2]) + '\t' + str(round(s[(i*3)+3],3)) +'\n')
     fileout.close()
     return
 
