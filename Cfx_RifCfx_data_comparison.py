@@ -11,6 +11,7 @@
 #Packages to be imported.
 #######
 
+import os
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
 import numpy as np
@@ -23,15 +24,18 @@ from scipy.stats import binom
 print('Variables to be defined:')
 
 #Input data - GCSs, TAB.
-path_to_GCSs_files={'Cfx': '',
-                    'RifCfx': ''}
+path_to_GCSs_files={'Cfx': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets_score\Cfx_10mkM_trusted_GCSs_h_s.txt",
+                    'RifCfx': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets_score\RifCfx_trusted_GCSs_h_s.txt"}
 #Input data - sets of transcription units.
-path_to_TUs_sets={'16S_operons': ''}
+path_to_TUs_sets={'16S_operons': "C:\Sutor\science\DNA-gyrase\Results\Final_data_2\Expression_data\Deletion_corrected\DOOR_Mu_del_cor_16S_rRNA_operons.txt"}
 #Input data - sets of intervals.
-path_to_intervals_sets={'BIMEs1': '',
-                  'BIMEs2': ''}
+path_to_intervals_sets={'BIMEs1': "C:\Sutor\science\DNA-gyrase\Results\Final_data_2\GCSs_association_with_REPs\BIMEs1_coordinates.broadPeak",
+                  'BIMEs2': "C:\Sutor\science\DNA-gyrase\Results\Final_data_2\GCSs_association_with_REPs\BIMEs2_coordinates.broadPeak"}
 #Outpath for plot.
-Plot_path_out=''
+Plot_path_out="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\Cfx_RifCfx_shared_GCSs_analysis\\"
+if not os.path.exists(Plot_path_out):
+    os.makedirs(Plot_path_out)
+Plot_path_out+="Cfx_RifCfx_shared_GCSs_N3E_values_changes.png"
 
 
 #######
@@ -59,7 +63,6 @@ def trusted_GCSs_parsing(input_dict):
 #Prepare lists of GCSs heights for Cfx and Cfx_Rif data. Write down values that higher for RifCfx.
 #######
 
-
 def find_shared_gcss(GCSs_sets_dict):
     #Shared GCSs identification
     shared_GCSs_array=[]
@@ -73,6 +76,7 @@ def find_shared_gcss(GCSs_sets_dict):
     for i in shared_GCSs_array:
         i.append(j) #Serial number
         j+=1
+    print("Number of GCSs shared between Cfx and RifCfx: " + str(len(shared_GCSs_array)))
     return shared_GCSs_array #array consist of elements: [GCSs coordinate, N3E ratio (RifCfx/Cfx), GCSs score, Serial number]
 
 
@@ -96,7 +100,7 @@ def TUs_parser(TUs_sets_path):
                 tu['Start']=int(line[2]) #Start
                 tu['End']=int(line[3]) #End
                 tu['Strand']=str(line[4]) #Strand +/-
-                tu['Transcription level']=float(line[5]) #Transcription level
+                tu['Transcription level']=float(line[5].replace(',', '.')) #Transcription level
                 tu['Description']=str(line[6]) #Description
                 ar.append(tu)
                 if line[4]=='+':
@@ -105,8 +109,8 @@ def TUs_parser(TUs_sets_path):
                     minus+=1
         filein.close()
         TUs_sets[k]=ar
-        print('Number of TUs in forward for ' + str(k) + 'set: ' + str(plus))
-        print('Number of TUs in reverse for ' + str(k) + 'set: ' + str(minus))
+        print('Number of TUs in forward for ' + str(k) + ' set: ' + str(plus))
+        print('Number of TUs in reverse for ' + str(k) + ' set: ' + str(minus))
     return TUs_sets
 
 
@@ -149,7 +153,7 @@ def broadpeak_pars(intervals_sets_path):
             if del_check==0:
                 ar.append([int_start, int_end])            
         intervals_sets_dict[k]=ar
-        print("Number of " + str(k) + "regions: " + str(len(ar)))
+        print("Number of " + str(k) + " regions: " + str(len(ar)))
         filein.close()
     return intervals_sets_dict
 
@@ -199,12 +203,12 @@ def binom_test_preferent(all_GCSs, set_GCSs, set_type):
     indec_set=comp_with_one(set_GCSs)
     print("Number of GCSs increase N3E when transcription is inhibited: " + str(indec_all[0]) + " out of " + str(indec_all[0]+indec_all[1]))
     prob_to_increase=indec_all[0]/(float(indec_all[0]+indec_all[1]))
-    print("Probability a GCSs will increase N3E: " + str(prob_to_increase) + "\n")
+    print("Probability that a GCS will increase N3E as a response on the transcription inhibition: " + str(prob_to_increase) + "\n")
     print("Number of GCSs fall into " + str(set_type) + " that increase N3E when transcription is inhibited: " + str(indec_set[0]) + " out of " + str(indec_set[0]+indec_set[1]))
     prob_of_distrib=binom.cdf(indec_set[0], indec_set[0]+indec_set[1], prob_to_increase)
     if prob_of_distrib>0.5:
         prob_of_distrib=1-prob_of_distrib
-    print("Probability of this distribution: " + str(prob_of_distrib) + "\n")
+    print("Probability of this event (binom test): " + str(prob_of_distrib) + "\n")
 
 ####### 
 #Delete GCSs repeated shared between several GCSs sets (left this GCSs in particular only set).
@@ -227,15 +231,17 @@ def exclude_repeats(ar1, ar2):
 #######
 
 def plot_N3E_ratio(dict_of_sets, pathout):
-    fig = plt.figure(figsize=(16,6))                                                               
-    plt1 = fig.add_subplot(1,1,1)  
+    fig=plt.figure(figsize=(16,6), dpi=100)                                                               
+    plt1=fig.add_subplot(1,1,1)  
     ticks1=[1]
     ticks2=[int(len(dict_of_sets['all_GCSs'][0])/2)]
     plt1.set_xlim(0, len(dict_of_sets['all_GCSs'][0]))
+    
     N3E_ratio=[]
     for i in dict_of_sets['all_GCSs'][0]:
         N3E_ratio.append(i[1])
     plt1.set_ylim(0, max(N3E_ratio)+1)
+    
     plt1.set_yticks(ticks1, minor=True)
     plt1.set_xticks(ticks2, minor=True)
     plt1.grid(True, axis='y', which='minor', linewidth=2, linestyle='--', alpha=0.9)
@@ -243,18 +249,19 @@ def plot_N3E_ratio(dict_of_sets, pathout):
     for k, v in dict_of_sets.items(): #Iterate GCSs sets.
         if k not in ['all_GCSs']: 
             for gcs in v[0]: #Iterate GCSs
-                plt1.scatter(v[0][3], v[0][1], c=v[1][0], alpha=v[1][1], linewidths=v[1][2], s=v[1][3])
+                plt1.scatter(gcs[3], gcs[1], c=v[1][0], alpha=v[1][1], linewidths=v[1][2], s=v[1][3], edgecolors='black')
     
-    plt1.scatter(620, 9.5, c='#74ffa0', alpha=1, linewidths=1, s=200)
-    plt1.annotate('GCSs in BIMEs2', xytext=(635, 9.3), xy=(0, 0), xycoords='data', color='black', weight="bold", size=27)  
-    plt1.scatter(620, 8.8, c='#ff8074', alpha=1, linewidths=1, s=200)
-    plt1.annotate('GCSs in rRNA operons DS', xytext=(635, 8.6), xy=(0, 0), xycoords='data', color='black', weight="bold", size=27)  
-    plt1.scatter(620, 8.1, c='#8b74ff', alpha=0.2, linewidths=0, s=100)
-    plt1.annotate('Other sites', xytext=(635, 7.9), xy=(0, 0), xycoords='data', color='black', weight="bold", size=27)  
-    plt1.annotate('Median', xytext=(535, 4.5), xy=(0, 0), xycoords='data', rotation=90, color='black', size=25)  
+    plt1.scatter(len(N3E_ratio)*0.53, (max(N3E_ratio)+1)*0.93, c='#74ffa0', alpha=1, linewidths=1, edgecolors='black', s=200)
+    plt1.annotate('GCSs in BIMEs2', xy=(0.55, 0.9), xycoords='axes fraction', color='black', weight="bold", size=27)  
+    plt1.scatter(len(N3E_ratio)*0.53, (max(N3E_ratio)+1)*0.83, c='#ff8074', alpha=1, linewidths=1, edgecolors='black', s=200)
+    plt1.annotate('GCSs in rRNA operons DS', xy=(0.55, 0.8), xycoords='axes fraction', color='black', weight="bold", size=27)  
+    plt1.scatter(len(N3E_ratio)*0.53, (max(N3E_ratio)+1)*0.73, c='#8b74ff', alpha=0.2, linewidths=0.5, edgecolors='black', s=100)
+    plt1.annotate('Other sites', xy=(0.55, 0.7), xycoords='axes fraction', color='black', weight="bold", size=27)  
+    plt1.annotate('Median', xy=(0.47, 0.50), xycoords='axes fraction', rotation=90, color='black', size=25)  
 
-    xticknames1=[0, 100, 200, 300, 400, 500,600,700,800,900,1000,1100]
-    yticknames1=[0,1,2,3,4,5,6,7,8,9,10,11]
+    xticknames1=np.arange(0, len(N3E_ratio)+1, 200)
+    yticknames1=np.arange(0, max(N3E_ratio)+1, 1)
+    print(max(N3E_ratio))
     plt1.set_yticks(yticknames1, minor=False)
     plt1.set_xticks(xticknames1, minor=False)
     plt1.set_xlabel('Sites', size=33, labelpad=8, rotation=0)
@@ -263,7 +270,8 @@ def plot_N3E_ratio(dict_of_sets, pathout):
     plt1.set_yticklabels(yticknames1)
     plt.setp(plt1.set_yticklabels(yticknames1), rotation=0, fontsize=25)
     plt1.set_ylabel('RifCfx/Cfx', size=33, labelpad=8, rotation=90)
-    fig.savefig(pathout, dpi=320) 
+    plt.tight_layout()
+    fig.savefig(pathout, dpi=400, figsize=(15, 15)) 
     return
 
 #######
@@ -292,10 +300,12 @@ def functions_wrapper(GCSs_dict_input, TUs_sets_path, intervals_sets_path, plot_
     shared_GCSs_minus_intervals_DS=exclude_repeats(shared_GCSs_set, GCSs_in_intervals+GCSs_in_DS_only)
     #Prepare data for plotting
     dict_of_sets={'all_GCSs': [shared_GCSs_set, ['#8b74ff', 0.15, 0, 100]], 
-                  'rRNA_DS': [GCSs_in_DS_only, ['#ff8074', 1, 1, 200]],
-                  'BIMEs2': [GCSs_in_intervals, ['#74ffa0', 1, 1, 200]], 
-                  'other': [shared_GCSs_minus_intervals_DS, ['#8b74ff', 0.15, 0, 100]]}
+                  'other': [shared_GCSs_minus_intervals_DS, ['#8b74ff', 0.15, 0, 100]],
+                  'rRNA_DS': [GCSs_in_DS_only, ['#ff8074', 0.8, 1, 200]],
+                  'BIMEs2': [GCSs_in_intervals, ['#74ffa0', 0.8, 1, 200]]}
     plot_N3E_ratio(dict_of_sets, plot_output)
     return
-    
+
+functions_wrapper(path_to_GCSs_files, path_to_TUs_sets, path_to_intervals_sets, Plot_path_out)
+
 print('Script ended its work succesfully!') 
