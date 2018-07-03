@@ -40,9 +40,9 @@ path_to_GCSs_files={'Cfx': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_mo
 Genome_seq_path="C:\Sutor\science\DNA-gyrase\Genomes\E_coli_w3110_G_Mu.fasta"
 
 #Path to the sequence to be scanned, FASTA.
-Target_seq_path="C:\Sutor\science\DNA-gyrase\Genomes\E_coli_w3110_G_Mu.fasta"
+Target_seq_path="C:\Sutor\science\DNA-gyrase\Genomes\pUC19_dimer.fasta"
 #Name of the target sequence ready to be scanned.
-Target_seq_name="E_coli_w3110_G_Mu_"
+Target_seq_name="pUC19_dimer_"
 
 #Prefix of the output path.
 Output_data_prefix="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\Combined_motif\\"
