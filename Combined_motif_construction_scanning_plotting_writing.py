@@ -40,14 +40,22 @@ path_to_GCSs_files={'Cfx': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_mo
 Genome_seq_path="C:\Sutor\science\DNA-gyrase\Genomes\E_coli_w3110_G_Mu.fasta"
 
 #Path to the sequence to be scanned, FASTA.
-Target_seq_path="C:\Sutor\science\DNA-gyrase\Genomes\pUC19_dimer.fasta"
+Target_seq_path="C:\Sutor\science\DNA-gyrase\Genomes\E_coli_w3110_G_Mu.fasta"
 #Name of the target sequence ready to be scanned.
-Target_seq_name="pUC19_dimer_"
+Target_seq_name="E_coli_w3110_G_Mu"
 
 #Prefix of the output path.
 Output_data_prefix="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\Combined_motif\\"
 if not os.path.exists(Output_data_prefix):
     os.makedirs(Output_data_prefix)
+    
+#Path to the output WIG file.
+path_to_res_score_files="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\Score_tracks\\"
+if not os.path.exists(path_to_res_score_files):
+    os.makedirs(path_to_res_score_files)
+Output_score_wig=path_to_res_score_files + Target_seq_name + "_score.wig"
+#Dataset name for WIG header.
+Dataset_name="Cfx_Micro_Oxo_1828"
 
 ###############################################
 #Motif construction and scanning sequences of interest with it.
@@ -62,7 +70,7 @@ def obtain_seq(seq_path):
     for record in SeqIO.parse(seq_oi, "fasta"):
         sequence=str(record.seq)
     seq_oi.close()      
-    return sequence
+    return sequence, record.id
 
 #######
 #Trusted GCSs data parsing.
@@ -144,42 +152,79 @@ def motif_construction_and_analysis(GCSs_dict, genomefam, genomefas, target_name
     #Scans forward sequence
     test_seq=Seq(str(genomefas), IUPAC.unambiguous_dna)
     whole_genome_scores=pssm.calculate(test_seq) 
-    outfile=open(outpath + target_name + 'scan_forward_with_combined_motif.txt', 'w')
+    outfile=open(outpath + target_name + '_scan_forward_with_combined_motif.txt', 'w')
+    dict_f={}
     #If test_seq len is equal to pssm, pssm.calculate() returns float32 but not the list.
     if len(test_seq)==win_width_l+win_width_r:
         one_pos_score=[]
         one_pos_score.append(whole_genome_scores)
         whole_genome_scores=one_pos_score
+        dict_f[63+2]=[whole_genome_scores, test_seq[63+1]]
     for i in range(len(whole_genome_scores)):
         outfile.write(str(i+63+2) + '\t' + str(whole_genome_scores[i]) + '\t'+ str(test_seq[i+63+1]) + '\n')
+        dict_f[i+63+2]=[whole_genome_scores[i], test_seq[i+63+1]]
     outfile.close()
     #Scans reverse complement sequence
     test_seq_rc=Seq(str(genomefas), IUPAC.unambiguous_dna).reverse_complement()
     whole_genome_scores_rc=pssm.calculate(test_seq_rc)   
-    outfile_rc=open(outpath + target_name + 'scan_rc_with_combined_motif.txt', 'w')
-    #If test_seq len is equal to pssm, pssm.calculate() returns float32 but not the list.
+    outfile_rc=open(outpath + target_name + '_scan_rc_with_combined_motif.txt', 'w')
+    dict_rc={}
+    #If test_seq_rc len is equal to pssm, pssm.calculate() returns float32 but not the list.
     if len(test_seq_rc)==win_width_l+win_width_r:
         one_pos_score_rc=[]
         one_pos_score_rc.append(whole_genome_scores_rc)
         whole_genome_scores_rc=one_pos_score_rc 
+        dict_rc[67-1]=[whole_genome_scores_rc, test_seq_rc[67-1]]
     for i in range(len(whole_genome_scores_rc)):
         outfile_rc.write(str(i+67-1) + '\t' + str(whole_genome_scores_rc[-i-1]) + '\t'+ str(test_seq_rc[-(i+67-1)]) + '\n')
+        dict_rc[i+67-1]=[whole_genome_scores_rc[-i-1], test_seq_rc[-(i+67-1)]]
     outfile_rc.close()     
-    return
+    return dict_f, dict_rc
+
+
+#######
+#Combines fw and rc results of scanning procedure, prepares score WIG file.
+#######
+
+def combine_score_fw_rc(dict_f, dict_rc, genomefas, path_out, ds_name, chr_name):
+    print("Length of the fw scan track: " + str(len(dict_f)))
+    print("Length of the rc scan track: " + str(len(dict_rc)))
+    #Preparing output WIG file.
+    fileout=open(path_out, "w")
+    fileout.write("track type=wiggle_0 name=\""+str(ds_name)+"\" autoScale=off viewLimits=0.0:25.0\nfixedStep chrom=" + str(chr_name) + " start=1 step=1\n")       
+    #Make combined score track.
+    ar_max=[]
+    for i in range(len(genomefas)):
+        if i+1 in dict_f and i+1 in dict_rc:
+            ar_max.append(max(dict_f[i+1][0], dict_rc[i+1][0]))
+        elif i+1 in dict_f and i+1 not in dict_rc:
+            ar_max.append(dict_f[i+1][0])
+        elif i+1 not in dict_f and i+1 in dict_rc:
+            ar_max.append(dict_rc[i+1][0])
+        elif i+1 not in dict_f and i+1 not in dict_rc:
+            ar_max.append(0)
+    #Write score containing WIG file.
+    for i in range(len(ar_max)):
+        fileout.write(str(ar_max[i]) + "\n")
+    fileout.close()
+    return ar_max
+
 
 #######
 #Wraps functions for motif construction and for scanning sequences of interest with it.
 #######
 
-def Wrapper_motif_construct_scan(Source_genome_path, Target_genome_path, target_name, GCSs_files_paths, outpath):
-    Source_sequence=obtain_seq(Source_genome_path)
-    Target_sequence=obtain_seq(Target_genome_path)
+def Wrapper_motif_construct_scan(Source_genome_path, Target_genome_path, target_name, GCSs_files_paths, outpath, wig_path_out, ds_name):
+    Source_sequence=obtain_seq(Source_genome_path)[0]
+    Target_sequence, chr_name=obtain_seq(Target_genome_path)
     GCSs_sets=trusted_GCSs_parsing(GCSs_files_paths)
     GCSs_for_motif=sorting_combining(GCSs_sets)
-    motif_construction_and_analysis(GCSs_for_motif, Source_sequence, Target_sequence, target_name, outpath)
+    f_rc_scan=motif_construction_and_analysis(GCSs_for_motif, Source_sequence, Target_sequence, target_name, outpath)
+    combine_score_fw_rc(f_rc_scan[0], f_rc_scan[1], Target_sequence, wig_path_out, ds_name, chr_name)
     return GCSs_for_motif
 
-Motif_defined_GSCs_dict=Wrapper_motif_construct_scan(Genome_seq_path, Target_seq_path, Target_seq_name, path_to_GCSs_files, Output_data_prefix)
+
+Motif_defined_GSCs_dict=Wrapper_motif_construct_scan(Genome_seq_path, Target_seq_path, Target_seq_name, path_to_GCSs_files, Output_data_prefix, Output_score_wig, Dataset_name)
 
 ###############################################
 #The motif plotting and writing.
@@ -356,7 +401,7 @@ def Wrapper_motif_plotting_write(GCSs_form_motif_dict, Source_genome_path, outpa
     background={'A': 0.245774783354, 'C': 0.2537191331, 'G': 0.254184334046, 'T': 0.246130246797}
     window_width=170
     win_range=[(window_width/2)-2, (window_width/2)+2]
-    Source_sequence=obtain_seq(Source_genome_path)
+    Source_sequence=obtain_seq(Source_genome_path)[0]
     GCSs_seqs=return_seqs(GCSs_form_motif_dict, win_range, Source_sequence, outpath)
     pfms=make_PFM(GCSs_seqs)
     matrix_deg_red=gc_matrix_edit(pfms['GC'], background, window_width)
