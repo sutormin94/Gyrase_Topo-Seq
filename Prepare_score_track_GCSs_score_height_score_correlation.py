@@ -120,7 +120,7 @@ def Plot_N3E_score(HS_dict, plot_path):
     plot0.plot(HS_dict['Cfx'][1], fit_fn(HS_dict['Cfx'][1]), '--k', label='y='+str(round(fit[0], 3))+'x+'+str(round(fit[1], 3)))
     plot0.set_xlabel('GCSs score', size=17) 
     plot0.set_ylabel('GCSs N3E', size=17)
-    plot0.legend(loc='upper right')
+    plot0.legend(loc='upper right', fontsize=17)
     plot0.set_title('Cfx', size=18)
     #RifCfx
     plot1=plt.subplot2grid((2,2),(0,1))    
@@ -131,7 +131,7 @@ def Plot_N3E_score(HS_dict, plot_path):
     plot1.plot(HS_dict['RifCfx'][1], fit_fn(HS_dict['RifCfx'][1]), '--k', label='y='+str(round(fit[0], 3))+'x+'+str(round(fit[1], 3)))
     plot1.set_xlabel('GCSs score', size=17)  
     plot1.set_ylabel('GCSs N3E', size=17)
-    plot1.legend(loc='upper right')
+    plot1.legend(loc='upper right', fontsize=17)
     plot1.set_title('RifCfx', size=18)
     #Micro
     plot2=plt.subplot2grid((2,2),(1,0))    
@@ -142,7 +142,7 @@ def Plot_N3E_score(HS_dict, plot_path):
     plot2.plot(HS_dict['Micro'][1], fit_fn(HS_dict['Micro'][1]), '--k', label='y='+str(round(fit[0], 3))+'x+'+str(round(fit[1], 3)))
     plot2.set_xlabel('GCSs score', size=17) 
     plot2.set_ylabel('GCSs N3E', size=17)
-    plot2.legend(loc='upper right')
+    plot2.legend(loc='upper right', fontsize=17)
     plot2.set_title('Micro', size=18)
     #Oxo
     plot3=plt.subplot2grid((2,2),(1,1))    
@@ -153,7 +153,7 @@ def Plot_N3E_score(HS_dict, plot_path):
     plot3.plot(HS_dict['Oxo'][1], fit_fn(HS_dict['Oxo'][1]), '--k', label='y='+str(round(fit[0], 3))+'x+'+str(round(fit[1], 3)))
     plot3.set_xlabel('GCSs score', size=17)
     plot3.set_ylabel('GCSs N3E', size=17)
-    plot3.legend(loc='upper right')
+    plot3.legend(loc='upper right', fontsize=17)
     plot3.set_title('Oxo', size=18)
     plt.tight_layout()
     plt.savefig(plot_path + "GCSs_N3E_score_correlations.png", dpi=400, figsize=(15, 15)) 
