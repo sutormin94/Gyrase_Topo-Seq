@@ -132,6 +132,8 @@ The script analysis sets of genome intervals (transcription units - TUs, BIMEs-1
 for the enrichment of GCSs (binomial test), compares their N3E and score with mean GCSs N3E and score (t-test), 
 compares intervals mean score with genome mean score (t-test).
 
+**Note: ** Returns some warning messages due to the ommitting statistics (t-test) for too short sets of values.
+
 **Requirements:** python 3
 
 **Input:** TAB files with trusted GCSs and score info, WIG genome score file, TAB transcription units data files, TAB intervals data files
