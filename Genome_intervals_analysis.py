@@ -137,11 +137,20 @@ def TUs_parser(TUs_sets_path):
 def TU_association(GCSs_sets_dict, TU_set, set_type, window_width, path_out, set_name):
     fileout=open(path_out + set_name + '_numbers_of_associated_GCSs.txt', 'w')
     if set_type=='16S operons':
-        fileout.write("Operon_ID\tGenes_ID\tStart\tEnd\tStrand\tExpression\tCondition\tGCSs in US\tGCSs in GB\tGCSs in DS\tSo on\n") 
+        fileout.write("Operon_ID\tGenes_ID\tStart\tEnd\tStrand\tExpression\t") 
+        for k in range(len(GCSs_sets_dict)):
+            fileout.write("Condition\tGCSs in US\tGCSs in GB\tGCSs in DS\t")
+        fileout.write("\n")
     elif set_type=='operons':
-        fileout.write("Operon_ID\tGenes_ID\tStart\tEnd\tStrand\tExpression\tCondition\tGCSs in USUS\tGCSs in USGB\tGCSs in GBDS\tGCSs in DSDS\tSo on\n")  
+        fileout.write("Operon_ID\tGenes_ID\tStart\tEnd\tStrand\tExpression\t") 
+        for k in range(len(GCSs_sets_dict)):
+            fileout.write("Condition\tGCSs in USUS\tGCSs in USGB\tGCSs in GBDS\tGCSs in DSDS\t")
+        fileout.write("\n")        
     elif set_type=='genes':
-        fileout.write("Gene_ID\tGene_name\tStart\tEnd\tStrand\tExpression\tCondition\tGCSs in USUS\tGCSs in USGB\tGCSs in GBDS\tGCSs in DSDS\tSo on\n")  
+        fileout.write("Gene_ID\tGene_name\tStart\tEnd\tStrand\tExpression\t")  
+        for k in range(len(GCSs_sets_dict)):
+            fileout.write("Condition\tGCSs in USUS\tGCSs in USGB\tGCSs in GBDS\tGCSs in DSDS\t")
+        fileout.write("\n")
     else:
         print('Unknown type of the set! Possible types: 16S_operons, operons, genes.')
         return
@@ -153,7 +162,7 @@ def TU_association(GCSs_sets_dict, TU_set, set_type, window_width, path_out, set
         for a, s in GCSs_sets_dict.items(): #a - Topo-Seq condition, s - corresponding set of GCSs.
             if a not in operons_stat_ds:
                 if set_type=='16S operons':
-                    operons_stat_ds[a]=[0, [], []] #[number of GCSs, N3E values, score values]
+                    operons_stat_ds[a]=[0, [], [], 0, [], [], 0, [], []] #[number of GCSs, N3E values, score values] for US, GB, DS correspondingly.
                 elif set_type=='operons' or set_type=='genes':
                     operons_stat_ds[a]=[0, [], [], 0, [], [], 0, [], [], 0, [], []] #[number of GCSs, N3E values, score values] for USUS, USGB, GBDS, DSDS correspondingly.
             fileout.write(a + '\t')
@@ -199,10 +208,18 @@ def TU_association(GCSs_sets_dict, TU_set, set_type, window_width, path_out, set
                     score[2].append(v[1])
             if set_type=='16S operons':
                 fileout.write(str(stats[0]) + '\t' + str(stats[2]) + '\t' + str(stats[4]) + '\t') #US, GB, DS
+                #US
+                operons_stat_ds[a][0]+=stats[0]
+                operons_stat_ds[a][1]+=N3E[0]
+                operons_stat_ds[a][2]+=score[0] 
+                #GB
+                operons_stat_ds[a][3]+=stats[2]
+                operons_stat_ds[a][4]+=N3E[2]
+                operons_stat_ds[a][5]+=score[2] 
                 #DS
-                operons_stat_ds[a][0]+=stats[4]
-                operons_stat_ds[a][1]+=N3E[4]
-                operons_stat_ds[a][2]+=score[4]                
+                operons_stat_ds[a][6]+=stats[4]
+                operons_stat_ds[a][7]+=N3E[4]
+                operons_stat_ds[a][8]+=score[4]                 
             elif set_type=='operons' or set_type=='genes':
                 fileout.write(str(stats[0]) + '\t' + str(stats[1]) + '\t' + str(stats[3]) + '\t' + str(stats[4]) + '\t') #USUS, USGB, GBDS, DSDS
                 #USUS
@@ -225,8 +242,6 @@ def TU_association(GCSs_sets_dict, TU_set, set_type, window_width, path_out, set
     for a, v in operons_stat_ds.items():
         v.append(ds_regions_len)
     fileout.close()
-    if set_type=='operons' or set_type=='genes':
-        print(operons_stat_ds['Cfx'][0], operons_stat_ds['Cfx'][3], operons_stat_ds['Cfx'][6], operons_stat_ds['Cfx'][9])
     return operons_stat_ds #{condition : [##number of GCSs, N3E values, score values##*1-4, len of regions]}
 
 #######
@@ -239,6 +254,12 @@ def TU_association(GCSs_sets_dict, TU_set, set_type, window_width, path_out, set
 
 def TU_interval_stat_analysis(GCSs_sets_dict, intervals_GCSs_dict, intervals, score_data, window_width, set_type, path_out, set_name):
     genome_len=4647454
+    #Correcting genome length.
+    deletions=[[274500, 372148], [793800, 807500], [1199000, 1214000]] #Deletions in E. coli w3110 strain that corresponds to DY330 strain.
+    del_len=0
+    for i in deletions:
+        del_len+=i[1]-i[0]
+    genome_len_dc=genome_len-del_len
     #Prepares lists of GCSs N3E and scores for statistical tests.
     GCSs_values_dict={}
     for a, s in GCSs_sets_dict.items():
@@ -259,15 +280,36 @@ def TU_interval_stat_analysis(GCSs_sets_dict, intervals_GCSs_dict, intervals, sc
     
     if set_type=='16S operons':
         for a, ns in GCSs_values_dict.items():
-            N3E_stat=stats.ttest_ind(ns[0], intervals_GCSs_dict[a][1]) #N3E DS
+            #N3E
+            N3E_stat=stats.ttest_ind(ns[0], intervals_GCSs_dict[a][1]) #N3E US
             fileout.write('t-test\t' + a + '\tDS N3E\t' + str(round(np.mean(intervals_GCSs_dict[a][1]),3)) + '\t' + 
-                          str(round(np.mean(ns[0]),3)) + '\t' + str(N3E_stat[1]) + '\t' + 't-statistic: ' + str(round(N3E_stat[0],3)) + '\n')            
-            score_stat=stats.ttest_ind(ns[1], intervals_GCSs_dict[a][2]) #Score DS
+                          str(round(np.mean(ns[0]),3)) + '\t' + str(N3E_stat[1]) + '\t' + 't-statistic: ' + str(round(N3E_stat[0],3)) + '\n') 
+            N3E_stat=stats.ttest_ind(ns[0], intervals_GCSs_dict[a][4]) #N3E GB
+            fileout.write('t-test\t' + a + '\tDS N3E\t' + str(round(np.mean(intervals_GCSs_dict[a][4]),3)) + '\t' + 
+                          str(round(np.mean(ns[0]),3)) + '\t' + str(N3E_stat[1]) + '\t' + 't-statistic: ' + str(round(N3E_stat[0],3)) + '\n') 
+            N3E_stat=stats.ttest_ind(ns[0], intervals_GCSs_dict[a][7]) #N3E DS
+            fileout.write('t-test\t' + a + '\tDS N3E\t' + str(round(np.mean(intervals_GCSs_dict[a][7]),3)) + '\t' + 
+                          str(round(np.mean(ns[0]),3)) + '\t' + str(N3E_stat[1]) + '\t' + 't-statistic: ' + str(round(N3E_stat[0],3)) + '\n') 
+            #Score
+            score_stat=stats.ttest_ind(ns[1], intervals_GCSs_dict[a][2]) #Score US
             fileout.write('t-test\t' + a + '\tDS Score\t' + str(round(np.mean(intervals_GCSs_dict[a][2]),3)) + '\t' + 
                           str(round(np.mean(ns[1]),3)) + '\t' + str(score_stat[1]) + '\t' + 't-statistic: ' + str(round(score_stat[0],3)) + '\n')
-            GCSs_number_stat=binom.cdf(intervals_GCSs_dict[a][0], len(ns[0]), intervals_GCSs_dict[a][3]/genome_len) #GSCs number DS
+            score_stat=stats.ttest_ind(ns[1], intervals_GCSs_dict[a][5]) #Score GB
+            fileout.write('t-test\t' + a + '\tDS Score\t' + str(round(np.mean(intervals_GCSs_dict[a][5]),3)) + '\t' + 
+                          str(round(np.mean(ns[1]),3)) + '\t' + str(score_stat[1]) + '\t' + 't-statistic: ' + str(round(score_stat[0],3)) + '\n')
+            score_stat=stats.ttest_ind(ns[1], intervals_GCSs_dict[a][8]) #Score DS
+            fileout.write('t-test\t' + a + '\tDS Score\t' + str(round(np.mean(intervals_GCSs_dict[a][8]),3)) + '\t' + 
+                          str(round(np.mean(ns[1]),3)) + '\t' + str(score_stat[1]) + '\t' + 't-statistic: ' + str(round(score_stat[0],3)) + '\n')
+            #Number of GCSs
+            GCSs_number_stat=binom.cdf(intervals_GCSs_dict[a][0], len(ns[0]), intervals_GCSs_dict[a][-1]/genome_len_dc) #Number of GCSs in US
             fileout.write('binomial test\t' + a + '\tDS Number of GCSs\t' + str(intervals_GCSs_dict[a][0]) + '\t' + 
                           str(len(ns[0])) + '\t' + str(GCSs_number_stat) + '\n')
+            GCSs_number_stat=binom.cdf(intervals_GCSs_dict[a][3], len(ns[0]), intervals_GCSs_dict[a][-1]/genome_len_dc) #Number of GCSs in GB
+            fileout.write('binomial test\t' + a + '\tDS Number of GCSs\t' + str(intervals_GCSs_dict[a][3]) + '\t' + 
+                          str(len(ns[0])) + '\t' + str(GCSs_number_stat) + '\n')
+            GCSs_number_stat=binom.cdf(intervals_GCSs_dict[a][6], len(ns[0]), intervals_GCSs_dict[a][-1]/genome_len_dc) #Number of GCSs in DS
+            fileout.write('binomial test\t' + a + '\tDS Number of GCSs\t' + str(intervals_GCSs_dict[a][6]) + '\t' + 
+                          str(len(ns[0])) + '\t' + str(GCSs_number_stat) + '\n')            
     
     elif set_type=='operons' or set_type=='genes':
         for a, ns in GCSs_values_dict.items():
@@ -297,17 +339,17 @@ def TU_interval_stat_analysis(GCSs_sets_dict, intervals_GCSs_dict, intervals, sc
             score_stat=stats.ttest_ind(ns[1], intervals_GCSs_dict[a][11]) #Score DSDS
             fileout.write('DSDS Score\t' + str(round(np.mean(intervals_GCSs_dict[a][11]),3)) + '\t' + 
                           str(round(np.mean(ns[1]),3)) + '\t' + str(score_stat[1]) + '\t' + 't-statistic: ' + str(round(score_stat[0],3)) + '\n')            
-            #GCSs number
-            GCSs_number_stat=binom.cdf(intervals_GCSs_dict[a][0], len(ns[0]), intervals_GCSs_dict[a][-1]/genome_len) #GSCs number USUS
+            #Number of GCSs
+            GCSs_number_stat=binom.cdf(intervals_GCSs_dict[a][0], len(ns[0]), intervals_GCSs_dict[a][-1]/genome_len_dc) #Number of GCSs in USUS
             fileout.write('binomial test\t' + a + '\tUSUS Number of GCSs\t' + str(intervals_GCSs_dict[a][0]) + '\t' + 
                           str(len(ns[0])) + '\t' + str(GCSs_number_stat) + '\tNA\t')
-            GCSs_number_stat=binom.cdf(intervals_GCSs_dict[a][3], len(ns[0]), intervals_GCSs_dict[a][-1]/genome_len) #GSCs number USGB
+            GCSs_number_stat=binom.cdf(intervals_GCSs_dict[a][3], len(ns[0]), intervals_GCSs_dict[a][-1]/genome_len_dc) #Number of GCSs in USGB
             fileout.write('USGB Number of GCSs\t' + str(intervals_GCSs_dict[a][3]) + '\t' + 
                           str(len(ns[0])) + '\t' + str(GCSs_number_stat) + '\tNA\t')
-            GCSs_number_stat=binom.cdf(intervals_GCSs_dict[a][6], len(ns[0]), intervals_GCSs_dict[a][-1]/genome_len) #GSCs number GBDS
+            GCSs_number_stat=binom.cdf(intervals_GCSs_dict[a][6], len(ns[0]), intervals_GCSs_dict[a][-1]/genome_len_dc) #Number of GCSs in GBDS
             fileout.write('GBDS Number of GCSs\t' + str(intervals_GCSs_dict[a][6]) + '\t' + 
                           str(len(ns[0])) + '\t' + str(GCSs_number_stat) + '\tNA\t')
-            GCSs_number_stat=binom.cdf(intervals_GCSs_dict[a][9], len(ns[0]), intervals_GCSs_dict[a][-1]/genome_len) #GSCs number DSDS
+            GCSs_number_stat=binom.cdf(intervals_GCSs_dict[a][9], len(ns[0]), intervals_GCSs_dict[a][-1]/genome_len_dc) #Number of GCSs in DSDS
             fileout.write('DSDS Number of GCSs\t' + str(intervals_GCSs_dict[a][9]) + '\t' + 
                           str(len(ns[0])) + '\t' + str(GCSs_number_stat) + '\tNA\n')            
     fileout.write('\n')
@@ -354,7 +396,7 @@ def TU_interval_stat_analysis(GCSs_sets_dict, intervals_GCSs_dict, intervals, sc
     return
 
 #######
-#Number of GCSs statistical analysis for those associated with TUs, additional normalization step is added. 
+#Statistical analysis for the number of GCSs associated with TUs, additional normalization step is added. 
 #######
 
 def GCSs_num_normalization(all_TUs, part_TUs, GCSs_sets_dict, all_TUs_set, part_TUs_set):
@@ -370,6 +412,31 @@ def GCSs_num_normalization(all_TUs, part_TUs, GCSs_sets_dict, all_TUs_set, part_
             GCSs_set_exp_interval_dict[a].append(float(part_TUs[a][j*3])*100000/(len(GCSs_sets_dict[a])*len(part_TUs_set))) #Normalized number of GCSs fall into particular compartment (USUS, USGB, GBDS, DSDS) for partial set of TUs.
     return GCSs_set_exp_interval_dict #[GCSs expected] + [GCSs obs, p-value, GCSs norm]*[USUS, USGB, GBDS, DSDS]
 
+
+#######
+#Statistical analysis for the number of GCSs associated with 16S operons, additional normalization step is added. 
+#######
+
+def GCSs_number_norm_16S(intervals_GCSs_dict, GCSs_sets_dict):
+    #Correcting genome length.
+    genome_len=4647454
+    deletions=[[274500, 372148], [793800, 807500], [1199000, 1214000]] #Deletions in E. coli w3110 strain that corresponds to DY330 strain.
+    del_len=0
+    for i in deletions:
+        del_len+=i[1]-i[0]
+    genome_len_dc=genome_len-del_len  
+    #Number of GCSs normalization and statistics.
+    GCSs_set_exp_interval_dict={}
+    for a, ns in intervals_GCSs_dict.items():
+        Num_GCSs_expected=len(GCSs_sets_dict[a])*ns[-1]/genome_len_dc
+        GCSs_set_exp_interval_dict[a]=[Num_GCSs_expected] 
+        for j in range(int((len(ns)-1)/3)):
+            GCSs_set_exp_interval_dict[a].append(ns[j*3]) #Number of GCSs fall into particular compartment (US, GB, DS) of 16S operons.
+            GCSs_set_exp_interval_dict[a].append(binom.cdf(ns[j*3], len(GCSs_sets_dict[a]), ns[-1]/genome_len_dc)) #p-value of binomial test for the number of GCSs fall into particular compartment (US, GB, DS) of the 16S operons.
+            GCSs_set_exp_interval_dict[a].append(float(ns[j*3])/Num_GCSs_expected) #Normalized number of GCSs fall into particular compartment (US, GB, DS) of the 16S operons.
+    return GCSs_set_exp_interval_dict #[GCSs expected] + [GCSs obs, p-value, GCSs norm]*[US, GB, DS]
+
+
 #######
 #Writes GCSs numbers information to file: Number of GCSs expected, Number of GCSs observed, p-value - binomial test, Number of GCSs normalized.
 #######
@@ -377,12 +444,16 @@ def GCSs_num_normalization(all_TUs, part_TUs, GCSs_sets_dict, all_TUs_set, part_
 def write_GCSs_norm(GCSs_set_exp_interval_dict, path_out, set_name):
     fileout=open(path_out + set_name + '_normalized_GCSs_numbers_and_statistics.txt', 'w')
     fileout.write('Condition\tCompartment\tNumber of GCSs expected\tNumber of GCSs observed\tp-value\tNumber of GCSs normalized\n')
-    Compartment_names=['USUS', 'USGB', 'GBDS', 'DSDS']
+    if set_name=='16S_operons':
+        Compartment_names=['US', 'GB', 'DS']
+    else:
+        Compartment_names=['USUS', 'USGB', 'GBDS', 'DSDS']
     for a, s in GCSs_set_exp_interval_dict.items():
         for i in range(len(Compartment_names)):
             fileout.write(a + '\t' + Compartment_names[i] + '\t' + str(round(s[0],3)) + '\t' + str(s[(i*3)+1]) + '\t' + str(s[(i*3)+2]) + '\t' + str(round(s[(i*3)+3],3)) +'\n')
     fileout.close()
     return
+
 
 ###############################################
 #Group of functions for intervals analysis.
@@ -466,7 +537,7 @@ def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
                                str(interval_associated_GCSs['RifCfx']) + '\t' + str(interval_associated_GCSs['Micro']) + '\t' +
                                str(interval_associated_GCSs['Oxo']) + '\n')          
         for a, s in GCSs_associated_info[k].items():
-            relative_intervals_len=float(intervals_len)/genome_len
+            relative_intervals_len=float(intervals_len)/genome_len_dc
             total_number_of_GCSs=len(GCSs_sets_dict[a])
             expected_number_of_GCSs_in_interval=relative_intervals_len*total_number_of_GCSs 
             GCSs_num_stat=binom.cdf(s[0], total_number_of_GCSs, relative_intervals_len) #Number of GCSs stat.
@@ -507,6 +578,8 @@ def TU_analysis_wrapper(input_dict, inpath, TUs_sets_path, path_out):
     set_type_16S='16S operons'
     GCSs_16S_assoc_info=TU_association(GCSs_sets_dict, TU_sets_dict['16S_operons'], set_type_16S, window_width_16S_operons, path_out, set_type_16S)
     TU_interval_stat_analysis(GCSs_sets_dict, GCSs_16S_assoc_info, TU_sets_dict['16S_operons'], score_data, window_width_16S_operons, set_type_16S, path_out, set_type_16S)
+    GCSs_set_exp_interval_dict_16S=GCSs_number_norm_16S(GCSs_16S_assoc_info, GCSs_sets_dict)
+    write_GCSs_norm(GCSs_set_exp_interval_dict_16S, path_out, '16S_operons')  
     
     #All genes analysis.
     window_width=650

@@ -9,6 +9,7 @@
 #Packages to be imported.
 #######
 
+import os
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy
@@ -22,10 +23,10 @@ from scipy.stats import binom
 print('Variables to be defined:')
 
 #Input data - GCSs, TAB.
-path_to_GCSs_files={'Cfx': 'C:\Sutor\science\DNA-gyrase\Results\Final_data_2\GCSs_sets\Cfx_trusted_one_position.txt',
-                    'RifCfx': 'C:\Sutor\science\DNA-gyrase\Results\Final_data_2\GCSs_sets\Rif_Cfx_trusted_one_position.txt',
-                    'Micro': 'C:\Sutor\science\DNA-gyrase\Results\Final_data_2\GCSs_sets\Micro_trusted_one_position.txt',
-                    'Oxo': 'C:\Sutor\science\DNA-gyrase\Results\Final_data_2\GCSs_sets\Oxo_trusted_one_position.txt'}
+path_to_GCSs_files={'Cfx': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets_score\Cfx_10mkM_trusted_GCSs_h_s.txt",
+                    'RifCfx': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets_score\RifCfx_trusted_GCSs_h_s.txt",
+                    'Micro': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets_score\Micro_trusted_GCSs_h_s.txt",
+                    'Oxo': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets_score\Oxo_trusted_GCSs_h_s.txt"} 
 #Input data - transcription, TAB.
 Transcription_data_path='C:\Sutor\science\DNA-gyrase\Results\Final_data_2\Expression_data\Deletion_corrected\DOOR_Mu_del_cor_genes_expression.txt'
 #TAD coordinates.
@@ -35,7 +36,10 @@ TAD_80_inputpath='C:\Sutor\science\DNA-gyrase\Results\Hi-C\TAD_calling\CIDs_80kb
 Mut_wt_inputpath='C:\Sutor\science\E_coli_variome\Foster_data\Foster,2015,WT_E_coli_w3110_Mu_compatible.vcf'
 Mut_mut_inputpath='C:\Sutor\science\E_coli_variome\Foster_data\Foster,2015,Mut_E_coli_w3110_Mu_compatible.vcf'
 #Output log file
-Outputpath='C:\Sutor\science\DNA-gyrase\Results\Final_data_2\Mutations_TADs_and_GCSs\GCSs_association_with_TADs_interTADs_mutations.txt'
+Outputpath="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_association_with_TADs_and_mutations\\"
+if not os.path.exists(Outputpath):
+    os.makedirs(Outputpath)
+Outputpath+="GCSs_association_with_TADs_interTADs_mutations.txt"
 
 
 #######

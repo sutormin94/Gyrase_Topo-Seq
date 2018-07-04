@@ -34,14 +34,14 @@ library(forcats)
 #######
 
 #Path to input excell file and sheet
-excell_path="C:/Sutor/science/DNA-gyrase/Results/Final_data_2/GCSS_association_with_US_GB_DS/DOOR_TUs/Deletions_corrected/Peaks_assoc_with_us_ds_gb.xlsx"
+excell_path="C:/Sutor/science/DNA-gyrase/Results/GCSs_sets_and_motifs/GCSs_association_with_US_GB_DS/GCSs_association_with_US_GB_DS.xlsx"
 excell_sheet_TU_sets="For_R_DOOR_del_cor_all_data"
 excell_sheet_rRNA="rRNA_data"
 excell_sheet_score="Score_R"
 
-Outpath_TU_sets_GCSs_num="C:/Sutor/science/DNA-gyrase/reports and burocraty/Papers/PICTURES/GCSs_association_with_US_DS_GB/GCSs_association_with_TUs_USUS_USGB_GBDS_DSDS_test.png"
-Outpath_rRNA_GCSs_num="C:/Sutor/science/DNA-gyrase/reports and burocraty/Papers/PICTURES/GCSs_association_with_US_DS_GB/GCSs_association_with_rRNA_US_GB_DS_test.png"
-Outpath_TU_sets_GCSs_score="C:/Sutor/science/DNA-gyrase/reports and burocraty/Papers/PICTURES/GCSs_association_with_US_DS_GB/GCSs_score_association_with_TUs_USUS_USGB_GBDS_DSDS_test.png"
+Outpath_TU_sets_GCSs_num="C:/Sutor/science/DNA-gyrase/Results/GCSs_sets_and_motifs/GCSs_association_with_US_GB_DS/GCSs_association_with_TUs_USUS_USGB_GBDS_DSDS_test.png"
+Outpath_rRNA_GCSs_num="C:/Sutor/science/DNA-gyrase/Results/GCSs_sets_and_motifs/GCSs_association_with_US_GB_DS/GCSs_association_with_rRNA_US_GB_DS_test.png"
+Outpath_TU_sets_GCSs_score="C:/Sutor/science/DNA-gyrase/Results/GCSs_sets_and_motifs/GCSs_association_with_US_GB_DS/GCSs_score_association_with_TUs_USUS_USGB_GBDS_DSDS_test.png"
 
 #######
 #Imports data for GCSs association with TUs sets.
