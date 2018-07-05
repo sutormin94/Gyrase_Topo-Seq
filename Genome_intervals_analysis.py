@@ -50,7 +50,8 @@ path_to_intervals_sets={'BIMEs1': "C:\Sutor\science\DNA-gyrase\Results\Final_dat
                   'IHF sites': "C:\Sutor\science\DNA-gyrase\Tracks\IHFAB_w3110_G_Mu_SGS.broadPeak",
                   'H-NS sites ': "C:\Sutor\science\DNA-gyrase\Tracks\H-NS_w3110_G_Mu_SGS.broadPeak",
                   'Fis sites': "C:\Sutor\science\DNA-gyrase\Tracks\Fis_w3110_G_Mu_SGS.broadPeak",
-                  'MatP sites': "C:\Sutor\science\DNA-gyrase\Tracks\MatP_w3110_G_Mu_SGS.broadPeak"}
+                  'MatP sites': "C:\Sutor\science\DNA-gyrase\Tracks\MatP_w3110_G_Mu_SGS.broadPeak",
+                  'Macrodomains': "C:\Sutor\science\DNA-gyrase\Tracks\Macrodomains_E_coli_w3110.broadPeak"}
 #Path for intervals analysis output.
 Intervals_analysis_outpath="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_association_with_BIMEs_and_NAPs_sites\\"
 if not os.path.exists(Intervals_analysis_outpath):
@@ -468,17 +469,24 @@ def broadpeak_pars(intervals_sets_path):
     intervals_sets_dict={}
     for k, v in intervals_sets_path.items():
         filein=open(v, 'r')
-        ar=[]
-        for line in filein:
-            line=line.rstrip().split('\t')
-            int_start=int(line[1])
-            int_end=int(line[2])
-            del_check=0
-            for j in range(len(deletions)):
-                if deletions[j][1]>int_start>deletions[j][0] or deletions[j][1]>int_end>deletions[j][0]:
-                    del_check=1
-            if del_check==0:
-                ar.append([int_start, int_end])            
+        ar=[]        
+        if k in ['Macrodomains']:
+            for line in filein:
+                line=line.rstrip().split('\t')
+                int_start=int(line[1])
+                int_end=int(line[2])
+                ar.append([int_start, int_end])
+        else:
+            for line in filein:
+                line=line.rstrip().split('\t')
+                int_start=int(line[1])
+                int_end=int(line[2])
+                del_check=0
+                for j in range(len(deletions)):
+                    if deletions[j][1]>int_start>deletions[j][0] or deletions[j][1]>int_end>deletions[j][0]:
+                        del_check=1
+                if del_check==0:
+                    ar.append([int_start, int_end])            
         intervals_sets_dict[k]=ar
         print("Number of " + str(k) + " regions: " + str(len(ar)))
         filein.close()
@@ -489,13 +497,20 @@ def broadpeak_pars(intervals_sets_path):
 #######   
 
 def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
+    #Preparing output files.
     fileout=open(path_out+'GCSs_associated_with_intervals_statistics.txt', 'w') #For all intervals sets.
     fileout.write('Interval type\tCondition\tNumber of GCSs expected\tNumber of GCSs observed\tp-value\t' +
                   'GCSs N3E (intervals)\tGCSs N3E (overall)\tp-value\tt-statistic\t' + 
                   'GCSs score (intervals)\tGCSs score (overall)\tp-value\tt-statistic\n')
     
     fileout1=open(path_out+'GCSs_association_with_BIME.txt', 'w') #Specially for BIMEs1, BIMEs2 sets.
-    fileout1.write('Interval type\tStart\tEnd\tCfx (number of GCSs)\tRifCfx (number of GCSs)\tMicro (number of GCSs)\tOxo (number of GCSs)\n')    
+    fileout1.write('Interval type\tStart\tEnd\tCfx (number of GCSs)\tRifCfx (number of GCSs)\tMicro (number of GCSs)\tOxo (number of GCSs)\n')   
+    fileout_macro=open(path_out+'GCSs_association_with_macrodomains.txt', 'w') #Specially for chromosomal macrodomains.
+    fileout_macro.write('Interval type\tStart\tEnd')   
+    for i in range(len(GCSs_sets_dict)):
+        fileout_macro.write('\tCondition\tNumber of GCSs observed\tNumber of GCSs expected\tp-value (binomial test)')
+    fileout_macro.write('\n')
+    
     #Correcting genome length.
     deletions=[[274500, 372148], [793800, 807500], [1199000, 1214000]] #Deletions in E. coli w3110 strain that corresponds to DY330 strain.
     del_len=0
@@ -535,31 +550,61 @@ def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
             if k in ['BIMEs1', 'BIMEs2']:
                 fileout1.write(k + '\t' + str(i[0]) + '\t' + str(i[1]) + '\t' + str(interval_associated_GCSs['Cfx']) + '\t' + 
                                str(interval_associated_GCSs['RifCfx']) + '\t' + str(interval_associated_GCSs['Micro']) + '\t' +
-                               str(interval_associated_GCSs['Oxo']) + '\n')          
-        for a, s in GCSs_associated_info[k].items():
-            relative_intervals_len=float(intervals_len)/genome_len_dc
-            total_number_of_GCSs=len(GCSs_sets_dict[a])
-            expected_number_of_GCSs_in_interval=relative_intervals_len*total_number_of_GCSs 
-            GCSs_num_stat=binom.cdf(s[0], total_number_of_GCSs, relative_intervals_len) #Number of GCSs stat.
-            GCSs_N3E_stat=stats.ttest_ind(s[1], GCSs_values_dict[a][0]) #GCSs N3E stat.
-            GCSs_score_stat=stats.ttest_ind(s[2], GCSs_values_dict[a][1]) #GCSs score stat.
-            fileout.write(k + '\t' + a + '\t' + str(round(expected_number_of_GCSs_in_interval,3)) + '\t' + str(s[0]) + '\t' + str(GCSs_num_stat) + '\t' + 
-                          str(round(np.mean(s[1]),3)) + '\t' + str(round(np.mean(GCSs_values_dict[a][0]),3)) + '\t' + str(GCSs_N3E_stat[1]) + '\t' + str(round(GCSs_N3E_stat[0],3)) + '\t' + 
-                          str(round(np.mean(s[2]),3)) + '\t' + str(round(np.mean(GCSs_values_dict[a][1]),3)) + '\t' + str(GCSs_score_stat[1]) + '\t' + str(round(GCSs_score_stat[0],3)) + '\n')
+                               str(interval_associated_GCSs['Oxo']) + '\n')  
+            elif k in ['Macrodomains']:
+                fileout_macro.write(k + '\t' + str(i[0]) + '\t' + str(i[1]))
+                macro_len=i[1]-i[0]
+                for delet in deletions:
+                    where_is_del=0
+                    if i[1]>delet[0]>i[0]: #Start of the deletion is in the macrodomain
+                        where_is_del=1
+                    if i[1]>delet[1]>i[0]: #End of the deletion is in the macrodomain
+                        where_is_del+=2
+                    if delet[1]>i[1]>i[0]>delet[0]: #Macrodomain is deleted
+                        macro_len=0
+                        continue
+                    if where_is_del==0: #Hence particular deletion does not interrupt the macrodomain
+                        continue
+                    elif where_is_del==1: #Hence deletion covers the end of the macrodomain
+                        macro_len+=delet[0]-i[1]
+                    elif where_is_del==2: #Hence deletion covers the start of the macrodomain
+                        macro_len+=i[0]-delet[1]
+                    elif where_is_del==3: #Hence macrodomain covers the deletion
+                        macro_len+=delet[0]-delet[1]
+                for ab, gcs_num in interval_associated_GCSs.items():
+                    condition=ab
+                    num_GCSs_observed=interval_associated_GCSs[ab]
+                    num_GCSs_expected=len(GCSs_sets_dict[a])*macro_len/genome_len_dc
+                    num_GCSs_p_value=binom.cdf(num_GCSs_observed, len(GCSs_sets_dict[a]), macro_len/genome_len_dc)
+                    fileout_macro.write('\t' + condition + '\t' + str(num_GCSs_observed) + '\t' + str(round(num_GCSs_expected, 3)) + '\t' + str(num_GCSs_p_value))  
+                fileout_macro.write('\n')
+        if k not in ['Macrodomains']:
+            for a, s in GCSs_associated_info[k].items():
+                relative_intervals_len=float(intervals_len)/genome_len_dc
+                total_number_of_GCSs=len(GCSs_sets_dict[a])
+                expected_number_of_GCSs_in_interval=relative_intervals_len*total_number_of_GCSs 
+                GCSs_num_stat=binom.cdf(s[0], total_number_of_GCSs, relative_intervals_len) #Number of GCSs stat.
+                GCSs_N3E_stat=stats.ttest_ind(s[1], GCSs_values_dict[a][0]) #GCSs N3E stat.
+                GCSs_score_stat=stats.ttest_ind(s[2], GCSs_values_dict[a][1]) #GCSs score stat.
+                fileout.write(k + '\t' + a + '\t' + str(round(expected_number_of_GCSs_in_interval,3)) + '\t' + str(s[0]) + '\t' + str(GCSs_num_stat) + '\t' + 
+                              str(round(np.mean(s[1]),3)) + '\t' + str(round(np.mean(GCSs_values_dict[a][0]),3)) + '\t' + str(GCSs_N3E_stat[1]) + '\t' + str(round(GCSs_N3E_stat[0],3)) + '\t' + 
+                              str(round(np.mean(s[2]),3)) + '\t' + str(round(np.mean(GCSs_values_dict[a][1]),3)) + '\t' + str(GCSs_score_stat[1]) + '\t' + str(round(GCSs_score_stat[0],3)) + '\n')
     fileout.close()
     fileout1.close()
+    fileout_macro.close()
     
     #Intervals score statistics.
     fileout2=open(path_out+'Intervals_score_statistics.txt', 'w')
     fileout2.write('Test\tInterval\tScore (intervals)\tScore (overall)\tp-value\tt-statistic\n')
     for k, v in intervals.items():
-        intervals_values=[]
-        for i in v:
-            intervals_values+=score_data[i[0]:i[1]]
-        intervals_score_stat=stats.ttest_ind(intervals_values, score_data) #Score
-        fileout2.write('t-test\t' + k + '\t' + str(round(np.mean(intervals_values),3)) + '\t' + 
-                  str(round(np.mean(score_data),3)) + '\t' + str(intervals_score_stat[1]) + '\t' + 't-statistic: ' + 
-                  str(round(intervals_score_stat[0],3)) + '\n')  
+        if k not in ['Macrodomains']:
+            intervals_values=[]
+            for i in v:
+                intervals_values+=score_data[i[0]:i[1]]
+            intervals_score_stat=stats.ttest_ind(intervals_values, score_data) #Score
+            fileout2.write('t-test\t' + k + '\t' + str(round(np.mean(intervals_values),3)) + '\t' + 
+                      str(round(np.mean(score_data),3)) + '\t' + str(intervals_score_stat[1]) + '\t' + 't-statistic: ' + 
+                      str(round(intervals_score_stat[0],3)) + '\n')  
     fileout2.close()
     return GCSs_associated_info
 
