@@ -506,7 +506,7 @@ def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
     fileout1=open(path_out+'GCSs_association_with_BIME.txt', 'w') #Specially for BIMEs1, BIMEs2 sets.
     fileout1.write('Interval type\tStart\tEnd\tCfx (number of GCSs)\tRifCfx (number of GCSs)\tMicro (number of GCSs)\tOxo (number of GCSs)\n')   
     fileout_bime_rel=open(path_out+'GCSs_relative_positions_within_BIME.txt', 'w')
-    fileout_bime_rel.write('Interval type\tStart\tEnd\tInterval len\tGCSs relative coordinates\tGCSs relative coordinates\tGCSs relative coordinates\tGCSs relative coordinates\n')
+    fileout_bime_rel.write('Interval type\tStart\tEnd\tInterval len\tCfx GCSs relative coordinates\tRifCfx GCSs relative coordinates\tMicro GCSs relative coordinates\tOxo GCSs relative coordinates\n')
     fileout_macro=open(path_out+'GCSs_association_with_macrodomains.txt', 'w') #Specially for chromosomal macrodomains.
     fileout_macro.write('Macrodomain\tStart\tEnd')   
     for i in range(len(GCSs_sets_dict)):
@@ -569,8 +569,7 @@ def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
                         coords='\t'
                         for gcs in interval_associated_GCSs['Cfx']:
                             coords+=str(gcs-i[0])+':'
-                        coords.rstrip(':')
-                        fileout_bime_rel.write(coords)
+                        fileout_bime_rel.write(coords.rstrip(':'))
                     #RifCfx GCSs
                     if len(interval_associated_GCSs['RifCfx'])==0:
                         fileout_bime_rel.write('\tNA')
@@ -578,8 +577,7 @@ def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
                         coords='\t'
                         for gcs in interval_associated_GCSs['RifCfx']:
                             coords+=str(gcs-i[0])+':'
-                        coords.rstrip(':')
-                        fileout_bime_rel.write(coords)
+                        fileout_bime_rel.write(coords.rstrip(':'))
                     #Micro GCSs
                     if len(interval_associated_GCSs['Micro'])==0:
                         fileout_bime_rel.write('\tNA')
@@ -587,8 +585,7 @@ def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
                         coords='\t'
                         for gcs in interval_associated_GCSs['Micro']:
                             coords+=str(gcs-i[0])+':'
-                        coords.rstrip(':')
-                        fileout_bime_rel.write(coords)
+                        fileout_bime_rel.write(coords.rstrip(':'))
                     #Oxo GCSs
                     if len(interval_associated_GCSs['Oxo'])==0:
                         fileout_bime_rel.write('\tNA')
@@ -596,8 +593,7 @@ def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
                         coords='\t'
                         for gcs in interval_associated_GCSs['Oxo']:
                             coords+=str(gcs-i[0])+':'
-                        coords.rstrip(':')
-                        fileout_bime_rel.write(coords)
+                        fileout_bime_rel.write(coords.rstrip(':'))
                     fileout_bime_rel.write('\n')
                 
             #Writing data for chromosomal macrodomains       
