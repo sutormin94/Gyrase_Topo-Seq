@@ -505,6 +505,8 @@ def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
     
     fileout1=open(path_out+'GCSs_association_with_BIME.txt', 'w') #Specially for BIMEs1, BIMEs2 sets.
     fileout1.write('Interval type\tStart\tEnd\tCfx (number of GCSs)\tRifCfx (number of GCSs)\tMicro (number of GCSs)\tOxo (number of GCSs)\n')   
+    fileout_bime_rel=open(path_out+'GCSs_relative_positions_within_BIME.txt', 'w')
+    fileout_bime_rel.write('Interval type\tStart\tEnd\tInterval len\tGCSs relative coordinates\tGCSs relative coordinates\tGCSs relative coordinates\tGCSs relative coordinates\n')
     fileout_macro=open(path_out+'GCSs_association_with_macrodomains.txt', 'w') #Specially for chromosomal macrodomains.
     fileout_macro.write('Macrodomain\tStart\tEnd')   
     for i in range(len(GCSs_sets_dict)):
@@ -540,17 +542,65 @@ def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
             for a, s in GCSs_sets_dict.items(): #Iterate GCSs sets.
                 if a not in GCSs_associated_info[k]:
                     GCSs_associated_info[k][a]=[0, [], []] #Dictionary contains elements corresponds to GCSs sets. [Number of GCSs, N3E values, Score values]
-                interval_associated_GCSs[a]=0 #GCSs fall into particular interval counter.
+                interval_associated_GCSs[a]=[] #Counter for the number of GCSs fall into the particular interval. Stores GCSs coordinates.
                 for gcs, info in s.items(): #Iterate GCSs.
                     if i[1]>gcs>i[0]:
                         GCSs_associated_info[k][a][0]+=1
                         GCSs_associated_info[k][a][1].append(info[0])
                         GCSs_associated_info[k][a][2].append(info[1])
-                        interval_associated_GCSs[a]+=1
+                        interval_associated_GCSs[a].append(gcs)
+            
+            #Writing data for BIMEs
             if k in ['BIMEs1', 'BIMEs2']:
-                fileout1.write(k + '\t' + str(i[0]) + '\t' + str(i[1]) + '\t' + str(interval_associated_GCSs['Cfx']) + '\t' + 
-                               str(interval_associated_GCSs['RifCfx']) + '\t' + str(interval_associated_GCSs['Micro']) + '\t' +
-                               str(interval_associated_GCSs['Oxo']) + '\n')  
+                fileout1.write(k + '\t' + str(i[0]) + '\t' + str(i[1]) + '\t' + str(len(interval_associated_GCSs['Cfx'])) + '\t' + 
+                               str(len(interval_associated_GCSs['RifCfx'])) + '\t' + str(len(interval_associated_GCSs['Micro'])) + '\t' +
+                               str(len(interval_associated_GCSs['Oxo'])) + '\n')  
+                #Check whether no GCSs fall into this particular interval.
+                Num_in_int=0
+                for cond, gcs_nums in interval_associated_GCSs.items():
+                    Num_in_int+=len(gcs_nums)
+                #If GCSs were found, then write.
+                if Num_in_int!=0:
+                    fileout_bime_rel.write(k + '\t' + str(i[0]) + '\t' + str(i[1]) + '\t' + str(i[1]-i[0]))
+                    #Cfx GCSs
+                    if len(interval_associated_GCSs['Cfx'])==0:
+                        fileout_bime_rel.write('\tNA')
+                    else:
+                        coords='\t'
+                        for gcs in interval_associated_GCSs['Cfx']:
+                            coords+=str(gcs-i[0])+':'
+                        coords.rstrip(':')
+                        fileout_bime_rel.write(coords)
+                    #RifCfx GCSs
+                    if len(interval_associated_GCSs['RifCfx'])==0:
+                        fileout_bime_rel.write('\tNA')
+                    else:
+                        coords='\t'
+                        for gcs in interval_associated_GCSs['RifCfx']:
+                            coords+=str(gcs-i[0])+':'
+                        coords.rstrip(':')
+                        fileout_bime_rel.write(coords)
+                    #Micro GCSs
+                    if len(interval_associated_GCSs['Micro'])==0:
+                        fileout_bime_rel.write('\tNA')
+                    else:
+                        coords='\t'
+                        for gcs in interval_associated_GCSs['Micro']:
+                            coords+=str(gcs-i[0])+':'
+                        coords.rstrip(':')
+                        fileout_bime_rel.write(coords)
+                    #Oxo GCSs
+                    if len(interval_associated_GCSs['Oxo'])==0:
+                        fileout_bime_rel.write('\tNA')
+                    else:
+                        coords='\t'
+                        for gcs in interval_associated_GCSs['Oxo']:
+                            coords+=str(gcs-i[0])+':'
+                        coords.rstrip(':')
+                        fileout_bime_rel.write(coords)
+                    fileout_bime_rel.write('\n')
+                
+            #Writing data for chromosomal macrodomains       
             elif k in ['Macrodomains']:
                 fileout_macro.write(i[2] + '\t' + str(i[0]) + '\t' + str(i[1]))
                 macro_len=i[1]-i[0]
@@ -573,11 +623,13 @@ def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
                         macro_len+=delet[0]-delet[1]
                 for ab, gcs_num in interval_associated_GCSs.items():
                     condition=ab
-                    num_GCSs_observed=interval_associated_GCSs[ab]
+                    num_GCSs_observed=len(interval_associated_GCSs[ab])
                     num_GCSs_expected=len(GCSs_sets_dict[ab])*macro_len/genome_len_dc
                     num_GCSs_p_value=binom.cdf(num_GCSs_observed, len(GCSs_sets_dict[ab]), macro_len/genome_len_dc)
                     fileout_macro.write('\t' + condition + '\t' + str(num_GCSs_observed) + '\t' + str(round(num_GCSs_expected, 3)) + '\t' + str(num_GCSs_p_value))  
                 fileout_macro.write('\n')
+        
+        #Writing statistics for all kinds of interval except chromosomal macrodomains.
         if k not in ['Macrodomains']:
             for a, s in GCSs_associated_info[k].items():
                 relative_intervals_len=float(intervals_len)/genome_len_dc
@@ -592,6 +644,7 @@ def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
     fileout.close()
     fileout1.close()
     fileout_macro.close()
+    fileout_bime_rel.close()
     
     #Intervals score statistics.
     fileout2=open(path_out+'Intervals_score_statistics.txt', 'w')
