@@ -2,8 +2,8 @@
 ##Dmitry Sutormin, 2018##
 ##Topo-Seq analysis##
 
-#The script takes results of scanning procedure for forward and reverse strands.
-#Returns score for every genome position (writes into WIG file), for GCSs (writes TAB files contain coordinate\tN3E\tScore info), 
+#The script takes results of scanning procedure (WIG file), returns scores for
+#GCSs (writes TAB files contain coordinate\tN3E\tScore info), 
 #computes Pearson correlation between N3E and score, plots (Score, N3E) scatter plots.
 
 ###############################################
