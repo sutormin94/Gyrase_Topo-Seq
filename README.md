@@ -102,26 +102,27 @@ returns the results of scanning, plots combined motif and writes it in a GC% deg
 
 **Requirements:** python 3
 
-**Input:** TAB files with trusted GCSs, FASTA genome file, FASTA file with a sequence to scan using the motif constructed
+**Input:** TAB files with trusted GCSs, FASTA genome file, FASTA file with a sequence to scan using the motif constructed, 
+dataset name and chromosome identificator (both for output WIG)
 
-**Output:** A pair of PreWIG files with the scanning procedure results (for forward and reverse strands), FASTA file with sequences under GCSs were selected for combined motif construction,
+**Output:** WIG files with the scanning procedure results (score track), FASTA file with sequences under GCSs that were selected for combined motif construction,
 Plot of the combined gyrase motif, TAB file with motif PFM (GC degenerate for further Fourier analysis) vertically oriented, 
 TAB file with motif non-degenerate and corrected PFM horizontally oriented.
 
 ######################
 
-## Prepare_score_track_GCSs_score_height_score_correlation.py
+## Return_GCSs_score_height_correlation.py
 
-The script takes results of scanning procedure for forward and reverse strands.
-Returns score for every genome position (writes into WIG file), for GCSs (writes TAB files contain coordinate\tN3E\tScore info), 
+The script takes results of scanning procedure (WIG file) and 
+returns score for GCSs (writes TAB files contain coordinate\tN3E\tScore info), 
 computes Pearson correlation between N3E and score, plots (Score, N3E) scatter plots.
 
 **Requirements:** python 3
 
-**Input:** TAB files with trusted GCSs, a pair of PreWIG files with the scanning procedure results (for forward and reverse strands), 
-dataset name and chromosome identificator (both for output WIG)
+**Input:** TAB files with trusted GCSs, WIG file with the scanning procedure results (score track).
 
-**Output:** TAB files with trusted GCSs (score info added), WIG file with score defined for every genome position, 
+**Output:** TAB files with trusted GCSs (score info added),
+plot with distributions of N3E and score values for different GCSs sets and overall genome (the last is for score),
 (score, N3E) scatter plot with 1d trend line, correlation (score, N3E)
 
 ######################

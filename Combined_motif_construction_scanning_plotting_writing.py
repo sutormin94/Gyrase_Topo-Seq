@@ -6,7 +6,7 @@
 #makes a combined set consists of these GCSs, returns sequences under them and constructs
 #PSSM matrix by the way getting rid of antibiotic-specific bias at positions forming the
 #cleavage site. Than the script scans a sequence of interest with the PSSM, 
-#returns the results of scanning, plots combined motif and writes it in a GC% degenerate and 
+#returns the results of scanning (WIG file), plots combined motif and writes it in a GC% degenerate and 
 #in a non-degenerate forms.
 ###############################################
 
@@ -30,32 +30,32 @@ import matplotlib.pyplot as plt
 
 print('Variables to be defined:')
 
-#Input data - GCSs, TAB.
+#Input: GCSs data, TAB.
 path_to_GCSs_files={'Cfx': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets\Cfx_10mkM_trusted_GCSs.txt",
                     'Micro': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets\Micro_trusted_GCSs.txt",
-                    'Oxo': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets\Oxo_trusted_GCSs.txt"
-                    }
+                    'Oxo': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets\Oxo_trusted_GCSs.txt"}
 
-#Path to the E. coli genome (source of sequences for PFM/PWM construction), FASTA.
+#Input: path to the E. coli genome (source of sequences for PFM/PWM construction), FASTA.
 Genome_seq_path="C:\Sutor\science\DNA-gyrase\Genomes\E_coli_w3110_G_Mu.fasta"
 
-#Path to the sequence to be scanned, FASTA.
+#Input: path to the sequence to be scanned, FASTA.
 Target_seq_path="C:\Sutor\science\DNA-gyrase\Genomes\E_coli_w3110_G_Mu.fasta"
-#Name of the target sequence ready to be scanned.
+#Input: name of the target sequence ready to be scanned.
 Target_seq_name="E_coli_w3110_G_Mu"
+#Input: dataset name for WIG header.
+Dataset_name="Cfx_Micro_Oxo_1828"
 
-#Prefix of the output path.
+#Output: prefix of the output path.
 Output_data_prefix="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\Combined_motif\\"
 if not os.path.exists(Output_data_prefix):
     os.makedirs(Output_data_prefix)
     
-#Path to the output WIG file.
+#Output: path to the output WIG file.
 path_to_res_score_files="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\Score_tracks\\"
 if not os.path.exists(path_to_res_score_files):
     os.makedirs(path_to_res_score_files)
 Output_score_wig=path_to_res_score_files + Target_seq_name + "_score.wig"
-#Dataset name for WIG header.
-Dataset_name="Cfx_Micro_Oxo_1828"
+
 
 ###############################################
 #Motif construction and scanning sequences of interest with it.
