@@ -240,22 +240,23 @@ def replicates_parsing_to_list_and_overlapping(replicas_dict, name):
     #Venn input description (for 3 sets): one, two, three, one_two, one_three, two_three, one_two_three
     venn_input=[len(GCSs_dict[name+str(1)])-len(one_two)-len(one_three)+len(one_two_three), 
                 len(GCSs_dict[name+str(2)])-len(one_two)-len(two_three)+len(one_two_three), 
+                len(one_two)-len(one_two_three), 
                 len(GCSs_dict[name+str(3)])-len(one_three)-len(two_three)+len(one_two_three),
-                len(one_two)-len(one_two_three), len(one_three)-len(one_two_three), len(two_three)-len(one_two_three),
+                len(one_three)-len(one_two_three), len(two_three)-len(one_two_three),
                 len(one_two_three)]
     return venn_input
 
 #######
 #Venn diagram represents GCSs sets overlapping.
 #description2: one, two, one_two
-#description3: one, two, three, one_two, one_three, two_three, one_two_three
+#description3: one, two, one_two, three, one_three, two_three, one_two_three
 #######
 
 venn_data_2=[len(Cfx)-len(Cfx_RifCfx_shared_GCSs), len(RifCfx)-len(Cfx_RifCfx_shared_GCSs), len(Cfx_RifCfx_shared_GCSs)]
 venn_data_3=[len(Cfx)-len(Cfx_Micro_shared_GCSs)-len(Cfx_Oxo_shared_GCSs)+len(Cfx_Micro_Oxo_shared_GCSs), 
              len(Micro)-len(Cfx_Micro_shared_GCSs)-len(Micro_Oxo_shared_GCSs)+len(Cfx_Micro_Oxo_shared_GCSs), 
+             len(Cfx_Micro_shared_GCSs)-len(Cfx_Micro_Oxo_shared_GCSs),
              len(Oxo)-len(Cfx_Oxo_shared_GCSs)-len(Micro_Oxo_shared_GCSs)+len(Cfx_Micro_Oxo_shared_GCSs),
-             len(Cfx_Micro_shared_GCSs)-len(Cfx_Micro_Oxo_shared_GCSs), 
              len(Cfx_Oxo_shared_GCSs)-len(Cfx_Micro_Oxo_shared_GCSs), 
              len(Micro_Oxo_shared_GCSs)-len(Cfx_Micro_Oxo_shared_GCSs), 
              len(Cfx_Micro_Oxo_shared_GCSs)]
