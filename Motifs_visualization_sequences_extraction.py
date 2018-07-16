@@ -23,16 +23,16 @@ from Bio import SeqUtils
 print('Variables to be defined:')
 
 #Input data - GCSs, TAB.
-path_to_GCSs_files={'Cfx': "/data/Gyrase/GCSs_sets/Cfx_10mkM_trusted_GCSs.txt",
-                    'RifCfx': "/data/Gyrase/GCSs_sets/RifCfx_trusted_GCSs.txt",
-                    'Micro': "/data/Gyrase/GCSs_sets/Micro_trusted_GCSs.txt",
-                    'Oxo': "/data/Gyrase/GCSs_sets/Oxo_trusted_GCSs.txt"}
+path_to_GCSs_files={'Cfx': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets\Cfx_10mkM_trusted_GCSs.txt",
+                    'RifCfx': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets\RifCfx_trusted_GCSs.txt",
+                    'Micro': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets\Micro_trusted_GCSs.txt",
+                    'Oxo': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets\Oxo_trusted_GCSs.txt"}
 
 #Path to the genome FASTA.
-Genome_path="/data/Gyrase/Genomes_tracks/E_coli_w3110_G_Mu.fasta"
+Genome_path="C:\Sutor\science\DNA-gyrase\Genomes\E_coli_w3110_G_Mu.fasta"
 
 #Path for the output.
-Output_path="/data/Gyrase/Motif/"
+Output_path="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\Motif\\"
 if not os.path.exists(Output_path):
         os.makedirs(Output_path)
 
@@ -171,9 +171,9 @@ def Plotting(PFMs_set, title, matrix_type, write_out, win_width):
         plot1.plot(x_axis, PFMs_set['Cfx'], color='#454F24', linewidth=1, alpha=0.6)
         plot1.plot(x_axis, PFMs_set['Cfx'], 'o', fillstyle='none', color='#7FCE79', markeredgecolor='#454F24', markersize=2, alpha=0.6)        
         #Rif_Cfx
-        plot1.plot(x_axis, PFMs_set['RifCfx'], color='#BAE85C', linewidth=4, alpha=0.6)
-        plot1.plot(x_axis, PFMs_set['RifCfx'], color='#4D590D', linewidth=1, alpha=0.6)
-        plot1.plot(x_axis, PFMs_set['RifCfx'], 'o', fillstyle='none', color='#BAE85C', markeredgecolor='#4D590D', markersize=2, alpha=0.6)       
+        #plot1.plot(x_axis, PFMs_set['RifCfx'], color='#BAE85C', linewidth=4, alpha=0.6)
+        #plot1.plot(x_axis, PFMs_set['RifCfx'], color='#4D590D', linewidth=1, alpha=0.6)
+        #plot1.plot(x_axis, PFMs_set['RifCfx'], 'o', fillstyle='none', color='#BAE85C', markeredgecolor='#4D590D', markersize=2, alpha=0.6)       
         #Micro
         plot1.plot(x_axis, PFMs_set['Micro'], color='#ff878b', linewidth=4, alpha=0.7)
         plot1.plot(x_axis, PFMs_set['Micro'], color='#7D212B', linewidth=1, alpha=1)
@@ -183,8 +183,8 @@ def Plotting(PFMs_set, title, matrix_type, write_out, win_width):
         plot1.plot(x_axis, PFMs_set['Oxo'], color='#470A59', linewidth=1)
         plot1.plot(x_axis, PFMs_set['Oxo'], 'o', fillstyle='none', color='#8991ff', markeredgecolor='#470A59', markersize=2, alpha=0.8)   
         #Tracks annotation
-        plot1.annotate('Ciprofloxacin', xytext=(-75, 0.85), xy=(40, 0.85), color='#7FCE79', weight="bold", size=15)
-        plot1.annotate('Rifampicin Ciprofloxacin', xytext=(-75, 0.8), xy=(40, 0.85), color='#BAE85C', weight="bold", size=15)
+        plot1.annotate('Ciprofloxacin', xytext=(-75, 0.8), xy=(40, 0.85), color='#7FCE79', weight="bold", size=15)
+        #plot1.annotate('Rifampicin Ciprofloxacin', xytext=(-75, 0.8), xy=(40, 0.85), color='#BAE85C', weight="bold", size=15)
         plot1.annotate('Microcin B17', xytext=(-75, 0.75), xy=(40, 0.85), color='#ff878b', weight="bold", size=15)
         plot1.annotate('Oxolinic acid', xytext=(-75, 0.70), xy=(40, 0.85), color='#8991ff', weight="bold", size=15)        
         #Set axis parameters
@@ -194,7 +194,7 @@ def Plotting(PFMs_set, title, matrix_type, write_out, win_width):
         plot1.set_xticks(np.concatenate((np.arange(-(win_width/2)+5, (win_width/2)+2, 10), [0, 3, -63, -17, 20, 66])))
         plot1.set_xlabel('Position, nt', size=17)
         plot1.set_ylabel(str(matrix_type), size=17)
-        plt.show()
+        #plt.show()
         plt.savefig(write_out, dpi=400, figsize=(16, 6)) 
         plt.close()
         return
@@ -216,7 +216,7 @@ def wrap_function(GCSs_input, genome_input_path, output_path):
                 PFMs=make_PFM(sequences_list)
                 write_motif(PFMs[PFM_type], output_path+str(k)+'_GC_pfm.txt', win_width)
                 dict_of_PFMs[k]=PFMs[PFM_type]
-        Plotting(dict_of_PFMs, plot_title, PFM_type, output_path+'Gyrase_motif_trusted_GCSs_'+str(PFM_type)+'.png', win_width)
+        Plotting(dict_of_PFMs, plot_title, PFM_type, output_path+'Gyrase_motif_trusted_GCSs_Cfx_Micro_Oxo'+str(PFM_type)+'.png', win_width)
         return
 
 wrap_function(path_to_GCSs_files, Genome_path, Output_path)

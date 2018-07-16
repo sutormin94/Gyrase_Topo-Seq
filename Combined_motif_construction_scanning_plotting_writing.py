@@ -209,22 +209,63 @@ def combine_score_fw_rc(dict_f, dict_rc, genomefas, path_out, ds_name, chr_name)
     fileout.close()
     return ar_max
 
+#######
+#Colocalization of top-scored genome sites with GCSs.
+#######
+
+def top_scored_sites_and_GCSs(ar_max, GCSs_sets_dict, outpath):
+    fileout_prec=open(outpath + 'GCSs_matches_top_scored_genome_sites_precisely.txt', 'w')
+    fileout_vic=open(outpath + 'GCSs_fall_into_5bp_vicinity_of_top_scored_genome_sites.txt', 'w')
+    #Makes list of tuples with coordinates from ar_max scores array.
+    Score_ar=[]
+    for i in range(len(ar_max)):
+        Score_ar.append([i+1, ar_max[i]])
+    print(i)
+    #Sort list by score.
+    print(Score_ar[0])
+    Score_ar.sort(key=lambda x: x[1], reverse=True)
+    print(Score_ar[0])
+    #Merges GCSs dicts into one dict.
+    all_GCSs_dict={}
+    for set_type, gcs_set in GCSs_sets_dict.items():
+        for GCSs in gcs_set:
+            if GCSs not in all_GCSs_dict:
+                all_GCSs_dict[GCSs]=[set_type]
+            else:
+                all_GCSs_dict[GCSs].append(set_type)
+    #Finds GCSs nearby top-scored genome sites.
+    fileout_prec.write('Position\tScore\tGCS\n')
+    fileout_vic.write('Position\tScore\tGCSs\n')
+    for top_score in Score_ar[:15]:
+        fileout_prec.write(str(top_score[0]) + '\t' + str(top_score[1]))
+        fileout_vic.write(str(top_score[0]) + '\t' + str(top_score[1]))
+        for GCSs in all_GCSs_dict:
+            if top_score[0]==GCSs+1:
+                fileout_prec.write('\t' + str(GCSs) + ' ' + str(all_GCSs_dict[GCSs]))
+            if GCSs+3+5>=top_score[0]>=GCSs-3-5:
+                fileout_vic.write('\t' + str(GCSs) + ' ' + str(all_GCSs_dict[GCSs]))
+        fileout_prec.write('\n')
+        fileout_vic.write('\n')
+    fileout_prec.close()    
+    fileout_vic.close()
+    return
 
 #######
 #Wraps functions for motif construction and for scanning sequences of interest with it.
 #######
 
-def Wrapper_motif_construct_scan(Source_genome_path, Target_genome_path, target_name, GCSs_files_paths, outpath, wig_path_out, ds_name):
+def Wrapper_motif_construct_scan(Source_genome_path, Target_genome_path, target_name, GCSs_files_paths, outpath, outpath_top_score, wig_path_out, ds_name):
     Source_sequence=obtain_seq(Source_genome_path)[0]
     Target_sequence, chr_name=obtain_seq(Target_genome_path)
     GCSs_sets=trusted_GCSs_parsing(GCSs_files_paths)
     GCSs_for_motif=sorting_combining(GCSs_sets)
     f_rc_scan=motif_construction_and_analysis(GCSs_for_motif, Source_sequence, Target_sequence, target_name, outpath)
-    combine_score_fw_rc(f_rc_scan[0], f_rc_scan[1], Target_sequence, wig_path_out, ds_name, chr_name)
+    ar_max=combine_score_fw_rc(f_rc_scan[0], f_rc_scan[1], Target_sequence, wig_path_out, ds_name, chr_name)
+    top_scored_sites_and_GCSs(ar_max, GCSs_sets, outpath_top_score)
     return GCSs_for_motif
 
 
-Motif_defined_GSCs_dict=Wrapper_motif_construct_scan(Genome_seq_path, Target_seq_path, Target_seq_name, path_to_GCSs_files, Output_data_prefix, Output_score_wig, Dataset_name)
+Motif_defined_GSCs_dict=Wrapper_motif_construct_scan(Genome_seq_path, Target_seq_path, Target_seq_name, path_to_GCSs_files, Output_data_prefix, path_to_res_score_files, Output_score_wig, Dataset_name)
 
 ###############################################
 #The motif plotting and writing.
