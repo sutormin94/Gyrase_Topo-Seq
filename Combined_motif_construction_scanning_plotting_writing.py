@@ -222,9 +222,7 @@ def top_scored_sites_and_GCSs(ar_max, GCSs_sets_dict, outpath):
         Score_ar.append([i+1, ar_max[i]])
     print(i)
     #Sort list by score.
-    print(Score_ar[0])
     Score_ar.sort(key=lambda x: x[1], reverse=True)
-    print(Score_ar[0])
     #Merges GCSs dicts into one dict.
     all_GCSs_dict={}
     for set_type, gcs_set in GCSs_sets_dict.items():
@@ -233,6 +231,7 @@ def top_scored_sites_and_GCSs(ar_max, GCSs_sets_dict, outpath):
                 all_GCSs_dict[GCSs]=[set_type]
             else:
                 all_GCSs_dict[GCSs].append(set_type)
+    print('Number of unique GCSs: ' + str(len(all_GCSs_dict)))
     #Finds GCSs nearby top-scored genome sites.
     fileout_prec.write('Position\tScore\tGCS\n')
     fileout_vic.write('Position\tScore\tGCSs\n')

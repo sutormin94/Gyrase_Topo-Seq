@@ -1,10 +1,13 @@
 # Gyrase_Topo-seq
-Exploring gyrase cleavage sites accross *E. coli W3110* genome
+Exploring gyrase cleavage sites across *E. coli W3110* genome
 
-DNA-gyrase is a type II topoisomerase that introduces negative superhelicity into topologically closed DNA molecules. It operates with two DNA segments - so called G and T. During catalysis the enzyme introduces temporal double-stranded break into the G-segment, transferres the T-segment through it and religates the gap. The 5'-ends of the DNA break are stabilized by the formation of the intermediate covalent complex between DNA and gyrase.
-Topo-Seq is a ChIP-Seq-like approach that exploits the formation the complexes to map the gyrase cleavage sites with a single-base precision.
+DNA-gyrase is a type II topoisomerase that introduces negative superhelicity into topologically closed DNA molecules. It operates with two DNA segments - so called G and T. 
+During catalysis the enzyme introduces temporal double-stranded break into G-segment, transfers T-segment through it and religates the gap. 
+5'-ends of the DNA break are stabilized by formation of an intermediate covalent complex between DNA and gyrase.
+Topo-Seq is a ChIP-Seq-like approach that exploits formation of these intermediates to map the gyrase cleavage sites (GCSs) with a single-base precision.
 
-This repository contains a set of bash, python and R scripts that were used for Topo-Seq data analysis and visualization.
+This repository contains a set of bash, python and R scripts which were used for Topo-Seq data analysis and visualization. 
+Raw sequencing data and some processed files (coverage depth WIG, N3E WIG, GCSs lists)can be retrieved from GEO datasets with accession GSE117186.
 
 ######################
 
@@ -18,13 +21,13 @@ indexed BAM-files suitable for visualization with IGV.
 
 **Input:** Raw reads files (FASTQ), Genome file (FASTA)
 
-**Output:** FastQC reports, SAM files, sorted indexed BAM files
+**Output:** FastQC reports, SAM files, sorted and indexed BAM files
 
 ######################
 
 ## SAM_to_coverage_and_N5E_N3E.py
 
-Script takes SAM files as input, performs QC filtering of reads relying on the alignment quality and a presence of the partner: 
+Script takes SAM files as an input, performs QC filtering of reads relying on the alignment quality and a presence of the partner: 
 only reads pairs that have a score<256 are stored. Than the script computes coverage depth for DNA chains separately and for both. 
 Additionally it calculates N5E (number of DNA fragments starts) and N3E (number of DNA fragments ends) values for every genome position. 
 Coverage depth, N3E and N5E info returns as WIG files.
@@ -70,7 +73,7 @@ Venn diagrams (Cfx vs Micro vs Oxo, Cfx vs RifCfx, 3 replicas for of the each ex
 
 ## GCSs_transcription_score_GC_distributions_throughout_genome.py
 
-The script takes sets of trusted GCSs and analysis the distribution of GCSs throughout the genome. 
+The script takes sets of trusted GCSs and analyzes the distribution of GCSs throughout the genome. 
 Also it plots the distribution of other values such as score, GC% and transcription.
 
 **Requirements:** python 3
@@ -129,7 +132,7 @@ plot with distributions of N3E and score values for different GCSs sets and over
 
 ## Genome_intervals_analysis.py
 
-The script analysis sets of genome intervals (transcription units - TUs, BIMEs-1, BIMEs-2, IHF sites, Fis sites, H-NS sites, MatP sites, etc.)
+The script analyzes sets of genome intervals (transcription units - TUs, BIMEs-1, BIMEs-2, IHF sites, Fis sites, H-NS sites, MatP sites, etc.)
 for the enrichment of GCSs (binomial test), compares their N3E and score with mean GCSs N3E and score (t-test), 
 compares intervals mean score with genome mean score (t-test).
 
@@ -150,7 +153,7 @@ TAB file with the number of GCSs are associated with particular intervals (BIMEs
 
 Script compares data from Cfx and RifCfx (conditions with transcription inhibited with rifampicin) experiments. It identifies GCSs
 shared between datasets, computes whether the signal (N3E) goes up or down as a response for transcription inhibition. Also it 
-analysis shared GCSs that fall into BIMEs or DS regions of rRNA operons to be associated with signal increase or decrease.
+analyzes shared GCSs that fall into BIMEs or DS regions of rRNA operons to be associated with signal increase or decrease.
 
 **Requirements:** python 3
 
@@ -195,7 +198,7 @@ GCSs association with rRNA operons is visualizing.
 
 ## TAD_Mut_assoc_GCSs_analysis.py
 
-Script analysis colocalization of mutations (from Foster, 2015) and TADs borders (from Lioy, 2018) with GCSs.
+Script analyzes colocalization of mutations (from Foster, 2015) and TADs borders (from Lioy, 2018) with GCSs.
 
 **Requirements:** python 3
 
