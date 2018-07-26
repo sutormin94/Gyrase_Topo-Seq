@@ -39,9 +39,9 @@ path_to_GCSs_files={'Cfx': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_mo
 Genome_seq_path="C:\Sutor\science\DNA-gyrase\Genomes\E_coli_w3110_G_Mu.fasta"
 
 #Input: path to the sequence to be scanned, FASTA.
-Target_seq_path="C:\Sutor\science\DNA-gyrase\Genomes\E_coli_w3110_G_Mu.fasta"
+Target_seq_path="C:\Sutor\science\DNA-gyrase\Results\In_vitro_experiments\Consensus.fasta"
 #Input: name of the target sequence ready to be scanned.
-Target_seq_name="E_coli_w3110_G_Mu"
+Target_seq_name="Consensus"
 #Input: dataset name for WIG header.
 Dataset_name="Cfx_Micro_Oxo_1828"
 
@@ -260,7 +260,8 @@ def Wrapper_motif_construct_scan(Source_genome_path, Target_genome_path, target_
     GCSs_for_motif=sorting_combining(GCSs_sets)
     f_rc_scan=motif_construction_and_analysis(GCSs_for_motif, Source_sequence, Target_sequence, target_name, outpath)
     ar_max=combine_score_fw_rc(f_rc_scan[0], f_rc_scan[1], Target_sequence, wig_path_out, ds_name, chr_name)
-    top_scored_sites_and_GCSs(ar_max, GCSs_sets, outpath_top_score)
+    if Target_genome_path==Source_genome_path:
+        top_scored_sites_and_GCSs(ar_max, GCSs_sets, outpath_top_score)
     return GCSs_for_motif
 
 

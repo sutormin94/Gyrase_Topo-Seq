@@ -37,10 +37,12 @@ library(forcats)
 excell_path="C:/Sutor/science/DNA-gyrase/Results/GCSs_sets_and_motifs/GCSs_association_with_US_GB_DS/GCSs_association_with_US_GB_DS.xlsx"
 excell_sheet_TU_sets="For_R_DOOR_del_cor_all_data"
 excell_sheet_rRNA="rRNA_data"
+excell_sheet_rRNA_Cfx_RifCfx="Cfx_RifCfx_rRNA_data"
 excell_sheet_score="Score_R"
 
 Outpath_TU_sets_GCSs_num="C:/Sutor/science/DNA-gyrase/Results/GCSs_sets_and_motifs/GCSs_association_with_US_GB_DS/GCSs_association_with_TUs_USUS_USGB_GBDS_DSDS_test.png"
 Outpath_rRNA_GCSs_num="C:/Sutor/science/DNA-gyrase/Results/GCSs_sets_and_motifs/GCSs_association_with_US_GB_DS/GCSs_association_with_rRNA_US_GB_DS_test.png"
+Outpath_rRNA_GCSs_num_Cfx_RifCfx="C:/Sutor/science/DNA-gyrase/Results/GCSs_sets_and_motifs/GCSs_association_with_US_GB_DS/Cfx_RifCfx_GCSs_association_with_rRNA_US_GB_DS_test.png"
 Outpath_TU_sets_GCSs_score="C:/Sutor/science/DNA-gyrase/Results/GCSs_sets_and_motifs/GCSs_association_with_US_GB_DS/GCSs_score_association_with_TUs_USUS_USGB_GBDS_DSDS_test.png"
 
 #######
@@ -115,6 +117,32 @@ p <- ggplot(data=Num_peaks_rRNA, aes(x=fct_inorder(Num_peaks_rRNA$Set) , y=Num_p
 
 p_sum_rRNA <- grid.arrange(p, nrow=1)
 ggsave(Outpath_rRNA_GCSs_num, units="in", p_sum_rRNA, width=10, height=4, dpi=600)
+
+
+#######
+#Imports data for Cfx and RifCfx GCSs association with rRNA operons.
+#######
+
+Num_peaks_rRNA=read_excel(excell_path, sheet=excell_sheet_rRNA_Cfx_RifCfx)
+Num_peaks_rRNA <-data.frame(Num_peaks_rRNA)
+
+#######
+#Plots.
+#######
+
+p <- ggplot(data=Num_peaks_rRNA, aes(x=fct_inorder(Num_peaks_rRNA$Region) , y=Num_peaks_rRNA$Enrichment, fill=fct_inorder(Num_peaks_rRNA$Set))) +
+  geom_bar(stat = "identity", color="black", width=0.9, size=1, position = position_dodge(width = 0.9)) +
+  labs(x = "Region", y = "Number of GCSs") +
+  scale_fill_brewer(name="Condition:", palette="Set2") +
+  theme(axis.line=element_line(size=1), axis.ticks=element_line(size=1), axis.text.x=element_text(size=23, color='black'),
+        axis.text.y=element_text(size=23, color='black'), axis.title.y=element_text(size=25), axis.title.x=element_text(size=25),
+        panel.background=element_rect(fill="white"), axis.ticks.length=unit(0.2, "cm"),
+        legend.text=element_text(size=25), legend.title=element_text(size=28,face = "bold"),
+        legend.position=c(0.15,0.8), legend.key.size=unit(1, "cm"),
+        plot.margin = margin(30, 0, 10, 0))
+
+p_sum_rRNA <- grid.arrange(p, nrow=1)
+ggsave(Outpath_rRNA_GCSs_num_Cfx_RifCfx, units="in", p_sum_rRNA, width=8, height=3.5, dpi=600)
 
 #######
 #Imports data for GCSs score association with TUs sets and compartments.

@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 from matplotlib import gridspec
 import numpy as np
 from scipy.stats import binom
+from scipy.stats import pearsonr
 
 #######
 #Variables to be defined.
@@ -120,6 +121,7 @@ def Prepare_non_GCSs_data(score_path, GC_path, transcription_path):
     Data_dict['Transcription']=bar_convert(Trancription_data)
     return Data_dict
 
+
 #######
 #Plotting: distribution throughout the genome.
 #######
@@ -136,19 +138,20 @@ def Plot_the_distribution(GSCs_data, Non_GCSs_data, path_out):
     #GCSs data plotting.
     fig, plot_names=plt.subplots(7,1,figsize=(11,15), dpi=100)
     i=0
+    Histo_comp_dict={} #Will contain computed histogramm data (bins and values)
     for key, value in GSCs_data.items():
         bins=np.linspace(0, 4647454, 11)
         plot_names[i].set_xlim(0, 4647454)
         plot_names[i].set_xticks(ticks1, minor=False)
         plot_names[i].set_xticklabels(xticknames1)
         plt.setp(plot_names[i].set_xticklabels(xticknames1), rotation=0, fontsize=14)
-        conf_interval=[binom.interval(0.95, len(value), 1/9)[0], binom.interval(0.95, len(value), 1/9)[1]]
+        conf_interval=[binom.interval(0.95, len(value), 1/10)[0], binom.interval(0.95, len(value), 1/10)[1]]
         plot_names[i].set_yticks(conf_interval, minor=True)
         plot_names[i].yaxis.grid(True, which='minor', linewidth=0.4, linestyle='--', color='black')
         plot_names[i].fill_between(bins, conf_interval[0], conf_interval[1], facecolor='grey', alpha=0.3)
         plot_names[i].locator_params(axis='y', nbins=6)
         plot_names[i].tick_params(axis='x', which='major', labelsize=19)
-        plot_names[i].hist(value, bins, facecolor=colors[i], alpha=0.7, linewidth=1, edgecolor='black')
+        Histo_comp_dict[key]=plot_names[i].hist(value, bins, facecolor=colors[i], alpha=0.7, linewidth=1, edgecolor='black') #Plot histo and ddd computed histogramm data (bins and values)
         plot_names[i].annotate('Origin \nof replication', xytext=(0, 50), textcoords='offset points', xy=(yori, 0), xycoords='data', color='black', arrowprops=dict(facecolor='black', shrink=0, width=0.3), size=16.5, weight="bold")
         plot_names[i].annotate('Terminators \n area', xytext=(0, 50), textcoords='offset points', xy=(yter, 0), xycoords='data', color='black', arrowprops=dict(facecolor='black', shrink=0, width=0.3), size=16.5, weight="bold")
         plot_names[i].tick_params(axis='y', which='major', pad=7, labelsize=15)
@@ -187,7 +190,24 @@ def Plot_the_distribution(GSCs_data, Non_GCSs_data, path_out):
         i+=1
     plt.tight_layout()
     fig.savefig(path_out, figsize=(11,15), dpi=400) 
+    return Histo_comp_dict
+
+#######
+#Computes following correlations: (Cfx GCSs data vs transcription), (Cfx GCSs data vs score), 
+#(RifCfx GCSs data vs transcription), (RifCfx GCSs data vs score) 
+#######
+
+def track_corr(GCSs_histo_comp_dict, Non_GCSs_data):
+    Cfx_GCSs=np.array(GCSs_histo_comp_dict['Cfx'][0]).tolist()
+    RifCfx_GCSs=np.array(GCSs_histo_comp_dict['RifCfx'][0]).tolist()
+    Transcription=Non_GCSs_data['Transcription']
+    Score=Non_GCSs_data['Score']
+    print('Paerson correlation (Cfx, transcription) for: ' + str(pearsonr(Cfx_GCSs, Transcription)))
+    print('Paerson correlation (RifCfx, transcription) for: ' + str(pearsonr(RifCfx_GCSs, Transcription)))
+    print('Paerson correlation (Cfx, score) for: ' + str(pearsonr(Cfx_GCSs, Score)))
+    print('Paerson correlation (RifCfx, score) for: ' + str(pearsonr(RifCfx_GCSs, Score)))    
     return
+
 
 #######
 #Wrapps all the functions together.
@@ -196,7 +216,8 @@ def Plot_the_distribution(GSCs_data, Non_GCSs_data, path_out):
 def wrap_the_functions(input_dict, score_path, GC_path, transcription_path, path_out):
     GSCs_data=trusted_GCSs_parsing(input_dict)
     Non_GCSs_data=Prepare_non_GCSs_data(score_path, GC_path, transcription_path)
-    Plot_the_distribution(GSCs_data, Non_GCSs_data, path_out)
+    GCSs_histo_comp_dict=Plot_the_distribution(GSCs_data, Non_GCSs_data, path_out)
+    track_corr(GCSs_histo_comp_dict, Non_GCSs_data)
     return
     
 wrap_the_functions(path_to_GCSs_files, Score_data_path, GC_data_path, Transcription_data_path, Plot_path_out)

@@ -283,30 +283,30 @@ def TU_interval_stat_analysis(GCSs_sets_dict, intervals_GCSs_dict, intervals, sc
         for a, ns in GCSs_values_dict.items():
             #N3E
             N3E_stat=stats.ttest_ind(ns[0], intervals_GCSs_dict[a][1]) #N3E US
-            fileout.write('t-test\t' + a + '\tDS N3E\t' + str(round(np.mean(intervals_GCSs_dict[a][1]),3)) + '\t' + 
+            fileout.write('t-test\t' + a + '\tUS N3E\t' + str(round(np.mean(intervals_GCSs_dict[a][1]),3)) + '\t' + 
                           str(round(np.mean(ns[0]),3)) + '\t' + str(N3E_stat[1]) + '\t' + 't-statistic: ' + str(round(N3E_stat[0],3)) + '\n') 
             N3E_stat=stats.ttest_ind(ns[0], intervals_GCSs_dict[a][4]) #N3E GB
-            fileout.write('t-test\t' + a + '\tDS N3E\t' + str(round(np.mean(intervals_GCSs_dict[a][4]),3)) + '\t' + 
+            fileout.write('t-test\t' + a + '\tGB N3E\t' + str(round(np.mean(intervals_GCSs_dict[a][4]),3)) + '\t' + 
                           str(round(np.mean(ns[0]),3)) + '\t' + str(N3E_stat[1]) + '\t' + 't-statistic: ' + str(round(N3E_stat[0],3)) + '\n') 
             N3E_stat=stats.ttest_ind(ns[0], intervals_GCSs_dict[a][7]) #N3E DS
             fileout.write('t-test\t' + a + '\tDS N3E\t' + str(round(np.mean(intervals_GCSs_dict[a][7]),3)) + '\t' + 
                           str(round(np.mean(ns[0]),3)) + '\t' + str(N3E_stat[1]) + '\t' + 't-statistic: ' + str(round(N3E_stat[0],3)) + '\n') 
             #Score
             score_stat=stats.ttest_ind(ns[1], intervals_GCSs_dict[a][2]) #Score US
-            fileout.write('t-test\t' + a + '\tDS Score\t' + str(round(np.mean(intervals_GCSs_dict[a][2]),3)) + '\t' + 
+            fileout.write('t-test\t' + a + '\tUS Score\t' + str(round(np.mean(intervals_GCSs_dict[a][2]),3)) + '\t' + 
                           str(round(np.mean(ns[1]),3)) + '\t' + str(score_stat[1]) + '\t' + 't-statistic: ' + str(round(score_stat[0],3)) + '\n')
             score_stat=stats.ttest_ind(ns[1], intervals_GCSs_dict[a][5]) #Score GB
-            fileout.write('t-test\t' + a + '\tDS Score\t' + str(round(np.mean(intervals_GCSs_dict[a][5]),3)) + '\t' + 
+            fileout.write('t-test\t' + a + '\tGB Score\t' + str(round(np.mean(intervals_GCSs_dict[a][5]),3)) + '\t' + 
                           str(round(np.mean(ns[1]),3)) + '\t' + str(score_stat[1]) + '\t' + 't-statistic: ' + str(round(score_stat[0],3)) + '\n')
             score_stat=stats.ttest_ind(ns[1], intervals_GCSs_dict[a][8]) #Score DS
             fileout.write('t-test\t' + a + '\tDS Score\t' + str(round(np.mean(intervals_GCSs_dict[a][8]),3)) + '\t' + 
                           str(round(np.mean(ns[1]),3)) + '\t' + str(score_stat[1]) + '\t' + 't-statistic: ' + str(round(score_stat[0],3)) + '\n')
             #Number of GCSs
             GCSs_number_stat=binom.cdf(intervals_GCSs_dict[a][0], len(ns[0]), intervals_GCSs_dict[a][-1]/genome_len_dc) #Number of GCSs in US
-            fileout.write('binomial test\t' + a + '\tDS Number of GCSs\t' + str(intervals_GCSs_dict[a][0]) + '\t' + 
+            fileout.write('binomial test\t' + a + '\tUS Number of GCSs\t' + str(intervals_GCSs_dict[a][0]) + '\t' + 
                           str(len(ns[0])) + '\t' + str(GCSs_number_stat) + '\n')
             GCSs_number_stat=binom.cdf(intervals_GCSs_dict[a][3], len(ns[0]), intervals_GCSs_dict[a][-1]/genome_len_dc) #Number of GCSs in GB
-            fileout.write('binomial test\t' + a + '\tDS Number of GCSs\t' + str(intervals_GCSs_dict[a][3]) + '\t' + 
+            fileout.write('binomial test\t' + a + '\tGB Number of GCSs\t' + str(intervals_GCSs_dict[a][3]) + '\t' + 
                           str(len(ns[0])) + '\t' + str(GCSs_number_stat) + '\n')
             GCSs_number_stat=binom.cdf(intervals_GCSs_dict[a][6], len(ns[0]), intervals_GCSs_dict[a][-1]/genome_len_dc) #Number of GCSs in DS
             fileout.write('binomial test\t' + a + '\tDS Number of GCSs\t' + str(intervals_GCSs_dict[a][6]) + '\t' + 

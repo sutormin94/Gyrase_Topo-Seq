@@ -13,8 +13,11 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.patheffects as PathEffects
 from Bio import SeqIO
 from Bio import SeqUtils
+from Bio.SeqUtils import GC as GC_count
+from scipy.stats import binom_test
 
 #######
 #Variables to be defined.
@@ -171,9 +174,9 @@ def Plotting(PFMs_set, title, matrix_type, write_out, win_width):
         plot1.plot(x_axis, PFMs_set['Cfx'], color='#454F24', linewidth=1, alpha=0.6)
         plot1.plot(x_axis, PFMs_set['Cfx'], 'o', fillstyle='none', color='#7FCE79', markeredgecolor='#454F24', markersize=2, alpha=0.6)        
         #Rif_Cfx
-        #plot1.plot(x_axis, PFMs_set['RifCfx'], color='#BAE85C', linewidth=4, alpha=0.6)
-        #plot1.plot(x_axis, PFMs_set['RifCfx'], color='#4D590D', linewidth=1, alpha=0.6)
-        #plot1.plot(x_axis, PFMs_set['RifCfx'], 'o', fillstyle='none', color='#BAE85C', markeredgecolor='#4D590D', markersize=2, alpha=0.6)       
+        plot1.plot(x_axis, PFMs_set['RifCfx'], color='#BAE85C', linewidth=4, alpha=0.6)
+        plot1.plot(x_axis, PFMs_set['RifCfx'], color='#4D590D', linewidth=1, alpha=0.6)
+        plot1.plot(x_axis, PFMs_set['RifCfx'], 'o', fillstyle='none', color='#BAE85C', markeredgecolor='#4D590D', markersize=2, alpha=0.6)       
         #Micro
         plot1.plot(x_axis, PFMs_set['Micro'], color='#ff878b', linewidth=4, alpha=0.7)
         plot1.plot(x_axis, PFMs_set['Micro'], color='#7D212B', linewidth=1, alpha=1)
@@ -184,16 +187,76 @@ def Plotting(PFMs_set, title, matrix_type, write_out, win_width):
         plot1.plot(x_axis, PFMs_set['Oxo'], 'o', fillstyle='none', color='#8991ff', markeredgecolor='#470A59', markersize=2, alpha=0.8)   
         #Tracks annotation
         plot1.annotate('Ciprofloxacin', xytext=(-75, 0.8), xy=(40, 0.85), color='#7FCE79', weight="bold", size=15)
-        #plot1.annotate('Rifampicin Ciprofloxacin', xytext=(-75, 0.8), xy=(40, 0.85), color='#BAE85C', weight="bold", size=15)
-        plot1.annotate('Microcin B17', xytext=(-75, 0.75), xy=(40, 0.85), color='#ff878b', weight="bold", size=15)
-        plot1.annotate('Oxolinic acid', xytext=(-75, 0.70), xy=(40, 0.85), color='#8991ff', weight="bold", size=15)        
+        plot1.annotate('Rifampicin Ciprofloxacin', xytext=(-75, 0.75), xy=(40, 0.85), color='#BAE85C', weight="bold", size=15)
+        plot1.annotate('Microcin B17', xytext=(-75, 0.7), xy=(40, 0.85), color='#ff878b', weight="bold", size=15)
+        plot1.annotate('Oxolinic acid', xytext=(-75, 0.65), xy=(40, 0.85), color='#8991ff', weight="bold", size=15)        
         #Set axis parameters
         plot1.tick_params(axis='both', direction='in', bottom='on', top='on', left='on', right='on')
         plot1.axis(ax_range)
         plot1.set_xlim(-win_width/2, win_width/2)
         plot1.set_xticks(np.concatenate((np.arange(-(win_width/2)+5, (win_width/2)+2, 10), [0, 3, -63, -17, 20, 66])))
         plot1.set_xlabel('Position, nt', size=17)
-        plot1.set_ylabel(str(matrix_type), size=17)
+        plot1.set_ylabel(str(matrix_type)+'%', size=17)
+        #plt.show()
+        plt.savefig(write_out, dpi=400, figsize=(16, 6)) 
+        plt.close()
+        return
+
+#######
+#Plotting the motif with statistic.
+#Matrix type - type of the PFM to plot.
+#######
+
+def Plotting_stat(GC_PFM, num_seq, title, matrix_type, genome_sequence, write_out, win_width):
+        #GC statistics module
+        #Counts average GC% over the whole genome
+        GC_genome=GC_count(genome_sequence)/100
+        print('GC% of the reference genome: ' + str(GC_genome))
+        
+        #Counts GC% p-value in the particular pwm column.
+        #Returns p-value array and auxiliary Zero array for plotting.
+        alignment_thick=num_seq
+        pValue=[]
+        Zero=[]
+        for i in range(len(GC_PFM)):
+                pValue.append(binom_test(float(GC_PFM[i]) * alignment_thick, n=alignment_thick, p=GC_genome))
+                Zero.append(1)
+        #Plotting   
+        x_axis=[]
+        for i in range(len(GC_PFM)):
+                x_axis.append(-(win_width/2)+1+i)      
+        print('len(x_axis)=' + str(len(x_axis)))
+        ax_range = [-win_width/2, win_width/2, 0.35, 0.9]
+        plt.figure(dpi=100, figsize=(16, 6))
+        plt.suptitle(str(title), fontsize=20)
+        plot1 = plt.subplot()
+        plot1.set_xticks([0], minor=True)
+        plot1.xaxis.grid(True, which='minor', linewidth=0.5, linestyle='--', alpha=1)            
+        #GC% pwm plotting
+        plot1.plot(x_axis, GC_PFM, color='green', linewidth=1)
+        plot1.plot(x_axis, GC_PFM, 'go', markersize=3)
+        plot1.axis(ax_range) 
+        plot1.annotate(matrix_type+'%', xytext=(65, 0.65), xy=(40, 0.85), color='green', weight="bold", size=15)
+        txt=plot1.annotate('p-value', xytext=(80, 0.60), xy=(-105, 0.64), color='cyan', weight="bold", size=15)
+        txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='black')])   
+        plot1.set_xlabel('Position, nt', size=17)
+        plot1.set_ylabel(matrix_type+'%', size=17)                 
+        #Set axis parameters
+        plot1.tick_params(axis='both', direction='in', bottom='on', top='on', left='on', right='on')
+        plot1.set_xlim(-win_width/2, win_width/2)
+        plot1.set_xticks(np.concatenate((np.arange(-(win_width/2)+5, (win_width/2)+2, 10), [0, 3, -63, -17, 20, 66])))
+        #p-value plotting
+        plot2=plot1.twinx()
+        plot2.plot(x_axis, pValue, 'k', linewidth=0.5, alpha=0.6)
+        plot2.fill_between(x_axis, pValue, Zero, color='cyan', alpha=0.2)
+        plot2.set_yticks(np.arange(0, 1.01, 0.01), minor=False)
+        plot2.set_yscale('log')
+        plot2.set_yticks([0.005], minor=True)
+        plot2.yaxis.grid(True, which='minor', linewidth=1, linestyle='--', alpha=0.8)
+        plot2.annotate('Confidence level = 0.005', xytext=(45, 0.0025), xy=(40, 0.8), color='black', size=15)
+        plot2.set_ylim(0.0000001, 1.0)
+        plot2.set_xlim(-win_width/2, win_width/2)
+        plot2.set_ylabel('p-value, logarithmic scale', size=17)        
         #plt.show()
         plt.savefig(write_out, dpi=400, figsize=(16, 6)) 
         plt.close()
@@ -207,7 +270,7 @@ def wrap_function(GCSs_input, genome_input_path, output_path):
         win_width=170
         win_range=[(win_width/2)-2, (win_width/2)+2]
         PFM_type='GC'
-        plot_title='Gyrase motif with different inhibitors'
+        plot_title='Gyrase motifs obtained for different Topo-Seq conditions'
         GCSs_dict=trusted_GCSs_parsing(GCSs_input)
         genome_sequence=genome_seq(genome_input_path)
         dict_of_PFMs={}
@@ -216,7 +279,8 @@ def wrap_function(GCSs_input, genome_input_path, output_path):
                 PFMs=make_PFM(sequences_list)
                 write_motif(PFMs[PFM_type], output_path+str(k)+'_GC_pfm.txt', win_width)
                 dict_of_PFMs[k]=PFMs[PFM_type]
-        Plotting(dict_of_PFMs, plot_title, PFM_type, output_path+'Gyrase_motif_trusted_GCSs_Cfx_Micro_Oxo'+str(PFM_type)+'.png', win_width)
+                Plotting_stat(PFMs[PFM_type], PFMs['Num_seqs'], 'Gyrase motif statistic for '+k, PFM_type, genome_sequence, output_path+PFM_type+'_gyrase_motif_trusted_GCSs_statistic_'+str(k)+'.png', win_width)
+        Plotting(dict_of_PFMs, plot_title, PFM_type, output_path+'Gyrase_motif_trusted_GCSs_Cfx_RifCfx_Micro_Oxo'+str(PFM_type)+'.png', win_width)
         return
 
 wrap_function(path_to_GCSs_files, Genome_path, Output_path)

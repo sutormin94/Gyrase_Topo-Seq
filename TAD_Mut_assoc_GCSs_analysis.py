@@ -15,6 +15,7 @@ import numpy as np
 import scipy
 from scipy import stats
 from scipy.stats import binom
+from scipy.stats import chisquare
 
 #######
 #Variables to be defined.
@@ -149,33 +150,59 @@ def colocal_search(GCSs_sets_dict, transcription, data_type, data_to_coloc, Bad_
                             break
                     if status==0: #GCSs is in interTAD
                         TAD_assoc_dict[a]['GCSs in interTAD']+=1
+            #TADs interTADs defenitions
+            GCSs_in_TADs=TAD_assoc_dict[a]['GCSs in TAD']
+            GCSs_in_interTADs=TAD_assoc_dict[a]['GCSs in interTAD']
+            prob_of_TAD=sum_TAD_len/(sum_interTAD_len+sum_TAD_len)
+            prob_of_interTAD=sum_interTAD_len/(sum_interTAD_len+sum_TAD_len)
+            GCSs_in_TADs_exp=(GCSs_in_TADs+GCSs_in_interTADs)*prob_of_TAD
+            GCSs_in_interTADs_exp=(GCSs_in_TADs+GCSs_in_interTADs)*prob_of_interTAD
+            #Borders defenitions
+            GCSs_in_TADs_border=TAD_assoc_dict[a]['GCSs in TAD border']
+            GCSs_in_interTAD_border=TAD_assoc_dict[a]['GCSs in interTAD border']
+            prob_of_TAD_border=2*win_width*len(data_to_coloc)/(sum_interTAD_len+sum_TAD_len)
+            prob_of_interTAD_border=prob_of_TAD_border
+            GCSs_in_TADs_border_exp=(GCSs_in_TADs+GCSs_in_interTADs)*prob_of_TAD_border
+            GCSs_in_interTADs_border_exp=(GCSs_in_TADs+GCSs_in_interTADs)*prob_of_interTAD_border
+            #Bad TAD defenition
+            GCSs_in_bad_TADs=TAD_assoc_dict[a]['GCSs in bad TAD']
+            
+            #Writing the output
             fileout.write('GCSs association with TAD and interTAD regions\n' + a + '\t' + TAD_inpath + '\n')
             print('Number of ' + str(a) + ' GCSs: ' + str(len(gcss_set)))
-            print('Number of GCSs in TADs: ' + str(TAD_assoc_dict[a]['GCSs in TAD']))
-            print('Number of GCSs in interTADs: ' + str(TAD_assoc_dict[a]['GCSs in interTAD']))
-            print('Number of GCSs in TAD borders: ' + str(TAD_assoc_dict[a]['GCSs in TAD border']))
-            print('Number of GCSs in interTAD borders: ' + str(TAD_assoc_dict[a]['GCSs in interTAD border']))
-            print('Number of GCSs in bad TADs: ' + str(TAD_assoc_dict[a]['GCSs in bad TAD']))
+            print('Number of GCSs in TADs: ' + str(GCSs_in_TADs))
+            print('Number of GCSs in interTADs: ' + str(GCSs_in_interTADs))
+            print('Number of GCSs in TAD borders: ' + str(GCSs_in_TADs_border))
+            print('Number of GCSs in interTAD borders: ' + str(GCSs_in_interTAD_border))
+            print('Number of GCSs in bad TADs: ' + str(GCSs_in_bad_TADs))
             print('Corrected len of the genome (on deletions and on bad TADs): ' + str(TAD_genome_len))
             print('Len of TADs: ' + str(sum_TAD_len))
             print('Len of interTADs: ' + str(sum_interTAD_len))
+            print('Binom test p-value for the number of GCSs in TADs: ')
+            print(binom.cdf(GCSs_in_TADs, GCSs_in_TADs+GCSs_in_interTADs, prob_of_TAD))            
             print('Binom test p-value for the number of GCSs in interTADs: ')
-            print(binom.cdf(TAD_assoc_dict[a]['GCSs in interTAD'], TAD_assoc_dict[a]['GCSs in TAD']+TAD_assoc_dict[a]['GCSs in interTAD'], sum_interTAD_len/(sum_interTAD_len+sum_TAD_len)))
+            print(binom.cdf(GCSs_in_interTADs, GCSs_in_TADs+GCSs_in_interTADs, prob_of_interTAD))
             print('Binom test p-value for the number of GCSs in TAD borders: ')
-            print(binom.cdf(TAD_assoc_dict[a]['GCSs in TAD border'], TAD_assoc_dict[a]['GCSs in TAD']+TAD_assoc_dict[a]['GCSs in interTAD'], 2*win_width*len(data_to_coloc)/(sum_interTAD_len+sum_TAD_len)))
+            print(binom.cdf(GCSs_in_TADs_border, GCSs_in_TADs+GCSs_in_interTADs, prob_of_TAD_border))
             print('Binom test p-value for the number of GCSs in interTAD borders: ')
-            print(binom.cdf(TAD_assoc_dict[a]['GCSs in interTAD border'], TAD_assoc_dict[a]['GCSs in TAD']+TAD_assoc_dict[a]['GCSs in interTAD'], 2*win_width*len(data_to_coloc)/(sum_interTAD_len+sum_TAD_len)))            
+            print(binom.cdf(GCSs_in_interTAD_border, GCSs_in_TADs+GCSs_in_interTADs, prob_of_interTAD_border))            
             print('\n')
-            fileout.write('Number of ' + str(a) + ' GCSs\t' + str(len(gcss_set)) + '\nNumber of GCSs in TADs\t' + str(TAD_assoc_dict[a]['GCSs in TAD']) + 
-                          '\nNumber of GCSs in interTADs\t' + str(TAD_assoc_dict[a]['GCSs in interTAD']) + '\nNumber of GCSs in TAD borders\t' + str(TAD_assoc_dict[a]['GCSs in TAD border']) +
-                          '\nNumber of GCSs in interTAD borders\t' + str(TAD_assoc_dict[a]['GCSs in interTAD border']) + '\nNumber of GCSs in bad TADs\t' + str(TAD_assoc_dict[a]['GCSs in bad TAD']) + 
-                          '\nCorrected len of the genome (on deletions and on bad TADs)\t' + str(TAD_genome_len) + '\nLen of TADs\t' + str(sum_TAD_len) + '\nLen of interTADs\t' + str(sum_interTAD_len) + 
-                          '\nBinom test p-value for the number of GCSs in interTADs\t' + 
-                          str(binom.cdf(TAD_assoc_dict[a]['GCSs in interTAD'], TAD_assoc_dict[a]['GCSs in TAD']+TAD_assoc_dict[a]['GCSs in interTAD'], sum_interTAD_len/(sum_interTAD_len+sum_TAD_len))) + 
-                          '\nBinom test p-value for the number of GCSs in TAD borders\t' +
-                          str(binom.cdf(TAD_assoc_dict[a]['GCSs in TAD border'], TAD_assoc_dict[a]['GCSs in TAD']+TAD_assoc_dict[a]['GCSs in interTAD'], 2*win_width*len(data_to_coloc)/(sum_interTAD_len+sum_TAD_len))) +
-                          '\nBinom test p-value for the number of GCSs in interTAD borders\t' +
-                          str(binom.cdf(TAD_assoc_dict[a]['GCSs in interTAD border'], TAD_assoc_dict[a]['GCSs in TAD']+TAD_assoc_dict[a]['GCSs in interTAD'], 2*win_width*len(data_to_coloc)/(sum_interTAD_len+sum_TAD_len))) +
+            fileout.write('Number of ' + str(a) + ' GCSs\t' + str(len(gcss_set)) + 
+                          '\nWidth of the border region (nt)\t' + str(win_width) + 
+                          '\nNumber of GCSs in TADs\t' + str(GCSs_in_TADs) + 
+                          '\nNumber of GCSs in interTADs\t' + str(GCSs_in_interTADs) + 
+                          '\nNumber of GCSs in TAD borders\t' + str(GCSs_in_TADs_border) +
+                          '\nNumber of GCSs in interTAD borders\t' + str(GCSs_in_interTAD_border) + 
+                          '\nNumber of GCSs in bad TADs\t' + str(GCSs_in_bad_TADs) + 
+                          '\nCorrected len of the genome (on deletions and on bad TADs)\t' + str(TAD_genome_len) + 
+                          '\nLen of TADs\t' + str(sum_TAD_len) + '\nLen of interTADs\t' + str(sum_interTAD_len) + 
+                          '\nBinom test p-value for the number of GCSs in TADs\t' + str(binom.cdf(GCSs_in_TADs, GCSs_in_TADs+GCSs_in_interTADs, prob_of_TAD)) + 
+                          '\nBinom test p-value for the number of GCSs in interTADs\t' + str(binom.cdf(GCSs_in_interTADs, GCSs_in_TADs+GCSs_in_interTADs, prob_of_interTAD)) + 
+                          '\nChi-square test for the GCSs number asimmetry between TADs and interTADs\t' + str(chisquare([GCSs_in_TADs, GCSs_in_interTADs], f_exp=[GCSs_in_TADs_exp, GCSs_in_interTADs_exp])) +
+                          '\nBinom test p-value for the number of GCSs in TAD borders\t' + str(binom.cdf(GCSs_in_TADs_border, GCSs_in_TADs+GCSs_in_interTADs, prob_of_TAD_border)) +
+                          '\nBinom test p-value for the number of GCSs in interTAD borders\t' + str(binom.cdf(GCSs_in_interTAD_border, GCSs_in_TADs+GCSs_in_interTADs, prob_of_interTAD_border)) +
+                          '\nBinom test p-value for the number of GCSs in TAD/interTAD borders\t' + str(binom.cdf(GCSs_in_TADs_border+GCSs_in_interTAD_border, GCSs_in_TADs+GCSs_in_interTADs, prob_of_TAD_border+prob_of_interTAD_border)) +
+                          '\nChi-square test for the GCSs number asimmetry between TADs and interTADs borders\t' + str(chisquare([GCSs_in_TADs_border, GCSs_in_interTAD_border], f_exp=[GCSs_in_TADs_border_exp, GCSs_in_interTADs_border_exp])) +
                           '\n\n')
         TAD_score=[]
         InterTAD_score=[]
@@ -184,7 +211,6 @@ def colocal_search(GCSs_sets_dict, transcription, data_type, data_to_coloc, Bad_
             status=0
             for bad_TAD in Bad_TAD_reg: #Iterates bad TADs
                 if bad_TAD[1]>=data_to_coloc[i][1]+10>=bad_TAD[0]: #bad TAD interval
-                    print(data_to_coloc[i][1]+10)
                     status=1
                     break
             if status==0 and i<len(data_to_coloc)-1:
@@ -199,8 +225,11 @@ def colocal_search(GCSs_sets_dict, transcription, data_type, data_to_coloc, Bad_
         transcription_t_test=stats.ttest_ind(TAD_score, InterTAD_score)
         print(transcription_t_test)
         print('\n')
-        fileout.write('Mean TAD transcription level\t' + str(np.mean(TAD_score)) + '\nMean interTAD transcription level\t' + str(np.mean(InterTAD_score)) +
-                      '\nt-test statistic\t' + str(transcription_t_test[0]) + '\nt-test p-value\t' + str(transcription_t_test[1]) + '\n\n')
+        fileout.write('Mean TAD transcription level\t' + str(np.mean(TAD_score)) + 
+                      '\nMean interTAD transcription level\t' + str(np.mean(InterTAD_score)) +
+                      '\nt-test statistic\t' + str(transcription_t_test[0]) + 
+                      '\nt-test p-value\t' + str(transcription_t_test[1]) + 
+                      '\n\n')
     
     #Correction for deletions
     deletions=[[274500, 372148], [793800, 807500], [1199000, 1214000]]
@@ -239,8 +268,8 @@ def colocal_search(GCSs_sets_dict, transcription, data_type, data_to_coloc, Bad_
                           '\nBinom test p-value for the number of mutations that precisely match GCSs\t' + str(binom.cdf(len(Mut_assoc_dict[a]['Precise match']), len(data_to_coloc), len(gcss_set)/genome_len)) + 
                           '\nNumber of mutations that fall into 4bp GCSs regions\t' + str(len(Mut_assoc_dict[a]['4bp GCSs'])) + 
                           '\nBinom test p-value for the number of mutations that fall into 4bp GCSs regions\t' + str((binom.cdf(len(Mut_assoc_dict[a]['4bp GCSs']), len(data_to_coloc), len(gcss_set)*4/genome_len))) + 
-                          '\nNumber of mutations that fall into 5bp vicinity of 4bp GCSs region\t' + str(len(Mut_assoc_dict[a]['5bp vicinity'])) +
-                          '\nBinom test p-value for the number of mutations that fall into 5bp vicinity of 4bp GCSs region\t' + str(binom.cdf(len(Mut_assoc_dict[a]['5bp vicinity']), len(data_to_coloc), len(gcss_set)*14/genome_len)) + 
+                          '\nNumber of mutations that fall into 5bp vicinity of 4bp GCSs regions\t' + str(len(Mut_assoc_dict[a]['5bp vicinity'])) +
+                          '\nBinom test p-value for the number of mutations that fall into 5bp vicinity of 4bp GCSs regions\t' + str(binom.cdf(len(Mut_assoc_dict[a]['5bp vicinity']), len(data_to_coloc), len(gcss_set)*14/genome_len)) + 
                           '\n\n')
     fileout.close()
     return

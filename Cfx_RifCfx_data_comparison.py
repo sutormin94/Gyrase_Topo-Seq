@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 from matplotlib import gridspec
 import numpy as np
 from scipy.stats import binom
+from scipy.stats import stats
 
 #######
 #Variables to be defined.
@@ -79,6 +80,58 @@ def find_shared_gcss(GCSs_sets_dict):
     print("Number of GCSs shared between Cfx and RifCfx: " + str(len(shared_GCSs_array)))
     return shared_GCSs_array #array consist of elements: [GCSs coordinate, N3E ratio (RifCfx/Cfx), GCSs score, Serial number]
 
+#######
+#Prepare lists of GCSs heights for Cfx and Cfx_Rif data. Write down values that higher for RifCfx.
+#######
+
+def GCSs_N3E_score_distribs(GCSs_sets_dict, plot_path):
+    #Prepares lists of values (N3E and score) for plotting.
+    cfx_N3E=[]
+    cfx_score=[]
+    for coord, info in GCSs_sets_dict['Cfx'].items():
+        cfx_N3E.append(info[0])
+        cfx_score.append(info[1])
+    rifcfx_N3E=[]
+    rifcfx_score=[]
+    for coord, info in GCSs_sets_dict['RifCfx'].items():
+        rifcfx_N3E.append(info[0])
+        rifcfx_score.append(info[1])
+    #t-test statistic
+    N3E_stat=stats.ttest_ind(cfx_N3E, rifcfx_N3E)
+    print('\nT-test for Cfx and RifCfx GCSs N3E means\n' + 'p-value=' + str(N3E_stat[1]) +'\n' + 't-statistic=' + str(N3E_stat[0]) + '\n')
+    print('Effect size for Cfx and RifCfx GCSs N3E means\n' + 'ES=' + str(np.abs((np.mean(cfx_N3E)-np.mean(rifcfx_N3E))/np.std(cfx_N3E))))
+    print('Effect size for Cfx and RifCfx GCSs N3E means\n' + 'ES=' + str(np.abs((np.mean(cfx_N3E)-np.mean(rifcfx_N3E))/np.std(rifcfx_N3E))))
+    print('Effect size for Cfx and RifCfx GCSs N3E means\n' + 'ES=' + str(np.abs((np.mean(cfx_N3E)-np.mean(rifcfx_N3E))/np.std(rifcfx_N3E+cfx_N3E))) + '\n')
+    score_stat=stats.ttest_ind(cfx_score, rifcfx_score)
+    print('\nT-test for Cfx and RifCfx GCSs score means\n' + 'p-value=' + str(score_stat[1]) +'\n' + 't-statistic=' + str(score_stat[0]) + '\n')
+    print('Effect size for Cfx and RifCfx GCSs score means\n' + 'ES=' + str(np.abs((np.mean(cfx_score)-np.mean(rifcfx_score))/np.std(cfx_score))))
+    print('Effect size for Cfx and RifCfx GCSs score means\n' + 'ES=' + str(np.abs((np.mean(cfx_score)-np.mean(rifcfx_score))/np.std(rifcfx_score))))
+    print('Effect size for Cfx and RifCfx GCSs score means\n' + 'ES=' + str(np.abs((np.mean(cfx_score)-np.mean(rifcfx_score))/np.std(rifcfx_score+cfx_score))) + '\n')    
+    #Plotting
+    #matplotlib.rc('text', usetex = True)
+    fig=plt.figure(figsize=(15,15), dpi=100)
+    #Cfx and RifCfx N3E
+    plot0=plt.subplot2grid((1,2),(0,0), rowspan=1, colspan=1)     
+    plot0.hist(cfx_N3E, color='#7FCE79', edgecolor='black', alpha=0.8)
+    plot0.hist(rifcfx_N3E, color='#BAE85C', edgecolor='black', alpha=0.8)
+    plot0.annotate('Mean N3E='+str(round(np.mean(cfx_N3E),2)), xy=(0.45, 0.9), xycoords='axes fraction', size=15)
+    plot0.annotate('Mean N3E='+str(round(np.mean(rifcfx_N3E),2)), xy=(0.45, 0.8), xycoords='axes fraction', size=15)
+    plot0.set_xlabel('GCSs N3E', size=17)
+    plot0.set_ylabel('Number of GCSs', size=17)
+    plot0.set_title('Cfx vs RifCfx N3E', size=18)
+    #Cfx and RifCfx score
+    plot1=plt.subplot2grid((1,2),(0,1), rowspan=1, colspan=1)     
+    plot1.hist(cfx_score, color='#7FCE79', edgecolor='black', alpha=0.8)
+    plot1.hist(rifcfx_score, color='#BAE85C', edgecolor='black', alpha=0.8)
+    plot1.annotate('Mean score='+str(round(np.mean(cfx_score),2)), xy=(0.45, 0.9), xycoords='axes fraction', size=15)
+    plot1.annotate('Mean score='+str(round(np.mean(rifcfx_score),2)), xy=(0.45, 0.8), xycoords='axes fraction', size=15)
+    plot1.set_xlabel('GCSs score', size=17)
+    plot1.set_ylabel('Number of GCSs', size=17)
+    plot1.set_title('Cfx vs RifCfx score', size=18)    
+    plt.tight_layout()
+    plt.savefig(plot_path + "Cfx_vs_RifCfx_GCSs_N3E_score_distributions.png", dpi=400, figsize=(15, 15)) 
+    plt.close()       
+    return
 
 #######
 #Parsing TUs sets.
@@ -283,6 +336,7 @@ def functions_wrapper(GCSs_dict_input, TUs_sets_path, intervals_sets_path, plot_
     GCSs_sets_dict=trusted_GCSs_parsing(GCSs_dict_input)
     #Find GCSs shared between Cfx and RifCfx
     shared_GCSs_set=find_shared_gcss(GCSs_sets_dict)
+    GCSs_N3E_score_distribs(GCSs_sets_dict, plot_output)
     #Parsing TUs
     TU_set=TUs_parser(TUs_sets_path)['16S_operons']
     #Find shared GCSs associated with DS compartment of TUs

@@ -100,17 +100,17 @@ p_value_x_ <- c(2, 1, 4, 3, 1, 2, 3, 4)
 p <- ggplot(data = samples_data, aes(x = name, y = mean, fill = antib_index)) +
   geom_bar(stat = "identity", color="black", width=0.9, size=1, position = position_dodge(width = 0.9)) +
   geom_errorbar(limits, position = position_dodge(width = 0.9), width = 0.3, size=0.8) +
-  labs(x = "Site", y = "Fold enrichment, units") +
-  scale_fill_brewer(palette="Greens", name="Condition:") +
+  labs(x = "Site", y = "Fold enrichment, \nunits") +
+  scale_fill_brewer(palette="Set2", name="Condition:") +
   geom_text(aes(x=p_value_x, y=p_value_y, label=p_value_labels), 
                 size=8) +
   geom_text(aes(x=p_value_x_, y=p_value_y_, label=p_value_labels_), 
             size=8) +
   theme(axis.line=element_line(size=1), axis.ticks=element_line(size=1), axis.text.x=element_text(size=23, color='black'),
-        axis.text.y=element_text(size=25, color='black'), axis.title.y=element_text(size=30), axis.title.x=element_text(size=30),
+        axis.text.y=element_text(size=25, color='black'), axis.title.y=element_text(size=25), axis.title.x=element_text(size=25),
         panel.background=element_rect(fill="white"), axis.ticks.length=unit(0.2, "cm"), 
-        legend.position=c(0.85,0.5), legend.text=element_text(size=30), 
-        legend.title=element_text(size=30), legend.key.size=unit(1.2, "cm"))+
+        legend.position=c(0.85,0.5), legend.text=element_text(size=25), 
+        legend.title=element_text(size=28, face = "bold"), legend.key.size=unit(1, "cm"))+
   scale_y_continuous(breaks=seq(0, 40, 10), limits=c(0,40))
 p
 
