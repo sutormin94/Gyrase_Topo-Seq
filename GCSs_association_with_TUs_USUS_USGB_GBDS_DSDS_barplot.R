@@ -123,22 +123,22 @@ ggsave(Outpath_rRNA_GCSs_num, units="in", p_sum_rRNA, width=10, height=4, dpi=60
 #Imports data for Cfx and RifCfx GCSs association with rRNA operons.
 #######
 
-Num_peaks_rRNA=read_excel(excell_path, sheet=excell_sheet_rRNA_Cfx_RifCfx)
-Num_peaks_rRNA <-data.frame(Num_peaks_rRNA)
+Num_peaks_rRNA_CR=read_excel(excell_path, sheet=excell_sheet_rRNA_Cfx_RifCfx)
+Num_peaks_rRNA_CR <-data.frame(Num_peaks_rRNA_CR)
 
 #######
 #Plots.
 #######
 
-p <- ggplot(data=Num_peaks_rRNA, aes(x=fct_inorder(Num_peaks_rRNA$Region) , y=Num_peaks_rRNA$Enrichment, fill=fct_inorder(Num_peaks_rRNA$Set))) +
+p <- ggplot(data=Num_peaks_rRNA_CR, aes(x=fct_inorder(Num_peaks_rRNA_CR$Region) , y=Num_peaks_rRNA_CR$Enrichment, fill=fct_inorder(Num_peaks_rRNA_CR$Set))) +
   geom_bar(stat = "identity", color="black", width=0.9, size=1, position = position_dodge(width = 0.9)) +
-  labs(x = "Region", y = "Number of GCSs") +
+  labs(x = NULL, y = "Enrichment in the\nnumber of GCSs") +
   scale_fill_brewer(name="Condition:", palette="Set2") +
-  theme(axis.line=element_line(size=1), axis.ticks=element_line(size=1), axis.text.x=element_text(size=23, color='black'),
+  theme(axis.line=element_line(size=1), axis.ticks=element_line(size=1), axis.text.x=element_text(size=20, color='black'),
         axis.text.y=element_text(size=23, color='black'), axis.title.y=element_text(size=25), axis.title.x=element_text(size=25),
         panel.background=element_rect(fill="white"), axis.ticks.length=unit(0.2, "cm"),
         legend.text=element_text(size=25), legend.title=element_text(size=28,face = "bold"),
-        legend.position=c(0.15,0.8), legend.key.size=unit(1, "cm"),
+        legend.position=c(0.17,0.8), legend.key.size=unit(1, "cm"),
         plot.margin = margin(30, 0, 10, 0))
 
 p_sum_rRNA <- grid.arrange(p, nrow=1)

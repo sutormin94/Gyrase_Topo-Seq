@@ -57,8 +57,8 @@ Stat_function<-function(x) {
 
 samples_data<-t(data.frame(lapply(samples_list, Stat_function)))
 
-samples_data<-data.frame(samples_data, c("MuSGS", "ccmH", "rRNA A US", "rRNA A DS", 
-                                         "MuSGS", "ccmH", "rRNA A US", "rRNA A DS"), 
+samples_data<-data.frame(samples_data, c("Mu SGS", "ccmH", "rRNA A US", "rRNA A DS", 
+                                         "Mu SGS", "ccmH", "rRNA A US", "rRNA A DS"), 
                                        c("Cfx","Cfx","Cfx","Cfx", 
                                          "RifCfx", "RifCfx", "RifCfx", "RifCfx"))
 
@@ -83,35 +83,35 @@ limits <- aes(ymax = samples_data$mean + 2*samples_data$se,
 
 p_value_labels <- c(replicate(4, "p-value"), '','','','')
 
-p_value_y <- c(39, 11, 8, 33, 0, 0, 0, 0)
-p_value_x <- c(2, 1, 4, 3, 1, 2, 3, 4)
+p_value_label_y <- c(42, 13, 9, 36, 0, 0, 0, 0)
+p_value_label_x <- c(2, 1, 4, 3, 1, 2, 3, 4)
 
-p_value_labels_ <- c(round(t.test(CFX_Mu, RifCFX_Mu)$p.value, digits=3),
+p_value_values <- c(round(t.test(CFX_Mu, RifCFX_Mu)$p.value, digits=3),
                      round(t.test(CFX_2394, RifCFX_2394)$p.value, digits=3),
                      round(t.test(CFX_3602, RifCFX_3602)$p.value, digits=3),
                      round(t.test(CFX_3594, RifCFX_3594)$p.value, digits=3), '','','','')
-p_value_y_ <- c(35, 7, 4, 29, 0, 0, 0, 0)
-p_value_x_ <- c(2, 1, 4, 3, 1, 2, 3, 4)
+p_value_value_y <- c(38, 9, 5, 32, 0, 0, 0, 0)
+p_value_value_x <- c(2, 1, 4, 3, 1, 2, 3, 4)
 
 #######
-#Plotting.
+#Plotting barplot compares Cfx and RifCfx qPCR data.
 #######
 
 p <- ggplot(data = samples_data, aes(x = name, y = mean, fill = antib_index)) +
   geom_bar(stat = "identity", color="black", width=0.9, size=1, position = position_dodge(width = 0.9)) +
   geom_errorbar(limits, position = position_dodge(width = 0.9), width = 0.3, size=0.8) +
-  labs(x = "Site", y = "Fold enrichment, \nunits") +
+  labs(x = NULL, y = "Fold enrichment, \nunits") +
   scale_fill_brewer(palette="Set2", name="Condition:") +
-  geom_text(aes(x=p_value_x, y=p_value_y, label=p_value_labels), 
+  geom_text(aes(x=p_value_label_x, y=p_value_label_y, label=p_value_labels), 
                 size=8) +
-  geom_text(aes(x=p_value_x_, y=p_value_y_, label=p_value_labels_), 
+  geom_text(aes(x=p_value_value_x, y=p_value_value_y, label=p_value_values), 
             size=8) +
-  theme(axis.line=element_line(size=1), axis.ticks=element_line(size=1), axis.text.x=element_text(size=23, color='black'),
+  theme(axis.line=element_line(size=1), axis.ticks=element_line(size=1), axis.text.x=element_text(size=20, color='black'),
         axis.text.y=element_text(size=25, color='black'), axis.title.y=element_text(size=25), axis.title.x=element_text(size=25),
         panel.background=element_rect(fill="white"), axis.ticks.length=unit(0.2, "cm"), 
-        legend.position=c(0.85,0.5), legend.text=element_text(size=25), 
+        legend.position=c(0.85,0.55), legend.text=element_text(size=25), 
         legend.title=element_text(size=28, face = "bold"), legend.key.size=unit(1, "cm"))+
-  scale_y_continuous(breaks=seq(0, 40, 10), limits=c(0,40))
+  scale_y_continuous(breaks=seq(0, 45, 10), limits=c(0,42))
 p
 
 ggsave(Outpath, units="in", width=8, height=4, dpi=600)
