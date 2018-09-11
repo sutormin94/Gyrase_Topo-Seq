@@ -122,7 +122,7 @@ plot with distributions of N3E and score values for different GCSs sets and over
 
 # Additional scripts
 
-Further scripts are not included into the main straightforward pipeline and requires additional data:
+Further scripts are not included into the main straightforward pipeline and require additional data:
 1. Genome annotation
 2. Transcription data
 3. GC% track for genome of interest
