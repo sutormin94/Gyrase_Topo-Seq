@@ -10,9 +10,9 @@ This repository contains a set of bash, python and R scripts which were used for
 Raw sequencing data and some processed files (coverage depth WIG, N3E WIG, GCSs lists) can be retrieved from GEO datasets with accession GSE117186.
 
 
-![alt text](https://github.com/sutormin94/Gyrase_Topo-seq/blob/master/Pipeline_overview/Main_pipeline.png)
+# Main pipeline
 
-######################
+![alt text](https://github.com/sutormin94/Gyrase_Topo-seq/blob/master/Pipeline_overview/Main_pipeline.png)
 
 ## Raw_reads_processing.sh
 
@@ -74,19 +74,6 @@ Venn diagrams (Cfx vs Micro vs Oxo, Cfx vs RifCfx, 3 replicas for of the each ex
 
 ######################
 
-## GCSs_transcription_score_GC_distributions_throughout_genome.py
-
-The script takes sets of trusted GCSs and analyzes the distribution of GCSs throughout the genome. 
-Also it plots the distribution of other values such as score, GC% and transcription.
-
-**Requirements:** python 3
-
-**Input:** TAB files with trusted GCSs, WIG genome score file, WIG genome GC file, TAB file with transcription data
-
-**Output:** Plot with all the values examined distributed throughout the genome: GCSs number, score, GC, transcription level
-
-######################
-
 ## Motifs_visualization_sequences_extraction.py
 
 The script takes sets of trusted GCSs as input and plots motifs using the sequences under the GCSs.
@@ -133,9 +120,38 @@ plot with distributions of N3E and score values for different GCSs sets and over
 
 ######################
 
+# Additional scripts
+
+Further scripts are not included into the main straightforward pipeline and requires additional data:
+1. Genome annotation
+2. Transcription data
+3. GC% track for genome of interest
+4. Binding sites of NAPs (Fis, IHF, H-NS, MatP, etc.)
+5. Annotation of special regions (BIME-1s, BIME-2s)
+6. Annotation of TAD borders
+7. VCF file with mutations
+
+For *E. coli DY330* MuSGS all the additional files required are stored in **Additional_genome_features** folder.
+
+
+
+
+## GCSs_transcription_score_GC_distributions_throughout_genome.py
+
+The script takes sets of trusted GCSs and analyzes the distribution of GCSs throughout the genome. 
+Also it plots the distribution of other values such as score, GC% and transcription.
+
+**Requirements:** python 3
+
+**Input:** TAB files with trusted GCSs, WIG genome score file, WIG genome GC file, TAB file with transcription data
+
+**Output:** Plot with all the values examined distributed throughout the genome: GCSs number, score, GC, transcription level
+
+######################
+
 ## Genome_intervals_analysis.py
 
-The script analyzes sets of genome intervals (transcription units - TUs, BIMEs-1, BIMEs-2, IHF sites, Fis sites, H-NS sites, MatP sites, etc.)
+The script analyzes sets of genome intervals (transcription units - TUs, BIME-1s, BIME-2s, IHF sites, Fis sites, H-NS sites, MatP sites, etc.)
 for the enrichment of GCSs (binomial test), compares their N3E and score with mean GCSs N3E and score (t-test), 
 compares intervals mean score with genome mean score (t-test).
 
