@@ -10,7 +10,7 @@ This repository contains a set of bash, python and R scripts which were used for
 Raw sequencing data and some processed files (coverage depth WIG, N3E WIG, GCSs lists) can be retrieved from GEO datasets with accession GSE117186.
 
 
-![alt text](https://github.com/sutormin94/Gyrase_Topo-seq/Pipeline_overview/Main_pipeline.png)
+![alt text](https://github.com/sutormin94/Gyrase_Topo-seq/blob/master/Pipeline_overview/Main_pipeline.png)
 
 ######################
 
