@@ -1,0 +1,28 @@
+OperonID	Genes_ID	Start	End	Strand	Expression	Length	Genes_description
+1764290	rrfF;thrV;rrfD;rrlD;gltV;rrsD;	3424400	3429656	-	15830.313951666669	5256	5S ribosomal RNA;Thr tRNA;5S ribosomal RNA;23S ribosomal RNA;Glu tRNA;16S ribosomal RNA;
+1764317	trpT;aspT;rrfC;rrlC;gltU;rrsC;	3690771	3695995	-	15031.129781999998	5224	Trp tRNA;Asp tRNA;5S ribosomal RNA;23S ribosomal RNA;Glu tRNA;16S ribosomal RNA;
+1764259	rrfG;rrlG;gltW;rrsG;	2725847	2730935	-	14670.385095000001	5088	5S ribosomal RNA;23S ribosomal RNA;Glu tRNA;16S ribosomal RNA;
+1764299	tufB;thrT;glyT;tyrU;thrU;	3460675	3462415	-	13747.00786288	1740	protein chain elongation factor EF-Tu;Thr tRNA;Gly tRNA;Tyr tRNA;Thr tRNA;
+1764328	rrsE;ileU;alaU;rrlE;rrfE;	4212776	4217871	+	11077.4189594	5095	16S ribosomal RNA;Ile tRNA;Ala tRNA;23S ribosomal RNA;5S ribosomal RNA;
+1764300	rrfB;rrlB;gltT;rrsB;	3466047	3471144	-	10709.8975415	5097	5S ribosomal RNA;23S ribosomal RNA;Glu tRNA;16S ribosomal RNA;
+1764188	rrsH;ileV;alaV;rrlH;rrfH;aspU;	223771	229004	+	9065.0927515	5233	16S ribosomal RNA;Ile tRNA;Ala tRNA;23S ribosomal RNA;5S ribosomal RNA;Asp tRNA;
+1764307	rrfA;rrlA;alaT;ileT;rrsA;	3597167	3602272	-	6867.527307599999	5105	5S ribosomal RNA;23S ribosomal RNA;Ala tRNA;Ile tRNA;16S ribosomal RNA;
+1763939	dppA;	3933832	3935439	+	815.2686567	1607	dipeptide transporter;
+174443	rpsM;rpsK;rpsD;rpoA;rplQ;	4199067	4201922	+	776.6948032	2855	30S ribosomal protein S13;30S ribosomal protein S11;30S ribosomal protein S4;RNA polymerase subunit alpha;50S ribosomal protein L17;
+174442	rplN;rplX;rplE;rpsN;rpsH;rplF;rplR;rpsE;rpmD;rplO;secY;rpmJ;	4193389	4198920	+	621.6697453833334	5531	50S ribosomal protein L14;50S ribosomal protein L24;50S ribosomal protein L5;30S ribosomal protein S14;30S ribosomal protein S8;50S ribosomal protein L6;50S ribosomal protein L18;30S ribosomal protein S5;50S ribosomal protein L30;50S ribosomal protein L15;preprotein translocase membrane subunit;50S ribosomal protein L36;
+174363	yidC;yidD;rnpA;rpmH;	3754815	3757201	-	552.296088125	2386	cytoplasmic insertase into membrane protein, Sec system;hypothetical protein;protein C5 component of RNase P;50S ribosomal protein L34;
+1763563	kgtP;	2724226	2725524	-	495.7482679	1298	alpha-ketoglutarate transporter;
+174438	rpsL;rpsG;fusA;tufA;	4166986	4171393	+	442.12298310000006	4407	30S ribosomal protein S12;30S ribosomal protein S7;protein chain elongation factor EF-G;protein chain elongation factor EF-Tu;
+174441	rpsJ;rplC;rplD;rplW;rplB;rpsS;rplV;rpsC;rplP;rpmC;rpsQ;	4188268	4193224	+	415.95739357272737	4956	30S ribosomal protein S10;50S ribosomal protein L3;50S ribosomal protein L4;50S ribosomal protein L23;50S ribosomal protein L2;30S ribosomal protein S19;50S ribosomal protein L22;30S ribosomal protein S3;50S ribosomal protein L16;50S ribosomal protein L29;30S ribosomal protein S17;
+174480	rpsF;priB;rpsR;rplI;	4430920	4432359	+	388.420450375	1439	30S ribosomal protein S6;primosomal protein N;30S ribosomal protein S18;50S ribosomal protein L9;
+174310	rplA;rplK;	3458220	3459356	-	377.2852651	1136	50S ribosomal protein L1;50S ribosomal protein L11;
+1762962	ompA;	1020557	1021597	-	370.1988473	1040	outer membrane protein A (3a;II*;G;d);
+174395	insK;insJ;	3919488	3920857	-	349.40652825	1369	IS150 protein InsB;IS150 protein InsA;
+174398	dppB;dppC;dppD;dppF;	3935747	3939673	+	344.85601335	3926	dipeptide transporter;dipeptide transporter;dipeptide transporter;dipeptide transporter;
+1763988	glpD;	4078019	4079524	-	341.8486056	1505	sn-glycerol-3-phosphate dehydrogenase, aerobic;
+173809	sdhC;sdhD;sdhA;sdhB;	756721	759949	+	334.96577652499997	3228	succinate dehydrogenase, membrane subunit, binds cytochrome b556;succinate dehydrogenase, membrane subunit, binds cytochrome b556;succinate dehydrogenase, flavoprotein subunit;succinate dehydrogenase, FeS subunit;
+174354	atpI;atpB;atpE;	3715363	3716853	+	305.0833089	1490	ATP synthase, membrane-bound accesory subunit;F0 sector of membrane-bound ATP synthase, subunit a;F0 sector of membrane-bound ATP synthase, subunit c;
+174355	atpF;atpH;atpA;atpG;atpD;atpC;	3716915	3722250	+	270.83862486666663	5335	F0 sector of membrane-bound ATP synthase, subunit b;F1 sector of membrane-bound ATP synthase subunit delta;F1 sector of membrane-bound ATP synthase subunit alpha;F1 sector of membrane-bound ATP synthase subunit gamma;F1 sector of membrane-bound ATP synthase subunit beta;F1 sector of membrane-bound ATP synthase subunit epsilon;
+174165	rplS;trmD;rimM;rpsP;	2743961	2745963	-	260.21480214999997	2002	50S ribosomal protein L19;tRNA (guanine-1-)-methyltransferase;16S rRNA processing protein;30S ribosomal protein S16;
+1763452	ompC;	2316102	2317205	-	252.8813406	1103	outer membrane porin protein C;
+173653	thrL;thrA;thrB;thrC;	190	5020	+	242.44151484924998	4830	thr operon leader peptide;fused aspartokinase I and homoserine dehydrogenase I;homoserine kinase;threonine synthase;

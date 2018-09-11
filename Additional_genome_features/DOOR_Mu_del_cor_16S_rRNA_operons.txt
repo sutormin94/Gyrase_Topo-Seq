@@ -1,0 +1,8 @@
+OperonID	Genes_ID	Start	End	Strand	Expression	Genes_description
+1764290	"rrfF;thrV;rrfD;rrlD;gltV;rrsD;"	3424400	3429656	-	15830,31395	"5S ribosomal RNA;Thr tRNA;5S ribosomal RNA;23S ribosomal RNA;Glu tRNA;16S ribosomal RNA;"
+1764317	"trpT;aspT;rrfC;rrlC;gltU;rrsC;"	3690771	3695995	-	15031,12978	"Trp tRNA;Asp tRNA;5S ribosomal RNA;23S ribosomal RNA;Glu tRNA;16S ribosomal RNA;"
+1764259	"rrfG;rrlG;gltW;rrsG;"	2725847	2730935	-	14670,3851	"5S ribosomal RNA;23S ribosomal RNA;Glu tRNA;16S ribosomal RNA;"
+1764328	"rrsE;ileU;alaU;rrlE;rrfE;"	4212776	4217871	+	11077,41896	"16S ribosomal RNA;Ile tRNA;Ala tRNA;23S ribosomal RNA;5S ribosomal RNA;"
+1764300	"rrfB;rrlB;gltT;rrsB;"	3466047	3471144	-	10709,89754	"5S ribosomal RNA;23S ribosomal RNA;Glu tRNA;16S ribosomal RNA;"
+1764188	"rrsH;ileV;alaV;rrlH;rrfH;aspU;"	223771	229004	+	9065,092752	"16S ribosomal RNA;Ile tRNA;Ala tRNA;23S ribosomal RNA;5S ribosomal RNA;Asp tRNA;"
+1764307	"rrfA;rrlA;alaT;ileT;rrsA;"	3597167	3602272	-	6867,527308	"5S ribosomal RNA;23S ribosomal RNA;Ala tRNA;Ile tRNA;16S ribosomal RNA;"
