@@ -130,10 +130,9 @@ Further scripts are not included into the main straightforward pipeline and requ
 5. Annotation of special regions (BIME-1s, BIME-2s)
 6. Annotation of TAD borders
 7. VCF file with mutations
+8. Processed data for GCSs enrichment in different genome regions (GCSs_association_with_TUs_USUS_USGB_GBDS_DSDS_barplot.R script)
 
 For *E. coli DY330* MuSGS all the additional files required are stored in **Additional_genome_features** folder.
-
-
 
 
 ## GCSs_transcription_score_GC_distributions_throughout_genome.py
@@ -183,6 +182,18 @@ N3E as a response for transcription inhibition for GCSs subsets
 
 ######################
 
+## TAD_Mut_assoc_GCSs_analysis.py
+
+Script analyzes colocalization of mutations (from Foster, 2015) and TADs borders (from Lioy, 2018) with GCSs.
+
+**Requirements:** python 3
+
+**Input:** TAB files with trusted GCSs, BED file with TAD intervals, VCF file with mutations
+
+**Output:** Statistics of GCSs associations
+
+######################
+
 ## qPCR_statistics.R
 
 Script that visualizes qPCR data: Cfx vs RifCfx compared for 4 locus - ccmH, MuSGS, rRNA A DS, rRNA A US.
@@ -212,15 +223,3 @@ GCSs association with rRNA operons is visualizing.
 **Input:** Excel file with GCSs data and score data 
 
 **Output:** Plots represent GCSs association data and score data
-
-######################
-
-## TAD_Mut_assoc_GCSs_analysis.py
-
-Script analyzes colocalization of mutations (from Foster, 2015) and TADs borders (from Lioy, 2018) with GCSs.
-
-**Requirements:** python 3
-
-**Input:** TAB files with trusted GCSs, BED file with TAD intervals, VCF file with mutations
-
-**Output:** Statistics of GCSs associations
