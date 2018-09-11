@@ -9,6 +9,9 @@ Topo-Seq is a ChIP-Seq-like approach that exploits formation of these intermedia
 This repository contains a set of bash, python and R scripts which were used for Topo-Seq data analysis and visualization. 
 Raw sequencing data and some processed files (coverage depth WIG, N3E WIG, GCSs lists) can be retrieved from GEO datasets with accession GSE117186.
 
+
+![alt text](https://github.com/sutormin94/Gyrase_Topo-seq/Pipeline_overview/Main_pipeline.png)
+
 ######################
 
 ## Raw_reads_processing.sh
