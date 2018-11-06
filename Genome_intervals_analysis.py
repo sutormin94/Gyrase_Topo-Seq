@@ -30,30 +30,47 @@ path_to_GCSs_files={'Cfx': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_mo
                     'Micro': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets_score\Micro_trusted_GCSs_h_s.txt",
                     'Oxo': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets_score\Oxo_trusted_GCSs_h_s.txt"}   
 #Input data - score, WIG.
-Score_path="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\Score_tracks\E_coli_w3110_G_Mu_score.wig"
+Score_path="C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\E_coli_w3110_G_Mu_score.wig"
 #Input data - sets of transcription units.
-path_to_TUs_sets={'All_genes': "C:\Sutor\science\DNA-gyrase\Results\Final_data_2\Expression_data\Deletion_corrected\DOOR_Mu_del_cor_genes_expression.txt",
-                  'High_transcription_level_genes': "C:\Sutor\science\DNA-gyrase\Results\Final_data_2\Expression_data\Deletion_corrected\DOOR_Mu_del_cor_high_expression_genes_370.txt",
-                  'Low_transcription_level_genes': "C:\Sutor\science\DNA-gyrase\Results\Final_data_2\Expression_data\Deletion_corrected\DOOR_Mu_del_cor_low_expression_genes_370.txt",
-                  'All_operons': "C:\Sutor\science\DNA-gyrase\Results\Final_data_2\Expression_data\Deletion_corrected\DOOR_Mu_del_cor_operons_expression.txt",
-                  'High_transcription_level_operons': "C:\Sutor\science\DNA-gyrase\Results\Final_data_2\Expression_data\Deletion_corrected\DOOR_Mu_del_cor_high_expression_operons_186.txt",
-                  'Low_transcription_level_operons': "C:\Sutor\science\DNA-gyrase\Results\Final_data_2\Expression_data\Deletion_corrected\DOOR_Mu_del_cor_low_expression_operons_186.txt",
-                  'Top_long_and_active_operons': "C:\Sutor\science\DNA-gyrase\Results\Final_data_2\Expression_data\Deletion_corrected\Top_long_and_active_DOOR_Mu_operons_expression.txt",
-                  '16S_operons': "C:\Sutor\science\DNA-gyrase\Results\Final_data_2\Expression_data\Deletion_corrected\DOOR_Mu_del_cor_16S_rRNA_operons.txt"}
+path_to_TUs_sets={'All_genes': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\DOOR_Mu_del_cor_genes_expression.txt",
+                  'High_transcription_level_genes': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\DOOR_Mu_del_cor_high_expression_genes_370.txt",
+                  'Low_transcription_level_genes': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\DOOR_Mu_del_cor_low_expression_genes_370.txt",
+                  'All_operons': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\DOOR_Mu_del_cor_operons_expression.txt",
+                  'High_transcription_level_operons': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\DOOR_Mu_del_cor_high_expression_operons_186.txt",
+                  'Low_transcription_level_operons': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\DOOR_Mu_del_cor_low_expression_operons_186.txt",
+                  'Top_long_and_active_operons': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\Top_long_and_active_DOOR_Mu_operons_expression.txt",
+                  '16S_operons': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\DOOR_Mu_del_cor_16S_rRNA_operons.txt"}
+#Length of the genome, bp
+Genome_length=4647454
 #Path for TU analysis output.
 TU_analysis_outpath="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_association_with_TUs\\"
 if not os.path.exists(TU_analysis_outpath):
     os.makedirs(TU_analysis_outpath)
 #Input data - sets of intervals.
-path_to_intervals_sets={'BIMEs1': "C:\Sutor\science\DNA-gyrase\Results\Final_data_2\GCSs_association_with_REPs\BIMEs1_coordinates.broadPeak",
-                  'BIMEs2': "C:\Sutor\science\DNA-gyrase\Results\Final_data_2\GCSs_association_with_REPs\BIMEs2_coordinates.broadPeak",
-                  'IHF sites': "C:\Sutor\science\DNA-gyrase\Tracks\IHFAB_w3110_G_Mu_SGS.broadPeak",
-                  'H-NS sites ': "C:\Sutor\science\DNA-gyrase\Tracks\H-NS_w3110_G_Mu_SGS.broadPeak",
-                  'Fis sites': "C:\Sutor\science\DNA-gyrase\Tracks\Fis_w3110_G_Mu_SGS.broadPeak",
-                  'MatP sites': "C:\Sutor\science\DNA-gyrase\Tracks\MatP_w3110_G_Mu_SGS.broadPeak",
-                  'Macrodomains': "C:\Sutor\science\DNA-gyrase\Tracks\Macrodomains_E_coli_w3110.broadPeak"}
+'''
+path_to_intervals_sets={'BIMEs1': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\BIMEs1_coordinates.broadPeak",
+                  'BIMEs2': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\BIMEs2_coordinates.broadPeak",
+                  'IHFA': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\IHFA_sites_mid_exp_Prieto_W3110_Mu_SGS.BroadPeak",
+                  'IHFB': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\IHFB_sites_mid_exp_Prieto_W3110_Mu_SGS.BroadPeak",
+                  'IHFAB': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\IHFAB_sites_mid_exp_Prieto_W3110_Mu_SGS.BroadPeak",
+                  'H-NS': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\H-NS_sites_ME_Kahramanoglou_W3110_Mu_SGS.BroadPeak",
+                  'Fis': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\Fis_sites_ME_Kahramanoglou_W3110_Mu_SGS.BroadPeak",
+                  'MatP': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\MatP_sites_37deg_Nolivos_W3110_Mu_SGS.BroadPeak",
+                  'MatS': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\MatS_sites_Mercier_W3110_Mu_SGS.BroadPeak",
+                  'TopoIV' : "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\TopoIV_trusted_sites_Sayyed_W3110_Mu_SGS.BroadPeak",
+                  'MukB' : "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\MukB_sites_37deg_Nolivos_W3110_Mu_SGS.BroadPeak",
+                  'Macrodomains': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\Macrodomains_E_coli_w3110_edited.broadPeak"}
+
+path_to_intervals_sets={'MatP 0': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\MatP_sites_37deg_Nolivos_W3110_Mu_SGS.BroadPeak",
+                        'MatP 3': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\MatP_sites_thr_3_37deg_Nolivos_W3110_Mu_SGS.BroadPeak",
+                        'MukB 0' : "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\MukB_sites_37deg_Nolivos_W3110_Mu_SGS.BroadPeak",
+                        'MukB 2' : "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\MukB_sites_thr_2_37deg_Nolivos_W3110_Mu_SGS.BroadPeak",
+                        'MukB 3' : "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\MukB_sites_thr_3_37deg_Nolivos_W3110_Mu_SGS.BroadPeak"}
+'''
+path_to_intervals_sets={'MatP Ter': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\MatP_sites_thr_3_37deg_Nolivos_W3110_Mu_SGS_Ter.BroadPeak",
+                        'MatP not Ter': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\MatP_sites_thr_3_37deg_Nolivos_W3110_Mu_SGS_no_Ter.BroadPeak"}
 #Path for intervals analysis output.
-Intervals_analysis_outpath="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_association_with_BIMEs_and_NAPs_sites\\"
+Intervals_analysis_outpath="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_association_with_MatP_MukB_dif_thr\\"
 if not os.path.exists(Intervals_analysis_outpath):
     os.makedirs(Intervals_analysis_outpath)
  
@@ -388,8 +405,7 @@ def TU_association(GCSs_sets_dict, TU_set, set_type, window_width, path_out, set
 #4) Interval mean score vs genome mean score - t-test.
 #######
 
-def TU_interval_stat_analysis(GCSs_sets_dict, intervals_GCSs_dict, intervals, score_data, window_width, set_type, path_out, set_name):
-    genome_len=4647454
+def TU_interval_stat_analysis(GCSs_sets_dict, intervals_GCSs_dict, intervals, score_data, window_width, set_type, path_out, set_name, genome_len):
     #Correcting genome length.
     deletions=[[274500, 372148], [793800, 807500], [1199000, 1214000]] #Deletions in E. coli w3110 strain that corresponds to DY330 strain.
     del_len=0
@@ -560,9 +576,8 @@ def GCSs_num_normalization(all_TUs, part_TUs, GCSs_sets_dict, all_TUs_set, part_
 #Statistical analysis for the number of GCSs associated with 16S operons, additional normalization step is added. 
 #######
 
-def GCSs_number_norm_16S(intervals_GCSs_dict, GCSs_sets_dict):
+def GCSs_number_norm_16S(intervals_GCSs_dict, GCSs_sets_dict, genome_len):
     #Correcting genome length.
-    genome_len=4647454
     deletions=[[274500, 372148], [793800, 807500], [1199000, 1214000]] #Deletions in E. coli w3110 strain that corresponds to DY330 strain.
     del_len=0
     for i in deletions:
@@ -638,7 +653,7 @@ def broadpeak_pars(intervals_sets_path):
 #GCSs in intervals.
 #######   
 
-def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
+def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out, genome_len):
     #Preparing output files.
     fileout=open(path_out+'GCSs_associated_with_intervals_statistics.txt', 'w') #For all intervals sets.
     fileout.write('Interval type\tCondition\tNumber of GCSs expected\tNumber of GCSs observed\tp-value\t' +
@@ -660,7 +675,6 @@ def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
     del_len=0
     for i in deletions:
         del_len+=i[1]-i[0]
-    genome_len=4647454
     genome_len_dc=genome_len-del_len  
     
     #Prepares lists of GCSs N3E and scores for statistical tests.
@@ -686,11 +700,24 @@ def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
                     GCSs_associated_info[k][a]=[0, [], []] #Dictionary contains elements corresponds to GCSs sets. [Number of GCSs, N3E values, Score values]
                 interval_associated_GCSs[a]=[] #Counter for the number of GCSs fall into the particular interval. Stores GCSs coordinates.
                 for gcs, info in s.items(): #Iterate GCSs.
-                    if i[1]>gcs>i[0]:
-                        GCSs_associated_info[k][a][0]+=1
-                        GCSs_associated_info[k][a][1].append(info[0])
-                        GCSs_associated_info[k][a][2].append(info[1])
-                        interval_associated_GCSs[a].append(gcs)
+                    if i[1]>=i[0]>=0: #Interval does not cross position for genome start/end
+                        if i[1]>gcs>i[0]:
+                            GCSs_associated_info[k][a][0]+=1
+                            GCSs_associated_info[k][a][1].append(info[0])
+                            GCSs_associated_info[k][a][2].append(info[1])
+                            interval_associated_GCSs[a].append(gcs)
+                    elif 0<i[1]<i[0]: #Interval crosses position for genome start/end
+                        if i[1]>gcs>=0 or genome_len>gcs>=i[0]:
+                            GCSs_associated_info[k][a][0]+=1
+                            GCSs_associated_info[k][a][1].append(info[0])
+                            GCSs_associated_info[k][a][2].append(info[1])
+                            interval_associated_GCSs[a].append(gcs)                             
+                    elif i[0]<0 and i[1]>0: #Interval crosses position for genome start/end (alternative coordinate system for interval boundary setting)
+                        if i[1]>gcs>=0 or genome_len>gcs>=genome_len+i[0]:
+                            GCSs_associated_info[k][a][0]+=1
+                            GCSs_associated_info[k][a][1].append(info[0])
+                            GCSs_associated_info[k][a][2].append(info[1])
+                            interval_associated_GCSs[a].append(gcs)                          
             
             #Writing data for BIMEs
             if k in ['BIMEs1', 'BIMEs2']:
@@ -800,11 +827,12 @@ def GCSs_in_intervals(GCSs_sets_dict, intervals, score_data, path_out):
     fileout2.close()
     return GCSs_associated_info
 
+
 #######
 #Wrapper for TUs analysis functions.
 ####### 
 
-def TU_analysis_wrapper(input_dict, inpath, TUs_sets_path, path_out):
+def TU_analysis_wrapper(input_dict, inpath, TUs_sets_path, path_out, genome_len):
     #Reading input.
     GCSs_sets_dict=trusted_GCSs_parsing(input_dict) #Parsing GCSs
     score_data=score_data_parser(inpath, 'score') #Parsing score file
@@ -814,14 +842,14 @@ def TU_analysis_wrapper(input_dict, inpath, TUs_sets_path, path_out):
     window_width_16S_operons=5000
     set_type_16S='16S operons'
     GCSs_16S_assoc_info=TU_association(GCSs_sets_dict, TU_sets_dict['16S_operons'], set_type_16S, window_width_16S_operons, path_out, set_type_16S)
-    TU_interval_stat_analysis(GCSs_sets_dict, GCSs_16S_assoc_info, TU_sets_dict['16S_operons'], score_data, window_width_16S_operons, set_type_16S, path_out, set_type_16S)
-    GCSs_set_exp_interval_dict_16S=GCSs_number_norm_16S(GCSs_16S_assoc_info, GCSs_sets_dict)
+    TU_interval_stat_analysis(GCSs_sets_dict, GCSs_16S_assoc_info, TU_sets_dict['16S_operons'], score_data, window_width_16S_operons, set_type_16S, path_out, set_type_16S, genome_len)
+    GCSs_set_exp_interval_dict_16S=GCSs_number_norm_16S(GCSs_16S_assoc_info, GCSs_sets_dict, genome_len)
     write_GCSs_norm(GCSs_set_exp_interval_dict_16S, path_out, '16S_operons')  
     
     #All genes analysis.
     window_width=650
     GCSs_all_genes_assoc_info=TU_association(GCSs_sets_dict, TU_sets_dict['All_genes'], 'genes', window_width, path_out, 'All_genes')
-    TU_interval_stat_analysis(GCSs_sets_dict, GCSs_all_genes_assoc_info, TU_sets_dict['All_genes'], score_data, window_width, 'genes', path_out, 'All_genes')
+    TU_interval_stat_analysis(GCSs_sets_dict, GCSs_all_genes_assoc_info, TU_sets_dict['All_genes'], score_data, window_width, 'genes', path_out, 'All_genes', genome_len)
     GCSs_set_exp_interval_dict_ag=GCSs_num_normalization(GCSs_all_genes_assoc_info, GCSs_all_genes_assoc_info, GCSs_sets_dict, TU_sets_dict['All_genes'], TU_sets_dict['All_genes'])
     write_GCSs_norm(GCSs_set_exp_interval_dict_ag, path_out, 'All_genes')    
     
@@ -829,14 +857,14 @@ def TU_analysis_wrapper(input_dict, inpath, TUs_sets_path, path_out):
     for k, v in TU_sets_dict.items():
         if k not in ['All_genes'] and k.find('genes')>0: #k contains 'genes' as a substring but not equial to 'All_genes'.
             GCSs_genes_assoc_info=TU_association(GCSs_sets_dict, v, 'genes', window_width, path_out, k)
-            TU_interval_stat_analysis(GCSs_sets_dict, GCSs_genes_assoc_info, v, score_data, window_width, 'genes', path_out, k)
+            TU_interval_stat_analysis(GCSs_sets_dict, GCSs_genes_assoc_info, v, score_data, window_width, 'genes', path_out, k, genome_len)
             GCSs_set_exp_interval_dict_g=GCSs_num_normalization(GCSs_all_genes_assoc_info, GCSs_genes_assoc_info, GCSs_sets_dict, TU_sets_dict['All_genes'], TU_sets_dict[k])
             write_GCSs_norm(GCSs_set_exp_interval_dict_g, path_out, k)
             
     #All operons analysis.
     window_width=650
     GCSs_all_operons_assoc_info=TU_association(GCSs_sets_dict, TU_sets_dict['All_operons'], 'operons', window_width, path_out, 'All_operons')
-    TU_interval_stat_analysis(GCSs_sets_dict, GCSs_all_operons_assoc_info, TU_sets_dict['All_operons'], score_data, window_width, 'operons', path_out, 'All_operons')
+    TU_interval_stat_analysis(GCSs_sets_dict, GCSs_all_operons_assoc_info, TU_sets_dict['All_operons'], score_data, window_width, 'operons', path_out, 'All_operons', genome_len)
     GCSs_set_exp_interval_dict_ao=GCSs_num_normalization(GCSs_all_operons_assoc_info, GCSs_all_operons_assoc_info, GCSs_sets_dict, TU_sets_dict['All_operons'], TU_sets_dict['All_operons'])
     write_GCSs_norm(GCSs_set_exp_interval_dict_ao, path_out, 'All_operons')    
     
@@ -844,28 +872,28 @@ def TU_analysis_wrapper(input_dict, inpath, TUs_sets_path, path_out):
     for k, v in TU_sets_dict.items():
         if k not in ['All_operons', '16S_operons'] and k.find('operons')>0: #k contains 'operons' as a substring but not equial to 'All_operons' or '16S_operons'.
             GCSs_operons_assoc_info=TU_association(GCSs_sets_dict, v, 'operons', window_width, path_out, k)
-            TU_interval_stat_analysis(GCSs_sets_dict, GCSs_operons_assoc_info, v, score_data, window_width, 'operons', path_out, k)
+            TU_interval_stat_analysis(GCSs_sets_dict, GCSs_operons_assoc_info, v, score_data, window_width, 'operons', path_out, k, genome_len)
             GCSs_set_exp_interval_dict_o=GCSs_num_normalization(GCSs_all_operons_assoc_info, GCSs_operons_assoc_info, GCSs_sets_dict, TU_sets_dict['All_operons'], TU_sets_dict[k])
             write_GCSs_norm(GCSs_set_exp_interval_dict_o, path_out, k)
     return
 
 
-TU_analysis_wrapper(path_to_GCSs_files, Score_path, path_to_TUs_sets, TU_analysis_outpath)
+#TU_analysis_wrapper(path_to_GCSs_files, Score_path, path_to_TUs_sets, TU_analysis_outpath, Genome_length)
 
 #######
 #Wrapper for intervals analysis functions.
 ####### 
 
-def Interval_analysis_wrapper(input_dict, inpath, intervals_sets_path, path_out):
+def Interval_analysis_wrapper(input_dict, inpath, intervals_sets_path, path_out, genome_len):
     #Reading input.
     GCSs_sets_dict=trusted_GCSs_parsing(input_dict) #Parsing GCSs
     score_data=score_data_parser(inpath, 'score') #Parsing score file   
     Intervals_sets_dict=broadpeak_pars(intervals_sets_path) #Parsing intervals
     
     #Statistics calculation.
-    GCSs_in_intervals(GCSs_sets_dict, Intervals_sets_dict, score_data, path_out)
+    GCSs_in_intervals(GCSs_sets_dict, Intervals_sets_dict, score_data, path_out, genome_len)
     return
 
-Interval_analysis_wrapper(path_to_GCSs_files, Score_path, path_to_intervals_sets, Intervals_analysis_outpath)
+Interval_analysis_wrapper(path_to_GCSs_files, Score_path, path_to_intervals_sets, Intervals_analysis_outpath, Genome_length)
 
 print('Script ended its work succesfully!') 

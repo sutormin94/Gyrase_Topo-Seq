@@ -150,7 +150,7 @@ Also it plots the distribution of other values such as score, GC% and transcript
 
 ## Genome_intervals_analysis.py
 
-The script analyzes sets of genome intervals (transcription units - TUs, BIME-1s, BIME-2s, IHF sites, Fis sites, H-NS sites, MatP sites, etc.)
+The script analyzes sets of genome intervals (transcription units - TUs, BIME-1s, BIME-2s, IHF sites, Fis sites, H-NS sites, MatP sites, chromosomal macrodomains, etc.)
 for the enrichment of GCSs (binomial test), compares their N3E and score with mean GCSs N3E and score (t-test), 
 compares intervals mean score with genome mean score (t-test).
 
