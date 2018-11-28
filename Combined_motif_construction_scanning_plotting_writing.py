@@ -357,23 +357,28 @@ def Plotting(matrix, matrix_type, win_width, outpath):
     x_axis=[]
     for i in range(len(matrix)):
         x_axis.append(-(win_width/2)+1+i)
-    ax_range=[-win_width/2, win_width/2, 0.3, 0.95]
+    ax_range=[-win_width/2, win_width/2, 0.35, 0.7]
+    yticks=[0.35, 0.4, 0.5, 0.6, 0.7]
+    xticks=[-80, -63, 0, 66, 80]
     plt.figure(figsize=(16, 6), dpi=100)
     plot1=plt.subplot()
-    plot1.set_xticks([0], minor=True)
+    #plot1.set_xticks([0], minor=True)
     plot1.xaxis.grid(True, which='minor', linewidth=0.5, linestyle='--', alpha=1)     
-    plot1.plot(x_axis, matrix, color='#7FCE79', linewidth=4, alpha=0.6)
-    plot1.plot(x_axis, matrix, color='#454F24', linewidth=1, alpha=0.6)
-    plot1.plot(x_axis, matrix, 'o', fillstyle='none', color='#7FCE79', markeredgecolor='#454F24', markersize=2, alpha=0.6)               
+    plot1.plot(x_axis, matrix, color='#7FCE79', linewidth=18, alpha=0.6)
+    plot1.plot(x_axis, matrix, color='#454F24', linewidth=5, alpha=0.6)
+    plot1.plot(x_axis, matrix, 'o', fillstyle='none', color='#7FCE79', markeredgecolor='#454F24', markersize=7, alpha=0.6)               
     plot1.tick_params(axis='both', direction='in', bottom='on', top='on', left='on', right='on')
     plot1.axis(ax_range)
     plot1.set_xlim(-win_width/2, win_width/2)
-    plot1.set_xticks(np.concatenate((np.arange(-(win_width/2)+5, (win_width/2)+2, 10), [0, 3, -63, -17, 20, 66])), minor=False)
-    plot1.tick_params(axis='both', which='major', labelsize=14)
-    plot1.set_xlabel('Position, nt', size=17)
-    plot1.set_ylabel(str(matrix_type + '%'), size=17)
+    plot1.set_xticks(xticks, minor=False)
+    plot1.set_yticks(yticks, minor=False)
+    #plot1.set_xticks(np.concatenate((np.arange(-(win_width/2)+5, (win_width/2)+2, 10), [0, 3, -63, -17, 20, 66])), minor=False)
+    plot1.tick_params(axis='both', which='major', labelsize=35)
+    plot1.set_xlabel('Position, nt', size=35)
+    plot1.set_ylabel(str(matrix_type + '%'), size=35)
+    plt.tight_layout()
     #plt.show()
-    plt.savefig(outpath + 'Combined_motif_plot.png', dpi=400, figsize=(16, 6))
+    plt.savefig(outpath + 'Combined_motif_plot_transp_back.png', dpi=400, figsize=(16, 6), transparent=True)
     plt.close()
     return
 
