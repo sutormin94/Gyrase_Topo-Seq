@@ -354,7 +354,7 @@ def plot_enrichment_signal(fname, IP_nd_ends, mock_nd_ends, un_IP_sm, un_mock_sm
     #Some hack to avoid some bug in matplotlib (OverflowError: In draw_path: Exceeded cell block limit)
     #See: https://stackoverflow.com/questions/37470734/matplotlib-giving-error-overflowerror-in-draw-path-exceeded-cell-block-limit
     mpl.rcParams['agg.path.chunksize']=10000
-    #Scaling smoothed tracks to male them visible on the plot.
+    #Scaling smoothed tracks to make them visible on the plot.
     max_element=max(IP_nd_ends+mock_nd_ends) #Max N3E value of experimental tracks
     max_element_IP_sm=max(un_IP_sm)
     max_element_mock_sm=max(un_mock_sm)
