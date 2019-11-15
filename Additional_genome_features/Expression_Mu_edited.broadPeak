@@ -1,4 +1,4 @@
-track type=broadPeak visibility=3 db=NC_007779.1_w3110_Mu name="expression" description="expression"
+track type=broadPeak visibility=3 db=NC_007779.1_w3110_Mu name="EP_expression_Incarnato_2018" description="Exponential phase expression Incarnato 2018 data"
 browser position NC_007779.1_w3110_Mu:1-100
 NC_007779.1_w3110_Mu	3633105	3633573	yigI	34.26495727	+	34.26495727	-1	-1
 NC_007779.1_w3110_Mu	3067117	3067858	yggE	18.12145749	-	18.12145749	-1	-1

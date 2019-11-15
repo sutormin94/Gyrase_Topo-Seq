@@ -878,7 +878,7 @@ def TU_analysis_wrapper(input_dict, inpath, TUs_sets_path, path_out, genome_len)
     return
 
 
-#TU_analysis_wrapper(path_to_GCSs_files, Score_path, path_to_TUs_sets, TU_analysis_outpath, Genome_length)
+TU_analysis_wrapper(path_to_GCSs_files, Score_path, path_to_TUs_sets, TU_analysis_outpath, Genome_length)
 
 #######
 #Wrapper for intervals analysis functions.
@@ -894,6 +894,6 @@ def Interval_analysis_wrapper(input_dict, inpath, intervals_sets_path, path_out,
     GCSs_in_intervals(GCSs_sets_dict, Intervals_sets_dict, score_data, path_out, genome_len)
     return
 
-Interval_analysis_wrapper(path_to_GCSs_files, Score_path, path_to_intervals_sets, Intervals_analysis_outpath, Genome_length)
+#Interval_analysis_wrapper(path_to_GCSs_files, Score_path, path_to_intervals_sets, Intervals_analysis_outpath, Genome_length)
 
 print('Script ended its work succesfully!') 

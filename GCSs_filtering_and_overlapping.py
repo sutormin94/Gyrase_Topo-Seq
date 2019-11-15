@@ -25,54 +25,54 @@ import numpy as np
 print('Variables to be defined:')
 
 #Path to the working directory
-pwd="/data/Gyrase/Data_preparation/"
+pwd="F:\E_coli_Topo-Seqs\Gyrase_Topo-Seq_data_coverage_depth\\"
 
 #Input data
-path_to_cfx_replicas={'Cfx_1': pwd + "Cfx_10mkM/GCSs_calling_0_05/Cfx_1/Cfx_1_raw_GCSs_called.txt",
-                      'Cfx_2': pwd + "Cfx_10mkM/GCSs_calling_0_05/Cfx_2/Cfx_2_raw_GCSs_called.txt",
-                      'Cfx_3': pwd + "Cfx_10mkM/GCSs_calling_0_05/Cfx_3/Cfx_3_raw_GCSs_called.txt"}
-path_to_rifcfx_replicas={'RifCfx_1': pwd + "RifCfx/GCSs_calling_0_05_Un/RifCfx_1/RifCfx_1_raw_GCSs_called.txt",
-                         'RifCfx_2':  pwd + "RifCfx/GCSs_calling_0_05_Un/RifCfx_2/RifCfx_2_raw_GCSs_called.txt",
-                      'RifCfx_3':  pwd + "RifCfx/GCSs_calling_0_05_Un/RifCfx_3/RifCfx_3_raw_GCSs_called.txt"}
-path_to_microcin_replicas={'Micro_1':  pwd + "Micro/GCSs_calling_0_05/Micro_1/Micro_1_raw_GCSs_called.txt",
-                           'Micro_2': pwd + "Micro/GCSs_calling_0_05/Micro_2/Micro_2_raw_GCSs_called.txt",
-                      'Micro_3': pwd + "Micro/GCSs_calling_0_05/Micro_3/Micro_3_raw_GCSs_called.txt"}
-path_to_oxo_replicas={'Oxo_1': pwd + "Oxo/GCSs_calling_0_05/Oxo_1/Oxo_1_raw_GCSs_called.txt",
-                      'Oxo_2': pwd + "Oxo/GCSs_calling_0_05/Oxo_2/Oxo_2_raw_GCSs_called.txt",
-                      'Oxo_3': pwd + "Oxo/GCSs_calling_0_05/Oxo_3/Oxo_3_raw_GCSs_called.txt"}
+path_to_cfx_replicas={'Cfx_1': pwd + "EP_Cfx_GCSs_calling_0.01\EP_Cfx_R1\EP_Cfx_R1_raw_GCSs_called.txt",
+                      'Cfx_2': pwd + "EP_Cfx_GCSs_calling_0.01\EP_Cfx_R2\EP_Cfx_R2_raw_GCSs_called.txt",
+                      'Cfx_3': pwd + "EP_Cfx_GCSs_calling_0.01\EP_Cfx_R3\EP_Cfx_R3_raw_GCSs_called.txt"}
+path_to_rifcfx_replicas={'RifCfx_1': pwd + "EP_RifCfx_GCSs_calling_0.01\EP_RifCfx_R1\EP_RifCfx_R1_raw_GCSs_called.txt",
+                         'RifCfx_2': pwd + "EP_RifCfx_GCSs_calling_0.01\EP_RifCfx_R2\EP_RifCfx_R2_raw_GCSs_called.txt",
+                         'RifCfx_3': pwd + "EP_RifCfx_GCSs_calling_0.01\EP_RifCfx_R3\EP_RifCfx_R3_raw_GCSs_called.txt"}
+path_to_microcin_replicas={'Micro_1': pwd + "EP_Micro_GCSs_calling_0.01\EP_Micro_R1\EP_Micro_R1_raw_GCSs_called.txt",
+                           'Micro_2': pwd + "EP_Micro_GCSs_calling_0.01\EP_Micro_R2\EP_Micro_R2_raw_GCSs_called.txt",
+                           'Micro_3': pwd + "EP_Micro_GCSs_calling_0.01\EP_Micro_R3\EP_Micro_R3_raw_GCSs_called.txt"}
+path_to_oxo_replicas={'Oxo_1': pwd + "EP_Oxo_GCSs_calling_0.01\EP_Oxo_R1\EP_Oxo_R1_raw_GCSs_called.txt",
+                      'Oxo_2': pwd + "EP_Oxo_GCSs_calling_0.01\EP_Oxo_R2\EP_Oxo_R2_raw_GCSs_called.txt",
+                      'Oxo_3': pwd + "EP_Oxo_GCSs_calling_0.01\EP_Oxo_R3\EP_Oxo_R3_raw_GCSs_called.txt"}
 #Input data in one dict (for one output table contains all replices and raw GCSs)
-path_to_replicas={'Cfx_1': pwd + "Cfx_10mkM/GCSs_calling_0_05/Cfx_1/Cfx_1_raw_GCSs_called.txt",
-                  'Cfx_2': pwd + "Cfx_10mkM/GCSs_calling_0_05/Cfx_2/Cfx_2_raw_GCSs_called.txt",
-                      'Cfx_3': pwd + "Cfx_10mkM/GCSs_calling_0_05/Cfx_3/Cfx_3_raw_GCSs_called.txt",
-                      'RifCfx_1': pwd + "RifCfx/GCSs_calling_0_05_Un/RifCfx_1/RifCfx_1_raw_GCSs_called.txt",
-                      'RifCfx_2':  pwd + "RifCfx/GCSs_calling_0_05_Un/RifCfx_2/RifCfx_2_raw_GCSs_called.txt",
-                      'RifCfx_3':  pwd + "RifCfx/GCSs_calling_0_05_Un/RifCfx_3/RifCfx_3_raw_GCSs_called.txt",
-                      'Micro_1':  pwd + "Micro/GCSs_calling_0_05/Micro_1/Micro_1_raw_GCSs_called.txt",
-                      'Micro_2': pwd + "Micro/GCSs_calling_0_05/Micro_2/Micro_2_raw_GCSs_called.txt",
-                      'Micro_3': pwd + "Micro/GCSs_calling_0_05/Micro_3/Micro_3_raw_GCSs_called.txt",
-                      'Oxo_1': pwd + "Oxo/GCSs_calling_0_05/Oxo_1/Oxo_1_raw_GCSs_called.txt",
-                      'Oxo_2': pwd + "Oxo/GCSs_calling_0_05/Oxo_2/Oxo_2_raw_GCSs_called.txt",
-                      'Oxo_3': pwd + "Oxo/GCSs_calling_0_05/Oxo_3/Oxo_3_raw_GCSs_called.txt"}
+path_to_replicas={'Cfx_1': pwd + "EP_Cfx_GCSs_calling_0.01\EP_Cfx_R1\EP_Cfx_R1_raw_GCSs_called.txt",
+                  'Cfx_2': pwd + "EP_Cfx_GCSs_calling_0.01\EP_Cfx_R2\EP_Cfx_R2_raw_GCSs_called.txt",
+                  'Cfx_3': pwd + "EP_Cfx_GCSs_calling_0.01\EP_Cfx_R3\EP_Cfx_R3_raw_GCSs_called.txt",
+                  'RifCfx_1': pwd + "EP_RifCfx_GCSs_calling_0.01\EP_RifCfx_R1\EP_RifCfx_R1_raw_GCSs_called.txt",
+                  'RifCfx_2': pwd + "EP_RifCfx_GCSs_calling_0.01\EP_RifCfx_R2\EP_RifCfx_R2_raw_GCSs_called.txt",
+                  'RifCfx_3': pwd + "EP_RifCfx_GCSs_calling_0.01\EP_RifCfx_R3\EP_RifCfx_R3_raw_GCSs_called.txt",
+                  'Micro_1': pwd + "EP_Micro_GCSs_calling_0.01\EP_Micro_R1\EP_Micro_R1_raw_GCSs_called.txt",
+                  'Micro_2': pwd + "EP_Micro_GCSs_calling_0.01\EP_Micro_R2\EP_Micro_R2_raw_GCSs_called.txt",
+                  'Micro_3': pwd + "EP_Micro_GCSs_calling_0.01\EP_Micro_R3\EP_Micro_R3_raw_GCSs_called.txt",
+                  'Oxo_1': pwd + "EP_Oxo_GCSs_calling_0.01\EP_Oxo_R1\EP_Oxo_R1_raw_GCSs_called.txt",
+                  'Oxo_2': pwd + "EP_Oxo_GCSs_calling_0.01\EP_Oxo_R2\EP_Oxo_R2_raw_GCSs_called.txt",
+                  'Oxo_3': pwd + "EP_Oxo_GCSs_calling_0.01\EP_Oxo_R3\EP_Oxo_R3_raw_GCSs_called.txt"}
 
 #Configuration of the output for the GCSs data in replicas.
-Replicas_path_out="/data/Gyrase/GCSs_sets/"
+Replicas_path_out="F:\E_coli_Topo-Seqs\Gyrase_Topo-Seq_data_coverage_depth\Trusted_GCSs_calling\\"
 if not os.path.exists(Replicas_path_out):
     os.makedirs(Replicas_path_out)
-Cfx_name="Cfx_10mkM"
-RifCfx_name="RifCfx"
-Micro_name="Micro"
-Oxo_name="Oxo"
+Cfx_name="EP_Cfx_10mKM"
+RifCfx_name="EP_RifCfx"
+Micro_name="EP_Micro"
+Oxo_name="EP_Oxo"
 All_conditions_name="All_conditions_GCSs"
 #Configuration of the output for GCSs trusted.
-Cfx_path=Replicas_path_out + "Cfx_10mkM_trusted_GCSs.txt"
-RifCfx_path=Replicas_path_out + "RifCfx_trusted_GCSs.txt"
-Micro_path=Replicas_path_out + "Micro_trusted_GCSs.txt"
-Oxo_path=Replicas_path_out + "Oxo_trusted_GCSs.txt"
-Cfx_Micro_path=Replicas_path_out + "Cfx_10mkM_Micro_shared_trusted_GCSs.txt"
-Cfx_Oxo_path=Replicas_path_out + "Cfx_10mkM_Oxo_shared_trusted_GCSs.txt"
-Micro_Oxo_path=Replicas_path_out + "Micro_Oxo_shared_trusted_GCSs.txt"
-Cfx_Micro_Oxo_path=Replicas_path_out + "Cfx_10mkM_Micro_Oxo_shared_trusted_GCSs.txt"
-Cfx_RifCfx_shared_GCSs_path=Replicas_path_out + "Cfx_10mkM_RifCfx_shared_trusted_GCSs.txt"
+Cfx_path=Replicas_path_out + "EP_Cfx_10mkM_trusted_GCSs.txt"
+RifCfx_path=Replicas_path_out + "EP_RifCfx_trusted_GCSs.txt"
+Micro_path=Replicas_path_out + "EP_Micro_trusted_GCSs.txt"
+Oxo_path=Replicas_path_out + "EP_Oxo_trusted_GCSs.txt"
+Cfx_Micro_path=Replicas_path_out + "EP_Cfx_10mkM_Micro_shared_trusted_GCSs.txt"
+Cfx_Oxo_path=Replicas_path_out + "EP_Cfx_10mkM_Oxo_shared_trusted_GCSs.txt"
+Micro_Oxo_path=Replicas_path_out + "EP_Micro_Oxo_shared_trusted_GCSs.txt"
+Cfx_Micro_Oxo_path=Replicas_path_out + "EP_Cfx_10mkM_Micro_Oxo_shared_trusted_GCSs.txt"
+Cfx_RifCfx_shared_GCSs_path=Replicas_path_out + "EP_Cfx_10mkM_RifCfx_shared_trusted_GCSs.txt"
 #Outpath for Venn diagrams.
 plot_outpath=Replicas_path_out
 

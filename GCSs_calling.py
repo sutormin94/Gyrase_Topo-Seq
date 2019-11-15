@@ -165,7 +165,8 @@ def norm_smooth_devide(ex_file_path, cont_file_path, un_ex_file_path, un_cont_fi
     untreated_control=wig_parsing(un_cont_file_path) #-A-IP
     #Normalization on the reads number
     #Adds pseudocounts to avoid zero values
-    Min_total_NE=min(treated_experiment[1], treated_control[1], untreated_experiment[1], untreated_control[1])
+    Min_total_NE=min(treated_experiment[1], treated_control[1], 
+                     untreated_experiment[1], untreated_control[1])
     print('Min_total_NE: ' + str(Min_total_NE))
     treated_experiment_norm=[1.0 * (x + 1) * Min_total_NE/treated_experiment[1] for x in treated_experiment[0]] #+A+IP norm
     treated_control_norm=[1.0 * (x + 1) * Min_total_NE/treated_control[1] for x in treated_control[0]] #+A-IP norm

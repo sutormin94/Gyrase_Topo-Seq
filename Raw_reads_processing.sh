@@ -37,7 +37,7 @@ echo '
 #######################
 Initial quality control is in progress...
 #######################
-'	
+'
 mkdir $PWD/Fastqc_analysis/
 fastqc -t 20 -o $PWD/Fastqc_analysis/ $PWD/Raw_data/*
 

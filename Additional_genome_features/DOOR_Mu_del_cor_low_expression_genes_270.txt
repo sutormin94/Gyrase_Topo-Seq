@@ -1,0 +1,271 @@
+GeneID	Gene_name	Start	End	Strand	Expression	Gene_description	OperonID
+Y75_p3967	yjcP	4304165	4305631	-	0,792774369	outer membrane factor of efflux pump	174458
+Y75_p2342	yfdX	2500335	2500970	-	0,79245283	hypothetical protein	1763499
+Y75_p1671	ydiP	1781226	1782137	-	0,791666667	DNA-binding transcriptional regulator	1763267
+Y75_p1673	ydiR	1783237	1784175	+	0,790202343	electron transfer flavoprotein, FAD-binding	173987
+Y75_p3080	yhbU	3302462	3303457	+	0,789156627	peptidase, collagenase-like	174279
+Y75_p2864	cmtB	3078665	3079108	-	0,788288288	PTS system mannitol-specific transporter subunit IIA	174232
+Y75_p1664	ydiL	1773451	1773807	+	0,784313725	hypothetical protein	1763265
+Y75_p1368	paaD	1458761	1459258	+	0,775100402	multicomponent oxygenase/reductase subunit for phenylacetic acid degradation	173935
+Y75_p2081	yehM	2210151	2212430	+	0,771929825	hypothetical protein	174066
+Y75_p0982	rarA	1072509	1073309	-	0,770287141	hydrolase	173868
+Y75_p1537	rem	1647487	1647738	-	0,76984127	hypothetical protein	1763207
+Y75_p0354	tauA	384456	385418	+	0,769470405	taurine transporter subunit	173737
+Y75_p1649	ydhY	1756687	1757313	-	0,768740032	4Fe-4S ferredoxin-type protein	173982
+Y75_p4160	yjhB	4509860	4511077	+	0,765188834	transporter	174491
+Y75_p1367	paaC	1458000	1458746	+	0,760374833	multicomponent oxygenase/reductase subunit for phenylacetic acid degradation	173935
+Y75_p4202	fimC	4550106	4550831	+	0,757575758	chaperone, periplasmic	174499
+Y75_p2007	wcaL	2119166	2120386	-	0,756756757	glycosyl transferase	174052
+Y75_p2602	ygaT	2788763	2789740	+	0,756646217	hypothetical protein	174174
+Y75_p0506	ylbF	548850	549665	+	0,753676471	hypothetical protein	173772
+Y75_p1365	paaA	1456763	1457692	+	0,752688172	multicomponent oxygenase/reductase subunit for phenylacetic acid degradation	173935
+Y75_p2642	srlB	2827140	2827511	+	0,752688172	PTS system glucitol/sorbitol-specific transporter subunit IIA	174184
+Y75_p1417	ydcT	1515653	1516666	+	0,747534517	spermidine/putrescine transporter subunit	173942
+Y75_p0980	ycdH	1071404	1071898	-	0,747474747	oxidoreductase, flavin:NADH component	173868
+Y75_p1709	chbF	1819984	1821336	-	0,747228381	cryptic phospho-beta-glucosidase	173993
+Y75_p0499	ybbY	539789	541090	+	0,74577573	uracil/xanthine transporter	173770
+Y75_p1012	csgC	1106324	1106656	+	0,744744745	curli production protein	173874
+Y75_p2367	xapA	2530613	2531446	-	0,743405276	purine nucleoside phosphorylase II	174122
+Y75_p0438	glnK	471822	472160	+	0,740412979	nitrogen assimilation regulatory protein for GlnL, GlnE, and AmtB	173756
+Y75_p1760	yeaI	1873221	1874696	+	0,738482385	diguanylate cyclase	1763306
+Y75_p0503	allD	544538	545587	-	0,738095238	ureidoglycolate dehydrogenase	173771
+Y75_p2124	rihB	2258701	2259642	-	0,737791932	ribonucleoside hydrolase 2	1763436
+Y75_p2013	wcaI	2127782	2129005	-	0,735294118	glycosyl transferase	174053
+Y75_p0974	yccE	1065580	1066836	+	0,731901352	hypothetical protein	1762979
+Y75_p2787	ygeI	2993416	2993634	+	0,730593607	hypothetical protein	1763638
+Y75_p1670	ydiO	1780032	1781183	+	0,730034722	acyl-CoA dehydrogenase	173986
+Y75_p0981	ycdI	1071909	1072499	-	0,727580372	oxidoreductase	173868
+Y75_p2862	yggP	3075957	3077234	-	0,726917058	dehydrogenase	174232
+Y75_p2410	eutI	2572267	2573283	-	0,726647001	phosphotransacetylase subunit	174133
+Y75_p2341	frc	2498572	2499822	-	0,725819345	formyl-CoA transferase	174118
+Y75_p2809	yqeC	3014065	3014835	-	0,725032425	hypothetical protein	174221
+Y75_p0519	sfmH	561565	562542	+	0,716463415	fimbrial-like adhesin protein	173775
+Y75_p0535	rusA	572594	572956	+	0,716253444	endonuclease RUS	173778
+Y75_p1489	lsrC	1605855	1606883	+	0,713313897	AI2 transporter	173957
+Y75_p1144	ymgH	1226164	1226385	+	0,712209302	hypothetical protein	173897
+Y75_p1145	ycgI	1226394	1226606	+	0,712209302	hypothetical protein	173897
+Y75_p1521	tfaQ	1637146	1637721	-	0,711805556	tail fiber assembly protein	173960
+Y75_p0846	hcp	913706	915358	-	0,709618875	hybrid-cluster [4Fe-2S-2O] protein in anaerobic terminal reductases	173841
+Y75_p2661	hycC	2847193	2849019	-	0,706075534	hydrogenase 3, membrane subunit	174188
+Y75_p1746	ydjG	1857827	1858807	-	0,704383282	oxidoreductase	173999
+Y75_p2302	yfcS	2458152	2458904	-	0,703851262	periplasmic pilus chaperone	174109
+Y75_p2501	yphF	2678162	2679145	-	0,696138211	sugar transporter subunit	174153
+Y75_p2335	emrK	2488744	2489907	-	0,692439863	EmrKY-TolC multidrug resistance efflux pump, membrane fusion protein component	174116
+Y75_p3992	phnD	4329136	4330152	-	0,692232055	phosphonate/organophosphate ester transporter subunit	174462
+Y75_p1464	ddpX	1565331	1565912	-	0,687285223	D-Ala-D-Ala dipeptidase, Zn-dependent	173951
+Y75_p2021	wcaB	2135326	2135814	-	0,685071575	acyl transferase	174054
+Y75_p3307	yihR	3567402	3568328	+	0,682847896	aldose-1-epimerase	1763823
+Y75_p2071	yehB	2192886	2195366	-	0,681176945	outer membrane protein	174064
+Y75_p1552	ydfE	1652914	1653834	+	0,679738562	hypothetical protein	173968
+Y75_p4150	idnD	4499177	4500208	-	0,678294574	L-idonate 5-dehydrogenase	174489
+Y75_p1370	paaF	1460333	1461100	+	0,677083333	enoyl-CoA hydratase-isomerase	173935
+Y75_p2100	yohG	2231779	2232867	-	0,675487465	outer membrane protein	174069
+Y75_p2101	yohH	2233005	2233142	-	0,675487465	hypothetical protein	1763427
+Y75_p1448	yddL	1548574	1548864	-	0,670250896	lipoprotein	173948
+Y75_p1292	ycjU	1382984	1383643	+	0,666666667	beta-phosphoglucomutase	173922
+Y75_p2726	gudP	2920526	2921878	-	0,662971175	D-glucarate transporter	174203
+Y75_p1444	narZ	1541686	1545426	-	0,662924352	nitrate reductase 2 (NRZ) subunit alpha	173947
+Y75_p4068	yjfJ	4416355	4417053	+	0,659513591	transcriptional regulator effector protein	174478
+Y75_p3049	garP	3274550	3275884	-	0,65917603	(D)-galactarate transporter	174270
+Y75_p0970	torA	1060800	1063346	+	0,65606596	trimethylamine N-oxide (TMAO) reductase I, catalytic subunit	173865
+Y75_p2008	wcaK	2120383	2121663	-	0,654176425	pyruvyl transferase	174052
+Y75_p2352	ypdF	2512115	2513200	-	0,653775322	peptidase	174120
+Y75_p2009	wzxC	2121939	2123417	-	0,650439486	colanic acid exporter	174053
+Y75_p2320	yfdL	2478112	2478630	-	0,649395509	hypothetical protein	174112
+Y75_p0676	kdpB	726532	728580	-	0,649097121	potassium translocating ATPase, subunit B	173803
+Y75_p1460	ddpD	1560867	1561853	-	0,648429585	D-Ala-D-Ala transporter subunit	173951
+Y75_p1373	paaI	1463307	1463729	+	0,645390071	thioesterase	173935
+Y75_p2010	wcaJ	2123419	2124813	-	0,643010753	UDP-glucose lipid carrier transferase	174053
+Y75_p4071	yjfM	4418189	4418827	+	0,641627543	hypothetical protein	174478
+Y75_p2660	hycD	2846267	2847190	-	0,634199134	hydrogenase 3, membrane subunit	174188
+Y75_p1545	dicC	1650456	1650686	-	0,632034632	DNA-binding transcriptional regulator	173965
+Y75_p2412	eutQ	2574080	2574781	-	0,631054131	hypothetical protein	174133
+Y75_p1550	dicB	1652445	1652633	+	0,62962963	cell division inhibition protein	173967
+Y75_p2907	glcE	3125248	3126300	-	0,628679962	glycolate oxidase FAD binding subunit	174241
+Y75_p0493	gcl	533140	534921	+	0,628507295	glyoxylate carboligase	173769
+Y75_p2709	ygcS	2896311	2897648	-	0,627802691	transporter	174197
+Y75_p0536	ylcG	572953	573093	+	0,624113475	hypothetical protein	173778
+Y75_p3596	yiaO	3894457	3895443	-	0,618034448	transporter	174390
+Y75_p1511	ydeI	1626941	1627333	-	0,610687023	hypothetical protein	1763192
+Y75_p0041	fixA	42403	43173	+	0,609597925	electron transfer flavoprotein subunit, ETFP adenine nucleotide-binding domain	173666
+Y75_p0498	allB	538371	539732	+	0,609397944	allantoinase	173770
+Y75_p1491	lsrB	1607887	1608909	+	0,606060606	AI2 transporter	173957
+Y75_p2209	yfaV	2364655	2365944	-	0,604651163	transporter	174093
+Y75_p1372	paaH	1461890	1463317	+	0,602240896	3-hydroxybutyryl-CoA dehydrogenase	173935
+Y75_p0686	ybfD	739636	740397	+	0,598425197	hypothetical protein	1762878
+Y75_p2437	hyfD	2604589	2606028	+	0,597222222	hydrogenase 4, membrane subunit	174140
+Y75_p3915	yjbG	4241609	4242346	+	0,596205962	hypothetical protein	174448
+Y75_p1289	ycjR	1378870	1379658	+	0,595690748	hypothetical protein	173922
+Y75_p2436	hyfC	2603625	2604572	+	0,5907173	hydrogenase 4, membrane subunit	174140
+Y75_p1591	uidC	1694422	1695687	-	0,589257504	outer membrane porin protein	173976
+Y75_p1776	yeaV	1886024	1887469	+	0,587828492	transporter	174005
+Y75_p2025	wza	2139363	2140502	-	0,587719298	lipoprotein required for capsular polysaccharide translocation through the outer membrane	174055
+Y75_p0042	fixB	43188	44129	+	0,583864119	electron transfer flavoprotein, NAD/FAD-binding domain and ETFP adenine nucleotide-binding domain-like	173666
+Y75_p1777	yeaW	1887501	1888625	+	0,583111111	2Fe-2S cluster-containing protein	174005
+Y75_p2405	eutG	2568102	2569289	-	0,579124579	alcohol dehydrogenase in ethanolamine utilization	174132
+Y75_p0635	ybeR	678255	678962	+	0,579096045	hypothetical protein	173794
+Y75_p2863	cmtA	3077249	3078637	-	0,572354212	PTS system fused mannitol-specific transporter subunit IIBC	174232
+Y75_p2082	yehP	2212423	2213559	+	0,568161829	hypothetical protein	174066
+Y75_p1010	csgB	1105314	1105769	+	0,567982456	curlin nucleator protein, minor subunit in curli complex	173874
+Y75_p2012	cpsB	2126343	2127779	-	0,567153793	mannose-1-phosphate guanyltransferase	174053
+Y75_p0534	ybcO	572307	572597	+	0,563573883	hypothetical protein	173778
+Y75_p3914	yjbF	4240974	4241612	+	0,558685446	lipoprotein	174448
+Y75_p0036	caiD	35377	36270	-	0,558524173	crotonobetainyl CoA hydratase	173664
+Y75_p3002	ebgC	3225500	3225949	+	0,551111111	cryptic beta-D-galactosidase subunit beta	174259
+Y75_p2339	yfdV	2495810	2496754	-	0,53968254	transporter	174118
+Y75_p1232	yciF	1318106	1318606	-	0,538922156	hypothetical protein	173911
+Y75_p1726	ydjY	1836952	1837629	+	0,536873156	hypothetical protein	173996
+Y75_p1284	ycjM	1373052	1374731	+	0,535714286	glucosyltransferase	173922
+Y75_p2024	wzb	2138914	2139357	-	0,533783784	protein-tyrosine phosphatase	174055
+Y75_p1648	ydhV	1754564	1756666	-	0,533523538	oxidoreductase	173982
+Y75_p1665	ydiM	1773907	1775121	+	0,526748971	transporter	1763266
+Y75_p1674	ydiS	1784231	1785520	+	0,525581395	oxidoreductase	173987
+Y75_p3060	agaB	3285147	3285623	+	0,524109015	PTS system N-acetylgalactosamine-specific transporter subunit IIB	174274
+Y75_p2596	ypjB	2783416	2784207	-	0,524017467	hypothetical protein	1763584
+Y75_p2597	ypjC	2784307	2784789	-	0,524017467	hypothetical protein	1763585
+Y75_p0494	hyi	534934	535710	+	0,522522523	hydroxypyruvate isomerase	173769
+Y75_p3934	yjbL	4265033	4265287	+	0,521568627	hypothetical protein	174453
+Y75_p0044	fixX	45463	45750	+	0,520833333	4Fe-4S ferredoxin-type protein	173666
+Y75_p2353	ypdG	2513215	2514462	-	0,520833333	PTS system transporter subunit IIC	174120
+Y75_p2020	wcaC	2134112	2135329	-	0,517241379	glycosyl transferase	174054
+Y75_p3990	phnF	4327497	4328222	-	0,509641873	transcriptional regulator of phosphonate uptake and biodegradation	174461
+Y75_p1233	yciG	1318692	1318871	-	0,505555556	hypothetical protein	1763080
+Y75_p0969	torC	1059628	1060800	+	0,502983802	trimethylamine N-oxide (TMAO) reductase I, cytochrome c-type subunit	173865
+Y75_p0710	mngA	767528	769504	+	0,500758725	PTS system 2-O-a-mannosyl-D-glycerate-specific transporter subunits IIABC	173812
+Y75_p1364	maoC	1454433	1456478	-	0,49657869	fused aldehyde dehydrogenase and enoyl-CoA hydratase	1763131
+Y75_p2408	cchB	2571541	2571828	-	0,493055556	carboxysome structural protein	174132
+Y75_p4233	hsdS	4585870	4587264	-	0,490322581	specificity determinant for hsdM and hsdR	174506
+Y75_p3987	phnI	4325399	4326463	-	0,488262911	carbon-phosphorus lyase complex subunit	174461
+Y75_p1366	paaB	1457704	1457991	+	0,486111111	multicomponent oxygenase/reductase subunit for phenylacetic acid degradation	173935
+Y75_p0355	tauB	385431	386198	+	0,485677083	taurine transporter subunit	173737
+Y75_p2047	yegR	2171248	2171565	-	0,471698113	hypothetical protein	1763408
+Y75_p1524	ynfO	1639592	1639825	+	0,47008547	hypothetical protein	173961
+Y75_p2019	wcaD	2132920	2134137	-	0,467980296	colanic acid polymerase	174054
+Y75_p3986	phnJ	4324561	4325406	-	0,464539007	carbon-phosphorus lyase complex subunit	174461
+Y75_p1369	paaE	1459266	1460336	+	0,45751634	multicomponent oxygenase/reductase subunit for phenylacetic acid degradation	173935
+Y75_p2018	wcaE	2132163	2132909	-	0,455153949	glycosyl transferase	174053
+Y75_p2570	alpA	2758422	2758634	+	0,450704225	DNA-binding transcriptional activator	1763577
+Y75_p2210	yfaW	2366001	2367218	-	0,446102819	enolase	174093
+Y75_p3594	sgbH	3892298	3892960	-	0,44494721	3-keto-L-gulonate 6-phosphate decarboxylase	174390
+Y75_p1431	yncH	1529776	1529988	+	0,441314554	hypothetical protein	173944
+Y75_p2785	ygeG	2991046	2991537	+	0,441056911	chaperone	1763636
+Y75_p1488	ego	1604326	1605861	+	0,436197917	fused AI2 transporter subunits and ATP-binding components of ABC superfamily	173957
+Y75_p1001	ycdU	1097387	1098373	+	0,435663627	inner membrane protein	1762987
+Y75_p0043	fixC	44180	45466	+	0,435120435	oxidoreductase	173666
+Y75_p0944	hyaB	1034798	1036591	+	0,433667781	hydrogenase 1, large subunit	173860
+Y75_p1443	narY	1540145	1541689	-	0,433656958	nitrate reductase 2 (NRZ) subunit beta	173947
+Y75_p1667	ydiB	1776625	1777491	+	0,432525952	quinate/shikimate 5-dehydrogenase	173985
+Y75_p1385	ynbB	1481062	1481958	+	0,423634337	CDP-diglyceride synthase	173938
+Y75_p0604	citF	647262	648794	-	0,422700587	citrate lyase, citrate-ACP transferase (alpha) subunit	173788
+Y75_p1748	ydjI	1859769	1860605	-	0,418160096	aldolase	173999
+Y75_p4003	adiY	4342968	4343729	-	0,417322835	DNA-binding transcriptional activator	1764062
+Y75_p2127	yeiN	2261885	2262823	-	0,415335463	hypothetical protein	174076
+Y75_p3988	phnH	4326463	4327047	-	0,411965812	carbon-phosphorus lyase complex subunit	174461
+Y75_p0908	ssuA	997529	998488	-	0,402083333	alkanesulfonate transporter subunit	173853
+Y75_p1419	ydcV	1517598	1518392	+	0,398742138	spermidine/putrescine transporter subunit	173942
+Y75_p2323	yfdO	2479446	2479814	-	0,395480226	defective phage replication protein O	174112
+Y75_p1288	ycjQ	1377799	1378851	+	0,389363723	oxidoreductase	173922
+Y75_p0495	glxR	535810	536688	+	0,386803185	tartronate semialdehyde reductase	173770
+Y75_p2034	yegJ	2154444	2154905	+	0,378787879	hypothetical protein	1763404
+Y75_p1371	paaG	1461100	1461888	+	0,367553866	acyl-CoA hydratase	173935
+Y75_p1286	ycjO	1376058	1376939	+	0,359410431	sugar transporter subunit	173922
+Y75_p0985	ycdM	1074407	1075555	-	0,356832028	monooxygenase	173868
+Y75_p1473	ydeM	1582469	1583626	-	0,354058722	hypothetical protein	1763175
+Y75_p0677	kdpA	728603	730276	-	0,352449223	potassium translocating ATPase, subunit A	173803
+Y75_p0907	ssuD	996387	997532	-	0,34904014	alkanesulfonate monooxygenase, FMNH(2)-dependent	173853
+Y75_p0497	ybbW	536857	538311	+	0,343642612	allantoin transporter	173770
+Y75_p1287	ycjP	1376926	1377768	+	0,336892052	sugar transporter subunit	173922
+Y75_p2236	yfbM	2392726	2393229	+	0,33531746	hypothetical protein	1763470
+Y75_p0684	ybfQ	737989	738243	+	0,333333333	transposase	1762877
+Y75_p3993	phnC	4330177	4330965	-	0,329531052	phosphonate/organophosphate ester transporter subunit	174462
+Y75_p1750	ydjK	1861686	1863065	-	0,318115942	transporter	173999
+Y75_p0237	ykfH	263250	263471	-	0,315315315	hypothetical protein	173708
+Y75_p1749	ydjJ	1860626	1861669	-	0,30651341	oxidoreductase	173999
+Y75_p1285	ycjN	1374745	1376037	+	0,30162413	sugar transporter subunit	173922
+Y75_p0504	fdrA	545904	547571	+	0,299160671	acyl-CoA synthetase with NAD(P)-binding Rossmann-fold domain	1762811
+Y75_p1293	ycjV	1383657	1384625	+	0,295748614	sugar transporter subunit	173922
+Y75_p1294	ymjB	1384625	1384738	+	0,295748614	hypothetical protein	173922
+Y75_p2662	hycB	2849016	2849627	-	0,294117647	hydrogenase 3, Fe-S subunit	174188
+Y75_p0533	ninE	572144	572314	+	0,292397661	hypothetical protein	173778
+Y75_p2073	yehD	2196136	2196678	-	0,289134438	fimbrial-like adhesin protein	174064
+Y75_p2406	eutJ	2569279	2570115	-	0,283154122	chaperonin, ethanolamine utilization protein	174132
+Y75_p0906	ssuC	995585	996376	-	0,277777778	alkanesulfonate transporter subunit	173853
+Y75_p1669	ydiF	1778423	1780018	+	0,263157895	fused acetyl-CoA:acetoacetyl-CoA transferase: alpha subunit and beta subunit	173986
+Y75_p2354	ypdH	2514484	2514810	-	0,259938838	PTS system transporter subunit IIB	174120
+Y75_p2321	yfdM	2478680	2478955	-	0,259259259	methyltransferase	174112
+Y75_p2128	yeiC	2262811	2263752	-	0,255838641	kinase	174076
+Y75_p2185	atoA	2329901	2330551	+	0,24577573	acetyl-CoA:acetoacetyl-CoA transferase subunit beta	174087
+Y75_p0543	rzoD	577550	577732	+	0,218579235	lipoprotein	173779
+Y75_p2072	yehC	2195382	2196101	-	0,216666667	periplasmic pilin chaperone	174064
+Y75_p1447	yddK	1547594	1548550	-	0,211119459	hypothetical protein	173948
+Y75_p1446	yddJ	1547220	1547555	-	0,211119459	hypothetical protein	1763166
+Y75_p1747	ydjH	1858817	1859764	-	0,210970464	kinase	173999
+Y75_p0678	kdpF	730276	730365	-	0,2	potassium ion accessory transporter subunit	173803
+Y75_p2407	eutE	2570126	2571529	-	0,199430199	aldehyde dehydrogenase, ethanolamine utilization protein	174132
+Y75_p1335	ydaS	1423201	1423497	+	0,168350168	DNA-binding transcriptional regulator	173931
+Y75_p2322	yfdN	2478955	2479449	-	0,161616162	hypothetical protein	174112
+Y75_p1666	ydiN	1775348	1776613	+	0,157977883	transporter	173985
+Y75_p4227	yjiS	4577553	4577717	+	0,121212121	hypothetical protein	1764158
+Y75_p0249	ykfC	272071	273216	+	0,108303249	hypothetical protein	1762720
+Y75_p1341	rzoR	1426236	1426421	+	0,107526882	lipoprotein	173931
+Y75_p1475	ydeO	1585762	1586523	-	0,104986877	DNA-binding transcriptional acfivator	1763177
+Y75_p1345	ynaA	1429290	1430318	+	0,096463023	tail protein	1763118
+Y75_p4231	mcrB	4583760	4585139	-	0,086956522	5-methylcytosine-specific restriction enzyme McrBC, subunit McrB	174505
+Y75_p0542	rzpD	577330	577791	+	0,086580087	murein endopeptidase	173779
+Y75_p4235	hsdR	4589051	4592617	-	0,085397096	endonuclease R	1764161
+Y75_p1331	sieB	1421507	1421995	+	0,081799591	phage superinfection exclusion protein	1763115
+Y75_p4182	yjhH	4529907	4530812	-	0,077262693	lyase/synthase	174494
+Y75_p4236	mrr	4592751	4593665	+	0,076502732	methylated adenine and cytosine restriction protein	1764162
+Y75_p0242	yafY	265334	266191	-	0,067567568	DNA-binding transcriptional regulator	173709
+Y75_p1334	racR	1422601	1423077	-	0,062893082	DNA-binding transcriptional regulator	1763116
+Y75_p4269	yjjJ	4627571	4628902	+	0,06006006	DNA-binding transcriptional regulator	1764175
+Y75_p1340	rzpR	1426181	1426480	+	0,054054054	defective peptidase	173931
+Y75_p1326	recT	1416820	1417629	-	0,049382716	recombination and repair protein	173928
+Y75_p4238	yjiX	4594678	4594881	-	0,049019608	hypothetical protein	174507
+Y75_p0243	yafZ	266408	267229	-	0,0486618	hypothetical protein	173710
+Y75_p4230	mcrC	4582714	4583760	-	0,047755492	5-methylcytosine-specific restriction enzyme McrBC, subunit McrC	174505
+Y75_p1324	ydaC	1416367	1416576	-	0,047619048	hypothetical protein	173927
+Y75_p0540	essD	576621	576836	+	0,046296296	phage lysis protein	173779
+Y75_p1348	stfR	1431885	1435247	+	0,044603033	tail fiber protein	173933
+Y75_p1344	ydaY	1428457	1428816	+	0,04415011	hypothetical protein	173932
+Y75_p0241	ykfB	264844	265311	-	0,042735043	hypothetical protein	173709
+Y75_p4237	yjiA	4593711	4594667	-	0,041797283	GTPase	174507
+Y75_p1339	ydaW	1425588	1426148	+	0,04	DNA-binding protein	173931
+Y75_p1343	ynaK	1428213	1428476	+	0,037878788	hypothetical protein	173932
+Y75_p1328	racC	1420324	1420599	-	0,036231884	hypothetical protein	173929
+Y75_p0244	ykfA	267321	268184	-	0,034722222	GTP-binding protein	173710
+Y75_p0544	borD	577823	578116	-	0,034013605	lipoprotein	1762821
+Y75_p0234	proA	260727	261980	+	0,031897927	gamma-glutamylphosphate reductase	173707
+Y75_p0235	ykfI	262552	262893	-	0,029239766	toxin of the YkfI-YafW toxin-antitoxin system	173708
+Y75_p4232	yjiW	4585301	4585699	-	0,029239766	hypothetical protein	1764160
+Y75_p0232	phoE	258269	259324	-	0,028409091	outer membrane phosphoporin protein E	1762717
+Y75_p4228	yjiT	4578216	4579733	+	0,027944112	hypothetical protein	1764159
+Y75_p1342	trkG	1426618	1428075	+	0,027434842	potassium transporter subunit	1763117
+Y75_p0233	proB	259612	260715	+	0,027173913	gamma-glutamate kinase	173707
+Y75_p1327	recE	1417622	1420222	-	0,026912726	exonuclease VIII, 5' -> 3' specific dsDNA exonuclease	173928
+Y75_p4181	yjhG	4527929	4529896	-	0,025406504	dehydratase	174494
+Y75_p4183	yjhI	4530817	4531605	-	0,025348542	DNA-binding transcriptional regulator	174494
+Y75_p0231	crl	257829	258230	+	0,024875622	DNA-binding transcriptional regulator	173706
+Y75_p4239	yjiY	4594931	4597081	-	0,023245002	inner membrane protein	174507
+Y75_p0245	perR	268513	269406	-	0,022371365	DNA-binding transcriptional regulator	1762719
+Y75_p4180	yjhF	4526473	4527822	-	0,022222222	transporter	1764144
+Y75_p0240	ykfF	264528	264767	-	0,020833333	hypothetical protein	1762718
+Y75_p0541	ybcS	576836	577333	+	0,020080321	lysozyme	173779
+Y75_p4234	hsdM	4587261	4588850	-	0,018867925	DNA methylase M	174506
+Y75_p4226	yjiR	4575964	4577376	-	0,014154282	fused DNA-binding transcriptional regulator and aminotransferase	1764157
+Y75_p1322	intR	1414836	1416071	-	0,008090615	integrase	173926
+Y75_p0230	frsA	256527	257771	+	0	hydrolase, binds to enzyme IIA(Glc)	173706
+Y75_p0236	yafW	262914	263231	-	0	antitoxin of the YkfI-YafW toxin-antitoxin system	173708
+Y75_p0238	ykfG	263480	263956	-	0	DNA repair protein	173708
+Y75_p0239	yafX	263972	264430	-	0	hypothetical protein	173708
+Y75_p1323	ydaQ	1416073	1416288	-	0	hypothetical protein	173926
+Y75_p1325	lar	1416569	1416763	-	0	restriction alleviation protein	173927
+Y75_p1329	ydaE	1420674	1420844	-	0	hypothetical protein	173929
+Y75_p1330	kil	1420844	1421065	-	0	inhibitor of ftsZ, killing protein	173929
+Y75_p1332	ydaF	1421992	1422147	-	0	hypothetical protein	173930
+Y75_p1333	ydaG	1422158	1422292	-	0	hypothetical protein	173930
+Y75_p1336	ydaT	1423520	1423942	+	0	hypothetical protein	173931
+Y75_p1337	ydaU	1423955	1424812	+	0	hypothetical protein	173931
+Y75_p1338	ydaV	1424819	1425565	+	0	DNA replication protein	173931
+Y75_p0229	gpt	255977	256435	+	0	guanine-hypoxanthine phosphoribosyltransferase	1762716
+Y75_p4179	yjhU	4525140	4526126	-	0	DNA-binding transcriptional regulator	1764143

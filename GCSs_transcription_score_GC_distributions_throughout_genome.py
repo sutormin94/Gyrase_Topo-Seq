@@ -37,7 +37,8 @@ Score_data_path="C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_
 GC_data_path="C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\E_coli_w3110_Mu_GC_133bp.wig"
 
 #Input data - transcription, TAB.
-Transcription_data_path="C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\DOOR_Mu_del_cor_genes_expression.txt"
+#Transcription_data_path="C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\DOOR_Mu_del_cor_genes_expression.txt"
+Transcription_data_path="F:\E_coli_RNA-Seq\E_coli_DY330_RNA-Seq\Expression_data\Exponential_phase_expression_TU_door_like_no_rRNA.txt"
 
 #Input data - NAPs data in BroadPeak format.
 NAPs_inpath={'IHFAB': "C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additional_genome_features\IHFAB_sites_mid_exp_Prieto_W3110_Mu_SGS.BroadPeak",
@@ -54,7 +55,7 @@ Macrodomains_path="C:\Sutor\science\DNA-gyrase\scripts\Gyrase_Topo-seq\Additiona
 Genome_length=4647454
 
 #Output data: plot.
-Plot_path_out="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_num_score_GC_transcription_distrib_thr_genome_with_MDs\\"
+Plot_path_out="F:\Topo_data_new_expression\Exponential_phase_TUs_no_rRNA\\"
 if not os.path.exists(Plot_path_out):
     os.makedirs(Plot_path_out)
 
@@ -510,16 +511,16 @@ def track_corr_MDs(GCSs_data_bared, Non_GCSs_data_MDs):
 
 def wrap_the_functions(input_dict, broadpeak_path, score_path, GC_path, transcription_path, NAPs_input_dict, path_out, genome_len):
     #Even distribution of bins across the genome.
-    #GSCs_data=trusted_GCSs_parsing(input_dict)
-    #Non_GCSs_data_even=Prepare_non_GCSs_data(score_path, GC_path, transcription_path, np.linspace(0, genome_len, 11).tolist())
-    #GCSs_histo_comp_dict_even=Plot_the_distribution(GSCs_data, Non_GCSs_data_even, np.linspace(0, genome_len, 11).tolist(), genome_len, path_out+'Even_')
-    #track_corr(GCSs_histo_comp_dict_even, Non_GCSs_data_even)
+    GSCs_data=trusted_GCSs_parsing(input_dict)
+    Non_GCSs_data_even=Prepare_non_GCSs_data(score_path, GC_path, transcription_path, np.linspace(0, genome_len, 11).tolist())
+    GCSs_histo_comp_dict_even=Plot_the_distribution(GSCs_data, Non_GCSs_data_even, np.linspace(0, genome_len, 11).tolist(), genome_len, path_out+'Even_')
+    track_corr(GCSs_histo_comp_dict_even, Non_GCSs_data_even)
     
     #Chromosomal macrodomains as genome bins.
     Macrodomains_descr=broadpeak_pars(broadpeak_path, genome_len)
-    #Non_GCSs_data_MDs=Prepare_non_GCSs_data(score_path, GC_path, transcription_path, Macrodomains_descr['Bins'])
-    #Bars=Plot_the_distribution_MDs(GSCs_data, Non_GCSs_data_MDs, Macrodomains_descr['Bins'], Macrodomains_descr['Lengths'], genome_len, path_out+'MDs_')
-    #track_corr_MDs(Bars[0], Bars[1])
+    Non_GCSs_data_MDs=Prepare_non_GCSs_data(score_path, GC_path, transcription_path, Macrodomains_descr['Bins'])
+    Bars=Plot_the_distribution_MDs(GSCs_data, Non_GCSs_data_MDs, Macrodomains_descr['Bins'], Macrodomains_descr['Lengths'], genome_len, path_out+'MDs_')
+    track_corr_MDs(Bars[0], Bars[1])
     
     #Plot NAPs binding data.
     NAPs_data_even=BroadPeak_to_bins(NAPs_input_dict, np.linspace(0, genome_len, 11).tolist())[1]

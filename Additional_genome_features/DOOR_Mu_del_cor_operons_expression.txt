@@ -1,4 +1,4 @@
-OperonID	Genes_ID	Start	End	Strand	Expression	Genes_description
+OperonID	Gene_name	Start	End	Strand	Expression	Gene_description
 1764239	"serU;"	2046727	2046816	-	22149,35556	"Ser tRNA;"
 1764240	"asnT;"	2047808	2047883	+	18892,10526	"Asn tRNA;"
 1764243	"asnV;"	2065519	2065594	+	18852,40789	"Asn tRNA;"

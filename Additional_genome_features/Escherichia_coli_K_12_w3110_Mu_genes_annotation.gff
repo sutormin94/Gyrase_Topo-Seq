@@ -102,8 +102,8 @@ NC_007779.1_w3110_Mu	ena	CDS	16751	16960	.	-	0	ID=CDS:BAB96591;Parent=transcript
 NC_007779.1_w3110_Mu	Rfam	gene	16901	17053	.	+	.	ID=gene:EBG00001131954;Name=sok;biotype=antitoxin;gene_id=EBG00001131954;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	16901	17053	.	+	.	ID=transcript:EBT00001723089;Parent=gene:EBG00001131954;Name=sok;biotype=antitoxin;transcript_id=EBT00001723089;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	16901	17053	.	+	.	Parent=transcript:EBT00001723089;Name=EBG00001131954-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131954-1;rank=1;version=1
-###
 NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	16952	17006	.	+	.	external_name=ECK0019:JWR0224:b4413;logic_name=ena_misc_rna
+###
 NC_007779.1_w3110_Mu	ena	gene	17489	18655	.	+	.	ID=gene:BAB96592;Name=nhaA;biotype=protein_coding;description=sodium-proton antiporter;gene_id=BAB96592;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	17489	18655	.	+	.	ID=transcript:BAB96592;Parent=gene:BAB96592;Name=nhaA-1;biotype=protein_coding;transcript_id=BAB96592;version=1
 NC_007779.1_w3110_Mu	ena	exon	17489	18655	.	+	.	Parent=transcript:BAB96592;Name=BAB96592-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAB96592-1;rank=1;version=1
@@ -362,8 +362,8 @@ NC_007779.1_w3110_Mu	ena	CDS	75644	77299	.	-	0	ID=CDS:BAB96638;Parent=transcript
 NC_007779.1_w3110_Mu	Rfam	gene	77367	77593	.	-	.	ID=gene:EBG00001131763;Name=SgrS;biotype=antisense;gene_id=EBG00001131763;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	77367	77593	.	-	.	ID=transcript:EBT00001723066;Parent=gene:EBG00001131763;Name=SgrS;biotype=antisense;transcript_id=EBT00001723066;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	77367	77593	.	-	.	Parent=transcript:EBT00001723066;Name=EBG00001131763-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131763-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	77367	77593	.	-	.	external_name=ECK0071:JWR0259:b4577;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	77367	77593	.	+	.	external_name=ECK0071:JWR0259:b4577;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	77621	78799	.	+	.	ID=gene:BAB96639;Name=setA;biotype=protein_coding;description=broad specificity sugar efflux system;gene_id=BAB96639;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	77621	78799	.	+	.	ID=transcript:BAB96639;Parent=gene:BAB96639;Name=setA-1;biotype=protein_coding;transcript_id=BAB96639;version=1
 NC_007779.1_w3110_Mu	ena	exon	77621	78799	.	+	.	Parent=transcript:BAB96639;Name=BAB96639-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAB96639-1;rank=1;version=1
@@ -847,7 +847,7 @@ NC_007779.1_w3110_Mu	ena	transcript	188712	189506	.	-	.	ID=transcript:BAB96743;P
 NC_007779.1_w3110_Mu	ena	exon	188712	189506	.	-	.	Parent=transcript:BAB96743;Name=BAB96743-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAB96743-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	188712	189506	.	-	0	ID=CDS:BAB96743;Parent=transcript:BAB96743;protein_id=BAB96743
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	189712	189847	.	+	.	external_name=ECK0167:JWR0225:b4414;logic_name=ena_misc_rna
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	189712	189847	.	-	.	external_name=ECK0167:JWR0225:b4414;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	Rfam	gene	189760	189846	.	-	.	ID=gene:EBG00001131785;Name=t44;biotype=sRNA;gene_id=EBG00001131785;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	189760	189846	.	-	.	ID=transcript:EBT00001723144;Parent=gene:EBG00001131785;Name=t44;biotype=sRNA;transcript_id=EBT00001723144;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	189760	189846	.	-	.	Parent=transcript:EBT00001723144;Name=EBG00001131785-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131785-1;rank=1;version=1
@@ -1041,7 +1041,7 @@ NC_007779.1_w3110_Mu	ena	tRNA_gene	225500	225575	.	+	.	ID=gene:EBG00000041714;Na
 NC_007779.1_w3110_Mu	ena	transcript	225500	225575	.	+	.	ID=transcript:EBG00000041714-1;Parent=gene:EBG00000041714;Name=alaV;biotype=tRNA;transcript_id=EBG00000041714-1;version=1
 NC_007779.1_w3110_Mu	ena	exon	225500	225575	.	+	.	Parent=transcript:EBG00000041714-1;Name=EBG00000041714-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00000041714-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	225643	225751	.	+	.	ID=gene:EBG00001131846;Name=StyR-44;biotype=ncRNA;gene_id=EBG00001131846;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	225643	225751	.	+	.	ID=gene:EBG00001131846;Name=StyR-44_6;biotype=ncRNA;gene_id=EBG00001131846;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	225643	225751	.	+	.	ID=transcript:EBT00001723259;Parent=gene:EBG00001131846;Name=StyR-44;biotype=ncRNA;transcript_id=EBT00001723259;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	225643	225751	.	+	.	Parent=transcript:EBT00001723259;Name=EBG00001131846-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131846-1;rank=1;version=1
 ###
@@ -1049,8 +1049,8 @@ NC_007779.1_w3110_Mu	ena	rRNA_gene	225759	228662	.	+	.	ID=gene:EBG00000041635;Na
 NC_007779.1_w3110_Mu	ena	rRNA	225759	228662	.	+	.	ID=transcript:EBG00000041635-1;Parent=gene:EBG00000041635;Name=rrlH;biotype=rRNA;transcript_id=EBG00000041635-1;version=1
 NC_007779.1_w3110_Mu	ena	exon	225759	228662	.	+	.	Parent=transcript:EBG00000041635-1;Name=EBG00000041635-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00000041635-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	Rfam	rRNA_gene	225759	228662	.	+	.	ID=gene:EBG00001131863;Name=LSU_rRNA_bacteria;biotype=rRNA;gene_id=EBG00001131863;logic_name=rfam_genes;version=1
-NC_007779.1_w3110_Mu	Rfam	rRNA	225759	228662	.	+	.	ID=transcript:EBT00001723157;Parent=gene:EBG00001131863;Name=LSU_rRNA_bacteria;biotype=rRNA;transcript_id=EBT00001723157;version=1
+NC_007779.1_w3110_Mu	Rfam	rRNA_gene	225759	228662	.	+	.	ID=gene:EBG00001131863;Name=rrlH;biotype=rRNA;gene_id=EBG00001131863;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	rRNA	225759	228662	.	+	.	ID=transcript:EBT00001723157;Parent=gene:EBG00001131863;Name=rrlH;biotype=rRNA;transcript_id=EBT00001723157;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	225759	228662	.	+	.	Parent=transcript:EBT00001723157;Name=EBG00001131863-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131863-1;rank=1;version=1
 ###
 NC_007779.1_w3110_Mu	Rfam	rRNA_gene	228041	228148	.	+	.	ID=gene:EBG00001131768;Name=PK-G12rRNA;biotype=rRNA;gene_id=EBG00001131768;logic_name=rfam_genes;version=1
@@ -1501,7 +1501,7 @@ NC_007779.1_w3110_Mu	ena	transcript	302215	302829	.	+	.	ID=transcript:BAE76071;P
 NC_007779.1_w3110_Mu	ena	exon	302215	302829	.	+	.	Parent=transcript:BAE76071;Name=BAE76071-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE76071-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	302215	302829	.	+	0	ID=CDS:BAE76071;Parent=transcript:BAE76071;protein_id=BAE76071
 ###
-NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	302835	303034	.	-	.	ID=gene:EBG00001131836;Name=IS009;biotype=ncRNA;gene_id=EBG00001131836;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	302835	303034	.	-	.	ID=gene:EBG00001131836;Name=IS009_1;biotype=ncRNA;gene_id=EBG00001131836;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	302835	303034	.	-	.	ID=transcript:EBT00001723093;Parent=gene:EBG00001131836;Name=IS009;biotype=ncRNA;transcript_id=EBT00001723093;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	302835	303034	.	-	.	Parent=transcript:EBT00001723093;Name=EBG00001131836-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131836-1;rank=1;version=1
 ###
@@ -2209,7 +2209,7 @@ NC_007779.1_w3110_Mu	ena	transcript	447874	449865	.	-	.	ID=transcript:BAE76211;P
 NC_007779.1_w3110_Mu	ena	exon	447874	449865	.	-	.	Parent=transcript:BAE76211;Name=BAE76211-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE76211-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	447874	449865	.	-	0	ID=CDS:BAE76211;Parent=transcript:BAE76211;protein_id=BAE76211
 ###
-NC_007779.1_w3110_Mu	ena	gene	449887	450834	.	-	.	ID=gene:BAE76212;Name=cyoA;biotype=protein_coding;description=cytoNC_007779.1_w3110_Muome o ubiquinol oxidase subunit II;gene_id=BAE76212;logic_name=ena;version=1
+NC_007779.1_w3110_Mu	ena	gene	449887	450834	.	-	.	ID=gene:BAE76212;Name=cyoA;biotype=protein_coding;description=cytochrome o ubiquinol oxidase subunit II;gene_id=BAE76212;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	449887	450834	.	-	.	ID=transcript:BAE76212;Parent=gene:BAE76212;Name=cyoA-1;biotype=protein_coding;transcript_id=BAE76212;version=1
 NC_007779.1_w3110_Mu	ena	exon	449887	450834	.	-	.	Parent=transcript:BAE76212;Name=BAE76212-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE76212-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	449887	450834	.	-	0	ID=CDS:BAE76212;Parent=transcript:BAE76212;protein_id=BAE76212
@@ -2332,7 +2332,7 @@ NC_007779.1_w3110_Mu	ena	transcript	475206	475595	.	-	.	ID=transcript:BAE76234;P
 NC_007779.1_w3110_Mu	ena	exon	475206	475595	.	-	.	Parent=transcript:BAE76234;Name=BAE76234-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE76234-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	475206	475595	.	-	0	ID=CDS:BAE76234;Parent=transcript:BAE76234;protein_id=BAE76234
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	475672	475785	.	+	.	external_name=ECK0449:JWR0009:b0455;logic_name=ena_misc_rna
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	475672	475785	.	-	.	external_name=ECK0449:JWR0009:b0455;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	475680	475776	.	-	.	ID=gene:EBG00001131947;Name=Bacteria_small_SRP;biotype=ncRNA;gene_id=EBG00001131947;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	475680	475776	.	-	.	ID=transcript:EBT00001723092;Parent=gene:EBG00001131947;Name=Bacteria_small_SRP;biotype=ncRNA;transcript_id=EBT00001723092;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	475680	475776	.	-	.	Parent=transcript:EBT00001723092;Name=EBG00001131947-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131947-1;rank=1;version=1
@@ -2887,7 +2887,7 @@ NC_007779.1_w3110_Mu	ena	pseudogene	580757	581320	.	+	.	ID=gene:EBG00000041374;N
 NC_007779.1_w3110_Mu	ena	pseudogene	580757	581320	.	+	.	ID=transcript:EBT00000041376;Parent=gene:EBG00000041374;Name=tfaD-1;biotype=pseudogene;transcript_id=EBT00000041376;version=1
 NC_007779.1_w3110_Mu	ena	exon	580757	581320	.	+	.	Parent=transcript:EBT00000041376;Name=EBT00000041376-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBT00000041376-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	581079	581277	.	-	.	ID=gene:EBG00001131831;Name=IS009;biotype=ncRNA;gene_id=EBG00001131831;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	581079	581277	.	-	.	ID=gene:EBG00001131831;Name=IS009_2;biotype=ncRNA;gene_id=EBG00001131831;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	581079	581277	.	-	.	ID=transcript:EBT00001723088;Parent=gene:EBG00001131831;Name=IS009;biotype=ncRNA;transcript_id=EBT00001723088;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	581079	581277	.	-	.	Parent=transcript:EBT00001723088;Name=EBG00001131831-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131831-1;rank=1;version=1
 ###
@@ -3787,12 +3787,12 @@ NC_007779.1_w3110_Mu	ena	transcript	769522	772155	.	+	.	ID=transcript:BAA35398;P
 NC_007779.1_w3110_Mu	ena	exon	769522	772155	.	+	.	Parent=transcript:BAA35398;Name=BAA35398-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA35398-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	769522	772155	.	+	0	ID=CDS:BAA35398;Parent=transcript:BAA35398;protein_id=BAA35398
 ###
-NC_007779.1_w3110_Mu	ena	gene	773002	774570	.	+	.	ID=gene:BAA35399;Name=cydA;biotype=protein_coding;description=cytoNC_007779.1_w3110_Muome d terminal oxidase%2C subunit I;gene_id=BAA35399;logic_name=ena;version=1
+NC_007779.1_w3110_Mu	ena	gene	773002	774570	.	+	.	ID=gene:BAA35399;Name=cydA;biotype=protein_coding;description=cytochrome d terminal oxidase%2C subunit I;gene_id=BAA35399;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	773002	774570	.	+	.	ID=transcript:BAA35399;Parent=gene:BAA35399;Name=cydA-1;biotype=protein_coding;transcript_id=BAA35399;version=1
 NC_007779.1_w3110_Mu	ena	exon	773002	774570	.	+	.	Parent=transcript:BAA35399;Name=BAA35399-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA35399-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	773002	774570	.	+	0	ID=CDS:BAA35399;Parent=transcript:BAA35399;protein_id=BAA35399
 ###
-NC_007779.1_w3110_Mu	ena	gene	774586	775725	.	+	.	ID=gene:BAA35400;Name=cydB;biotype=protein_coding;description=cytoNC_007779.1_w3110_Muome d terminal oxidase%2C subunit II;gene_id=BAA35400;logic_name=ena;version=1
+NC_007779.1_w3110_Mu	ena	gene	774586	775725	.	+	.	ID=gene:BAA35400;Name=cydB;biotype=protein_coding;description=cytochrome d terminal oxidase%2C subunit II;gene_id=BAA35400;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	774586	775725	.	+	.	ID=transcript:BAA35400;Parent=gene:BAA35400;Name=cydB-1;biotype=protein_coding;transcript_id=BAA35400;version=1
 NC_007779.1_w3110_Mu	ena	exon	774586	775725	.	+	.	Parent=transcript:BAA35400;Name=BAA35400-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA35400-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	774586	775725	.	+	0	ID=CDS:BAA35400;Parent=transcript:BAA35400;protein_id=BAA35400
@@ -4387,8 +4387,8 @@ NC_007779.1_w3110_Mu	ena	CDS	888967	889503	.	+	0	ID=CDS:BAA35550;Parent=transcri
 NC_007779.1_w3110_Mu	Rfam	gene	889520	889598	.	+	.	ID=gene:EBG00001131944;Name=RybB;biotype=sRNA;gene_id=EBG00001131944;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	889520	889598	.	+	.	ID=transcript:EBT00001723141;Parent=gene:EBG00001131944;Name=RybB;biotype=sRNA;transcript_id=EBT00001723141;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	889520	889598	.	+	.	Parent=transcript:EBT00001723141;Name=EBG00001131944-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131944-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	889520	889598	.	+	.	external_name=ECK0837:JWR0227:b4417;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	889520	889598	.	-	.	external_name=ECK0837:JWR0227:b4417;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	889678	891363	.	-	.	ID=gene:BAA35551;Name=ybjL;biotype=protein_coding;description=predicted transporter;gene_id=BAA35551;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	889678	891363	.	-	.	ID=transcript:BAA35551;Parent=gene:BAA35551;Name=ybjL-1;biotype=protein_coding;transcript_id=BAA35551;version=1
 NC_007779.1_w3110_Mu	ena	exon	889678	891363	.	-	.	Parent=transcript:BAA35551;Name=BAA35551-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA35551-1;rank=1;version=1
@@ -5620,8 +5620,8 @@ NC_007779.1_w3110_Mu	ena	CDS	1148710	1149294	.	-	0	ID=CDS:BAA35895;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	1149288	1149456	.	-	.	ID=gene:EBG00001131922;Name=SraB;biotype=sRNA;gene_id=EBG00001131922;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	1149288	1149456	.	-	.	ID=transcript:EBT00001723187;Parent=gene:EBG00001131922;Name=SraB;biotype=sRNA;transcript_id=EBT00001723187;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	1149288	1149456	.	-	.	Parent=transcript:EBT00001723187;Name=EBG00001131922-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131922-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1149288	1149456	.	-	.	external_name=ECK1073:JWR0228:b4418;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1149288	1149456	.	+	.	external_name=ECK1073:JWR0228:b4418;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	1149493	1150014	.	+	.	ID=gene:BAA35896;Name=yceD;biotype=protein_coding;description=conserved hypothetical protein;gene_id=BAA35896;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	1149493	1150014	.	+	.	ID=transcript:BAA35896;Parent=gene:BAA35896;Name=yceD-1;biotype=protein_coding;transcript_id=BAA35896;version=1
 NC_007779.1_w3110_Mu	ena	exon	1149493	1150014	.	+	.	Parent=transcript:BAA35896;Name=BAA35896-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA35896-1;rank=1;version=1
@@ -6289,8 +6289,8 @@ NC_007779.1_w3110_Mu	ena	CDS	1271867	1271974	.	-	0	ID=CDS:BAE76392;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	1272022	1272087	.	-	.	ID=gene:EBG00001131911;Name=rdlD;biotype=antitoxin;gene_id=EBG00001131911;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	1272022	1272087	.	-	.	ID=transcript:EBT00001723097;Parent=gene:EBG00001131911;Name=rdlD;biotype=antitoxin;transcript_id=EBT00001723097;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	1272022	1272087	.	-	.	Parent=transcript:EBT00001723097;Name=EBG00001131911-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131911-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1272022	1272088	.	-	.	external_name=ECK1205:JWR0229:b4420;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1272022	1272088	.	+	.	external_name=ECK1205:JWR0229:b4420;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	1272402	1272509	.	-	.	ID=gene:BAE76393;Name=ldrB;biotype=protein_coding;description=toxic polypeptide%2C small;gene_id=BAE76393;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	1272402	1272509	.	-	.	ID=transcript:BAE76393;Parent=gene:BAE76393;Name=ldrB-1;biotype=protein_coding;transcript_id=BAE76393;version=1
 NC_007779.1_w3110_Mu	ena	exon	1272402	1272509	.	-	.	Parent=transcript:BAE76393;Name=BAE76393-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE76393-1;rank=1;version=1
@@ -6299,8 +6299,8 @@ NC_007779.1_w3110_Mu	ena	CDS	1272402	1272509	.	-	0	ID=CDS:BAE76393;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	1272557	1272622	.	-	.	ID=gene:EBG00001131948;Name=rdlD;biotype=antitoxin;gene_id=EBG00001131948;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	1272557	1272622	.	-	.	ID=transcript:EBT00001723186;Parent=gene:EBG00001131948;Name=rdlD;biotype=antitoxin;transcript_id=EBT00001723186;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	1272557	1272622	.	-	.	Parent=transcript:EBT00001723186;Name=EBG00001131948-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131948-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1272557	1272622	.	-	.	external_name=ECK1207:JWR0230:b4422;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1272557	1272622	.	+	.	external_name=ECK1207:JWR0230:b4422;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	1272937	1273044	.	-	.	ID=gene:BAE76394;Name=ldrC;biotype=protein_coding;description=toxic polypeptide%2C small;gene_id=BAE76394;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	1272937	1273044	.	-	.	ID=transcript:BAE76394;Parent=gene:BAE76394;Name=ldrC-1;biotype=protein_coding;transcript_id=BAE76394;version=1
 NC_007779.1_w3110_Mu	ena	exon	1272937	1273044	.	-	.	Parent=transcript:BAE76394;Name=BAE76394-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE76394-1;rank=1;version=1
@@ -6309,8 +6309,8 @@ NC_007779.1_w3110_Mu	ena	CDS	1272937	1273044	.	-	0	ID=CDS:BAE76394;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	1273092	1273157	.	-	.	ID=gene:EBG00001131915;Name=rdlD;biotype=antitoxin;gene_id=EBG00001131915;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	1273092	1273157	.	-	.	ID=transcript:EBT00001723264;Parent=gene:EBG00001131915;Name=rdlD;biotype=antitoxin;transcript_id=EBT00001723264;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	1273092	1273157	.	-	.	Parent=transcript:EBT00001723264;Name=EBG00001131915-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131915-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1273092	1273159	.	-	.	external_name=ECK1209:JWR0231:b4424;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1273092	1273159	.	+	.	external_name=ECK1209:JWR0231:b4424;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	1273448	1274548	.	-	.	ID=gene:BAA36074;Name=chaA;biotype=protein_coding;description=calcium/sodium:proton antiporter;gene_id=BAA36074;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	1273448	1274548	.	-	.	ID=transcript:BAA36074;Parent=gene:BAA36074;Name=chaA-1;biotype=protein_coding;transcript_id=BAA36074;version=1
 NC_007779.1_w3110_Mu	ena	exon	1273448	1274548	.	-	.	Parent=transcript:BAA36074;Name=BAA36074-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA36074-1;rank=1;version=1
@@ -6979,8 +6979,8 @@ NC_007779.1_w3110_Mu	ena	CDS	1407577	1408485	.	+	0	ID=CDS:BAA14941;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	1408466	1408645	.	-	.	ID=gene:EBG00001131900;Name=IS061;biotype=sRNA;gene_id=EBG00001131900;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	1408466	1408645	.	-	.	ID=transcript:EBT00001723152;Parent=gene:EBG00001131900;Name=IS061;biotype=sRNA;transcript_id=EBT00001723152;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	1408466	1408645	.	-	.	Parent=transcript:EBT00001723152;Name=EBG00001131900-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131900-1;rank=1;version=1
-###
 NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1408488	1408645	.	-	.	external_name=ECK1336:JWR0233:b4426;logic_name=ena_misc_rna
+###
 NC_007779.1_w3110_Mu	ena	gene	1408815	1409378	.	+	.	ID=gene:BAE76405;Name=ydaL;biotype=protein_coding;description=conserved hypothetical protein;gene_id=BAE76405;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	1408815	1409378	.	+	.	ID=transcript:BAE76405;Parent=gene:BAE76405;Name=ydaL-1;biotype=protein_coding;transcript_id=BAE76405;version=1
 NC_007779.1_w3110_Mu	ena	exon	1408815	1409378	.	+	.	Parent=transcript:BAE76405;Name=BAE76405-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE76405-1;rank=1;version=1
@@ -7157,7 +7157,7 @@ NC_007779.1_w3110_Mu	ena	transcript	1435247	1435822	.	+	.	ID=transcript:BAA14978
 NC_007779.1_w3110_Mu	ena	exon	1435247	1435822	.	+	.	Parent=transcript:BAA14978;Name=BAA14978-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA14978-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	1435247	1435822	.	+	0	ID=CDS:BAA14978;Parent=transcript:BAA14978;protein_id=BAA14978
 ###
-NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	1435590	1435788	.	-	.	ID=gene:EBG00001131829;Name=IS009;biotype=ncRNA;gene_id=EBG00001131829;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	1435590	1435788	.	-	.	ID=gene:EBG00001131829;Name=IS009_3;biotype=ncRNA;gene_id=EBG00001131829;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	1435590	1435788	.	-	.	ID=transcript:EBT00001723121;Parent=gene:EBG00001131829;Name=IS009;biotype=ncRNA;transcript_id=EBT00001723121;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	1435590	1435788	.	-	.	Parent=transcript:EBT00001723121;Name=EBG00001131829-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131829-1;rank=1;version=1
 ###
@@ -7184,8 +7184,8 @@ NC_007779.1_w3110_Mu	ena	CDS	1438596	1439729	.	-	0	ID=CDS:BAA14981;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	1439954	1440074	.	-	.	ID=gene:EBG00001131805;Name=MicC;biotype=sRNA;gene_id=EBG00001131805;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	1439954	1440074	.	-	.	ID=transcript:EBT00001723081;Parent=gene:EBG00001131805;Name=MicC;biotype=sRNA;transcript_id=EBT00001723081;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	1439954	1440074	.	-	.	Parent=transcript:EBT00001723081;Name=EBG00001131805-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131805-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1439957	1440064	.	-	.	external_name=ECK1373:JWR0234:b4427;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1439957	1440064	.	+	.	external_name=ECK1373:JWR0234:b4427;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	1440096	1443620	.	-	.	ID=gene:BAA14982;Name=ydbK;biotype=protein_coding;description=fused predicted Fe-S subunit of pyruvate-flavodoxin oxidoreductase;gene_id=BAA14982;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	1440096	1443620	.	-	.	ID=transcript:BAA14982;Parent=gene:BAA14982;Name=ydbK-1;biotype=protein_coding;transcript_id=BAA14982;version=1
 NC_007779.1_w3110_Mu	ena	exon	1440096	1443620	.	-	.	Parent=transcript:BAA14982;Name=BAA14982-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA14982-1;rank=1;version=1
@@ -7422,8 +7422,8 @@ NC_007779.1_w3110_Mu	ena	CDS	1494798	1494965	.	-	0	ID=CDS:BAE76433;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	1494902	1495053	.	+	.	ID=gene:EBG00001131905;Name=sok;biotype=antitoxin;gene_id=EBG00001131905;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	1494902	1495053	.	+	.	ID=transcript:EBT00001723117;Parent=gene:EBG00001131905;Name=sok;biotype=antitoxin;transcript_id=EBT00001723117;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	1494902	1495053	.	+	.	Parent=transcript:EBT00001723117;Name=EBG00001131905-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131905-1;rank=1;version=1
-###
 NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1494955	1495007	.	+	.	external_name=ECK1414:JWR0235:b4429;logic_name=ena_misc_rna
+###
 NC_007779.1_w3110_Mu	ena	gene	1495306	1496946	.	+	.	ID=gene:BAA15044;Name=trg;biotype=protein_coding;description=methyl-accepting chemotaxis protein III%2C ribose and galactose sensor receptor;gene_id=BAA15044;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	1495306	1496946	.	+	.	ID=transcript:BAA15044;Parent=gene:BAA15044;Name=trg-1;biotype=protein_coding;transcript_id=BAA15044;version=1
 NC_007779.1_w3110_Mu	ena	exon	1495306	1496946	.	+	.	Parent=transcript:BAA15044;Name=BAA15044-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA15044-1;rank=1;version=1
@@ -8059,7 +8059,7 @@ NC_007779.1_w3110_Mu	ena	transcript	1637146	1637721	.	-	.	ID=transcript:BAA15250
 NC_007779.1_w3110_Mu	ena	exon	1637146	1637721	.	-	.	Parent=transcript:BAA15250;Name=BAA15250-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA15250-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	1637146	1637721	.	-	0	ID=CDS:BAA15250;Parent=transcript:BAA15250;protein_id=BAA15250
 ###
-NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	1637180	1637378	.	+	.	ID=gene:EBG00001131795;Name=IS009;biotype=ncRNA;gene_id=EBG00001131795;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	1637180	1637378	.	+	.	ID=gene:EBG00001131795;Name=IS009_4;biotype=ncRNA;gene_id=EBG00001131795;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	1637180	1637378	.	+	.	ID=transcript:EBT00001723086;Parent=gene:EBG00001131795;Name=IS009;biotype=ncRNA;transcript_id=EBT00001723086;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	1637180	1637378	.	+	.	Parent=transcript:EBT00001723086;Name=EBG00001131795-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131795-1;rank=1;version=1
 ###
@@ -8784,8 +8784,8 @@ NC_007779.1_w3110_Mu	ena	CDS	1766854	1767222	.	-	0	ID=CDS:BAA15453;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	1767544	1767604	.	+	.	ID=gene:EBG00001131840;Name=rydB;biotype=sRNA;gene_id=EBG00001131840;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	1767544	1767604	.	+	.	ID=transcript:EBT00001723110;Parent=gene:EBG00001131840;Name=rydB;biotype=sRNA;transcript_id=EBT00001723110;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	1767544	1767604	.	+	.	Parent=transcript:EBT00001723110;Name=EBG00001131840-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131840-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1767549	1767616	.	+	.	external_name=ECK1681:JWR0236:b4430;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1767549	1767616	.	-	.	external_name=ECK1681:JWR0236:b4430;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	1767770	1768039	.	-	.	ID=gene:BAE76501;Name=ydiH;biotype=protein_coding;description=hypothetical protein;gene_id=BAE76501;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	1767770	1768039	.	-	.	ID=transcript:BAE76501;Parent=gene:BAE76501;Name=ydiH-1;biotype=protein_coding;transcript_id=BAE76501;version=1
 NC_007779.1_w3110_Mu	ena	exon	1767770	1768039	.	-	.	Parent=transcript:BAE76501;Name=BAE76501-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE76501-1;rank=1;version=1
@@ -8806,7 +8806,7 @@ NC_007779.1_w3110_Mu	ena	transcript	1771910	1773022	.	+	.	ID=transcript:BAA15450
 NC_007779.1_w3110_Mu	ena	exon	1771910	1773022	.	+	.	Parent=transcript:BAA15450;Name=BAA15450-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA15450-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	1771910	1773022	.	+	0	ID=CDS:BAA15450;Parent=transcript:BAA15450;protein_id=BAA15450
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1773208	1773312	.	+	.	external_name=ECK1686:JWR0203:b4431;logic_name=ena_misc_rna
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1773208	1773312	.	-	.	external_name=ECK1686:JWR0203:b4431;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	Rfam	gene	1773208	1773315	.	-	.	ID=gene:EBG00001131965;Name=RprA;biotype=sRNA;gene_id=EBG00001131965;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	1773208	1773315	.	-	.	ID=transcript:EBT00001723156;Parent=gene:EBG00001131965;Name=RprA;biotype=sRNA;transcript_id=EBT00001723156;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	1773208	1773315	.	-	.	Parent=transcript:EBT00001723156;Name=EBG00001131965-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131965-1;rank=1;version=1
@@ -9581,7 +9581,7 @@ NC_007779.1_w3110_Mu	ena	transcript	1925149	1925805	.	-	.	ID=transcript:BAA15649
 NC_007779.1_w3110_Mu	ena	exon	1925149	1925805	.	-	.	Parent=transcript:BAA15649;Name=BAA15649-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA15649-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	1925149	1925805	.	-	0	ID=CDS:BAA15649;Parent=transcript:BAA15649;protein_id=BAA15649
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1925902	1926150	.	+	.	external_name=ECK1838:JWR0237:b4432;logic_name=ena_misc_rna
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	1925902	1926150	.	-	.	external_name=ECK1838:JWR0237:b4432;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	Rfam	gene	1925936	1926080	.	-	.	ID=gene:EBG00001131774;Name=SraC_RyeA;biotype=sRNA;gene_id=EBG00001131774;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	1925936	1926080	.	-	.	ID=transcript:EBT00001723255;Parent=gene:EBG00001131774;Name=SraC_RyeA;biotype=sRNA;transcript_id=EBT00001723255;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	1925936	1926080	.	-	.	Parent=transcript:EBT00001723255;Name=EBG00001131774-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131774-1;rank=1;version=1
@@ -10170,8 +10170,8 @@ NC_007779.1_w3110_Mu	ena	CDS	2028245	2028472	.	+	0	ID=CDS:BAE76554;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	2028486	2028572	.	+	.	ID=gene:EBG00001131939;Name=DsrA;biotype=sRNA;gene_id=EBG00001131939;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	2028486	2028572	.	+	.	ID=transcript:EBT00001723262;Parent=gene:EBG00001131939;Name=DsrA;biotype=sRNA;transcript_id=EBT00001723262;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2028486	2028572	.	+	.	Parent=transcript:EBT00001723262;Name=EBG00001131939-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131939-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2028486	2028572	.	+	.	external_name=ECK1952:JWR0036:b1954;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2028486	2028572	.	-	.	external_name=ECK1952:JWR0036:b1954;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	2028770	2029585	.	+	.	ID=gene:BAE76555;Name=yedP;biotype=protein_coding;description=conserved hypothetical protein;gene_id=BAE76555;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	2028770	2029585	.	+	.	ID=transcript:BAE76555;Parent=gene:BAE76555;Name=yedP-1;biotype=protein_coding;transcript_id=BAE76555;version=1
 NC_007779.1_w3110_Mu	ena	exon	2028770	2029585	.	+	.	Parent=transcript:BAE76555;Name=BAE76555-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE76555-1;rank=1;version=1
@@ -10420,8 +10420,8 @@ NC_007779.1_w3110_Mu	ena	exon	2074045	2074470	.	+	.	Parent=transcript:EBT0000004
 NC_007779.1_w3110_Mu	Rfam	gene	2074574	2074777	.	-	.	ID=gene:EBG00001131921;Name=IS102;biotype=sRNA;gene_id=EBG00001131921;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	2074574	2074777	.	-	.	ID=transcript:EBT00001723216;Parent=gene:EBG00001131921;Name=IS102;biotype=sRNA;transcript_id=EBT00001723216;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2074574	2074777	.	-	.	Parent=transcript:EBT00001723216;Name=EBG00001131921-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131921-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2074574	2074777	.	-	.	external_name=ECK1992:JWR0240:b4435;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2074574	2074777	.	+	.	external_name=ECK1992:JWR0240:b4435;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	2074798	2077917	.	+	.	ID=gene:BAA15825;Name=flu;biotype=protein_coding;description=antigen 43 (Ag43) phase-variable biofilm formation autotransporter;gene_id=BAA15825;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	2074798	2077917	.	+	.	ID=transcript:BAA15825;Parent=gene:BAA15825;Name=flu-1;biotype=protein_coding;transcript_id=BAA15825;version=1
 NC_007779.1_w3110_Mu	ena	exon	2074798	2077917	.	+	.	Parent=transcript:BAA15825;Name=BAA15825-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA15825-1;rank=1;version=1
@@ -10816,13 +10816,13 @@ NC_007779.1_w3110_Mu	ena	CDS	2155728	2156387	.	-	0	ID=CDS:BAE76580;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	2156534	2156682	.	-	.	ID=gene:EBG00001131802;Name=SIB_RNA;biotype=antitoxin;gene_id=EBG00001131802;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	2156534	2156682	.	-	.	ID=transcript:EBT00001723177;Parent=gene:EBG00001131802;Name=SIB_RNA;biotype=antitoxin;transcript_id=EBT00001723177;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2156534	2156682	.	-	.	Parent=transcript:EBT00001723177;Name=EBG00001131802-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131802-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2156534	2156682	.	-	.	external_name=ECK2068:JWR0241:b4436;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2156534	2156682	.	+	.	external_name=ECK2068:JWR0241:b4436;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	Rfam	gene	2156869	2157011	.	-	.	ID=gene:EBG00001131861;Name=SIB_RNA;biotype=antitoxin;gene_id=EBG00001131861;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	2156869	2157011	.	-	.	ID=transcript:EBT00001723143;Parent=gene:EBG00001131861;Name=SIB_RNA;biotype=antitoxin;transcript_id=EBT00001723143;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2156869	2157011	.	-	.	Parent=transcript:EBT00001723143;Name=EBG00001131861-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131861-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2156869	2157011	.	-	.	external_name=ECK2069:JWR0242:b4437;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2156869	2157011	.	+	.	external_name=ECK2069:JWR0242:b4437;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	2157275	2158522	.	+	.	ID=gene:BAA15928;Name=mdtA;biotype=protein_coding;description=multidrug efflux system%2C subunit A;gene_id=BAA15928;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	2157275	2158522	.	+	.	ID=transcript:BAA15928;Parent=gene:BAA15928;Name=mdtA-1;biotype=protein_coding;transcript_id=BAA15928;version=1
 NC_007779.1_w3110_Mu	ena	exon	2157275	2158522	.	+	.	Parent=transcript:BAA15928;Name=BAA15928-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA15928-1;rank=1;version=1
@@ -10866,8 +10866,8 @@ NC_007779.1_w3110_Mu	ena	CDS	2168927	2170288	.	+	0	ID=CDS:BAA15936;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	2170371	2170456	.	-	.	ID=gene:EBG00001131787;Name=CyaR_RyeE;biotype=sRNA;gene_id=EBG00001131787;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	2170371	2170456	.	-	.	ID=transcript:EBT00001723172;Parent=gene:EBG00001131787;Name=CyaR_RyeE;biotype=sRNA;transcript_id=EBT00001723172;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2170371	2170456	.	-	.	Parent=transcript:EBT00001723172;Name=EBG00001131787-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131787-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2170371	2170456	.	-	.	external_name=ECK2078:JWR0243:b4438;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2170371	2170456	.	+	.	external_name=ECK2078:JWR0243:b4438;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	2170561	2170779	.	-	.	ID=gene:BAA15937;Name=ogrK;biotype=protein_coding;description=DNA-binding transcriptional regulator;gene_id=BAA15937;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	2170561	2170779	.	-	.	ID=transcript:BAA15937;Parent=gene:BAA15937;Name=ogrK-1;biotype=protein_coding;transcript_id=BAA15937;version=1
 NC_007779.1_w3110_Mu	ena	exon	2170561	2170779	.	-	.	Parent=transcript:BAA15937;Name=BAA15937-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA15937-1;rank=1;version=1
@@ -11566,8 +11566,8 @@ NC_007779.1_w3110_Mu	ena	CDS	2316102	2317205	.	-	0	ID=CDS:BAA15998;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	2317539	2317632	.	-	.	ID=gene:EBG00001131755;Name=MicF;biotype=antisense;gene_id=EBG00001131755;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	2317539	2317632	.	-	.	ID=transcript:EBT00001723070;Parent=gene:EBG00001131755;Name=MicF;biotype=antisense;transcript_id=EBT00001723070;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2317539	2317632	.	-	.	Parent=transcript:EBT00001723070;Name=EBG00001131755-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131755-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2317540	2317632	.	-	.	external_name=ECK2208:JWR0043:b4439;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2317540	2317632	.	+	.	external_name=ECK2208:JWR0043:b4439;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	2317944	2320616	.	+	.	ID=gene:BAA15999;Name=rcsD;biotype=protein_coding;description=phosphotransfer intermediate protein in two-component regulatory system with RcsBC;gene_id=BAA15999;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	2317944	2320616	.	+	.	ID=transcript:BAA15999;Parent=gene:BAA15999;Name=rcsD-1;biotype=protein_coding;transcript_id=BAA15999;version=1
 NC_007779.1_w3110_Mu	ena	exon	2317944	2320616	.	+	.	Parent=transcript:BAA15999;Name=BAA15999-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA15999-1;rank=1;version=1
@@ -13136,8 +13136,8 @@ NC_007779.1_w3110_Mu	Rfam	exon	2653293	2653501	.	-	.	Parent=transcript:EBT000017
 NC_007779.1_w3110_Mu	Rfam	gene	2653633	2653936	.	-	.	ID=gene:EBG00001131797;Name=ryfA;biotype=sRNA;gene_id=EBG00001131797;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	2653633	2653936	.	-	.	ID=transcript:EBT00001723176;Parent=gene:EBG00001131797;Name=ryfA;biotype=sRNA;transcript_id=EBT00001723176;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2653633	2653936	.	-	.	Parent=transcript:EBT00001723176;Name=EBG00001131797-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131797-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2653633	2653936	.	-	.	external_name=ECK2518:JWR0244:b4440;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2653633	2653936	.	+	.	external_name=ECK2518:JWR0244:b4440;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	2653935	2654711	.	-	.	ID=gene:BAA16412;Name=sseB;biotype=protein_coding;description=rhodanase-like enzyme%2C sulfur transfer from thiosulfate;gene_id=BAA16412;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	2653935	2654711	.	-	.	ID=transcript:BAA16412;Parent=gene:BAA16412;Name=sseB-1;biotype=protein_coding;transcript_id=BAA16412;version=1
 NC_007779.1_w3110_Mu	ena	exon	2653935	2654711	.	-	.	Parent=transcript:BAA16412;Name=BAA16412-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA16412-1;rank=1;version=1
@@ -13317,7 +13317,7 @@ NC_007779.1_w3110_Mu	Rfam	gene	2690933	2691117	.	+	.	ID=gene:EBG00001131927;Name
 NC_007779.1_w3110_Mu	Rfam	transcript	2690933	2691117	.	+	.	ID=transcript:EBT00001723139;Parent=gene:EBG00001131927;Name=GlmZ_SraJ;biotype=sRNA;transcript_id=EBT00001723139;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2690933	2691117	.	+	.	Parent=transcript:EBT00001723139;Name=EBG00001131927-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131927-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2690970	2691118	.	-	.	external_name=ECK2554:JWR0245:b4441;logic_name=ena_misc_rna
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2690970	2691118	.	+	.	external_name=ECK2554:JWR0245:b4441;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	Rfam	gene	2690971	2691118	.	+	.	ID=gene:EBG00001131967;Name=GlmY_tke1;biotype=sRNA;gene_id=EBG00001131967;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	2690971	2691118	.	+	.	ID=transcript:EBT00001723245;Parent=gene:EBG00001131967;Name=GlmY_tke1;biotype=sRNA;transcript_id=EBT00001723245;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2690971	2691118	.	+	.	Parent=transcript:EBT00001723245;Name=EBG00001131967-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131967-1;rank=1;version=1
@@ -13489,8 +13489,8 @@ NC_007779.1_w3110_Mu	Rfam	rRNA_gene	2725849	2725964	.	-	.	ID=gene:EBG00001131803
 NC_007779.1_w3110_Mu	Rfam	rRNA	2725849	2725964	.	-	.	ID=transcript:EBT00001723100;Parent=gene:EBG00001131803;Name=5S_rRNA;biotype=rRNA;transcript_id=EBT00001723100;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2725849	2725964	.	-	.	Parent=transcript:EBT00001723100;Name=EBG00001131803-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131803-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	Rfam	rRNA_gene	2726059	2728962	.	-	.	ID=gene:EBG00001131773;Name=LSU_rRNA_bacteria;biotype=rRNA;gene_id=EBG00001131773;logic_name=rfam_genes;version=1
-NC_007779.1_w3110_Mu	Rfam	rRNA	2726059	2728962	.	-	.	ID=transcript:EBT00001723136;Parent=gene:EBG00001131773;Name=LSU_rRNA_bacteria;biotype=rRNA;transcript_id=EBT00001723136;version=1
+NC_007779.1_w3110_Mu	Rfam	rRNA_gene	2726059	2728962	.	-	.	ID=gene:EBG00001131773;Name=rrlG;biotype=rRNA;gene_id=EBG00001131773;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	rRNA	2726059	2728962	.	-	.	ID=transcript:EBT00001723136;Parent=gene:EBG00001131773;Name=rrlG;biotype=rRNA;transcript_id=EBT00001723136;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2726059	2728962	.	-	.	Parent=transcript:EBT00001723136;Name=EBG00001131773-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131773-1;rank=1;version=1
 ###
 NC_007779.1_w3110_Mu	ena	rRNA_gene	2726059	2728962	.	-	.	ID=gene:EBG00000041674;Name=rrlG;biotype=rRNA;gene_id=EBG00000041674;logic_name=ena_rna;version=1
@@ -13501,7 +13501,7 @@ NC_007779.1_w3110_Mu	Rfam	rRNA_gene	2726573	2726680	.	-	.	ID=gene:EBG00001131953
 NC_007779.1_w3110_Mu	Rfam	rRNA	2726573	2726680	.	-	.	ID=transcript:EBT00001723065;Parent=gene:EBG00001131953;Name=PK-G12rRNA;biotype=rRNA;transcript_id=EBT00001723065;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2726573	2726680	.	-	.	Parent=transcript:EBT00001723065;Name=EBG00001131953-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131953-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	2728970	2729069	.	-	.	ID=gene:EBG00001131789;Name=StyR-44;biotype=ncRNA;gene_id=EBG00001131789;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	2728970	2729069	.	-	.	ID=gene:EBG00001131789;Name=StyR-44_7;biotype=ncRNA;gene_id=EBG00001131789;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	2728970	2729069	.	-	.	ID=transcript:EBT00001723151;Parent=gene:EBG00001131789;Name=StyR-44;biotype=ncRNA;transcript_id=EBT00001723151;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2728970	2729069	.	-	.	Parent=transcript:EBT00001723151;Name=EBG00001131789-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131789-1;rank=1;version=1
 ###
@@ -13983,7 +13983,7 @@ NC_007779.1_w3110_Mu	ena	transcript	2813996	2814511	.	-	.	ID=transcript:BAA16549
 NC_007779.1_w3110_Mu	ena	exon	2813996	2814511	.	-	.	Parent=transcript:BAA16549;Name=BAA16549-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAA16549-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	2813996	2814511	.	-	0	ID=CDS:BAA16549;Parent=transcript:BAA16549;protein_id=BAA16549
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2814579	2814653	.	+	.	external_name=ECK2682:JWR0246:b4442;logic_name=ena_misc_rna
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2814579	2814653	.	-	.	external_name=ECK2682:JWR0246:b4442;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	Rfam	gene	2814580	2814651	.	-	.	ID=gene:EBG00001131753;Name=MicA;biotype=sRNA;gene_id=EBG00001131753;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	2814580	2814651	.	-	.	ID=transcript:EBT00001723257;Parent=gene:EBG00001131753;Name=MicA;biotype=sRNA;transcript_id=EBT00001723257;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2814580	2814651	.	-	.	Parent=transcript:EBT00001723257;Name=EBG00001131753-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131753-1;rank=1;version=1
@@ -14530,8 +14530,8 @@ NC_007779.1_w3110_Mu	ena	CDS	2923562	2923891	.	-	0	ID=CDS:BAE76864;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	2923934	2924293	.	+	.	ID=gene:EBG00001131799;Name=CsrB;biotype=sRNA;gene_id=EBG00001131799;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	2923934	2924293	.	+	.	ID=transcript:EBT00001723219;Parent=gene:EBG00001131799;Name=CsrB;biotype=sRNA;transcript_id=EBT00001723219;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2923934	2924293	.	+	.	Parent=transcript:EBT00001723219;Name=EBG00001131799-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131799-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2923934	2924293	.	+	.	external_name=ECK2787:JWR0062:b4408;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2923934	2924293	.	-	.	external_name=ECK2787:JWR0062:b4408;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	2924513	2925058	.	-	.	ID=gene:BAE76865;Name=syd;biotype=protein_coding;description=hypothetical protein;gene_id=BAE76865;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	2924513	2925058	.	-	.	ID=transcript:BAE76865;Parent=gene:BAE76865;Name=syd-1;biotype=protein_coding;transcript_id=BAE76865;version=1
 NC_007779.1_w3110_Mu	ena	exon	2924513	2925058	.	-	.	Parent=transcript:BAE76865;Name=BAE76865-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE76865-1;rank=1;version=1
@@ -14612,7 +14612,7 @@ NC_007779.1_w3110_Mu	ena	transcript	2941428	2942345	.	-	.	ID=transcript:BAE76880
 NC_007779.1_w3110_Mu	ena	exon	2941428	2942345	.	-	.	Parent=transcript:BAE76880;Name=BAE76880-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE76880-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	2941428	2942345	.	-	0	ID=CDS:BAE76880;Parent=transcript:BAE76880;protein_id=BAE76880
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2942474	2942678	.	+	.	external_name=ECK2804:JWR0247:b4443;logic_name=ena_misc_rna
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2942474	2942678	.	-	.	external_name=ECK2804:JWR0247:b4443;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	2942474	2942679	.	-	.	ID=gene:EBG00001131783;Name=GcvB;biotype=ncRNA;gene_id=EBG00001131783;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	2942474	2942679	.	-	.	ID=transcript:EBT00001723267;Parent=gene:EBG00001131783;Name=GcvB;biotype=ncRNA;transcript_id=EBT00001723267;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2942474	2942679	.	-	.	Parent=transcript:EBT00001723267;Name=EBG00001131783-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131783-1;rank=1;version=1
@@ -14769,13 +14769,13 @@ NC_007779.1_w3110_Mu	ena	CDS	2973633	2975792	.	-	0	ID=CDS:BAE76905;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	2975880	2975967	.	+	.	ID=gene:EBG00001131968;Name=OmrA-B;biotype=sRNA;gene_id=EBG00001131968;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	2975880	2975967	.	+	.	ID=transcript:EBT00001723243;Parent=gene:EBG00001131968;Name=OmrA-B;biotype=sRNA;transcript_id=EBT00001723243;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2975880	2975967	.	+	.	Parent=transcript:EBT00001723243;Name=EBG00001131968-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131968-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2975880	2975967	.	+	.	external_name=ECK2833:JWR0248:b4444;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2975880	2975967	.	-	.	external_name=ECK2833:JWR0248:b4444;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	Rfam	gene	2976082	2976163	.	+	.	ID=gene:EBG00001131935;Name=OmrA-B;biotype=sRNA;gene_id=EBG00001131935;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	2976082	2976163	.	+	.	ID=transcript:EBT00001723205;Parent=gene:EBG00001131935;Name=OmrA-B;biotype=sRNA;transcript_id=EBT00001723205;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	2976082	2976163	.	+	.	Parent=transcript:EBT00001723205;Name=EBG00001131935-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131935-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2976088	2976163	.	+	.	external_name=ECK2834:JWR0249:b4445;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	2976088	2976163	.	-	.	external_name=ECK2834:JWR0249:b4445;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	2976377	2977408	.	+	.	ID=gene:BAE76906;Name=galR;biotype=protein_coding;description=DNA-binding transcriptional repressor;gene_id=BAE76906;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	2976377	2977408	.	+	.	ID=transcript:BAE76906;Parent=gene:BAE76906;Name=galR-1;biotype=protein_coding;transcript_id=BAE76906;version=1
 NC_007779.1_w3110_Mu	ena	exon	2976377	2977408	.	+	.	Parent=transcript:BAE76906;Name=BAE76906-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE76906-1;rank=1;version=1
@@ -15144,7 +15144,7 @@ NC_007779.1_w3110_Mu	ena	transcript	3055390	3055719	.	+	.	ID=transcript:BAE76975
 NC_007779.1_w3110_Mu	ena	exon	3055390	3055719	.	+	.	Parent=transcript:BAE76975;Name=BAE76975-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE76975-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	3055390	3055719	.	+	0	ID=CDS:BAE76975;Parent=transcript:BAE76975;protein_id=BAE76975
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3055761	3055943	.	+	.	external_name=ECK2906:JWR0067:b2911;logic_name=ena_misc_rna
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3055761	3055943	.	-	.	external_name=ECK2906:JWR0067:b2911;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	3055761	3055944	.	-	.	ID=gene:EBG00001131780;Name=6S;biotype=ncRNA;gene_id=EBG00001131780;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3055761	3055944	.	-	.	ID=transcript:EBT00001723084;Parent=gene:EBG00001131780;Name=6S;biotype=ncRNA;transcript_id=EBT00001723084;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3055761	3055944	.	-	.	Parent=transcript:EBT00001723084;Name=EBG00001131780-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131780-1;rank=1;version=1
@@ -15157,8 +15157,8 @@ NC_007779.1_w3110_Mu	ena	CDS	3056019	3056567	.	+	0	ID=CDS:BAE76976;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	3056593	3056743	.	-	.	ID=gene:EBG00001131794;Name=SIB_RNA;biotype=antitoxin;gene_id=EBG00001131794;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3056593	3056743	.	-	.	ID=transcript:EBT00001723240;Parent=gene:EBG00001131794;Name=SIB_RNA;biotype=antitoxin;transcript_id=EBT00001723240;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3056593	3056743	.	-	.	Parent=transcript:EBT00001723240;Name=EBG00001131794-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131794-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3056593	3056743	.	-	.	external_name=ECK2908:JWR0250:b4446;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3056593	3056743	.	+	.	external_name=ECK2908:JWR0250:b4446;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	3056956	3058188	.	-	.	ID=gene:BAE76977;Name=serA;biotype=protein_coding;description=D-3-phosphoglycerate dehydrogenase;gene_id=BAE76977;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	3056956	3058188	.	-	.	ID=transcript:BAE76977;Parent=gene:BAE76977;Name=serA-1;biotype=protein_coding;transcript_id=BAE76977;version=1
 NC_007779.1_w3110_Mu	ena	exon	3056956	3058188	.	-	.	Parent=transcript:BAE76977;Name=BAE76977-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE76977-1;rank=1;version=1
@@ -15841,8 +15841,8 @@ NC_007779.1_w3110_Mu	ena	CDS	3192642	3194303	.	+	0	ID=CDS:BAA16578;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	3194529	3194678	.	+	.	ID=gene:EBG00001131862;Name=SIB_RNA;biotype=antitoxin;gene_id=EBG00001131862;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3194529	3194678	.	+	.	ID=transcript:EBT00001723198;Parent=gene:EBG00001131862;Name=SIB_RNA;biotype=antitoxin;transcript_id=EBT00001723198;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3194529	3194678	.	+	.	Parent=transcript:EBT00001723198;Name=EBG00001131862-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131862-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3194529	3194678	.	+	.	external_name=ECK3041:JWR0251:b4447;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3194529	3194678	.	-	.	external_name=ECK3041:JWR0251:b4447;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	Rfam	gene	3194904	3195053	.	+	.	ID=gene:EBG00001131903;Name=SIB_RNA;biotype=antitoxin;gene_id=EBG00001131903;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3194904	3195053	.	+	.	ID=transcript:EBT00001723154;Parent=gene:EBG00001131903;Name=SIB_RNA;biotype=antitoxin;transcript_id=EBT00001723154;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3194904	3195053	.	+	.	Parent=transcript:EBT00001723154;Name=EBG00001131903-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131903-1;rank=1;version=1
@@ -16408,7 +16408,7 @@ NC_007779.1_w3110_Mu	ena	transcript	3310010	3312214	.	-	.	ID=transcript:BAE77210
 NC_007779.1_w3110_Mu	ena	exon	3310010	3312214	.	-	.	Parent=transcript:BAE77210;Name=BAE77210-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE77210-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	3310010	3312214	.	-	0	ID=CDS:BAE77210;Parent=transcript:BAE77210;protein_id=BAE77210
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3312202	3312375	.	+	.	external_name=ECK3153:JWR0253:b4449;logic_name=ena_misc_rna
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3312202	3312375	.	-	.	external_name=ECK3153:JWR0253:b4449;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	Rfam	gene	3312204	3312375	.	-	.	ID=gene:EBG00001131879;Name=SraG;biotype=sRNA;gene_id=EBG00001131879;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3312204	3312375	.	-	.	ID=transcript:EBT00001723120;Parent=gene:EBG00001131879;Name=SraG;biotype=sRNA;transcript_id=EBT00001723120;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3312204	3312375	.	-	.	Parent=transcript:EBT00001723120;Name=EBG00001131879-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131879-1;rank=1;version=1
@@ -16655,8 +16655,8 @@ NC_007779.1_w3110_Mu	ena	CDS	3350783	3351436	.	-	0	ID=CDS:BAE77253;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	3351554	3351661	.	-	.	ID=gene:EBG00001131964;Name=ArcZ;biotype=sRNA;gene_id=EBG00001131964;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3351554	3351661	.	-	.	ID=transcript:EBT00001723201;Parent=gene:EBG00001131964;Name=ArcZ;biotype=sRNA;transcript_id=EBT00001723201;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3351554	3351661	.	-	.	Parent=transcript:EBT00001723201;Name=EBG00001131964-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131964-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3351554	3351661	.	-	.	external_name=ECK3199:JWR0254:b4450;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3351554	3351661	.	+	.	external_name=ECK3199:JWR0254:b4450;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	3351666	3354002	.	-	.	ID=gene:BAE77254;Name=arcB;biotype=protein_coding;description=hybrid sensory histidine kinase in two-component regulatory system with ArcA;gene_id=BAE77254;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	3351666	3354002	.	-	.	ID=transcript:BAE77254;Parent=gene:BAE77254;Name=arcB-1;biotype=protein_coding;transcript_id=BAE77254;version=1
 NC_007779.1_w3110_Mu	ena	exon	3351666	3354002	.	-	.	Parent=transcript:BAE77254;Name=BAE77254-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE77254-1;rank=1;version=1
@@ -16988,8 +16988,8 @@ NC_007779.1_w3110_Mu	Rfam	rRNA_gene	3424647	3424762	.	-	.	ID=gene:EBG00001131832
 NC_007779.1_w3110_Mu	Rfam	rRNA	3424647	3424762	.	-	.	ID=transcript:EBT00001723163;Parent=gene:EBG00001131832;Name=5S_rRNA;biotype=rRNA;transcript_id=EBT00001723163;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3424647	3424762	.	-	.	Parent=transcript:EBT00001723163;Name=EBG00001131832-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131832-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	Rfam	rRNA_gene	3424857	3427760	.	-	.	ID=gene:EBG00001131864;Name=LSU_rRNA_bacteria;biotype=rRNA;gene_id=EBG00001131864;logic_name=rfam_genes;version=1
-NC_007779.1_w3110_Mu	Rfam	rRNA	3424857	3427760	.	-	.	ID=transcript:EBT00001723232;Parent=gene:EBG00001131864;Name=LSU_rRNA_bacteria;biotype=rRNA;transcript_id=EBT00001723232;version=1
+NC_007779.1_w3110_Mu	Rfam	rRNA_gene	3424857	3427760	.	-	.	ID=gene:EBG00001131864;Name=rrlD;biotype=rRNA;gene_id=EBG00001131864;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	rRNA	3424857	3427760	.	-	.	ID=transcript:EBT00001723232;Parent=gene:EBG00001131864;Name=rrlD;biotype=rRNA;transcript_id=EBT00001723232;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3424857	3427760	.	-	.	Parent=transcript:EBT00001723232;Name=EBG00001131864-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131864-1;rank=1;version=1
 ###
 NC_007779.1_w3110_Mu	ena	rRNA_gene	3424857	3427760	.	-	.	ID=gene:EBG00000041653;Name=rrlD;biotype=rRNA;gene_id=EBG00000041653;logic_name=ena_rna;version=1
@@ -17000,7 +17000,7 @@ NC_007779.1_w3110_Mu	Rfam	rRNA_gene	3425371	3425478	.	-	.	ID=gene:EBG00001131856
 NC_007779.1_w3110_Mu	Rfam	rRNA	3425371	3425478	.	-	.	ID=transcript:EBT00001723094;Parent=gene:EBG00001131856;Name=PK-G12rRNA;biotype=rRNA;transcript_id=EBT00001723094;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3425371	3425478	.	-	.	Parent=transcript:EBT00001723094;Name=EBG00001131856-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131856-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	3427768	3427876	.	-	.	ID=gene:EBG00001131757;Name=StyR-44;biotype=ncRNA;gene_id=EBG00001131757;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	3427768	3427876	.	-	.	ID=gene:EBG00001131757;Name=StyR-44_1;biotype=ncRNA;gene_id=EBG00001131757;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3427768	3427876	.	-	.	ID=transcript:EBT00001723228;Parent=gene:EBG00001131757;Name=StyR-44;biotype=ncRNA;transcript_id=EBT00001723228;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3427768	3427876	.	-	.	Parent=transcript:EBT00001723228;Name=EBG00001131757-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131757-1;rank=1;version=1
 ###
@@ -17231,15 +17231,15 @@ NC_007779.1_w3110_Mu	ena	rRNA_gene	3466259	3469162	.	-	.	ID=gene:EBG00000041686;
 NC_007779.1_w3110_Mu	ena	rRNA	3466259	3469162	.	-	.	ID=transcript:EBG00000041686-1;Parent=gene:EBG00000041686;Name=rrlB;biotype=rRNA;transcript_id=EBG00000041686-1;version=1
 NC_007779.1_w3110_Mu	ena	exon	3466259	3469162	.	-	.	Parent=transcript:EBG00000041686-1;Name=EBG00000041686-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00000041686-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	Rfam	rRNA_gene	3466259	3469162	.	-	.	ID=gene:EBG00001131906;Name=LSU_rRNA_bacteria;biotype=rRNA;gene_id=EBG00001131906;logic_name=rfam_genes;version=1
-NC_007779.1_w3110_Mu	Rfam	rRNA	3466259	3469162	.	-	.	ID=transcript:EBT00001723134;Parent=gene:EBG00001131906;Name=LSU_rRNA_bacteria;biotype=rRNA;transcript_id=EBT00001723134;version=1
+NC_007779.1_w3110_Mu	Rfam	rRNA_gene	3466259	3469162	.	-	.	ID=gene:EBG00001131906;Name=rrlB;biotype=rRNA;gene_id=EBG00001131906;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	rRNA	3466259	3469162	.	-	.	ID=transcript:EBT00001723134;Parent=gene:EBG00001131906;Name=rrlB;biotype=rRNA;transcript_id=EBT00001723134;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3466259	3469162	.	-	.	Parent=transcript:EBT00001723134;Name=EBG00001131906-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131906-1;rank=1;version=1
 ###
 NC_007779.1_w3110_Mu	Rfam	rRNA_gene	3466773	3466880	.	-	.	ID=gene:EBG00001131881;Name=PK-G12rRNA;biotype=rRNA;gene_id=EBG00001131881;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	rRNA	3466773	3466880	.	-	.	ID=transcript:EBT00001723265;Parent=gene:EBG00001131881;Name=PK-G12rRNA;biotype=rRNA;transcript_id=EBT00001723265;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3466773	3466880	.	-	.	Parent=transcript:EBT00001723265;Name=EBG00001131881-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131881-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	3469170	3469278	.	-	.	ID=gene:EBG00001131814;Name=StyR-44;biotype=ncRNA;gene_id=EBG00001131814;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	3469170	3469278	.	-	.	ID=gene:EBG00001131814;Name=StyR-44_2;biotype=ncRNA;gene_id=EBG00001131814;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3469170	3469278	.	-	.	ID=transcript:EBT00001723182;Parent=gene:EBG00001131814;Name=StyR-44;biotype=ncRNA;transcript_id=EBT00001723182;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3469170	3469278	.	-	.	Parent=transcript:EBT00001723182;Name=EBG00001131814-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131814-1;rank=1;version=1
 ###
@@ -17297,8 +17297,8 @@ NC_007779.1_w3110_Mu	ena	CDS	3478396	3479313	.	-	0	ID=CDS:BAE77350;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	3479409	3479518	.	-	.	ID=gene:EBG00001131873;Name=OxyS;biotype=sRNA;gene_id=EBG00001131873;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3479409	3479518	.	-	.	ID=transcript:EBT00001723263;Parent=gene:EBG00001131873;Name=OxyS;biotype=sRNA;transcript_id=EBT00001723263;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3479409	3479518	.	-	.	Parent=transcript:EBT00001723263;Name=EBG00001131873-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131873-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3479409	3479518	.	-	.	external_name=ECK3952:JWR0098:b4458%3B global regulation;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3479409	3479518	.	+	.	external_name=ECK3952:JWR0098:b4458%3B global regulation;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	3479580	3480953	.	-	.	ID=gene:BAE77351;Name=argH;biotype=protein_coding;description=argininosuccinate lyase;gene_id=BAE77351;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	3479580	3480953	.	-	.	ID=transcript:BAE77351;Parent=gene:BAE77351;Name=argH-1;biotype=protein_coding;transcript_id=BAE77351;version=1
 NC_007779.1_w3110_Mu	ena	exon	3479580	3480953	.	-	.	Parent=transcript:BAE77351;Name=BAE77351-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE77351-1;rank=1;version=1
@@ -17771,14 +17771,14 @@ NC_007779.1_w3110_Mu	ena	CDS	3585947	3586456	.	-	0	ID=CDS:BAE77443;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	3586514	3586767	.	+	.	ID=gene:EBG00001131917;Name=CsrC;biotype=sRNA;gene_id=EBG00001131917;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3586514	3586767	.	+	.	ID=transcript:EBT00001723272;Parent=gene:EBG00001131917;Name=CsrC;biotype=sRNA;transcript_id=EBT00001723272;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3586514	3586767	.	+	.	Parent=transcript:EBT00001723272;Name=EBG00001131917-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131917-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3586523	3586767	.	+	.	external_name=ECK3858:JWR0214:b4457;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3586523	3586767	.	-	.	external_name=ECK3858:JWR0214:b4457;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	3587074	3587670	.	+	.	ID=gene:BAE77444;Name=yihA;biotype=protein_coding;description=GTP-binding protein;gene_id=BAE77444;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	3587074	3587670	.	+	.	ID=transcript:BAE77444;Parent=gene:BAE77444;Name=yihA-1;biotype=protein_coding;transcript_id=BAE77444;version=1
 NC_007779.1_w3110_Mu	ena	exon	3587074	3587670	.	+	.	Parent=transcript:BAE77444;Name=BAE77444-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE77444-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	3587074	3587670	.	+	0	ID=CDS:BAE77444;Parent=transcript:BAE77444;protein_id=BAE77444
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3587796	3587904	.	-	.	external_name=ECK3856:JWR0097:b3864;logic_name=ena_misc_rna
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3587796	3587904	.	+	.	external_name=ECK3856:JWR0097:b3864;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	Rfam	gene	3587796	3587914	.	+	.	ID=gene:EBG00001131940;Name=Spot_42;biotype=sRNA;gene_id=EBG00001131940;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3587796	3587914	.	+	.	ID=transcript:EBT00001723179;Parent=gene:EBG00001131940;Name=Spot_42;biotype=sRNA;transcript_id=EBT00001723179;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3587796	3587914	.	+	.	Parent=transcript:EBT00001723179;Name=EBG00001131940-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131940-1;rank=1;version=1
@@ -17831,8 +17831,8 @@ NC_007779.1_w3110_Mu	Rfam	rRNA_gene	3597169	3597284	.	-	.	ID=gene:EBG00001131843
 NC_007779.1_w3110_Mu	Rfam	rRNA	3597169	3597284	.	-	.	ID=transcript:EBT00001723161;Parent=gene:EBG00001131843;Name=5S_rRNA;biotype=rRNA;transcript_id=EBT00001723161;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3597169	3597284	.	-	.	Parent=transcript:EBT00001723161;Name=EBG00001131843-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131843-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	Rfam	rRNA_gene	3597380	3600284	.	-	.	ID=gene:EBG00001131822;Name=LSU_rRNA_bacteria;biotype=rRNA;gene_id=EBG00001131822;logic_name=rfam_genes;version=1
-NC_007779.1_w3110_Mu	Rfam	rRNA	3597380	3600284	.	-	.	ID=transcript:EBT00001723168;Parent=gene:EBG00001131822;Name=LSU_rRNA_bacteria;biotype=rRNA;transcript_id=EBT00001723168;version=1
+NC_007779.1_w3110_Mu	Rfam	rRNA_gene	3597380	3600284	.	-	.	ID=gene:EBG00001131822;Name=rrlA;biotype=rRNA;gene_id=EBG00001131822;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	rRNA	3597380	3600284	.	-	.	ID=transcript:EBT00001723168;Parent=gene:EBG00001131822;Name=rrlA;biotype=rRNA;transcript_id=EBT00001723168;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3597380	3600284	.	-	.	Parent=transcript:EBT00001723168;Name=EBG00001131822-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131822-1;rank=1;version=1
 ###
 NC_007779.1_w3110_Mu	ena	rRNA_gene	3597380	3600284	.	-	.	ID=gene:EBG00000041705;Name=rrlA;biotype=rRNA;gene_id=EBG00000041705;logic_name=ena_rna;version=1
@@ -17843,7 +17843,7 @@ NC_007779.1_w3110_Mu	Rfam	rRNA_gene	3597894	3598001	.	-	.	ID=gene:EBG00001131908
 NC_007779.1_w3110_Mu	Rfam	rRNA	3597894	3598001	.	-	.	ID=transcript:EBT00001723278;Parent=gene:EBG00001131908;Name=PK-G12rRNA;biotype=rRNA;transcript_id=EBT00001723278;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3597894	3598001	.	-	.	Parent=transcript:EBT00001723278;Name=EBG00001131908-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131908-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	3600292	3600400	.	-	.	ID=gene:EBG00001131764;Name=StyR-44;biotype=ncRNA;gene_id=EBG00001131764;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	3600292	3600400	.	-	.	ID=gene:EBG00001131764;Name=StyR-44_3;biotype=ncRNA;gene_id=EBG00001131764;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3600292	3600400	.	-	.	ID=transcript:EBT00001723224;Parent=gene:EBG00001131764;Name=StyR-44;biotype=ncRNA;transcript_id=EBT00001723224;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3600292	3600400	.	-	.	Parent=transcript:EBT00001723224;Name=EBG00001131764-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131764-1;rank=1;version=1
 ###
@@ -18110,7 +18110,7 @@ NC_007779.1_w3110_Mu	Rfam	gene	3651165	3651371	.	+	.	ID=gene:EBG00001131842;Name
 NC_007779.1_w3110_Mu	Rfam	transcript	3651165	3651371	.	+	.	ID=transcript:EBT00001723246;Parent=gene:EBG00001131842;Name=GlmZ_SraJ;biotype=sRNA;transcript_id=EBT00001723246;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3651165	3651371	.	+	.	Parent=transcript:EBT00001723246;Name=EBG00001131842-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131842-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3651200	3651371	.	-	.	external_name=ECK3795:JWR0257:b4456;logic_name=ena_misc_rna
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3651200	3651371	.	+	.	external_name=ECK3795:JWR0257:b4456;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	Rfam	gene	3651221	3651369	.	+	.	ID=gene:EBG00001131895;Name=GlmY_tke1;biotype=sRNA;gene_id=EBG00001131895;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3651221	3651369	.	+	.	ID=transcript:EBT00001723101;Parent=gene:EBG00001131895;Name=GlmY_tke1;biotype=sRNA;transcript_id=EBT00001723101;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3651221	3651369	.	+	.	Parent=transcript:EBT00001723101;Name=EBG00001131895-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131895-1;rank=1;version=1
@@ -18352,8 +18352,8 @@ NC_007779.1_w3110_Mu	Rfam	rRNA_gene	3690986	3691101	.	-	.	ID=gene:EBG00001131885
 NC_007779.1_w3110_Mu	Rfam	rRNA	3690986	3691101	.	-	.	ID=transcript:EBT00001723075;Parent=gene:EBG00001131885;Name=5S_rRNA;biotype=rRNA;transcript_id=EBT00001723075;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3690986	3691101	.	-	.	Parent=transcript:EBT00001723075;Name=EBG00001131885-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131885-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	Rfam	rRNA_gene	3691196	3694099	.	-	.	ID=gene:EBG00001131806;Name=LSU_rRNA_bacteria;biotype=rRNA;gene_id=EBG00001131806;logic_name=rfam_genes;version=1
-NC_007779.1_w3110_Mu	Rfam	rRNA	3691196	3694099	.	-	.	ID=transcript:EBT00001723145;Parent=gene:EBG00001131806;Name=LSU_rRNA_bacteria;biotype=rRNA;transcript_id=EBT00001723145;version=1
+NC_007779.1_w3110_Mu	Rfam	rRNA_gene	3691196	3694099	.	-	.	ID=gene:EBG00001131806;Name=rrlC;biotype=rRNA;gene_id=EBG00001131806;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	rRNA	3691196	3694099	.	-	.	ID=transcript:EBT00001723145;Parent=gene:EBG00001131806;Name=rrlC;biotype=rRNA;transcript_id=EBT00001723145;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3691196	3694099	.	-	.	Parent=transcript:EBT00001723145;Name=EBG00001131806-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131806-1;rank=1;version=1
 ###
 NC_007779.1_w3110_Mu	ena	rRNA_gene	3691196	3694099	.	-	.	ID=gene:EBG00000041697;Name=rrlC;biotype=rRNA;gene_id=EBG00000041697;logic_name=ena_rna;version=1
@@ -18364,7 +18364,7 @@ NC_007779.1_w3110_Mu	Rfam	rRNA_gene	3691710	3691817	.	-	.	ID=gene:EBG00001131844
 NC_007779.1_w3110_Mu	Rfam	rRNA	3691710	3691817	.	-	.	ID=transcript:EBT00001723242;Parent=gene:EBG00001131844;Name=PK-G12rRNA;biotype=rRNA;transcript_id=EBT00001723242;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3691710	3691817	.	-	.	Parent=transcript:EBT00001723242;Name=EBG00001131844-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131844-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	3694107	3694215	.	-	.	ID=gene:EBG00001131791;Name=StyR-44;biotype=ncRNA;gene_id=EBG00001131791;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	3694107	3694215	.	-	.	ID=gene:EBG00001131791;Name=StyR-44_4;biotype=ncRNA;gene_id=EBG00001131791;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3694107	3694215	.	-	.	ID=transcript:EBT00001723277;Parent=gene:EBG00001131791;Name=StyR-44;biotype=ncRNA;transcript_id=EBT00001723277;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3694107	3694215	.	-	.	Parent=transcript:EBT00001723277;Name=EBG00001131791-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131791-1;rank=1;version=1
 ###
@@ -19548,8 +19548,8 @@ NC_007779.1_w3110_Mu	ena	CDS	3939703	3940974	.	-	0	ID=CDS:BAE77755;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	3941336	3941401	.	+	.	ID=gene:EBG00001131930;Name=rdlD;biotype=antitoxin;gene_id=EBG00001131930;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3941336	3941401	.	+	.	ID=transcript:EBT00001723068;Parent=gene:EBG00001131930;Name=rdlD;biotype=antitoxin;transcript_id=EBT00001723068;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3941336	3941401	.	+	.	Parent=transcript:EBT00001723068;Name=EBG00001131930-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131930-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3941338	3941401	.	+	.	external_name=ECK3525:JWR0256:b4454;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3941338	3941401	.	-	.	external_name=ECK3525:JWR0256:b4454;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	3941450	3941557	.	+	.	ID=gene:BAE77756;Name=ldrD;biotype=protein_coding;description=toxic polypeptide%2C small;gene_id=BAE77756;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	3941450	3941557	.	+	.	ID=transcript:BAE77756;Parent=gene:BAE77756;Name=ldrD-1;biotype=protein_coding;transcript_id=BAE77756;version=1
 NC_007779.1_w3110_Mu	ena	exon	3941450	3941557	.	+	.	Parent=transcript:BAE77756;Name=BAE77756-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE77756-1;rank=1;version=1
@@ -19672,8 +19672,8 @@ NC_007779.1_w3110_Mu	ena	CDS	3975727	3976551	.	+	0	ID=CDS:BAE77778;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	3976563	3976676	.	+	.	ID=gene:EBG00001131872;Name=GadY;biotype=sRNA;gene_id=EBG00001131872;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	3976563	3976676	.	+	.	ID=transcript:EBT00001723099;Parent=gene:EBG00001131872;Name=GadY;biotype=sRNA;transcript_id=EBT00001723099;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	3976563	3976676	.	+	.	Parent=transcript:EBT00001723099;Name=EBG00001131872-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131872-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3976569	3976673	.	+	.	external_name=ECK3500:JWR0255:b4452;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	3976569	3976673	.	-	.	external_name=ECK3500:JWR0255:b4452;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	3976919	3977647	.	+	.	ID=gene:BAE77779;Name=gadW;biotype=protein_coding;description=DNA-binding transcriptional activator;gene_id=BAE77779;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	3976919	3977647	.	+	.	ID=transcript:BAE77779;Parent=gene:BAE77779;Name=gadW-1;biotype=protein_coding;transcript_id=BAE77779;version=1
 NC_007779.1_w3110_Mu	ena	exon	3976919	3977647	.	+	.	Parent=transcript:BAE77779;Name=BAE77779-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE77779-1;rank=1;version=1
@@ -20052,7 +20052,7 @@ NC_007779.1_w3110_Mu	ena	transcript	4059911	4060399	.	-	.	ID=transcript:BAE77852
 NC_007779.1_w3110_Mu	ena	exon	4059911	4060399	.	-	.	Parent=transcript:BAE77852;Name=BAE77852-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE77852-1;rank=1;version=1
 NC_007779.1_w3110_Mu	ena	CDS	4059911	4060399	.	-	0	ID=CDS:BAE77852;Parent=transcript:BAE77852;protein_id=BAE77852
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	4060521	4060614	.	+	.	external_name=ECK3426:JWR0219:b4451;logic_name=ena_misc_rna
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	4060521	4060614	.	-	.	external_name=ECK3426:JWR0219:b4451;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	Rfam	gene	4060550	4060614	.	-	.	ID=gene:EBG00001131901;Name=RyhB;biotype=sRNA;gene_id=EBG00001131901;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	4060550	4060614	.	-	.	ID=transcript:EBT00001723235;Parent=gene:EBG00001131901;Name=RyhB;biotype=sRNA;transcript_id=EBT00001723235;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	4060550	4060614	.	-	.	Parent=transcript:EBT00001723235;Name=EBG00001131901-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131901-1;rank=1;version=1
@@ -20881,12 +20881,12 @@ NC_007779.1_w3110_Mu	ena	tRNA_gene	4214505	4214580	.	+	.	ID=gene:EBG00000041664;
 NC_007779.1_w3110_Mu	ena	transcript	4214505	4214580	.	+	.	ID=transcript:EBG00000041664-1;Parent=gene:EBG00000041664;Name=alaU;biotype=tRNA;transcript_id=EBG00000041664-1;version=1
 NC_007779.1_w3110_Mu	ena	exon	4214505	4214580	.	+	.	Parent=transcript:EBG00000041664-1;Name=EBG00000041664-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00000041664-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	4214648	4214747	.	+	.	ID=gene:EBG00001131784;Name=StyR-44;biotype=ncRNA;gene_id=EBG00001131784;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	ncRNA_gene	4214648	4214747	.	+	.	ID=gene:EBG00001131784;Name=StyR-44_5;biotype=ncRNA;gene_id=EBG00001131784;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	4214648	4214747	.	+	.	ID=transcript:EBT00001723280;Parent=gene:EBG00001131784;Name=StyR-44;biotype=ncRNA;transcript_id=EBT00001723280;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	4214648	4214747	.	+	.	Parent=transcript:EBT00001723280;Name=EBG00001131784-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131784-1;rank=1;version=1
 ###
-NC_007779.1_w3110_Mu	Rfam	rRNA_gene	4214755	4217658	.	+	.	ID=gene:EBG00001131923;Name=LSU_rRNA_bacteria;biotype=rRNA;gene_id=EBG00001131923;logic_name=rfam_genes;version=1
-NC_007779.1_w3110_Mu	Rfam	rRNA	4214755	4217658	.	+	.	ID=transcript:EBT00001723069;Parent=gene:EBG00001131923;Name=LSU_rRNA_bacteria;biotype=rRNA;transcript_id=EBT00001723069;version=1
+NC_007779.1_w3110_Mu	Rfam	rRNA_gene	4214755	4217658	.	+	.	ID=gene:EBG00001131923;Name=rrlE;biotype=rRNA;gene_id=EBG00001131923;logic_name=rfam_genes;version=1
+NC_007779.1_w3110_Mu	Rfam	rRNA	4214755	4217658	.	+	.	ID=transcript:EBT00001723069;Parent=gene:EBG00001131923;Name=rrlE;biotype=rRNA;transcript_id=EBT00001723069;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	4214755	4217658	.	+	.	Parent=transcript:EBT00001723069;Name=EBG00001131923-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131923-1;rank=1;version=1
 ###
 NC_007779.1_w3110_Mu	ena	rRNA_gene	4214755	4217658	.	+	.	ID=gene:EBG00000041654;Name=rrlE;biotype=rRNA;gene_id=EBG00000041654;logic_name=ena_rna;version=1
@@ -21177,8 +21177,8 @@ NC_007779.1_w3110_Mu	ena	CDS	4282181	4282645	.	+	0	ID=CDS:BAE78065;Parent=transc
 NC_007779.1_w3110_Mu	Rfam	gene	4282638	4282778	.	+	.	ID=gene:EBG00001131833;Name=sraL;biotype=sRNA;gene_id=EBG00001131833;logic_name=rfam_genes;version=1
 NC_007779.1_w3110_Mu	Rfam	transcript	4282638	4282778	.	+	.	ID=transcript:EBT00001723275;Parent=gene:EBG00001131833;Name=sraL;biotype=sRNA;transcript_id=EBT00001723275;version=1
 NC_007779.1_w3110_Mu	Rfam	exon	4282638	4282778	.	+	.	Parent=transcript:EBT00001723275;Name=EBG00001131833-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=EBG00001131833-1;rank=1;version=1
+NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	4282639	4282778	.	+	.	external_name=ECK4056:JWR0258:b4459;logic_name=ena_misc_rna
 ###
-NC_007779.1_w3110_Mu	ena_misc_rna	biological_region	4282639	4282778	.	-	.	external_name=ECK4056:JWR0258:b4459;logic_name=ena_misc_rna
 NC_007779.1_w3110_Mu	ena	gene	4283191	4284540	.	+	.	ID=gene:BAE78066;Name=yjcD;biotype=protein_coding;description=predicted permease;gene_id=BAE78066;logic_name=ena;version=1
 NC_007779.1_w3110_Mu	ena	transcript	4283191	4284540	.	+	.	ID=transcript:BAE78066;Parent=gene:BAE78066;Name=yjcD-1;biotype=protein_coding;transcript_id=BAE78066;version=1
 NC_007779.1_w3110_Mu	ena	exon	4283191	4284540	.	+	.	Parent=transcript:BAE78066;Name=BAE78066-1;constitutive=1;ensembl_end_phase=0;ensembl_phase=0;exon_id=BAE78066-1;rank=1;version=1
