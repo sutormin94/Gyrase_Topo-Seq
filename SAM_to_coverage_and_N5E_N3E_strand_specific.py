@@ -117,7 +117,6 @@ def create_tab_files(input_sam_file, output_tab_file):
 #######
 #Reads TAB files.
 #######
-
 def Tab_pars(filein):
 	peaks=[]
 	for line in filein:
@@ -207,9 +206,8 @@ def depth_counter(coords_ar, chromosome_length):
 #Creates new list with pairwise summs.
 #######
 def Integrator(ar1, ar2, chromosome_length):
-	ar3=[]
-	for i in range(chromosome_length):
-		ar3.append(0)    
+	ar3=[0]*chromosome_length
+  
 	for i in range (len(ar1)-1):
 		ar3[i]=ar1[i]+ar2[i]
 	return ar3
@@ -231,19 +229,28 @@ def write_file(ar, flag, strain_id, fileout_path):
 #Returns this information as dict of lists.
 #######
 def start_end_count(forw, rev, chromosome_length):  
-	genome_start=[]
-	genome_end=[]
-	for i in range(chromosome_length):
-		genome_start.append(0)
-		genome_end.append(0)
+	
+	genome_start_F=[0]*chromosome_length
+	genome_end_F=[0]*chromosome_length
+	genome_start_R=[0]*chromosome_length
+	genome_end_R=[0]*chromosome_length
+	
 	for i in range(len(forw)):
-		genome_start[forw[i][0]-1]=genome_start[forw[i][0]-1]+1
-		genome_end[forw[i][1]-1]=genome_end[forw[i][1]-1]+1
+		genome_start_F[forw[i][0]-1]=genome_start_F[forw[i][0]-1]+1
+		genome_end_F[forw[i][1]-1]=genome_end_F[forw[i][1]-1]+1
 	for i in range(len(rev)):
-		genome_start[rev[i][1]]=genome_start[rev[i][1]]+1
-		genome_end[rev[i][0]]=genome_end[rev[i][0]]+1 
-	genome_start_and_end=Integrator(genome_start, genome_end, chromosome_length)
-	return {'DNA_fragments_starts':genome_start, 'DNA_fragments_ends':genome_end, 'DNA_fragments_starts_and_ends':genome_start_and_end}
+		genome_start_R[rev[i][1]]=genome_start_R[rev[i][1]]+1
+		genome_end_R[rev[i][0]]=genome_end_R[rev[i][0]]+1 
+	genome_start_and_end_F=Integrator(genome_start_F, genome_end_F, chromosome_length)
+	genome_start_and_end_R=Integrator(genome_start_R, genome_end_R, chromosome_length)
+	
+	return_dict={'DNA_fragments_starts_forward_strand' : genome_start_F, 
+		     'DNA_fragments_ends_forward_strand' : genome_end_F, 
+		     'DNA_fragments_starts_and_ends_forward_strand' : genome_start_and_end_F,
+		     'DNA_fragments_starts_reverse_strand' : genome_start_R, 
+		     'DNA_fragments_ends_reverse_strand' : genome_end_R, 
+		     'DNA_fragments_starts_and_ends_reverse_strand' : genome_start_and_end_R}
+	return return_dict
 
 #######
 #Wraps functions that read, edit and write SAM files (sam_edt) and check the resulting edited SAM (check_sam). 
@@ -345,17 +352,30 @@ def create_wig_files_wrapper(tab_path, wig_path, chromosome_id, chromosome_lengt
 		write_file(genome_depth, str(tab[:-4]) + "depth", chromosome_id, outfile_path)
 		
 		#Calculates number of DNA fragments starts (N5E) and ends (N3E) for every genome position
-		Starts=start_end_count(for_coords, rev_coords, chromosome_length)['DNA_fragments_starts']
-		Ends=start_end_count(for_coords, rev_coords, chromosome_length)['DNA_fragments_ends']
-		Starts_and_ends=start_end_count(for_coords, rev_coords, chromosome_length)['DNA_fragments_starts_and_ends']
+		N3E_N5E_dict=start_end_count(for_coords, rev_coords, chromosome_length)		
+		
+		Starts_F=N3E_N5E_dict['DNA_fragments_starts_forward_strand']
+		Ends_F=N3E_N5E_dict['DNA_fragments_ends_forward_strand']
+		Starts_and_ends_F=N3E_N5E_dict['DNA_fragments_starts_and_ends_forward_strand']
+		Starts_R=N3E_N5E_dict['DNA_fragments_starts_reverse_strand']
+		Ends_R=N3E_N5E_dict['DNA_fragments_ends_reverse_strand']
+		Starts_and_ends_R=N3E_N5E_dict['DNA_fragments_starts_and_ends_reverse_strand']		
 		
 		#Writes WIG files (N3E and N5E)
-		outfile_starts_path=wig_path + tab[:-4] + "_N5E.wig" #N5E
-		write_file(Starts, str(tab[:-4]) + "_N5E", chromosome_id, outfile_starts_path) 
-		outfile_ends_path=wig_path + tab[:-4] + "_N3E.wig" #N3E
-		write_file(Ends, str(tab[:-4]) + "_N3E", chromosome_id, outfile_ends_path) 
-		outfile_starts_ends_path=wig_path + tab[:-4] + "_N53E.wig" #N5E+N3E
-		write_file(Starts_and_ends, str(tab[:-4]) + "_N5E_and_N3E", chromosome_id, outfile_starts_ends_path) 
+		outfile_starts_F_path=wig_path + tab[:-4] + "_N5E_F.wig" #N5E forward strand
+		write_file(Starts_F, str(tab[:-4]) + "_N5E_F", chromosome_id, outfile_starts_F_path) 
+		outfile_ends_F_path=wig_path + tab[:-4] + "_N3E_F.wig" #N3E forward strand
+		write_file(Ends_F, str(tab[:-4]) + "_N3E_F", chromosome_id, outfile_ends_F_path) 
+		outfile_starts_ends_F_path=wig_path + tab[:-4] + "_N53E_F.wig" #N5E+N3E forward strand
+		write_file(Starts_and_ends_F, str(tab[:-4]) + "_N5E_and_N3E_F", chromosome_id, outfile_starts_ends_F_path) 
+		
+		outfile_starts_R_path=wig_path + tab[:-4] + "_N5E_R.wig" #N5E reverse strand
+		write_file(Starts_R, str(tab[:-4]) + "_N5E_R", chromosome_id, outfile_starts_R_path) 
+		outfile_ends_R_path=wig_path + tab[:-4] + "_N3E_R.wig" #N3E reverse strand
+		write_file(Ends_R, str(tab[:-4]) + "_N3E_R", chromosome_id, outfile_ends_R_path) 
+		outfile_starts_ends_R_path=wig_path + tab[:-4] + "_N53E_R.wig" #N5E+N3E reverse strand
+		write_file(Starts_and_ends_R, str(tab[:-4]) + "_N5E_and_N3E_R", chromosome_id, outfile_starts_ends_R_path) 		
+			
 	return
 
 
