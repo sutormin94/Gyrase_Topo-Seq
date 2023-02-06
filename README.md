@@ -1,5 +1,6 @@
 # Gyrase_Topo-seq
-Exploring gyrase cleavage sites across *E. coli W3110* genome
+
+Exploring gyrase cleavage sites across the *E. coli* W3110 genome
 
 DNA-gyrase is a type II topoisomerase that introduces negative superhelicity into topologically closed DNA molecules. It operates with two DNA segments - so called G and T. 
 During catalysis the enzyme introduces temporal double-stranded break into G-segment, transfers T-segment through it and religates the gap. 
