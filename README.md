@@ -9,6 +9,8 @@ Topo-Seq is a ChIP-Seq-like approach that exploits formation of these intermedia
 This repository contains a set of bash, python and R scripts which were used for Topo-Seq data analysis and visualization. 
 Raw sequencing data and some processed files (coverage depth WIG, N3E WIG, GCSs lists) can be retrieved from GEO datasets with accession GSE117186.
 
+If you find this code useful and would like to use it in your own research, please, cite:
+Sutormin D, Rubanova N, Logacheva M, Ghilarov D, Severinov K. Single-nucleotide-resolution mapping of DNA gyrase cleavage sites across the Escherichia coli genome. Nucleic Acids Res. 2019 Feb 20;47(3):1373-1388. doi: 10.1093/nar/gky1222. Erratum in: Nucleic Acids Res. 2019 Feb 20;47(3):1601. PMID: 30517674; PMCID: PMC6379681.
 
 # Main pipeline
 
