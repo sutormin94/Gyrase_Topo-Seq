@@ -31,27 +31,27 @@ import matplotlib.pyplot as plt
 print('Variables to be defined:')
 
 #Input: GCSs data, TAB.
-path_to_GCSs_files={'Cfx': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets\Cfx_10mkM_trusted_GCSs.txt",
-                    'Micro': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets\Micro_trusted_GCSs.txt",
-                    'Oxo': "C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\GCSs_sets\Oxo_trusted_GCSs.txt"}
+path_to_GCSs_files={'Cfx':   "C:\\Users\sutor\OneDrive\ThinkPad_working\Sutor\Science\E_coli_Gyrase_Topo-Seq\Scripts\Gyrase_Topo-seq\Additional_genome_features\Cfx_10mkM_trusted_GCSs_h_s.txt",
+                    'Micro': "C:\\Users\sutor\OneDrive\ThinkPad_working\Sutor\Science\E_coli_Gyrase_Topo-Seq\Scripts\Gyrase_Topo-seq\Additional_genome_features\Micro_trusted_GCSs_h_s.txt",
+                    'Oxo':   "C:\\Users\sutor\OneDrive\ThinkPad_working\Sutor\Science\E_coli_Gyrase_Topo-Seq\Scripts\Gyrase_Topo-seq\Additional_genome_features\Oxo_trusted_GCSs_h_s.txt"}
 
 #Input: path to the E. coli genome (source of sequences for PFM/PWM construction), FASTA.
-Genome_seq_path="C:\Sutor\science\DNA-gyrase\Genomes\E_coli_w3110_G_Mu.fasta"
+Genome_seq_path="C:\\Users\sutor\OneDrive\ThinkPad_working\Sutor\Science\E_coli_Gyrase_Topo-Seq\Scripts\Gyrase_Topo-seq\Additional_genome_features\E_coli_w3110_G_Mu.fasta"
 
 #Input: path to the sequence to be scanned, FASTA.
-Target_seq_path="C:\Sutor\science\DNA-gyrase\Results\In_vitro_experiments\Consensus.fasta"
+Target_seq_path="C:\\Users\sutor\OneDrive\ThinkPad_working\Sutor\Science\E_coli_Gyrase_Topo-Seq\Scripts\Gyrase_Topo-seq\Additional_genome_features\E_coli_w3110_G_Mu.fasta"
 #Input: name of the target sequence ready to be scanned.
-Target_seq_name="Consensus"
+Target_seq_name="E_coli_genome"
 #Input: dataset name for WIG header.
 Dataset_name="Cfx_Micro_Oxo_1828"
 
 #Output: prefix of the output path.
-Output_data_prefix="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\Combined_motif\\"
+Output_data_prefix="C:\\Users\sutor\OneDrive\ThinkPad_working\Sutor\Science\E_coli_Gyrase_Topo-Seq\Results\Consensus_sequence_construction_and_scanning\\"
 if not os.path.exists(Output_data_prefix):
     os.makedirs(Output_data_prefix)
     
 #Output: path to the output WIG file.
-path_to_res_score_files="C:\Sutor\science\DNA-gyrase\Results\GCSs_sets_and_motifs\Score_tracks\\"
+path_to_res_score_files="C:\\Users\sutor\OneDrive\ThinkPad_working\Sutor\Science\E_coli_Gyrase_Topo-Seq\Results\Consensus_sequence_construction_and_scanning\\"
 if not os.path.exists(path_to_res_score_files):
     os.makedirs(path_to_res_score_files)
 Output_score_wig=path_to_res_score_files + Target_seq_name + "_score.wig"
